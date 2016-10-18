@@ -1,0 +1,355 @@
+@charset "UTF-8";
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+
+.featured-events .g-cell:nth-child(3) .event-card,
+.promo-event-cards .g-cell:nth-child(3) .event-card {
+    display: none;
+}
+.ie8 .featured-events .g-cell:nth-child(3) .event-card,
+.ie8 .promo-event-cards .g-cell:nth-child(3) .event-card {
+    display: block;
+}
+@media only screen and (min-width: 800px) {
+    .featured-events .g-cell:nth-child(3) .event-card,
+    .promo-event-cards .g-cell:nth-child(3) .event-card {
+        display: block;
+    }
+}
+/* Patch to show the tooltip overflow */
+
+.event-cards .g-cell {
+    overflow: visible;
+}
+.fb-connect-card:hover {
+    cursor: initial;
+}
+.fb-connect-card:hover .fb-connect-card__logo {
+    opacity: 0.9;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    filter: alpha(opacity=90);
+}
+.fb-connect-card div {
+    text-align: center;
+}
+.fb-connect-card .event-poster__decoration {
+    background-color: #3b5998;
+}
+.fb-connect-card .fb-connect-card__header {
+    padding: 20px 20px 0 0;
+    position: relative;
+}
+.fb-connect-card .fb-connect-card__header span {
+    display: inline-block;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    background: white;
+}
+.fb-connect-card .fb-connect-card__header .fb-connect-card__logo {
+    -webkit-transition: opacity, 0.5s;
+    -moz-transition: opacity, 0.5s;
+    transition: opacity, 0.5s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 5px solid white;
+    box-sizing: border-box;
+    border-radius: 45px;
+    background: #3b5998;
+}
+.fb-connect-card .fb-connect-card__header .ico-facebook-logo {
+    font-size: 50px;
+    line-height: 68px;
+    color: white;
+}
+.fb-connect-card .fb-connect-card__content {
+    padding: 0 20px;
+}
+.fb-connect-card .fb-connect-card__content p {
+    font-size: 25px;
+    line-height: 35px;
+    color: #1a1a1a;
+}
+.fb-connect-card .fb-connect-card__content img {
+    padding: 5px 0;
+}
+.fb-connect-card .fb-connect-card__content .btn {
+    color: #3b5998;
+    border-color: #3b5998;
+    text-transform: uppercase;
+}
+.fb-connect-card .fb-connect-card__content .btn:hover,
+.fb-connect-card .fb-connect-card__content .btn:focus {
+    color: white;
+    background-color: #3b5998;
+}
+.fb-connect-card .fb-connect-card__content .btn.is-connected {
+    color: #3b5998;
+}
+.facebook-card {
+    background-image: url("../../../../images/home/facebook-connect-bg.png");
+    background-size: cover;
+    position: relative;
+}
+.facebook-card .poster-card__header {
+    padding-bottom: 137px;
+}
+.facebook-card .facebook-card__body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+.facebook-card .facebook-card__body .facebook-card__content {
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    position: relative;
+    top: 50%;
+    color: white;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+}
+/* Organizer Callout section. */
+
+.organizer-callout {
+    border-top: 1px solid #D2D6DF;
+    position: relative;
+}
+.organizer-callout .text-body-medium {
+    line-height: 30px;
+}
+/*  NL Promo Stamp -- Delete when NETHERLANDS_FEE_PROMOTION_Q2_2016 promo is done */
+
+.nl-promo-2016-q2 .marketing-text-heading-sub {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Benton Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #282C35;
+}
+.nl-promo-2016-q2 .marketing-text-body-xsmall {
+    font-size: 11px;
+    line-height: 16px;
+}
+.nl-promo-2016-q2 .marketing-text-body--faint {
+    color: #666A73;
+}
+.nl-promo-2016-q2 .marketing-text--white {
+    color: white;
+}
+.nl-promo-2016-q2 .promo__badge--sm-md {
+    align-content: center;
+    text-align: center;
+    padding: 10px;
+}
+.nl-promo-2016-q2 .promo__badge--lg {
+    width: 100px;
+    text-align: center;
+    padding-left: 10px;
+    position: absolute;
+    top: 130px;
+    right: 0;
+    padding: 22px;
+    z-index: 2;
+}
+.nl-promo-2016-q2 .promo__cost {
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.nl-promo-2016-q2 .gradient--orange {
+    background: -webkit-linear-gradient(top left, #F6682F 0%, #FFB91D 100%);
+    background: linear-gradient(to bottom right, #F6682F 0%, #FFB91D 100%);
+}
+/* Register to Vote banner -- Delete after 2016 US Elections */
+
+.register-to-vote-banner {
+    position: relative;
+    background-color: white;
+}
+.register-to-vote-badge,
+.register-to-vote-info,
+.register-to-vote-copy,
+.register-to-vote-link {
+    display: inline-block;
+}
+.register-to-vote-badge {
+    width: 35px;
+    height: 35px;
+}
+@media only screen and (max-width: 479px) {
+    .register-to-vote-badge {
+        position: absolute;
+        left: 15px;
+    }
+}
+.register-to-vote-info {
+    vertical-align: top;
+}
+.ie8 .register-to-vote-info {
+    line-height: 55px;
+}
+@media only screen and (min-width: 480px) {
+    .register-to-vote-info {
+        line-height: 55px;
+    }
+}
+@media only screen and (max-width: 479px) {
+    .register-to-vote-info {
+        display: block;
+        padding-left: 70px;
+    }
+}
+@media only screen and (max-width: 479px) {
+    .register-to-vote-link {
+        display: block;
+    }
+}
+.category-card.category-music .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_music.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-music .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_music.jpg");
+    }
+}
+.category-card.category-food .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_food.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-food .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_food.jpg");
+    }
+}
+.category-card.category-classes .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_classes.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-classes .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_classes.jpg");
+    }
+}
+.category-card.category-arts .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_arts.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-arts .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_arts.jpg");
+    }
+}
+.category-card.category-parties .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_parties.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-parties .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_parties.jpg");
+    }
+}
+.category-card.category-sports .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_sports.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-sports .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_sports.jpg");
+    }
+}
+.category-card.category-networking .category-card__image {
+    background-image: url("../../../../images/home/categories/220/img_category_networking.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .category-card.category-networking .category-card__image {
+        background-image: url("../../../../images/home/categories/150/img_category_networking.jpg");
+    }
+}
+@media only screen and (max-width: 799px) {
+    .event-poster .btn--target:hover,
+    .event-poster .btn--target:focus {
+        color: #00a8f2;
+        background-color: transparent;
+        border-color: #EFF2F5;
+    }
+}
+.learn-more-emphasized {
+    border-bottom: 1px solid white;
+}
+.learn-more-emphasized:hover,
+.learn-more-emphasized.active,
+.learn-more-emphasized:focus {
+    color: #EFF2F5;
+    text-decoration: none;
+    border-bottom: 1px solid #EFF2F5;
+}
+.consumer-location.popular-location {
+    margin-bottom: 0;
+    background-color: #F8F8FA;
+}
+.org-consumer-search-bar {
+    margin-bottom: 15px;
+}
