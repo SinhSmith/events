@@ -2069,15 +2069,6 @@
     <Content Include="Content\img\contact-form.png" />
     <Content Include="Content\img\form-contact-shadow.png" />
     <Content Include="Content\img\sprite.png" />
-    <Content Include="Views\Chi tiet du an – Coteccons.html" />
-    <Content Include="Views\Coteccons – Our Experience drives us forward.html" />
-    <Content Include="Views\Danh sach du an – Coteccons.html" />
-    <Content Include="Views\Kết quả tìm kiếm cho “a” – Coteccons.html" />
-    <Content Include="Views\Liên hệ – Coteccons.html" />
-    <Content Include="Views\Tin Công Ty – Coteccons.html" />
-    <Content Include="Views\Tin tuc chi tiet – Coteccons.html" />
-    <Content Include="Views\Tintuc – Coteccons.html" />
-    <Content Include="Views\Vinhomes Thăng Long – Coteccons.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
