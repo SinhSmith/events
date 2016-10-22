@@ -11,40 +11,24 @@
         !function (a, b, c) { function d(a) { var c, d = b.createElement("canvas"), e = d.getContext && d.getContext("2d"), f = String.fromCharCode; return e && e.fillText ? (e.textBaseline = "top", e.font = "600 32px Arial", "flag" === a ? (e.fillText(f(55356, 56806, 55356, 56826), 0, 0), d.toDataURL().length > 3e3) : "diversity" === a ? (e.fillText(f(55356, 57221), 0, 0), c = e.getImageData(16, 16, 1, 1).data.toString(), e.fillText(f(55356, 57221, 55356, 57343), 0, 0), c !== e.getImageData(16, 16, 1, 1).data.toString()) : ("simple" === a ? e.fillText(f(55357, 56835), 0, 0) : e.fillText(f(55356, 57135), 0, 0), 0 !== e.getImageData(16, 16, 1, 1).data[0])) : !1 } function e(a) { var c = b.createElement("script"); c.src = a, c.type = "text/javascript", b.getElementsByTagName("head")[0].appendChild(c) } var f, g; c.supports = { simple: d("simple"), flag: d("flag"), unicode8: d("unicode8"), diversity: d("diversity") }, c.DOMReady = !1, c.readyCallback = function () { c.DOMReady = !0 }, c.supports.simple && c.supports.flag && c.supports.unicode8 && c.supports.diversity || (g = function () { c.readyCallback() }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", g, !1), a.addEventListener("load", g, !1)) : (a.attachEvent("onload", g), b.attachEvent("onreadystatechange", function () { "complete" === b.readyState && c.readyCallback() })), f = c.source || {}, f.concatemoji ? e(f.concatemoji) : f.wpemoji && f.twemoji && (e(f.twemoji), e(f.wpemoji))) }(window, document, window._wpemojiSettings);
     </script>
     <script src="~/Scripts/home/wp-emoji-release.min.js"></script>
-    <style type="text/css">
-        img.wp-smiley,
-        img.emoji {
-            display: inline !important;
-            border: none !important;
-            box-shadow: none !important;
-            height: 1em !important;
-            width: 1em !important;
-            margin: 0 .07em !important;
-            vertical-align: -0.1em !important;
-            background: none !important;
-            padding: 0 !important;
-        }
-    </style>
-
     <link href="~/Content/common/frontend.css" rel="stylesheet" />
     <link href="~/Content/home/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/icons.data.svg.css" media="all">
-
-    <link rel="stylesheet" type="text/css" href="~/Content/base_styles.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/global_header.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/home.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/home_consumer.css">
+    <link rel="stylesheet" href="~/Content/css/icons.data.svg.css" media="all">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/base_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/global_header.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/home.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/home_consumer.css">
     <script src="~/Scripts/js/8095t6t28384.js"></script>
     <script src="~/Scripts/js/analytics.js"></script>
     <script src="~/Scripts/js/api.js"></script>
     <script src="~/Scripts/js/conversion.js"></script>
     <script src="~/Scripts/js/bat.js"></script>
-    <script src="~/Scripts/js/fbevents.js"></script>
+    @*<script src="~/Scripts/js/fbevents.js"></script>*@
     <script src="~/Scripts/js/ga.js"></script>
     <script src="~/Scripts/js/gtm.js"></script>
-    <script src="~/Scripts/js/pd.js"></script>
+    @*<script src="~/Scripts/js/pd.js"></script>*@
     <script src="~/Scripts/js/recaptcha__en.js"></script>
-    <script src="~/Scripts/js/roundtrip.js"></script>
+    @*<script src="~/Scripts/js/roundtrip.js"></script>*@
 
     <!--[if lt IE 10]>
     <link rel='stylesheet' id='cotec-ie-css'  href='~/Content/common/ie.css' type='text/css' media='all' />
@@ -81,22 +65,16 @@
 </head>
 <body>
     @RenderPage("_HeaderPartial.cshtml")
+    
     @RenderBody()
+    
     @RenderPage("_FooterPartial.cshtml")
 
     @RenderSection("LocalStyles",required:false)
     <script src="~/Scripts/home/jquery.form.min.js"></script>
-
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var _wpcf7 = { "loaderUrl": "http:\/\/localhost:2255\/Content\/Images\/ajax-loader.gif", "recaptchaEmpty": "Please verify that you are not a robot.", "sending": "\u0110ang g\u1eedi ..." };
-        /* ]]> */
-    </script>
-
     <script src="~/Scripts/home/scripts.js"></script>
     <script src="~/Scripts/home/skip-link-focus-fix.js"></script>
     <script src="~/Scripts/home/wp-embed.min.js"></script>
-
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/home/w3danima.js"></script>
@@ -106,6 +84,5 @@
     <script src="~/Scripts/home/jquery.slimscroll.min.js"></script>
     <script src="~/Scripts/home/jquery.hc-sticky.js"></script>
     @RenderSection("LocalScripts",required:false)
-
 </body>
 </html>
