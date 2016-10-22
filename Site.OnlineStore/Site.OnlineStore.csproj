@@ -1971,6 +1971,7 @@
     <Content Include="Library\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Library\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Library\ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\fonts\briteicons.woff2" />
     <None Include="Properties\PublishProfiles\xaviadecor.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common\html5.js" />
