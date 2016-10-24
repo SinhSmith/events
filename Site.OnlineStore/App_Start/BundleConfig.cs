@@ -35,7 +35,8 @@ namespace Site.OnlineStore
                         "~/Content/admin/chosen-library/chosen.jquery.min.js",
                         "~/Content/admin/plugins/spin/spin.min.js",
                         "~/Content/admin/plugins/daterangepicker/moment.js",
-                        "~/Content/admin/plugins/daterangepicker/daterangepicker.js"
+                        "~/Content/admin/plugins/daterangepicker/daterangepicker.js",
+                        "~/Library/datetime-picker/jquery.datetimepicker.full.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/others").Include(
@@ -52,7 +53,8 @@ namespace Site.OnlineStore
                       "~/Content/admin/dist/css/skins/skin-green.min.css",
                       "~/Content/common.css",
                       "~/Content/admin/chosen-library/chosen.min.css",
-                      "~/Content/admin/plugins/daterangepicker/daterangepicker-bs3.css"
+                      "~/Content/admin/plugins/daterangepicker/daterangepicker-bs3.css",
+                      "~/Library/datetime-picker/jquery.datetimepicker.css"
                       ));
         }
     }

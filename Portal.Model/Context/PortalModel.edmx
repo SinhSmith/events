@@ -103,6 +103,78 @@
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="event_Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="100" />
+          <Property Name="OrganizationDescription" Type="nvarchar" MaxLength="300" />
+          <Property Name="CoverImageId" Type="int" />
+          <Property Name="PaymentEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventType" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EventTopic" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsShowRemainingNumberTicket" Type="bit" Nullable="false" />
+          <Property Name="Location_StreetName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Location_Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Location_Address2" Type="nvarchar" MaxLength="500" />
+          <Property Name="Location_City" Type="nvarchar" MaxLength="100" />
+          <Property Name="Location_State" Type="nvarchar" MaxLength="100" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="IsVerified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="event_Ticket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="AvailableTicketQuantity" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsShowDescription" Type="bit" Nullable="false" />
+          <Property Name="SaleChanel" Type="int" Nullable="false" />
+          <Property Name="SaleEndOption" Type="int" />
+          <Property Name="IsHide" Type="bit" Nullable="false" />
+          <Property Name="MinimunTicketOrder" Type="int" Nullable="false" />
+          <Property Name="MaximunTicketOrder" Type="int" Nullable="false" />
+          <Property Name="TicketCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="StartSaleDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndSaleDateTime" Type="datetime" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="event_Ticket_OrderTicket">
+          <Key>
+            <PropertyRef Name="TicketId" />
+            <PropertyRef Name="OrderTicketId" />
+          </Key>
+          <Property Name="TicketId" Type="int" Nullable="false" />
+          <Property Name="OrderTicketId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="event_TicketOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
         <EntityType Name="portal_News_Projects">
           <Key>
             <PropertyRef Name="NewId" />
@@ -312,6 +384,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_event_Event_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="event_Event" Type="Self.event_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Event">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Event_share_Images">
+          <End Role="share_Images" Type="Self.share_Images" Multiplicity="0..1" />
+          <End Role="event_Event" Type="Self.event_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="share_Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Event">
+              <PropertyRef Name="CoverImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Ticket_event_Event">
+          <End Role="event_Event" Type="Self.event_Event" Multiplicity="1" />
+          <End Role="event_Ticket" Type="Self.event_Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Ticket">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Ticket_OrderTicket_event_Ticket">
+          <End Role="event_Ticket" Type="Self.event_Ticket" Multiplicity="1" />
+          <End Role="event_Ticket_OrderTicket" Type="Self.event_Ticket_OrderTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Ticket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Ticket_OrderTicket">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Ticket_OrderTicket_event_TicketOrder">
+          <End Role="event_TicketOrder" Type="Self.event_TicketOrder" Multiplicity="1" />
+          <End Role="event_Ticket_OrderTicket" Type="Self.event_Ticket_OrderTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_TicketOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Ticket_OrderTicket">
+              <PropertyRef Name="OrderTicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_portal_News_Projects_cms_News">
           <End Role="cms_News" Type="Self.cms_News" Multiplicity="1" />
           <End Role="portal_News_Projects" Type="Self.portal_News_Projects" Multiplicity="*" />
@@ -393,6 +525,10 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cms_Categories" EntityType="Self.cms_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cms_News" EntityType="Self.cms_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_Event" EntityType="Self.event_Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_Ticket" EntityType="Self.event_Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_Ticket_OrderTicket" EntityType="Self.event_Ticket_OrderTicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_TicketOrder" EntityType="Self.event_TicketOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="portal_News_Projects" EntityType="Self.portal_News_Projects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="portal_Projects" EntityType="Self.portal_Projects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="portal_Projects_Images" EntityType="Self.portal_Projects_Images" Schema="dbo" store:Type="Tables" />
@@ -426,6 +562,26 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Event_AspNetUsers" Association="Self.FK_event_Event_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Event_share_Images" Association="Self.FK_event_Event_share_Images">
+            <End Role="share_Images" EntitySet="share_Images" />
+            <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Ticket_event_Event" Association="Self.FK_event_Ticket_event_Event">
+            <End Role="event_Event" EntitySet="event_Event" />
+            <End Role="event_Ticket" EntitySet="event_Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Ticket_OrderTicket_event_Ticket" Association="Self.FK_event_Ticket_OrderTicket_event_Ticket">
+            <End Role="event_Ticket" EntitySet="event_Ticket" />
+            <End Role="event_Ticket_OrderTicket" EntitySet="event_Ticket_OrderTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Ticket_OrderTicket_event_TicketOrder" Association="Self.FK_event_Ticket_OrderTicket_event_TicketOrder">
+            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
+            <End Role="event_Ticket_OrderTicket" EntitySet="event_Ticket_OrderTicket" />
           </AssociationSet>
           <AssociationSet Name="FK_portal_News_Projects_cms_News" Association="Self.FK_portal_News_Projects_cms_News">
             <End Role="cms_News" EntitySet="cms_News" />
@@ -514,6 +670,7 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="event_Event" Relationship="PortalModel.FK_event_Event_AspNetUsers" FromRole="AspNetUser" ToRole="event_Event" />
         </EntityType>
         <EntityType Name="cms_Categories">
           <Key>
@@ -587,6 +744,7 @@
           <NavigationProperty Name="system_Banners" Relationship="Self.FK_system_Banners_share_Images" FromRole="share_Images" ToRole="system_Banners" />
           <NavigationProperty Name="portal_Projects" Relationship="PortalModel.portal_Projects_Images" FromRole="share_Images" ToRole="portal_Projects" />
           <NavigationProperty Name="portal_Projects1" Relationship="PortalModel.FK_portal_Projects_share_Images" FromRole="share_Images" ToRole="portal_Projects" />
+          <NavigationProperty Name="event_Event" Relationship="PortalModel.FK_event_Event_share_Images" FromRole="share_Images" ToRole="event_Event" />
         </EntityType>
         <EntityType Name="system_Banners">
           <Key>
@@ -764,7 +922,26 @@
             <End Role="share_Images" EntitySet="share_Images" />
             <End Role="portal_Projects" EntitySet="portal_Projects" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="event_Ticket" EntityType="PortalModel.event_Ticket" />
+          <EntitySet Name="event_TicketOrder" EntityType="PortalModel.event_TicketOrder" />
+          <AssociationSet Name="event_Ticket_OrderTicket" Association="PortalModel.event_Ticket_OrderTicket">
+            <End Role="event_Ticket" EntitySet="event_Ticket" />
+            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
+          </AssociationSet>
+          <EntitySet Name="event_Event" EntityType="PortalModel.event_Event" />
+          <AssociationSet Name="FK_event_Event_AspNetUsers" Association="PortalModel.FK_event_Event_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Event_share_Images" Association="PortalModel.FK_event_Event_share_Images">
+            <End Role="share_Images" EntitySet="share_Images" />
+            <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Ticket_event_Event" Association="PortalModel.FK_event_Ticket_event_Event">
+            <End Role="event_Event" EntitySet="event_Event" />
+            <End Role="event_Ticket" EntitySet="event_Ticket" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="portal_Projects">
           <Key>
             <PropertyRef Name="Id" />
@@ -818,7 +995,117 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="event_Ticket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="AvailableTicketQuantity" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsShowDescription" Type="Boolean" Nullable="false" />
+          <Property Name="SaleChanel" Type="Int32" Nullable="false" />
+          <Property Name="SaleEndOption" Type="Int32" />
+          <Property Name="IsHide" Type="Boolean" Nullable="false" />
+          <Property Name="MinimunTicketOrder" Type="Int32" Nullable="false" />
+          <Property Name="MaximunTicketOrder" Type="Int32" Nullable="false" />
+          <Property Name="TicketCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="event_TicketOrder" Relationship="PortalModel.event_Ticket_OrderTicket" FromRole="event_Ticket" ToRole="event_TicketOrder" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="StartSaleDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndSaleDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="event_Event" Relationship="PortalModel.FK_event_Ticket_event_Event" FromRole="event_Ticket" ToRole="event_Event" />
+        </EntityType>
+        <EntityType Name="event_TicketOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="event_Ticket" Relationship="PortalModel.event_Ticket_OrderTicket" FromRole="event_TicketOrder" ToRole="event_Ticket" />
+        </EntityType>
+        <Association Name="event_Ticket_OrderTicket">
+          <End Type="PortalModel.event_Ticket" Role="event_Ticket" Multiplicity="*" />
+          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
+        </Association>
+        <EntityType Name="event_Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="OwnerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CoverImageId" Type="Int32" />
+          <Property Name="PaymentEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventType" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EventTopic" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsShowRemainingNumberTicket" Type="Boolean" Nullable="false" />
+          <Property Name="Location_StreetName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location_Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location_Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location_City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location_State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="PortalModel.FK_event_Event_AspNetUsers" FromRole="event_Event" ToRole="AspNetUser" />
+          <NavigationProperty Name="CoverImage" Relationship="PortalModel.FK_event_Event_share_Images" FromRole="event_Event" ToRole="share_Images" />
+          <NavigationProperty Name="Tickets" Relationship="PortalModel.FK_event_Ticket_event_Event" FromRole="event_Event" ToRole="event_Ticket" />
+        </EntityType>
+        <Association Name="FK_event_Event_AspNetUsers">
+          <End Type="PortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Event">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Event_share_Images">
+          <End Type="PortalModel.share_Images" Role="share_Images" Multiplicity="0..1" />
+          <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="share_Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Event">
+              <PropertyRef Name="CoverImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Ticket_event_Event">
+          <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="1" />
+          <End Type="PortalModel.event_Ticket" Role="event_Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Ticket">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1060,6 +1347,81 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="event_Ticket">
+            <EntityTypeMapping TypeName="PortalModel.event_Ticket">
+              <MappingFragment StoreEntitySet="event_Ticket">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EndSaleDateTime" ColumnName="EndSaleDateTime" />
+                <ScalarProperty Name="StartSaleDateTime" ColumnName="StartSaleDateTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TicketCode" ColumnName="TicketCode" />
+                <ScalarProperty Name="MaximunTicketOrder" ColumnName="MaximunTicketOrder" />
+                <ScalarProperty Name="MinimunTicketOrder" ColumnName="MinimunTicketOrder" />
+                <ScalarProperty Name="IsHide" ColumnName="IsHide" />
+                <ScalarProperty Name="SaleEndOption" ColumnName="SaleEndOption" />
+                <ScalarProperty Name="SaleChanel" ColumnName="SaleChanel" />
+                <ScalarProperty Name="IsShowDescription" ColumnName="IsShowDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AvailableTicketQuantity" ColumnName="AvailableTicketQuantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="event_TicketOrder">
+            <EntityTypeMapping TypeName="PortalModel.event_TicketOrder">
+              <MappingFragment StoreEntitySet="event_TicketOrder">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="event_Ticket_OrderTicket" TypeName="PortalModel.event_Ticket_OrderTicket" StoreEntitySet="event_Ticket_OrderTicket">
+            <EndProperty Name="event_TicketOrder">
+              <ScalarProperty Name="Id" ColumnName="OrderTicketId" />
+            </EndProperty>
+            <EndProperty Name="event_Ticket">
+              <ScalarProperty Name="Id" ColumnName="TicketId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="event_Event">
+            <EntityTypeMapping TypeName="PortalModel.event_Event">
+              <MappingFragment StoreEntitySet="event_Event">
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Location_State" ColumnName="Location_State" />
+                <ScalarProperty Name="Location_City" ColumnName="Location_City" />
+                <ScalarProperty Name="Location_Address2" ColumnName="Location_Address2" />
+                <ScalarProperty Name="Location_Address" ColumnName="Location_Address" />
+                <ScalarProperty Name="Location_StreetName" ColumnName="Location_StreetName" />
+                <ScalarProperty Name="IsShowRemainingNumberTicket" ColumnName="IsShowRemainingNumberTicket" />
+                <ScalarProperty Name="EventTopic" ColumnName="EventTopic" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="PaymentEmail" ColumnName="PaymentEmail" />
+                <ScalarProperty Name="CoverImageId" ColumnName="CoverImageId" />
+                <ScalarProperty Name="OrganizationDescription" ColumnName="OrganizationDescription" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

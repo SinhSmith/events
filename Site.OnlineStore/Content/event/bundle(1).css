@@ -1,0 +1,1610 @@
+@charset "UTF-8";
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+.event-listing__header {
+  position: absolute;
+  top: 61px;
+  width: 100%; }
+
+.event-listing__body {
+  position: relative;
+  margin-top: 0;
+  padding-top: 0; }
+  @media only screen and (min-width: 1080px) {
+    .event-listing__body {
+      padding-top: 40px; } }
+
+.notification-box--listing {
+  position: relative;
+  z-index: 10000; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.listing-footer {
+  color: #94969a;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #282C35;
+  padding: 20px 0 10px; }
+  .listing-footer .listing-footer-text,
+  .listing-footer .listing-footer-links {
+    color: #94969a;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer; }
+    .listing-footer .listing-footer-text .link:hover,
+    .listing-footer .listing-footer-links .link:hover {
+      text-decoration: none;
+      color: white; }
+  .listing-footer .listing-footer-text a {
+    color: #dfdfe1;
+    color: rgba(255, 255, 255, 0.85); }
+  .listing-footer .listing-footer-logo-wrapper {
+    margin-top: 10px; }
+  .listing-footer .footer-logo {
+    color: #94969a;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 40px; }
+    .listing-footer .footer-logo .ico-eventbrite-badge {
+      font-size: 47px; }
+    .listing-footer .footer-logo:hover {
+      text-decoration: none;
+      color: white; }
+  .listing-footer .listing-footer-links {
+    line-height: 25px; }
+    .listing-footer .listing-footer-links .link {
+      color: #dfdfe1;
+      color: rgba(255, 255, 255, 0.85);
+      padding: 0 10px; }
+    .listing-footer .listing-footer-links .link.first-link {
+      padding-left: 0; }
+
+@media only screen and (max-width: 479px) {
+  .listing-footer {
+    padding: 20px 0 94px; }
+    .listing-footer .g-cell {
+      font-size: 12px; }
+    .listing-footer .listing-footer-logo-wrapper {
+      margin-top: 0; }
+    .listing-footer .footer-logo {
+      line-height: 33px; }
+    .listing-footer .footer-logo .ico-eventbrite-badge {
+      font-size: 23px; }
+    .listing-footer .listing-footer-links .link {
+      padding: 0 6px; }
+    .listing-footer .listing-footer-links li:first-child {
+      display: block; } }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.event-listing--has-image .event-listing__header {
+  height: 66vh;
+  max-height: inherit;
+  min-height: 500px;
+  overflow: hidden; }
+  @media only screen and (max-width: 479px) {
+    .event-listing--has-image .event-listing__header {
+      padding-top: 0;
+      padding-bottom: 0; } }
+
+.listing-hero-image__blurry-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 500px;
+  width: 100%; }
+  .event-listing--has-image .ie8 .listing-hero-image__blurry-background .hero-image-overlay {
+    background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#70000000, endColorstr=#70000000 );
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+  @media only screen and (min-width: 480px) {
+    .event-listing--has-image .listing-hero-image__blurry-background .hero-image-overlay {
+      background-image: -webkit-linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+      background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#70000000, endColorstr=#70000000 );
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0; } }
+  .listing-hero-image__blurry-background .listing-hero-image {
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-filter: blur(50px) brightness(0.9);
+    -ms-filter: blur(50px) brightness(0.9);
+    filter: blur(50px) brightness(0.9);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Blur=" 50px "), progid:DXImageTransform.Microsoft.Alpha(Brightness=" 0.9 ")";
+    display: inline-block;
+    width: 200%;
+    position: relative;
+    top: 50%;
+    left: 50%; }
+    @media only screen and (max-width: 479px) {
+      .listing-hero-image__blurry-background .listing-hero-image {
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
+        position: static; } }
+
+.listing-image--main {
+  display: block;
+  width: 100%; }
+  @media only screen and (min-width: 1080px) {
+    .listing-image--main {
+      height: 360px; } }
+
+.listing-hero__badge-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  .listing-hero__badge-container .badge-price {
+    display: none; }
+
+.listing-hero-details__main-container {
+  position: relative; }
+
+@media only screen and (min-width: 1080px) {
+  .listing-hero--image-container {
+    border-top-left-radius: 4px; } }
+
+.listing-hero__detailed-info {
+  position: absolute;
+  height: 100%; }
+  @media only screen and (min-width: 1080px) {
+    .listing-hero__detailed-info {
+      border-top-right-radius: 4px; } }
+  .listing-hero__detailed-info .listing-hero-header {
+    position: absolute; }
+    @media only screen and (max-width: 799px) {
+      .listing-hero__detailed-info .listing-hero-header {
+        display: inline-block; } }
+  .listing-hero__detailed-info .listing-hero-date {
+    text-align: center; }
+  .listing-hero__detailed-info .listing-hero-image--month {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; }
+  .listing-hero__detailed-info .listing-hero-image--day {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.25em;
+    letter-spacing: 1px; }
+  .listing-hero__detailed-info .listing-hero-body {
+    padding-top: 64px; }
+    @media only screen and (min-width: 1001px) and (max-width: 1080px) {
+      .listing-hero__detailed-info .listing-hero-body {
+        padding-top: 50px; } }
+    @media only screen and (max-width: 799px) {
+      .listing-hero__detailed-info .listing-hero-body {
+        display: inline-block;
+        padding-top: 0; } }
+    @media only screen and (min-width: 480px) and (max-width: 799px) {
+      .listing-hero__detailed-info .listing-hero-body {
+        margin-left: 60px; } }
+  .listing-hero__detailed-info .listing-hero-title {
+    display: block;
+    /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-height: 125;
+    /* Fallback for non-webkit */
+    margin: 0 auto;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #282C35;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    word-break: break-word; }
+    @media only screen and (min-width: 801px) and (max-width: 1000px) {
+      .listing-hero__detailed-info .listing-hero-title {
+        max-height: 125px;
+        -webkit-line-clamp: 4;
+        font-size: 18px;
+        line-height: 22px; } }
+    @media only screen and (max-width: 799px) {
+      .listing-hero__detailed-info .listing-hero-title {
+        max-height: 125px;
+        -webkit-line-clamp: 4;
+        font-size: 20px;
+        line-height: 25px; } }
+    @media only screen and (max-width: 479px) {
+      .listing-hero__detailed-info .listing-hero-title {
+        font-size: 18px; } }
+  .listing-hero__detailed-info .listing-hero-footer {
+    position: absolute;
+    bottom: 20px; }
+
+.listing-hero__detailed-info {
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9); }
+  @media only screen and (max-width: 479px) {
+    .listing-hero__detailed-info .listing-hero-body {
+      margin-right: 45px; } }
+  .listing-hero__detailed-info a.listing-organizer-name {
+    color: #666A73; }
+  .listing-hero__detailed-info .listing-hero-title {
+    padding-bottom: 2px; }
+  @media only screen and (max-width: 799px) {
+    .listing-hero__detailed-info {
+      position: relative;
+      background-color: white; }
+      .listing-hero__detailed-info .listing-hero-body.listing-hero-body--parent {
+        margin-left: 0; } }
+  @media only screen and (max-width: 479px) {
+    .listing-hero__detailed-info {
+      overflow: visible; } }
+
+.listing-hero__detailed-info--no-image {
+  position: relative;
+  background-color: white; }
+  .listing-hero__detailed-info--no-image .listing-hero-title {
+    padding-bottom: 2px; }
+  @media only screen and (min-width: 480px) and (max-width: 799px) {
+    .listing-hero__detailed-info--no-image .listing-hero-body {
+      margin-left: 0; } }
+  @media only screen and (min-width: 1080px) {
+    .listing-hero__detailed-info--no-image {
+      border-top-left-radius: 4px; }
+      .listing-hero__detailed-info--no-image .listing-hero-body {
+        margin-left: 0;
+        padding-top: 95px;
+        padding-bottom: 90px; }
+      .listing-hero__detailed-info--no-image .listing-organizer-title,
+      .listing-hero__detailed-info--no-image .listing-hero-footer {
+        position: absolute;
+        bottom: 40px; } }
+
+.listing-hero--no-image__bkg {
+  height: 65px;
+  background-color: #EFF2F5;
+  background-image: linear, false, #EFF2F5, #D2D6DF; }
+  .ie8 .listing-hero--no-image__bkg {
+    height: 66vh; }
+  @media only screen and (min-width: 800px) {
+    .listing-hero--no-image__bkg {
+      height: 66vh; } }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+.listing-panel-wrapper {
+  position: relative;
+  padding: 0;
+  margin: 0; }
+
+.listing-panel {
+  border-style: solid;
+  border-color: #D2D6DF;
+  border-width: 0 0 1px 0;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box; }
+  .listing-panel .listing-panel-actions {
+    display: inline-block; }
+    .listing-panel .listing-panel-actions li {
+      display: inline; }
+  @media only screen and (max-width: 479px) {
+    .listing-panel {
+      border-top-width: 1px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      width: 100%;
+      max-height: 81px; }
+      .listing-panel .listing-panel-info {
+        margin-left: 0; } }
+
+.listing-panel--no-image {
+  border-width: 1px 0; }
+
+.sticky-listing-panel {
+  position: relative;
+  z-index: 10000; }
+  .sticky-listing-panel .micro-ticket-box__btn-select-wrapper .custom-select-container {
+    width: 100%;
+    margin-right: 0; }
+  .ie8 .sticky-listing-panel {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    max-height: inherit; }
+  @media only screen and (min-width: 480px) {
+    .sticky-listing-panel {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      max-height: inherit; } }
+  @media only screen and (max-width: 799px) {
+    .sticky-listing-panel {
+      border-width: 1px 0; } }
+  @media only screen and (max-width: 479px) {
+    .sticky-listing-panel {
+      position: fixed;
+      max-height: 101px;
+      padding-top: 5px; } }
+
+.sticky-listing-panel-placeholder {
+  width: 100%;
+  height: 66px;
+  border: none; }
+
+.is-stuck {
+  box-shadow: 0 8px 20px -9px rgba(0, 0, 0, 0.3); }
+  .ie8 .is-stuck {
+    position: fixed;
+    top: 0;
+    width: 100%; }
+  @media only screen and (min-width: 480px) {
+    .is-stuck {
+      position: fixed;
+      top: 0;
+      width: 100%; } }
+  @media only screen and (min-width: 1080px) {
+    .is-stuck {
+      width: 1080px; } }
+
+.listing-panel-actions {
+  display: none; }
+  @media only screen and (max-width: 479px) {
+    .listing-panel-actions {
+      display: block;
+      position: absolute;
+      top: -20px;
+      right: 10px; }
+      .listing-panel-actions .listing-panel-actions__btn {
+        box-shadow: 0 1px 1px 1px #EFF2F5; } }
+
+.rsvp-box {
+  float: right;
+  text-align: right;
+  width: 100%; }
+  .rsvp-box .listing-panel-label {
+    margin-right: 20px;
+    vertical-align: middle; }
+  .rsvp-box .inline-list {
+    display: inline-block; }
+    .rsvp-box .inline-list li {
+      display: inline-block;
+      padding-right: 0; }
+      .rsvp-box .inline-list li:first-child {
+        padding-left: 0; }
+  .rsvp-box .btn i {
+    line-height: 18px; }
+
+.exp-cta-btn--orange:not(.btn--secondary) {
+  padding: 10px 20px 11px;
+  background-color: #f6682F;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.8px; }
+  .exp-cta-btn--orange:not(.btn--secondary):link, .exp-cta-btn--orange:not(.btn--secondary):visited {
+    color: white; }
+  .exp-cta-btn--orange:not(.btn--secondary):hover, .exp-cta-btn--orange:not(.btn--secondary):focus {
+    background-color: #f66125;
+    color: white; }
+  .exp-cta-btn--orange:not(.btn--secondary):active {
+    background-color: #de470a;
+    color: white; }
+
+.listing-panel-info__details-title {
+  line-height: 44px; }
+
+.listing-panel-info__details-datetime {
+  font-size: 12px; }
+
+.listing-panel-info__price-or-status {
+  text-align: right; }
+  @media only screen and (max-width: 479px) {
+    .listing-panel-info__price-or-status {
+      text-align: center; } }
+
+.listing-panel-info__display-price {
+  line-height: 44px; }
+  @media only screen and (max-width: 479px) {
+    .listing-panel-info__display-price {
+      line-height: 35px; } }
+
+.listing-panel-info__status {
+  display: inline;
+  line-height: 44px; }
+
+.micro-ticket-box .micro-ticket-box__status,
+.micro-ticket-box__status {
+  font-size: 15px;
+  line-height: 44px;
+  text-transform: capitalize; }
+
+.micro-ticket-box__btn {
+  width: 100%; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.listing-info {
+  position: relative; }
+  .listing-info .listing-info__header {
+    background-color: white; }
+    .listing-info .listing-info__header .listing-panel-actions {
+      display: none; }
+      @media only screen and (max-width: 479px) {
+        .listing-info .listing-info__header .listing-panel-actions {
+          display: block;
+          position: absolute;
+          top: -22px;
+          right: 10px; } }
+      .listing-info .listing-info__header .listing-panel-actions a:first-child {
+        margin-bottom: 10px; }
+    .listing-info .listing-info__header.has-no-organizer {
+      padding-top: 0;
+      padding-bottom: 0; }
+      @media only screen and (max-width: 479px) {
+        .listing-info .listing-info__header.has-no-organizer {
+          padding-top: 20px;
+          padding-bottom: 10px; } }
+  @media only screen and (max-width: 479px) {
+    .listing-info .listing-info__header-container,
+    .listing-info .listing-info__header--sales-ended__inner {
+      border-top: 1px solid #D2D6DF; } }
+  .listing-info .listing-info__header--sales-ended {
+    background-color: white; }
+
+.listing-info__body {
+  position: relative;
+  background-color: white; }
+  .ie8 .listing-info__body {
+    padding-top: 50px; }
+  @media only screen and (min-width: 480px) {
+    .listing-info__body {
+      padding-top: 50px; } }
+
+.listing-info__footer {
+  position: relative;
+  background-color: white; }
+  .listing-info__footer .share-wrapper {
+    float: left;
+    text-align: left; }
+    @media only screen and (max-width: 479px) {
+      .listing-info__footer .share-wrapper {
+        float: none;
+        text-align: center; } }
+  .listing-info__footer .friends-wrapper {
+    float: right;
+    text-align: right; }
+    @media only screen and (max-width: 479px) {
+      .listing-info__footer .friends-wrapper {
+        float: none;
+        text-align: center; } }
+  .listing-info__footer .ico--large {
+    font-size: 50px; }
+
+.listing-social-stream-container {
+  position: relative;
+  background-color: white; }
+
+.event-details__data:not(:last-child) {
+  margin-bottom: 50px; }
+  .ie8 .event-details__data:not(:last-child) {
+    margin-bottom: 60px; }
+  @media only screen and (min-width: 480px) {
+    .event-details__data:not(:last-child) {
+      margin-bottom: 60px; } }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.listing-organizer {
+  position: relative;
+  background-color: white; }
+  .listing-organizer .listing-organizer-header .listing-organizer-name {
+    color: #45494E;
+    padding-top: 10px;
+    font-weight: 600; }
+  .listing-organizer .listing-organizer-actions {
+    border-top: 1px solid #D2D6DF;
+    border-bottom: 1px solid #D2D6DF; }
+    @media only screen and (max-width: 479px) {
+      .listing-organizer .listing-organizer-actions {
+        padding: 10px 0; }
+        .listing-organizer .listing-organizer-actions .link-list li:first-child {
+          padding-top: 0; }
+        .listing-organizer .listing-organizer-actions .link {
+          display: block;
+          padding: 10px 0; } }
+  .listing-organizer .listing-organizer-actions-mobile {
+    padding: 10px 0 0; }
+  .listing-organizer .listing-organizer-body {
+    padding-top: 20px; }
+    .listing-organizer .listing-organizer-body img {
+      max-width: 100%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto; }
+    .listing-organizer .listing-organizer-body .listing-organizer-description {
+      color: #666A73;
+      line-height: 22px;
+      text-align: center; }
+      @media only screen and (max-width: 479px) {
+        .listing-organizer .listing-organizer-body .listing-organizer-description {
+          text-align: left; } }
+
+@media only screen and (max-width: 479px) {
+  .listing-organizer-links .link {
+    display: block;
+    padding: 10px 0; } }
+
+.listing-organizer-links li {
+  text-align: left;
+  white-space: nowrap;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+  .listing-organizer-links li a i,
+  .listing-organizer-links li a:link i,
+  .listing-organizer-links li a:visited i,
+  .listing-organizer-links li a:hover i,
+  .listing-organizer-links li a:focus i,
+  .listing-organizer-links li a:active i {
+    color: #D2D6DF; }
+
+.org-panel-description p:only-of-type {
+  text-align: center; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.event-listing-footer {
+  background-color: white; }
+  @media only screen and (max-width: 479px) {
+    .event-listing-footer {
+      padding-top: 30px; } }
+
+.listing-map {
+  position: relative;
+  overflow: hidden; }
+  .listing-map .static-img {
+    width: 100%; }
+  .listing-map .listing-map-link {
+    margin: 20px 20px; }
+  .listing-map .listing-map-footer {
+    position: absolute;
+    top: 50%;
+    margin-top: -163px;
+    right: 5%;
+    width: 35%;
+    /*
+         * We are adding an extra breakpoint here as it was impossible to use the grid in this case
+         * The issue is that using the grid on top of the map will make the dragging inoperative
+         * We tried a solution based on pointer-events: none, but IE support make us discard it
+        */ }
+    @media only screen and (min-width: 1200px) {
+      .listing-map .listing-map-footer {
+        right: 15%;
+        width: 30%; } }
+
+.map-canvas.is-active {
+  width: 100%;
+  height: 100%;
+  min-height: 360px; }
+
+.listing-map-card {
+  background: transparent;
+  background-color: rgba(255, 255, 255, 0.95);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F2FFFFFF,endColorstr=#F2FFFFFF);
+  zoom: 1;
+  position: relative;
+  width: 100%; }
+  .listing-map-card .listing-map-card-body .listing-map-card-title {
+    color: #282C35;
+    font-weight: 600;
+    padding-bottom: 5px;
+    line-height: 30px; }
+  .listing-map-card .listing-map-card-body .listing-map-card-street-address,
+  .listing-map-card .listing-map-card-body .listing-map-card-locality {
+    color: #666A73; }
+
+@media only screen and (max-width: 799px) {
+  .map-canvas.is-active {
+    min-height: 360px; } }
+
+@media only screen and (max-width: 640px) {
+  .map-canvas.is-active {
+    min-height: 320px; } }
+
+.listing-module--no-margin {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.text-header-inline-as-block {
+  display: block; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.event-listing-preview-bar {
+  background-color: #F8F8FA; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.who-is-going .fb-connect-link {
+  padding-top: 10px;
+  display: inline-block;
+  color: #00a8f2;
+  text-decoration: none; }
+  .who-is-going .fb-connect-link:hover, .who-is-going .fb-connect-link:focus, .who-is-going .fb-connect-link:active {
+    color: #33b9f5;
+    color: rgba(0, 168, 242, 0.8); }
+  @media only screen and (max-width: 799px) {
+    .who-is-going .fb-connect-link span {
+      display: none; } }
+  .who-is-going .fb-connect-link p {
+    vertical-align: middle;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 5px; }
+
+@media only screen and (min-width: 480px) and (max-width: 799px) {
+  .who-is-going .fb-connect-error span {
+    display: none; } }
+
+.who-is-going .ico-person {
+  color: #D2D6DF; }
+
+.who-is-going .friend-list {
+  margin-top: 10px; }
+
+.who-is-going .grouped-ico .fb-friend-item {
+  display: inline-block;
+  vertical-align: middle; }
+  .who-is-going .grouped-ico .fb-friend-item .btn--target {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 44px; }
+  .who-is-going .grouped-ico .fb-friend-item.no-space {
+    margin-right: 0; }
+
+.who-is-going .fb-avatar-link {
+  display: inline-block; }
+
+.who-is-going .fb-avatar-link img {
+  width: 44px;
+  height: 44px;
+  border-radius: 44px; }
+
+.who-is-going .who-is-going-wobble li i {
+  -webkit-animation-duration: 0.7s;
+  -moz-animation-duration: 0.7s;
+  animation-duration: 0.7s;
+  -webkit-animation-direction: alternate;
+  -moz-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-transform-origin: bottom;
+  -moz-transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  -o-transform-origin: bottom;
+  transform-origin: bottom;
+  display: inline-block; }
+
+.who-is-going .who-is-going-wobble .grouped-ico {
+  overflow: visible;
+  margin-right: 2px; }
+
+.who-is-going .who-is-going-wobble li:nth-child(even) i {
+  -webkit-animation-name: wobbleLeft;
+  -moz-animation-name: wobbleLeft;
+  animation-name: wobbleLeft; }
+
+.who-is-going .who-is-going-wobble li:nth-child(odd) i {
+  -webkit-animation-name: wobbleRight;
+  -moz-animation-name: wobbleRight;
+  animation-name: wobbleRight; }
+
+.who-is-going .who-is-going-wobble li i.ico-settings {
+  -webkit-animation-name: none;
+  -moz-animation-name: none;
+  animation-name: none; }
+
+.fb-settings-modal .modal__body {
+  padding-top: 20px; }
+  .fb-settings-modal .modal__body label {
+    color: #666A73; }
+  .fb-settings-modal .modal__body .btn {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%; }
+
+.fb-more-friends-modal .modal__body {
+  padding-top: 20px; }
+
+.fb-more-friends-modal .fb-avatar-link {
+  display: inline-block; }
+  .fb-more-friends-modal .fb-avatar-link img {
+    width: 44px;
+    height: 44px;
+    border-radius: 44px; }
+
+@-webkit-keyframes wobbleLeft {
+  0% {
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    transform: rotate(-7deg); }
+  100% {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg); } }
+
+@-moz-keyframes wobbleLeft {
+  0% {
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    transform: rotate(-7deg); }
+  100% {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg); } }
+
+@keyframes wobbleLeft {
+  0% {
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    transform: rotate(-7deg); }
+  100% {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg); } }
+
+@-webkit-keyframes wobbleRight {
+  0% {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg); }
+  100% {
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    transform: rotate(-7deg); } }
+
+@-moz-keyframes wobbleRight {
+  0% {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg); }
+  100% {
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    transform: rotate(-7deg); } }
+
+@keyframes wobbleRight {
+  0% {
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg); }
+  100% {
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    -o-transform: rotate(-7deg);
+    transform: rotate(-7deg); } }
+
+.contact-organizer-modal .responsive-form .has-form-input-error {
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  border-radius: 3px 3px 0 0; }
+
+.contact-organizer-modal .responsive-form .responsive-form__field-error {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  background-color: #ff0044;
+  color: white;
+  color: white;
+  padding: 3px 11px;
+  border-radius: 0 0 3px 3px;
+  margin-top: 0; }
+  .contact-organizer-modal .responsive-form .responsive-form__field-error.is-message-hidden {
+    color: rgba(255, 255, 255, 0);
+    margin-top: -21px; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+.related-events {
+  -webkit-transition: max-height 0.8s ease-in;
+  -moz-transition: max-height 0.8s ease-in;
+  transition: max-height 0.8s ease-in;
+  overflow: hidden;
+  background: #F8F8FA;
+  max-height: 0;
+  clear: both;
+  display: block; }
+  .related-events.show {
+    padding-bottom: 20px;
+    max-height: 500px; }
+
+.related-events-title {
+  position: relative;
+  font-size: 20px;
+  line-height: 30px;
+  text-transform: uppercase; }
+  @media only screen and (max-width: 799px) {
+    .related-events-title {
+      font-size: 15px;
+      line-height: 22px; } }
+  @media only screen and (max-width: 479px) {
+    .related-events-title {
+      text-align: center; } }
+  .related-events-title .feedback-link {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 12px;
+    text-transform: none; }
+    @media only screen and (max-width: 799px) {
+      .related-events-title .feedback-link {
+        display: none; } }
+
+.scroll-wrapper {
+  width: 100%;
+  overflow: hidden; }
+
+.scroll-control {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+  z-index: 1000; }
+  .scroll-control .ico-arrow-left,
+  .scroll-control .ico-arrow-right {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+    color: #45494E;
+    zoom: 1; }
+  .event-list:hover .scroll-control .ico-arrow-left,
+  .event-list:hover .scroll-control .ico-arrow-right {
+    opacity: 0.6;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+    filter: alpha(opacity=60); }
+  .scroll-control.scroll-control-left {
+    left: 0; }
+  .scroll-control.scroll-control-right {
+    right: 0; }
+
+.touch-device .scroll-wrapper {
+  overflow-x: scroll; }
+
+.touch-device .scroll-control {
+  display: none; }
+
+.event-list {
+  position: relative; }
+
+.scroll-item {
+  width: 320px;
+  margin-left: 10px;
+  float: left; }
+  .scroll-item:first-child {
+    margin-left: 0; }
+  @media only screen and (max-width: 799px) {
+    .scroll-item {
+      width: 160px; }
+      .scroll-item .poster-card__header .poster-card__label,
+      .scroll-item .poster-card__date .event-time,
+      .scroll-item .poster-card__footer .poster-card__actions .share-action,
+      .scroll-item .poster-card__footer .poster-card__tags .event-format {
+        display: none; }
+      .scroll-item .poster-card__footer {
+        padding-right: 40px; } }
+  .scroll-item.scroll-item--force-small {
+    width: 160px; }
+    .scroll-item.scroll-item--force-small .poster-card__header .poster-card__label,
+    .scroll-item.scroll-item--force-small .poster-card__date .event-time,
+    .scroll-item.scroll-item--force-small .poster-card__footer .poster-card__actions .share-action,
+    .scroll-item.scroll-item--force-small .poster-card__footer .poster-card__tags .event-format {
+      display: none; }
+    .scroll-item.scroll-item--force-small .poster-card__footer {
+      padding-right: 40px; }
+
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+body .follow-me {
+  display: inline-block;
+  text-decoration: none;
+  outline: none; }
+  body .follow-me .ico-follow--small {
+    width: 12px;
+    height: 12px; }
+  body .follow-me .ico-follow--medium, body .follow-me .ico-follow {
+    width: 20px;
+    height: 20px; }
+  body .follow-me .ico-follow--large {
+    width: 25px;
+    height: 25px; }
+  body .follow-me .ico-follow {
+    -webkit-transition-property: background-position-x;
+    -moz-transition-property: background-position-x;
+    transition-property: background-position-x;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: steps(45);
+    -moz-transition-timing-function: steps(45);
+    transition-timing-function: steps(45);
+    background-image: url("../../../../../images/listings/follow/addchecksprite.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    display: inline-block;
+    vertical-align: text-bottom; }
+    body .follow-me .ico-follow.is-active {
+      background-position-x: 100%; }
+    body .follow-me .ico-follow.is-active {
+      -webkit-transition-duration: 1s;
+      -moz-transition-duration: 1s;
+      transition-duration: 1s; }
+  body .follow-me.is-hidden {
+    display: none; }
+  body .follow-me.btn {
+    width: 150px; }
+    body .follow-me.btn.btn--ico i {
+      margin-right: 0; }
+  body .follow-me.btn:active .ico-follow, body .follow-me.btn:focus .ico-follow, body .follow-me.btn:hover .ico-follow {
+    -webkit-transition-property: background-position-x;
+    -moz-transition-property: background-position-x;
+    transition-property: background-position-x;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: steps(45);
+    -moz-transition-timing-function: steps(45);
+    transition-timing-function: steps(45);
+    background-image: url("listings/follow/whiteaddchecksprite.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%; }
+    body .follow-me.btn:active .ico-follow.is-active, body .follow-me.btn:focus .ico-follow.is-active, body .follow-me.btn:hover .ico-follow.is-active {
+      background-position-x: 100%; }
+  body .follow-me.btn:active.is-active, body .follow-me.btn:focus.is-active, body .follow-me.btn:hover.is-active {
+    -webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    transition-duration: 1s; }
+  body .follow-me.btn:active {
+    background-color: #4dc2f6;
+    border-color: #4dc2f6; }
+
+.structured-content-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56%; }
+
+.structured-content-video__iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }

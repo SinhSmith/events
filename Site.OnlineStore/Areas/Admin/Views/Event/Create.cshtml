@@ -1,0 +1,1400 @@
+﻿@model Portal.Model.Context.event_Event
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Library/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/admin/event-management.js"></script>
+
+<link href="~/Content/event/base_styles.css" rel="stylesheet" />
+<link href="~/Content/event/create_event_tinymce.css" rel="stylesheet" />
+<link href="~/Content/event/create2.css" rel="stylesheet" />
+<link href="~/Content/event/ticket_grouping.css" rel="stylesheet" />
+<link href="~/Content/event/ui.css" rel="stylesheet" />
+<link href="~/Content/event/global_header.css" rel="stylesheet" />
+<link href="~/Content/event/bundle.css" rel="stylesheet" />
+<link href="~/Content/event/bundle(1).css" rel="stylesheet" />
+<link href="~/Content/event/window.css" rel="stylesheet" />
+
+<!-- Summary -->
+<div id="event_summary_bar" class="g-grid " style="display: block;">
+    <div class="g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12">
+
+        <div class="l-mar-top-3 notification-bar notification-bar--success is-hidden js-one-funnel-message">
+            <p class="js-one-funnel-message-area"></p>
+            <a class="notification-bar__close js-notification-bar-close"><i class="ico-cross"></i></a>
+        </div>
+        <div class="l-mar-top-3 notification notification--alert hidden">
+
+        </div>
+        <div id="js_form_errors"></div>
+        <div class="js-error-not-saved l-mar-top-3 notification notification--error is-hidden">
+            Your event was not saved. Please review the highlighted fields below.
+        </div>
+    </div>
+</div>
+
+<!-- Creating ticket steps -->
+<div id="content" class="clrfix">
+    <!-- Id event hidden control -->
+    <div id="event_form" class="responsive-form">
+        <div style="display:none">
+            <input type="hidden" name="csrfmiddlewaretoken">
+        </div>
+        <!-- Event content form -->
+        <div class="g-grid g-group">
+            <div id="main_page" class="clrfix page visible inactive">
+                <div id="main_wrapper">
+                    <input id="EventId" type="hidden" name="Id">
+
+                    <!-- First step: Event details -->
+                    <div id="event_details_wrapper">
+                        <div id="event_details_header" class="g-group">
+                            <div class="l-mar-top-4">
+                                <div class="g-cell g-cell-1-1 g-cell-lg-7-12 g-cell-md-8-12 g-offset-lg-1-12">
+                                    <div class="l-media-v-center">
+                                        <div class="l-media-v-center__row">
+                                            <span class="ico-box ico--small ico--color-teal ico--color-brand-white">1</span>
+                                            <span class="text-large l-pad-hor-1">
+                                                Event Details
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="event_details_content" class="g-vertical-group g-cell-md-1-1 g-cell-lg-8-12 g-offset-lg-1-12 module_content l-mar-top-2">
+                            <!-- Event Title -->
+                            <div id="event_details_title">
+                                <div class="g-cell g-cell-1-1">
+                                    <label class="label-primary" for="id_group-details-name">
+                                        Event title
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="l-mar-top-1 g-cell g-cell-1-1">
+                                    <div class="inputtext errors">
+                                        <input id="Title" name="Title" maxlength="255" placeholder="Give it a short distinct name" type="text">
+                                        <div id="id_group-details-name_errors">
+                                            <ul class="errorlist"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Event Location -->
+                            <div class="g-cell g-cell-1-1 l-mar-top-3">
+                                <label class="label-primary" for="location-name-input">
+                                    Location
+                                </label>
+                            </div>
+                            <div id="event_details_super_location" class="l-mar-top-1">
+                                <div>
+                                    <div id="create_location_content">
+                                        <div>
+                                            <div class="g-group">
+                                                <div id="location_edit_form" class="g-vertical-group g-cell-1-1 g-cell-md-5-8">
+                                                    <div class="g-cell g-cell-1-1">
+                                                        <input class="js-location-edit-venue l-mar-top-1" id="Location_StreetName" name="Location_StreetName" type="text" placeholder="Enter the venue&#39;s name">
+                                                        <p class="form__field-error is-hidden js-error-for-venue"></p>
+                                                        <input class="js-location-edit-address_1 l-mar-top-1 js-xd-cep-street" id="Location_Address" name="Location_Address" type="text" placeholder="Address" />
+                                                        <p class="form__field-error is-hidden js-error-for-address_1"></p>
+                                                        <input class="js-location-edit-address_2 l-mar-top-1 js-xd-cep-neighborhood" id="Location_Address2" name="Location_Address2" type="text" placeholder="Address 2">
+                                                        <p class="form__field-error is-hidden js-error-for-address_2"></p>
+                                                        <input class="js-location-edit-city l-mar-top-1 js-xd-cep-city" id="Location_City" name="Location_City" type="text" placeholder="City">
+                                                        <p class="form__field-error is-hidden js-error-for-city"></p>
+                                                    </div>
+                                                    <div class="g-group">
+                                                        <div class="g-cell g-cell-1-2">
+                                                            <input class="js-location-edit-state l-mar-top-1 js-xd-cep-state" id="Location_State" name="Location_State" type="text" placeholder="State">
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-2">
+                                                            <input class="js-location-edit-postal_code l-mar-top-1 js-xd-cep-input" id="Location_ZipCode" name="Location_ZipCode" type="text" placeholder="Zip/Postal">
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-1 l-mar-top-1 js-country-select">
+                                                            <select class="js-d-select-box js-location-edit-country responsive-form__select" id="Country" name="Country">
+                                                                <option value="">Please select a country.</option>
+                                                                <option value="US">United States</option>
+                                                                <option value="AF">Afghanistan</option>
+                                                                <option value="AX">Åland Islands</option>
+                                                                <option value="AL">Albania</option>
+                                                                <option value="DZ">Algeria</option>
+                                                                <option value="AS">American Samoa</option>
+                                                                <option value="AD">Andorra</option>
+                                                                <option value="AO">Angola</option>
+                                                                <option value="AI">Anguilla</option>
+                                                                <option value="AQ">Antarctica</option>
+                                                                <option value="AG">Antigua and Barbuda</option>
+                                                                <option value="AR">Argentina</option>
+                                                                <option value="AM">Armenia</option>
+                                                                <option value="AW">Aruba</option>
+                                                                <option value="AU">Australia</option>
+                                                                <option value="AT">Austria</option>
+                                                                <option value="AZ">Azerbaijan</option>
+                                                                <option value="BS">Bahamas</option>
+                                                                <option value="BH">Bahrain</option>
+                                                                <option value="BD">Bangladesh</option>
+                                                                <option value="BB">Barbados</option>
+                                                                <option value="BY">Belarus</option>
+                                                                <option value="BE">Belgium</option>
+                                                                <option value="BZ">Belize</option>
+                                                                <option value="BJ">Benin</option>
+                                                                <option value="BM">Bermuda</option>
+                                                                <option value="BT">Bhutan</option>
+                                                                <option value="BO">Bolivia, Plurinational State of</option>
+                                                                <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                                                                <option value="BA">Bosnia and Herzegovina</option>
+                                                                <option value="BW">Botswana</option>
+                                                                <option value="BV">Bouvet Island</option>
+                                                                <option value="BR">Brazil</option>
+                                                                <option value="IO">British Indian Ocean Territory</option>
+                                                                <option value="BN">Brunei Darussalam</option>
+                                                                <option value="BG">Bulgaria</option>
+                                                                <option value="BF">Burkina Faso</option>
+                                                                <option value="BI">Burundi</option>
+                                                                <option value="KH">Cambodia</option>
+                                                                <option value="CM">Cameroon</option>
+                                                                <option value="CA">Canada</option>
+                                                                <option value="CV">Cape Verde</option>
+                                                                <option value="KY">Cayman Islands</option>
+                                                                <option value="CF">Central African Republic</option>
+                                                                <option value="TD">Chad</option>
+                                                                <option value="CL">Chile</option>
+                                                                <option value="CN">China</option>
+                                                                <option value="CX">Christmas Island</option>
+                                                                <option value="CC">Cocos (Keeling) Islands</option>
+                                                                <option value="CO">Colombia</option>
+                                                                <option value="KM">Comoros</option>
+                                                                <option value="CG">Congo</option>
+                                                                <option value="CD">Congo, The Democratic Republic of the</option>
+                                                                <option value="CK">Cook Islands</option>
+                                                                <option value="CR">Costa Rica</option>
+                                                                <option value="CI">Côte d'Ivoire</option>
+                                                                <option value="HR">Croatia</option>
+                                                                <option value="CW">Curaçao</option>
+                                                                <option value="CY">Cyprus</option>
+                                                                <option value="CZ">Czech Republic</option>
+                                                                <option value="DK">Denmark</option>
+                                                                <option value="DJ">Djibouti</option>
+                                                                <option value="DM">Dominica</option>
+                                                                <option value="DO">Dominican Republic</option>
+                                                                <option value="EC">Ecuador</option>
+                                                                <option value="EG">Egypt</option>
+                                                                <option value="SV">El Salvador</option>
+                                                                <option value="GQ">Equatorial Guinea</option>
+                                                                <option value="ER">Eritrea</option>
+                                                                <option value="EE">Estonia</option>
+                                                                <option value="ET">Ethiopia</option>
+                                                                <option value="FK">Falkland Islands (Malvinas)</option>
+                                                                <option value="FO">Faroe Islands</option>
+                                                                <option value="FJ">Fiji</option>
+                                                                <option value="FI">Finland</option>
+                                                                <option value="FR">France</option>
+                                                                <option value="GF">French Guiana</option>
+                                                                <option value="PF">French Polynesia</option>
+                                                                <option value="TF">French Southern Territories</option>
+                                                                <option value="GA">Gabon</option>
+                                                                <option value="GM">Gambia</option>
+                                                                <option value="GE">Georgia</option>
+                                                                <option value="DE">Germany</option>
+                                                                <option value="GH">Ghana</option>
+                                                                <option value="GI">Gibraltar</option>
+                                                                <option value="GR">Greece</option>
+                                                                <option value="GL">Greenland</option>
+                                                                <option value="GD">Grenada</option>
+                                                                <option value="GP">Guadeloupe</option>
+                                                                <option value="GU">Guam</option>
+                                                                <option value="GT">Guatemala</option>
+                                                                <option value="GG">Guernsey</option>
+                                                                <option value="GN">Guinea</option>
+                                                                <option value="GW">Guinea-Bissau</option>
+                                                                <option value="GY">Guyana</option>
+                                                                <option value="HT">Haiti</option>
+                                                                <option value="HM">Heard Island and McDonald Islands</option>
+                                                                <option value="VA">Holy See (Vatican City State)</option>
+                                                                <option value="HN">Honduras</option>
+                                                                <option value="HK">Hong Kong</option>
+                                                                <option value="HU">Hungary</option>
+                                                                <option value="IS">Iceland</option>
+                                                                <option value="IN">India</option>
+                                                                <option value="ID">Indonesia</option>
+                                                                <option value="IQ">Iraq</option>
+                                                                <option value="IE">Ireland</option>
+                                                                <option value="IM">Isle of Man</option>
+                                                                <option value="IL">Israel</option>
+                                                                <option value="IT">Italy</option>
+                                                                <option value="JM">Jamaica</option>
+                                                                <option value="JP">Japan</option>
+                                                                <option value="JE">Jersey</option>
+                                                                <option value="JO">Jordan</option>
+                                                                <option value="KZ">Kazakhstan</option>
+                                                                <option value="KE">Kenya</option>
+                                                                <option value="KI">Kiribati</option>
+                                                                <option value="KR">Korea, Republic of</option>
+                                                                <option value="KW">Kuwait</option>
+                                                                <option value="KG">Kyrgyzstan</option>
+                                                                <option value="LA">Lao People's Democratic Republic</option>
+                                                                <option value="LV">Latvia</option>
+                                                                <option value="LB">Lebanon</option>
+                                                                <option value="LS">Lesotho</option>
+                                                                <option value="LR">Liberia</option>
+                                                                <option value="LY">Libya</option>
+                                                                <option value="LI">Liechtenstein</option>
+                                                                <option value="LT">Lithuania</option>
+                                                                <option value="LU">Luxembourg</option>
+                                                                <option value="MO">Macao</option>
+                                                                <option value="MK">Macedonia, Republic of</option>
+                                                                <option value="MG">Madagascar</option>
+                                                                <option value="MW">Malawi</option>
+                                                                <option value="MY">Malaysia</option>
+                                                                <option value="MV">Maldives</option>
+                                                                <option value="ML">Mali</option>
+                                                                <option value="MT">Malta</option>
+                                                                <option value="MH">Marshall Islands</option>
+                                                                <option value="MQ">Martinique</option>
+                                                                <option value="MR">Mauritania</option>
+                                                                <option value="MU">Mauritius</option>
+                                                                <option value="YT">Mayotte</option>
+                                                                <option value="MX">Mexico</option>
+                                                                <option value="FM">Micronesia, Federated States of</option>
+                                                                <option value="MD">Moldova, Republic of</option>
+                                                                <option value="MC">Monaco</option>
+                                                                <option value="MN">Mongolia</option>
+                                                                <option value="ME">Montenegro</option>
+                                                                <option value="MS">Montserrat</option>
+                                                                <option value="MA">Morocco</option>
+                                                                <option value="MZ">Mozambique</option>
+                                                                <option value="MM">Myanmar</option>
+                                                                <option value="NA">Namibia</option>
+                                                                <option value="NR">Nauru</option>
+                                                                <option value="NP">Nepal</option>
+                                                                <option value="NL">Netherlands</option>
+                                                                <option value="NC">New Caledonia</option>
+                                                                <option value="NZ">New Zealand</option>
+                                                                <option value="NI">Nicaragua</option>
+                                                                <option value="NE">Niger</option>
+                                                                <option value="NG">Nigeria</option>
+                                                                <option value="NU">Niue</option>
+                                                                <option value="NF">Norfolk Island</option>
+                                                                <option value="MP">Northern Mariana Islands</option>
+                                                                <option value="NO">Norway</option>
+                                                                <option value="OM">Oman</option>
+                                                                <option value="PK">Pakistan</option>
+                                                                <option value="PW">Palau</option>
+                                                                <option value="PS">Palestine, State of</option>
+                                                                <option value="PA">Panama</option>
+                                                                <option value="PG">Papua New Guinea</option>
+                                                                <option value="PY">Paraguay</option>
+                                                                <option value="PE">Peru</option>
+                                                                <option value="PH">Philippines</option>
+                                                                <option value="PN">Pitcairn</option>
+                                                                <option value="PL">Poland</option>
+                                                                <option value="PT">Portugal</option>
+                                                                <option value="PR">Puerto Rico</option>
+                                                                <option value="QA">Qatar</option>
+                                                                <option value="RE">Réunion</option>
+                                                                <option value="RO">Romania</option>
+                                                                <option value="RU">Russian Federation</option>
+                                                                <option value="RW">Rwanda</option>
+                                                                <option value="BL">Saint Barthélemy</option>
+                                                                <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+                                                                <option value="KN">Saint Kitts and Nevis</option>
+                                                                <option value="LC">Saint Lucia</option>
+                                                                <option value="MF">Saint Martin (French part)</option>
+                                                                <option value="PM">Saint Pierre and Miquelon</option>
+                                                                <option value="VC">Saint Vincent and the Grenadines</option>
+                                                                <option value="WS">Samoa</option>
+                                                                <option value="SM">San Marino</option>
+                                                                <option value="ST">Sao Tome and Principe</option>
+                                                                <option value="SA">Saudi Arabia</option>
+                                                                <option value="SN">Senegal</option>
+                                                                <option value="RS">Serbia</option>
+                                                                <option value="SC">Seychelles</option>
+                                                                <option value="SL">Sierra Leone</option>
+                                                                <option value="SG">Singapore</option>
+                                                                <option value="SX">Sint Maarten (Dutch part)</option>
+                                                                <option value="SK">Slovakia</option>
+                                                                <option value="SI">Slovenia</option>
+                                                                <option value="SB">Solomon Islands</option>
+                                                                <option value="SO">Somalia</option>
+                                                                <option value="ZA">South Africa</option>
+                                                                <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                                                <option value="SS">South Sudan</option>
+                                                                <option value="ES">Spain</option>
+                                                                <option value="LK">Sri Lanka</option>
+                                                                <option value="SR">Suriname</option>
+                                                                <option value="SJ">Svalbard and Jan Mayen</option>
+                                                                <option value="SZ">Swaziland</option>
+                                                                <option value="SE">Sweden</option>
+                                                                <option value="CH">Switzerland</option>
+                                                                <option value="TW">Taiwan, Province of China</option>
+                                                                <option value="TJ">Tajikistan</option>
+                                                                <option value="TZ">Tanzania, United Republic of</option>
+                                                                <option value="TH">Thailand</option>
+                                                                <option value="TL">Timor-Leste</option>
+                                                                <option value="TG">Togo</option>
+                                                                <option value="TK">Tokelau</option>
+                                                                <option value="TO">Tonga</option>
+                                                                <option value="TT">Trinidad and Tobago</option>
+                                                                <option value="TN">Tunisia</option>
+                                                                <option value="TR">Turkey</option>
+                                                                <option value="TM">Turkmenistan</option>
+                                                                <option value="TC">Turks and Caicos Islands</option>
+                                                                <option value="TV">Tuvalu</option>
+                                                                <option value="UG">Uganda</option>
+                                                                <option value="UA">Ukraine</option>
+                                                                <option value="AE">United Arab Emirates</option>
+                                                                <option value="GB">United Kingdom</option>
+                                                                <option value="UM">United States Minor Outlying Islands</option>
+                                                                <option value="UY">Uruguay</option>
+                                                                <option value="UZ">Uzbekistan</option>
+                                                                <option value="VU">Vanuatu</option>
+                                                                <option value="VE">Venezuela, Bolivarian Republic of</option>
+                                                                <option value="VN">Viet Nam</option>
+                                                                <option value="VG">Virgin Islands, British</option>
+                                                                <option value="VI">Virgin Islands, U.S.</option>
+                                                                <option value="WF">Wallis and Futuna</option>
+                                                                <option value="EH">Western Sahara</option>
+                                                                <option value="YE">Yemen</option>
+                                                                <option value="ZM">Zambia</option>
+                                                                <option value="ZW">Zimbabwe</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="g-group g-cell-1-1">
+                                                        <div class="g-cell g-cell-1-2">
+                                                            <ul class="bullet-list-ico bullet-list-ico--compact text-body-small">
+                                                                <li>
+                                                                    <a href="#" class="location-reset"><i class="ico-refresh ico--small"></i>Reset location</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="g-vertical-group g-cell-3-8 hide-small">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Time and Schedules -->
+                            <div id="event_details_date" class="l-mar-top-3">
+                                <div>
+                                    <div class="js-dtp-eventdatetimepair">
+                                        <div class="js-dtp-datetimepairpicker ui-date-time-pair-picker">
+                                            <div class="js-dtp-startdatetimepicker datetime_input g-cell l-mar-top-1 ui-date-time-picker">
+                                                <label class="label-primary">Starts</label>
+                                                <div class="l-mar-top-1">
+                                                    <input type="text" style="width:200px" id="Event_StartDate_Dpk">
+                                                </div>
+                                            </div>
+
+                                            <div class="js-dtp-enddatetimepicker datetime_input g-cell l-mar-top-1 ui-date-time-picker">
+                                                <label class="label-primary">Ends</label>
+                                                <div class="l-mar-top-1">
+                                                    <input type="text" style="width:200px" id="Event_EndDate_Dpk">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="g-cell g-cell-1-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Event Cover Image -->
+                            <div id="event_details_logo" class="l-mar-top-3">
+                                <div class="g-cell g-cell-1-1">
+                                    <label class="label-primary">
+                                        Event Image
+                                    </label>
+                                </div>
+
+                                <div class="js-logo-croploader-wrap g-cell g-cell-1-1 g-cell-md-3-4 g-cell-lg-5-8">
+                                    <input type="file" id="CoverImage" name="CoverImage" />
+                                </div>
+                            </div>
+
+                            <!-- Event Description -->
+                            <div id="event_details_details" class="l-mar-top-3">
+                                <div class="g-cell g-cell-1-2">
+                                    <label class="label-primary">
+                                        Event description
+                                    </label>
+                                </div>
+                                <div class="l-mar-top-1">
+                                    <div class="g-cell g-cell-1-1">
+                                        <textarea id="Description" name="Description" placeholder="Tell people what&#39;s special about this event" rows="10" aria-hidden="true" style="display: none;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Organization -->
+                            <div id="event_details_organizer" class="l-mar-top-3">
+                                <div class="g-cell g-cell-1-1">
+                                    <label class="label-primary">Organizer name</label>
+                                </div>
+                                <div class="g-cell g-cell-1-1">
+                                    <div id="organizer-selector" class="l-mar-top-2">
+                                        <input type="text" id="OrganizationName" name="OrganizationName">
+                                    </div>
+
+                                    <div id="edit-organizer-desc-0" class="edit-organizer-desc l-mar-top-2 visible">
+                                        <label class="label-primary">
+                                            Organizer description
+                                        </label>
+                                        <div class="l-mar-top-1">
+                                            <textarea cols="20" id="OrganizationDescription" name="OrganizationDescription" placeholder="Share details about the organizer" rows="10" aria-hidden="true" style="display: none;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second step: Event tickets -->
+                    <div id="create_tickets_wrapper">
+                        <div id="create_tickets_header" class="g-group">
+                            <div class="l-mar-top-6">
+                                <div class="g-cell g-cell-1-1 g-cell-lg-7-12 g-cell-md-8-12 g-offset-lg-1-12">
+                                    <div class="l-media-v-center">
+                                        <div class="l-media-v-center__row">
+                                            <span class="ico-box ico--small ico--color-teal ico--color-brand-white">2</span>
+                                            <span class="text-large l-pad-hor-1">
+                                                Create Tickets
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="js-create-ticket-wrapper ticket-container--no-handles">
+                            <section class="js-ticket-summary js-ticket-summary-container" style="opacity: 1;">
+                                <div class="g-cell g-cell-1-2 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-3-12 paid-ticket-container">
+                                    <select id="TicketType" name="TicketType" class="responsive-form__select create_select_time_field custom-select-container clrfix">
+                                        <option value="" selected="selected">Select the type of ticket</option>
+                                        <option value="0">Free</option>
+                                        <option value="1">Paid</option>
+                                        <option value="2">Donation</option>
+                                    </select>
+                                </div>
+                                <div class="g-cell g-cell-2-2 l-mar-top-2 g-offset-lg-4-12 g-cell-lg-3-12 paid-ticket-container">
+                                    <a class="js-create-ticket btn btn--ico btn--secondary pull-right" id="add-ticket-button">
+                                        <i class="ico-circle-plus"></i>Add ticket
+                                    </a>
+                                </div>
+                                <div class="g-cell g-cell-1-1 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-10-12 paid-ticket-container">
+                                    <!-- Ticket table header -->
+                                    <div class="g-group create-tickets--header hide-small">
+                                        <div class="g-cell g-cell-5-12 g-cell--no-gutters l-block-h-2 l-pad-vert-2">
+                                            Ticket name<span class="required">*</span>
+                                        </div>
+                                        <div class="g-cell g-cell-2-12 g-cell--no-gutters l-padded-h-half l-pad-vert-2">
+                                            Quantity available<span class="required">*</span>
+                                        </div>
+                                        <div class="g-cell g-cell-3-12 g-cell--no-gutters l-padded-h-half l-pad-vert-2">Price</div>
+                                        <div class="g-cell g-cell-2-12 g-cell--no-gutters l-padded-h-half l-pad-vert-2">Actions</div>
+                                    </div>
+                                    <!-- Ticket table body -->
+                                    <div id="List_Tickets" class="js-ticket-container create-tickets--container">
+                                        <!-- Ticket rows -->
+                                    </div>
+                                    <!-- Ticket table footer -->
+                                    <div class="g-group js-ticket-summary-footer create-tickets--footer l-pad-vert-2">
+                                        <div class="g-cell g-cell-1-1 g-cell-lg-4-12 g-offset-lg-8-12 l-sm-align-center l-md-align-center l-lg-align-right js-event-capacity l-mar-top-2">
+                                            <div class="js-event-capacity-display" data-original-title="" title="">
+                                                <span>Total capacity:</span><span id="TotalTicketCapacity"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="js-deleted-tickets is-hidden">
+                                <div class="create-tickets--ticket" style="display: none;">
+                                    <div class="g-group create-tickets--row report__row--paid-ticket">
+                                        <div class="hide-small">
+                                            <div class="js-change-price-tip js-change-price-large g-cell text-small l-mar-left-1 l-mar-top-2 is-hidden">
+                                                <span class="text-significant">NEW:</span> You just changed the name or price of a ticket that already has sales. <a href="https://www.eventbrite.com/support/articleredirect?anum=3790" target="_blank">Learn what that means</a> for your event.
+                                            </div>
+                                        </div>
+                                        <div class="js-ticket-row ticket-row" style="position: relative;">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-5-12 g-cell--no-gutters sorting-gripper-container l-padded-h-half l-mar-top-2">
+                                                <div class="js-sorting-gripper sorting-gripper hide-small ">
+                                                    <i class="ico-gripper ico--xxlarge ico--color-understated"></i>
+                                                </div>
+                                                <input type="hidden" name="group-tickets-4-id" id="id_group-tickets-4-id" value="">
+                                                <input type="hidden" name="group-tickets-4-cid" id="id_group-tickets-4-cid" value="-1553">
+                                                <input type="hidden" name="group-tickets-4-has_attendees" id="id_group-tickets-4-has_attendees" class="js-has-attendees" value="false">
+                                                <input type="hidden" name="group-tickets-4-current_event_set" id="id_group-tickets-4-current_event_set" class="js-current-event-set" value="[]">
+                                                <input type="hidden" name="group-tickets-4-new_event_set" id="id_group-tickets-4-new_event_set" class="js-new-event-set" value="[]">
+                                                <label for="group-tickets-4-ticket_type" class="label-primary hide-medium-accessible hide-large-accessible">Ticket name</label>
+                                                <div>
+
+                                                    <input name="group-tickets-4-ticket_type" maxlength="255" type="text" id="id_group-tickets-4-ticket_type" class="form__input form__input--full-width js-ticket-name" placeholder="Early Bird, RSVP..." title="" data-original-title="Give your ticket a name, like General Admission, Early Bird, RSVP, etc.">
+
+                                                    <span class="js-ticket-visibility create-tickets--visibility is-hidden">
+                                                        <i class="ico-invisible ico--medium"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="form__field-error is-hidden js-error-for-name"></div>
+                                            </div>
+                                            <div class="g-cell g-cell-1-2 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half">
+                                                <label for="group-tickets-4-quantity_total" class="label-primary hide-medium-accessible hide-large-accessible">Quantity</label>
+
+                                                <input name="group-tickets-4-quantity_total" maxlength="6" id="id_group-tickets-4-quantity_total" type="text" class="form__input--full-width js-quantity-input" pattern="[0-9]*" placeholder="100" title="" data-original-title="Enter the total number of tickets available for this ticket type">
+
+                                                <div class="form__field-error is-hidden js-error-for-quantity"></div>
+
+                                            </div>
+                                            <div class="g-cell g-cell-1-2 g-cell-md-3-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half paid-ticket-container">
+                                                <label for="group-tickets-4-cost" class="label-primary hide-medium-accessible hide-large-accessible">Price</label>
+                                                <div class="js-payment-type">
+                                                    <div>
+                                                        <div class="
+    responsive-form__input--currency
+
+
+    responsive-form__input--currency--long
+
+">
+                                                            <div class="responsive-form__input--currency__symbol">SEK</div>
+                                                            <input type="text" name="group-tickets-4-cost" id="id_group-tickets-4-cost" class="js-price-input form__input--xxsmall" placeholder="15.00" title="" maxlength="11" data-original-title="Set your ticket price. (You&#39;ll select payout options later on the Manage page)">
+                                                            <input type="hidden" name="group-tickets-4-fee" id="id_group-tickets-4-fee" class="js-ticket-fee-hidden" value="0">
+                                                        </div>
+                                                        <div class="js-ticket-buyer-total text-body-small text-body--faint is-hidden" style="display: block;">
+                                                            Buyer total:
+                                                            <a href="https://www.eventbrite.com/edit?eid=28578043698#" class="js-ticket-buyer-total-number">SEK0.00</a>
+                                                            <a class="js-ticket-fee-summary-link tooltip--important is-hidden" href="https://www.eventbrite.com/edit?eid=28578043698#" data-original-title="" title="" style="display: inline;">
+                                                                <i class="ico-information ico--color-understated ico--small"></i>
+                                                            </a>
+                                                        </div>
+                                                        <span class="form__field-error is-hidden js-error-for-ticketPrice"></span>
+                                                        <input type="hidden" name="group-tickets-4-is_donation" value="False" id="id_group-tickets-4-is_donation">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="g-cell g-cell-1-1 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half report__row__tab-group">
+                                                <a class="js-ticket-settings-link report__row__tab narrow-tooltip icon-link" href="https://www.eventbrite.com/edit?eid=28578043698#" title="" data-original-title="Ticket Settings">
+                                                    <i class="ico-settings ico--medium" alt="Settings"></i>
+                                                </a>
+                                                <a id="id_group-tickets-4-delete_ticket" class="js-delete-ticket report__row__tab narrow-tooltip icon-link" title="" href="https://www.eventbrite.com/edit?eid=28578043698#" data-original-title="Delete" style="display: inline;">
+                                                    <i class="ico-trash ico--medium" alt="Delete"></i>
+                                                </a>
+                                                <div class="show-small">
+                                                    <div class="js-change-price-tip l-pad-all-1 text-small g-cell is-hidden">
+                                                        <span class="text-significant">NEW:</span> You just changed the name or price of a ticket that already has sales. <a href="https://www.eventbrite.com/support/articleredirect?anum=3790" target="_blank">Learn what that means</a> for your event.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="group-tickets-4-DELETE" id="id_group-tickets-4-DELETE" class="js-ticket-delete" value="1">
+                                            <input type="hidden" name="group-tickets-4-ORDER" id="id_group-tickets-4-ORDER" class="js-ticket-order" value="1">
+                                        </div>
+                                    </div>
+                                    <div class="ticket-settings settings" style="display: none;">
+                                        <div class="ticket-settings-container js-ticket-settings">
+                                            <div class="l-mar-top-2 g-cell g-cell-1-1">
+                                                <div class="js-ticket-name l-mar-top-1 text-body-large">Settings</div>
+                                                <hr class="l-mar-top-2">
+                                            </div>
+                                            <div class="responsive-form text-body-medium l-pad-vert-3">
+                                                <div class="js-help-target g-group">
+                                                    <label class="responsive-form__fieldset-legend g-cell g-cell-1-1" for="id_group-tickets-4-description">
+                                                        Ticket description
+                                                    </label>
+                                                    <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
+                                                        <textarea data-check="{}" name="group-tickets-4-description" id="id_group-tickets-4-description" class="js-ticket-description" placeholder="Tell your attendees more about this ticket type."></textarea>
+                                                        <input data-check="{}" type="hidden" name="group-tickets-4-hide_description" id="id_group-tickets-4-hide_description" class="js-show-ticket-description-hidden" value="true">
+                                                        <div class="l-pad-vert-1">
+                                                            <input data-check="{}" id="id_group-tickets-4-show_description" type="checkbox" class="js-show-ticket-description">
+                                                            <label for="id_group-tickets-4-show_description">
+                                                                Show ticket description on event page
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-ticket-sales-channel g-group" style="display: block;">
+                                                    <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
+                                                        <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1 l-mar-top-3">
+                                                            Sales channel
+                                                            <i class="ico-info ico--color-brand-light-blue js-d-tooltip js-sales-channel-help-tooltip" title="" dorsal-guid="fdfbdc8e-ec6a-b6b8-4794-f860fe10b8f9" data-original-title="This is where attendees can register or buy this ticket." data-xd-wired="tooltip"></i>
+                                                        </h4>
+
+                                                        <div class="g-cell g-cell-1-1 l-mar-top-1">
+                                                            <div class="responsive-form__select js-ticket-sales-channel-option custom-select-container clrfix">
+                                                                <span class="custom-select-value">Everywhere</span>
+                                                                <div class="custom-select-arrow"></div>
+                                                                <select class="js-d-select-box js-ticket-sales-channel-option" name="group-tickets-4-sales_channel_option" id="id_group-tickets-4-sales_channel_option" dorsal-guid="cfd4f19c-c4c7-006d-7255-cb1ce3906180" data-xd-wired="select-box">
+
+
+
+                                                                    <option value="everywhere" selected="selected">Everywhere</option>
+                                                                    <option value="online">Online only</option>
+                                                                    <option value="atd">At the door only</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="g-cell g-cell-1-3 g-cell-lg-1-4 l-mar-top-4 js-help-text hide-small form__group--help-text">
+                                                        <div class="form__group--help-text-container">
+                                                            Select where to sell your tickets: online or at the door using the Eventbrite Organizer iOS app
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-ticket-fees g-group gticket_settings_service_fees l-mar-top-3" style="display: none;">
+                                                    <div>
+                                                        <label for="id_group-tickets-4-include_ticket_fees" class="label-primary g-cell g-cell-1-1">
+                                                            Fees
+                                                        </label>
+                                                        <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                            <section class="js-ticket-fee-options" style="display: block;">
+                                                                <div class="responsive-form__select custom-select-container clrfix">
+                                                                    <span class="custom-select-value">Pass fees on</span>
+                                                                    <div class="custom-select-arrow"></div>
+                                                                    <select name="group-tickets-4-include_ticket_fees" id="id_group-tickets-4-include_ticket_fees" class="js-ticket-absorb-fees form__input form__input--long">
+
+
+
+                                                                        <option value="0">Pass fees on</option>
+                                                                        <option value="1">Absorb fees</option>
+                                                                    </select>
+                                                                </div>
+                                                            </section>
+                                                            <div class="ticket-settings--fee-detail pod--primary l-pad-vert-1 l-mar-top-1 text-body-medium js-ticket-fees" style="display: none;">
+                                                                <div class="fee-breakdown js-ticket-show-online-fee-breakdown" style="display: block;">
+                                                                    <span class="l-pad-hor-1 text-body-medium text-body--significant ">
+                                                                        Online:
+                                                                    </span>
+                                                                    <span>
+                                                                        Fee: <span class="js-ticket-online-fee-amount">SEK0.00</span>
+                                                                    </span>
+                                                                    <span>
+                                                                        Buyer total: <span class="js-ticket-online-total">SEK0.00</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="fee-breakdown js-ticket-show-atd-fee-breakdown" style="display: none;">
+                                                                    <span class="l-pad-hor-1 text-body-medium text-body--significant ">
+                                                                        At The Door:
+                                                                    </span>
+                                                                    <span>
+                                                                        Fee: <span class="js-ticket-atd-fee-amount">SEK0.00</span>
+                                                                    </span>
+                                                                    <span>
+                                                                        Buyer total: <span class="js-ticket-atd-total">SEK0.00</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-3 g-cell-lg-1-4 hide-small js-help-text form__group--help-text">
+                                                            <div class="form__group--help-text-container">
+                                                                <span class="js-fee-help-pass">You'll receive the price of the ticket, and the buyer will pay the Eventbrite Service Fee</span>
+                                                                <span class="js-fee-help-absorb is-hidden">You'll receive the price of the ticket minus the Eventbrite Service Fee</span>
+                                                                <span class="js-fee-help-pass-ccp is-hidden">You'll receive the price of the ticket and the buyer will pay the Payment Processing Fee and Eventbrite Service Fee</span>
+                                                                <span class="js-fee-help-absorb-ccp is-hidden">You'll receive the price of the ticket minus the Payment Processing Fee and Eventbrite Service Fee</span>
+                                                                <span class="js-fee-help-split-ccp is-hidden">You'll receive the price of the ticket minus the Payment Processing Fee, and the buyer will pay the Eventbrite Service Fee</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-ticket-sales">
+                                                    <div class="g-group">
+                                                        <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                            <div class="js-ticket-sales-start-group g-cell g-cell-1-1 l-mar-top-3">
+                                                                <h4 class="responsive-form__fieldset-legend" for="id_group-tickets-4-start_sales">
+                                                                    Ticket sales start
+                                                                </h4>
+                                                                <div class="js-ticket-sales-start">
+                                                                    <div class="js-visibility-container">
+                                                                        <input name="group-tickets-4-start_sales" id="id_group-tickets-4-start_sales" type="hidden" class="js-sales-start-time-picker" value="2016-10-13 06:40:00">
+                                                                        <a href="https://www.eventbrite.com/edit?eid=28578043698#" class="js-visibility-trigger js-ticket-sales-end-link is-hidden">
+                                                                            or when ticket sales end
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="js-error-for-salesStartDate form__field-error"></div>
+                                                                    <div class="js-visibility-container js-ticket-sales-end-select is-hidden">
+                                                                        When sales end for
+                                                                        <input type="hidden" id="id_group-tickets-4-start_sales_after" name="group-tickets-4-start_sales_after" class="js-start-sales-after-hidden" value="">
+                                                                        <select id="id_group-tickets-4-start_sales_after_ticket" name="group-tickets-4-start_sales_after_ticket" class="js-sales-ticket-choices"></select>
+                                                                        <a id="id_group-tickets-4-sales_after_ticket_off" class="js-visibility-trigger js-ticket-sales-start-by-date" href="https://www.eventbrite.com/edit?eid=28578043698#">
+                                                                            or by date
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="g-cell g-cell-1-1 g-cell--no-gutters l-mar-top-3">
+                                                                <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1" for="id_initial-group-tickets-4-end_sales">
+                                                                    Ticket sales end
+                                                                </h4>
+                                                                <div>
+                                                                    <div id="id_group-tickets-4-end_sales_explicit" class="js-end-sales-explicit g-cell g-cell-1-1">
+                                                                        <input type="hidden" name="initial-group-tickets-4-end_sales" value="2016-11-22 18:00:00" id="id_initial-group-tickets-4-end_sales">
+                                                                        <input name="group-tickets-4-end_sales" id="id_group-tickets-4-end_sales" type="hidden" class="js-sales-end-time-picker" value="2016-11-22 18:00:00">
+                                                                    </div>
+                                                                    <div id="id_group-tickets-4-end_sales_relative" class="js-end-sales-relative end-sales-relative-container is-hidden">
+                                                                        <div class="end-sales-relative-input-container g-group">
+                                                                            <div class="g-cell g-cell-5-12 g-cell-lg-3-12">
+                                                                                <input type="text" name="group-tickets-4-end_sales_relative_time" id="id_group-tickets-4-end_sales_relative_time" class="js-end-sales-relative-time">
+                                                                                <div class="form__field-error is-hidden js-error-for-endSalesRelativeTime"></div>
+                                                                            </div>
+                                                                            <div class="g-cell g-cell-7-12 g-cell-lg-3-12">
+                                                                                <select class="js-end-sales-relative-type" id="id_group-tickets-4-end_sales_relative_type" name="group-tickets-4-end_sales_relative_type">
+
+
+
+                                                                                    <option value="hours">hour(s)</option>
+                                                                                    <option value="days">day(s)</option>
+                                                                                    <option value="minutes">minute(s)</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="g-cell g-cell-5-12 g-cell-lg-3-12 l-align-center">
+                                                                                <div class="l-mar-top-1 text-body-large">
+
+                                                                                    before event
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="g-cell g-cell-7-12 g-cell-lg-3-12">
+                                                                                <select name="group-tickets-4-end_sales_relative_to" id="id_group-tickets-4-end_sales_relative_to" class="js-end-sales-relative-to">
+
+
+
+
+                                                                                    <option value="start_time">starts</option>
+                                                                                    <option value="end_time">ends</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="js-error-for-salesEndDate form__field-error g-cell g-cell-1-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-3 g-cell-lg-1-4 hide-small l-mar-top-4 form__group--help-text js-help-text">
+                                                            <div class="form__group--help-text-container">
+                                                                Optional: Start and end your ticket sales at a certain time or when another ticket type sells out
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-ticket-visibility g-group l-mar-top-3">
+                                                    <div>
+                                                        <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">
+                                                            Ticket visibility
+                                                        </h4>
+                                                        <section class="l-mar-top-1 g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                            <input data-check="{}" name="group-tickets-4-hidden" id="id_group-tickets-4-hidden" type="checkbox" class="js-ticket-hidden">
+                                                            <label for="id_group-tickets-4-hidden">
+                                                                Hide this ticket type
+                                                            </label>
+                                                            <section class="js-auto-hide">
+                                                                <div>
+                                                                    <span class="js-add-auto-hide-schedule">
+                                                                        <a href="javascript:void(0)" class="js-auto-hide-schedule-label">Add ticket auto-hide schedule</a>
+                                                                    </span>
+                                                                </div>
+                                                                <input type="checkbox" name="group-tickets-4-auto_hide" id="id_group-tickets-4-auto_hide" class="js-auto-hide-schedule is-hidden">
+                                                                <div id="id_group-tickets-4-auto_hide_settings" class="js-auto-hide-settings is-hidden">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <input type="radio" name="group-tickets-4-auto_hide_type" id="id_group-tickets-4-auto_hide_type_0" checked="checked" value="0" class="js-auto-hide-on-sale">
+                                                                            <label for="id_group-tickets-4-auto_hide_type_0">
+                                                                                When ticket is not on sale
+                                                                            </label>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="radio" name="group-tickets-4-auto_hide_type" id="id_group-tickets-4-auto_hide_type_1" class="js-auto-hide-custom" value="1">
+                                                                            <label for="id_group-tickets-4-auto_hide_type_1">
+                                                                                For custom date and time
+                                                                            </label>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div id="id_group-tickets-4-auto_hide_custom" class="js-auto-hide-custom-settings is-hidden nested-list-content">
+                                                                        <section>
+                                                                            <input type="checkbox" name="group-tickets-4-auto_hide_until" id="id_group-tickets-4-auto_hide_until" class="js-auto-hide-until">
+                                                                            <label for="id_group-tickets-4-auto_hide_until">Hide until</label>
+                                                                            <div class="nested-list-content">
+                                                                                <input name="group-tickets-4-hide_until" id="id_group-tickets-4-hide_until" type="hidden" class="js-hide-until" value="2016-10-13 06:40:00" disabled="disabled">
+                                                                            </div>
+                                                                        </section>
+                                                                        <section class="l-mar-top-1">
+                                                                            <input type="checkbox" name="group-tickets-4-auto_hide_after" id="id_group-tickets-4-auto_hide_after" class="js-auto-hide-after">
+                                                                            <label for="id_group-tickets-4-auto_hide_after">Hide after</label>
+                                                                            <div class="nested-list-content">
+                                                                                <input name="group-tickets-4-hide_after" id="id_group-tickets-4-hide_after" type="hidden" class="js-hide-after" value="2016-11-22 18:00:00" disabled="disabled">
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </section>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-min-max-tickets l-mar-top-3 g-group">
+                                                    <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">
+                                                        Tickets allowed per order
+                                                    </h4>
+                                                    <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                        <div class="g-group">
+                                                            <div class="g-cell g-cell-1-2 g-cell-md-1-4 g-cell--no-gutters l-mar-top-3">
+                                                                <input type="text" name="group-tickets-4-order_minimum" value="1" id="id_group-tickets-4-order_minimum" class="js-order-minimum l-pad-hor-1" pattern="[0-9]*">
+                                                                <label for="id_group-tickets-4-order_minimum">
+                                                                    minimum
+                                                                </label>
+                                                                <div class="js-error-for-order_min form__field-error"></div>
+                                                            </div>
+                                                            <div class="g-cell g-cell-1-2 g-cell-md-1-4 g-cell--no-gutters l-block-h-1 l-mar-top-3">
+                                                                <input type="text" name="group-tickets-4-order_limit" placeholder="10" id="id_group-tickets-4-order_limit" class="js-order-maximum l-pad-hor-1" pattern="[0-9]*">
+                                                                <label for="id_group-tickets-4-order_limit">
+                                                                    maximum
+                                                                </label>
+                                                                <div class="js-error-for-order_limit form__field-error"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="js-help-text hide-small g-cell g-cell-md-1-3 g-cell-lg-1-4 form__group--help-text">
+                                                        <div class="form__group--help-text-container">
+                                                            Optional: Limit the minimum or maximum number of tickets per order
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-group-tickets--1553 g-cell g-cell-1-1 l-mar-top-3 group-tickets-container">
+                                                    <label class="label-primary">Ticket Code Group</label>
+                                                    <div class="l-pad-vert-2">
+                                                        <div class="js-ticket-group-list--1553">
+                                                            <section>
+                                                                <div>
+                                                                    <span>None specified.</span>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="js-ticket-group-search--1553"></div>
+                                                        <div class="l-pad-vert-2">
+                                                            <a class="js-add-ticket-group--1553 not-decorated" data-automation="add-ticket-group--1553"><i class="ico-circle-plus"></i> Add to group</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="l-align-center g-cell g-cell-1-1">
+                                                <hr>
+                                                <div class="l-pad-vert-3">
+                                                    <a class="js-minimize-settings-link">
+                                                        <i class="ico-circle ico-omnes-arrow-up ico--bullet"></i>
+                                                        Minimize settings
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="create-tickets--ticket" style="display: none;">
+                                    <div class="g-group create-tickets--row">
+                                        <div class="hide-small">
+                                            <div class="js-change-price-tip js-change-price-large g-cell text-small l-mar-left-1 l-mar-top-2 is-hidden">
+                                                <span class="text-significant">NEW:</span> You just changed the name or price of a ticket that already has sales. <a href="https://www.eventbrite.com/support/articleredirect?anum=3790" target="_blank">Learn what that means</a> for your event.
+                                            </div>
+                                        </div>
+                                        <div class="js-ticket-row ticket-row" style="position: relative;">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-5-12 g-cell--no-gutters sorting-gripper-container l-padded-h-half l-mar-top-2">
+                                                <div class="js-sorting-gripper sorting-gripper hide-small ">
+                                                    <i class="ico-gripper ico--xxlarge ico--color-understated"></i>
+                                                </div>
+                                                <input type="hidden" name="group-tickets-3-id" id="id_group-tickets-3-id" value="">
+                                                <input type="hidden" name="group-tickets-3-cid" id="id_group-tickets-3-cid" value="-1470">
+                                                <input type="hidden" name="group-tickets-3-has_attendees" id="id_group-tickets-3-has_attendees" class="js-has-attendees" value="false">
+                                                <input type="hidden" name="group-tickets-3-current_event_set" id="id_group-tickets-3-current_event_set" class="js-current-event-set" value="[]">
+                                                <input type="hidden" name="group-tickets-3-new_event_set" id="id_group-tickets-3-new_event_set" class="js-new-event-set" value="[]">
+                                                <label for="group-tickets-3-ticket_type" class="label-primary hide-medium-accessible hide-large-accessible">Ticket name</label>
+                                                <div>
+
+                                                    <input name="group-tickets-3-ticket_type" maxlength="255" type="text" id="id_group-tickets-3-ticket_type" class="form__input form__input--full-width js-ticket-name" placeholder="Early Bird, RSVP..." title="" data-original-title="Give your ticket a name, like General Admission, Early Bird, RSVP, etc.">
+
+                                                    <span class="js-ticket-visibility create-tickets--visibility is-hidden">
+                                                        <i class="ico-invisible ico--medium"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="form__field-error is-hidden js-error-for-name"></div>
+                                            </div>
+                                            <div class="g-cell g-cell-1-2 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half">
+                                                <label for="group-tickets-3-quantity_total" class="label-primary hide-medium-accessible hide-large-accessible">Quantity</label>
+
+                                                <input name="group-tickets-3-quantity_total" maxlength="6" id="id_group-tickets-3-quantity_total" type="text" class="form__input--full-width js-quantity-input" pattern="[0-9]*" placeholder="100" title="" data-original-title="Enter the total number of tickets available for this ticket type">
+
+                                                <div class="form__field-error is-hidden js-error-for-quantity"></div>
+
+                                            </div>
+                                            <div class="g-cell g-cell-1-2 g-cell-md-3-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half paid-ticket-container">
+                                                <label for="group-tickets-3-cost" class="label-primary hide-medium-accessible hide-large-accessible">Price</label>
+                                                <div class="js-payment-type">
+                                                    <div class="l-mar-top-2">Free</div>
+                                                    <input type="hidden" id="id_group-tickets-3-fee" name="group-tickets-3-fee" value="0">
+                                                    <input type="hidden" id="id_group-tickets-3-cost" name="group-tickets-3-cost" value="0.00">
+                                                    <input type="hidden" name="group-tickets-3-is_donation" value="False" id="id_group-tickets-3-is_donation">
+
+                                                </div>
+                                            </div>
+                                            <div class="g-cell g-cell-1-1 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half report__row__tab-group">
+                                                <a class="js-ticket-settings-link report__row__tab narrow-tooltip icon-link" href="https://www.eventbrite.com/edit?eid=28578043698#" title="" data-original-title="Ticket Settings">
+                                                    <i class="ico-settings ico--medium" alt="Settings"></i>
+                                                </a>
+                                                <a id="id_group-tickets-3-delete_ticket" class="js-delete-ticket report__row__tab narrow-tooltip icon-link" title="" href="https://www.eventbrite.com/edit?eid=28578043698#" data-original-title="Delete" style="display: inline;">
+                                                    <i class="ico-trash ico--medium" alt="Delete"></i>
+                                                </a>
+                                                <div class="show-small">
+                                                    <div class="js-change-price-tip l-pad-all-1 text-small g-cell is-hidden">
+                                                        <span class="text-significant">NEW:</span> You just changed the name or price of a ticket that already has sales. <a href="https://www.eventbrite.com/support/articleredirect?anum=3790" target="_blank">Learn what that means</a> for your event.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="group-tickets-3-DELETE" id="id_group-tickets-3-DELETE" class="js-ticket-delete" value="1">
+                                            <input type="hidden" name="group-tickets-3-ORDER" id="id_group-tickets-3-ORDER" class="js-ticket-order" value="2">
+                                        </div>
+                                    </div>
+                                    <div class="ticket-settings settings" style="display: none;">
+                                        <div class="ticket-settings-container js-ticket-settings">
+                                            <div class="l-mar-top-2 g-cell g-cell-1-1">
+                                                <div class="js-ticket-name l-mar-top-1 text-body-large">Settings</div>
+                                                <hr class="l-mar-top-2">
+                                            </div>
+                                            <div class="responsive-form text-body-medium l-pad-vert-3">
+                                                <div class="js-help-target g-group">
+                                                    <label class="responsive-form__fieldset-legend g-cell g-cell-1-1" for="id_group-tickets-3-description">
+                                                        Ticket description
+                                                    </label>
+                                                    <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
+                                                        <textarea data-check="{}" name="group-tickets-3-description" id="id_group-tickets-3-description" class="js-ticket-description" placeholder="Tell your attendees more about this ticket type."></textarea>
+                                                        <input data-check="{}" type="hidden" name="group-tickets-3-hide_description" id="id_group-tickets-3-hide_description" class="js-show-ticket-description-hidden" value="true">
+                                                        <div class="l-pad-vert-1">
+                                                            <input data-check="{}" id="id_group-tickets-3-show_description" type="checkbox" class="js-show-ticket-description">
+                                                            <label for="id_group-tickets-3-show_description">
+                                                                Show ticket description on event page
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-ticket-sales-channel g-group" style="display: block;">
+                                                    <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
+                                                        <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1 l-mar-top-3">
+                                                            Sales channel
+                                                            <i class="ico-info ico--color-brand-light-blue js-d-tooltip js-sales-channel-help-tooltip" title="" dorsal-guid="9919cb3f-53fc-2338-0f3f-836306e7704c" data-original-title="This is where attendees can register or buy this ticket." data-xd-wired="tooltip"></i>
+                                                        </h4>
+
+                                                        <div class="g-cell g-cell-1-1 l-mar-top-1">
+                                                            <div class="responsive-form__select js-ticket-sales-channel-option custom-select-container clrfix">
+                                                                <span class="custom-select-value">Everywhere</span>
+                                                                <div class="custom-select-arrow"></div>
+                                                                <select class="js-d-select-box js-ticket-sales-channel-option" name="group-tickets-3-sales_channel_option" id="id_group-tickets-3-sales_channel_option" dorsal-guid="9679e28e-8b57-c315-8bb1-0d23c6fa09b5" data-xd-wired="select-box">
+
+
+
+                                                                    <option value="everywhere" selected="selected">Everywhere</option>
+                                                                    <option value="online">Online only</option>
+                                                                    <option value="atd">At the door only</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="g-cell g-cell-1-3 g-cell-lg-1-4 l-mar-top-4 js-help-text hide-small form__group--help-text">
+                                                        <div class="form__group--help-text-container">
+                                                            Select where to sell your tickets: online or at the door using the Eventbrite Organizer iOS app
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-ticket-fees g-group gticket_settings_service_fees l-mar-top-3" style="display: none;">
+                                                    <div>
+                                                        <label for="id_group-tickets-3-include_ticket_fees" class="label-primary g-cell g-cell-1-1">
+                                                            Fees
+                                                        </label>
+                                                        <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                            <section class="js-ticket-fee-options" style="display: block;">
+                                                                <div class="responsive-form__select custom-select-container clrfix">
+                                                                    <span class="custom-select-value">Pass fees on</span>
+                                                                    <div class="custom-select-arrow"></div>
+                                                                    <select name="group-tickets-3-include_ticket_fees" id="id_group-tickets-3-include_ticket_fees" class="js-ticket-absorb-fees form__input form__input--long">
+                                                                        <option value="0">Pass fees on</option>
+                                                                        <option value="1">Absorb fees</option>
+                                                                    </select>
+                                                                </div>
+                                                            </section>
+                                                            <div class="ticket-settings--fee-detail pod--primary l-pad-vert-1 l-mar-top-1 text-body-medium js-ticket-fees" style="display: none;">
+                                                                <div class="fee-breakdown js-ticket-show-online-fee-breakdown" style="display: block;">
+                                                                    <span class="l-pad-hor-1 text-body-medium text-body--significant ">
+                                                                        Online:
+                                                                    </span>
+                                                                    <span>
+                                                                        Fee: <span class="js-ticket-online-fee-amount">SEK0.00</span>
+                                                                    </span>
+                                                                    <span>
+                                                                        Buyer total: <span class="js-ticket-online-total">SEK0.00</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="fee-breakdown js-ticket-show-atd-fee-breakdown" style="display: none;">
+                                                                    <span class="l-pad-hor-1 text-body-medium text-body--significant ">
+                                                                        At The Door:
+                                                                    </span>
+                                                                    <span>
+                                                                        Fee: <span class="js-ticket-atd-fee-amount">SEK0.00</span>
+                                                                    </span>
+                                                                    <span>
+                                                                        Buyer total: <span class="js-ticket-atd-total">SEK0.00</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-ticket-sales">
+                                                    <div class="g-group">
+                                                        <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                            <div class="js-ticket-sales-start-group g-cell g-cell-1-1 l-mar-top-3">
+                                                                <h4 class="responsive-form__fieldset-legend" for="id_group-tickets-3-start_sales">
+                                                                    Ticket sales start
+                                                                </h4>
+                                                                <div class="js-ticket-sales-start">
+                                                                    <div class="js-visibility-container">
+                                                                        <input name="group-tickets-3-start_sales" id="id_group-tickets-3-start_sales" type="hidden" class="js-sales-start-time-picker" value="2016-10-13 06:40:00">
+                                                                        <a class="js-visibility-trigger js-ticket-sales-end-link is-hidden">
+                                                                            or when ticket sales end
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="js-error-for-salesStartDate form__field-error"></div>
+                                                                    <div class="js-visibility-container js-ticket-sales-end-select is-hidden">
+                                                                        When sales end for
+                                                                        <input type="hidden" id="id_group-tickets-3-start_sales_after" name="group-tickets-3-start_sales_after" class="js-start-sales-after-hidden" value="">
+                                                                        <select id="id_group-tickets-3-start_sales_after_ticket" name="group-tickets-3-start_sales_after_ticket" class="js-sales-ticket-choices"></select>
+                                                                        <a id="id_group-tickets-3-sales_after_ticket_off" class="js-visibility-trigger js-ticket-sales-start-by-date" href="https://www.eventbrite.com/edit?eid=28578043698#">
+                                                                            or by date
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="g-cell g-cell-1-1 g-cell--no-gutters l-mar-top-3">
+                                                                <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1" for="id_initial-group-tickets-3-end_sales">
+                                                                    Ticket sales end
+                                                                </h4>
+                                                                <div>
+                                                                    <div id="id_group-tickets-3-end_sales_explicit" class="js-end-sales-explicit g-cell g-cell-1-1">
+                                                                        <input type="hidden" name="initial-group-tickets-3-end_sales" value="2016-11-22 18:00:00" id="id_initial-group-tickets-3-end_sales">
+                                                                        <input name="group-tickets-3-end_sales" id="id_group-tickets-3-end_sales" type="hidden" class="js-sales-end-time-picker" value="2016-11-22 18:00:00">
+                                                                    </div>
+                                                                    <div id="id_group-tickets-3-end_sales_relative" class="js-end-sales-relative end-sales-relative-container is-hidden">
+                                                                        <div class="end-sales-relative-input-container g-group">
+                                                                            <div class="g-cell g-cell-5-12 g-cell-lg-3-12">
+                                                                                <input type="text" name="group-tickets-3-end_sales_relative_time" id="id_group-tickets-3-end_sales_relative_time" class="js-end-sales-relative-time">
+                                                                                <div class="form__field-error is-hidden js-error-for-endSalesRelativeTime"></div>
+                                                                            </div>
+                                                                            <div class="g-cell g-cell-7-12 g-cell-lg-3-12">
+                                                                                <select class="js-end-sales-relative-type" id="id_group-tickets-3-end_sales_relative_type" name="group-tickets-3-end_sales_relative_type">
+
+
+
+                                                                                    <option value="hours">hour(s)</option>
+                                                                                    <option value="days">day(s)</option>
+                                                                                    <option value="minutes">minute(s)</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="g-cell g-cell-5-12 g-cell-lg-3-12 l-align-center">
+                                                                                <div class="l-mar-top-1 text-body-large">
+
+                                                                                    before event
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="g-cell g-cell-7-12 g-cell-lg-3-12">
+                                                                                <select name="group-tickets-3-end_sales_relative_to" id="id_group-tickets-3-end_sales_relative_to" class="js-end-sales-relative-to">
+
+
+
+
+                                                                                    <option value="start_time">starts</option>
+                                                                                    <option value="end_time">ends</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="js-error-for-salesEndDate form__field-error g-cell g-cell-1-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-3 g-cell-lg-1-4 hide-small l-mar-top-4 form__group--help-text js-help-text">
+                                                            <div class="form__group--help-text-container">
+                                                                Optional: Start and end your ticket sales at a certain time or when another ticket type sells out
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-ticket-visibility g-group l-mar-top-3">
+                                                    <div>
+                                                        <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">
+                                                            Ticket visibility
+                                                        </h4>
+                                                        <section class="l-mar-top-1 g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                            <input data-check="{}" name="group-tickets-3-hidden" id="id_group-tickets-3-hidden" type="checkbox" class="js-ticket-hidden">
+                                                            <label for="id_group-tickets-3-hidden">
+                                                                Hide this ticket type
+                                                            </label>
+                                                            <section class="js-auto-hide">
+                                                                <div>
+                                                                    <span class="js-add-auto-hide-schedule">
+                                                                        <a href="javascript:void(0)" class="js-auto-hide-schedule-label">Add ticket auto-hide schedule</a>
+                                                                    </span>
+                                                                </div>
+                                                                <input type="checkbox" name="group-tickets-3-auto_hide" id="id_group-tickets-3-auto_hide" class="js-auto-hide-schedule is-hidden">
+                                                                <div id="id_group-tickets-3-auto_hide_settings" class="js-auto-hide-settings is-hidden">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <input type="radio" name="group-tickets-3-auto_hide_type" id="id_group-tickets-3-auto_hide_type_0" checked="checked" value="0" class="js-auto-hide-on-sale">
+                                                                            <label for="id_group-tickets-3-auto_hide_type_0">
+                                                                                When ticket is not on sale
+                                                                            </label>
+                                                                        </li>
+                                                                        <li>
+                                                                            <input type="radio" name="group-tickets-3-auto_hide_type" id="id_group-tickets-3-auto_hide_type_1" class="js-auto-hide-custom" value="1">
+                                                                            <label for="id_group-tickets-3-auto_hide_type_1">
+                                                                                For custom date and time
+                                                                            </label>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div id="id_group-tickets-3-auto_hide_custom" class="js-auto-hide-custom-settings is-hidden nested-list-content">
+                                                                        <section>
+                                                                            <input type="checkbox" name="group-tickets-3-auto_hide_until" id="id_group-tickets-3-auto_hide_until" class="js-auto-hide-until">
+                                                                            <label for="id_group-tickets-3-auto_hide_until">Hide until</label>
+                                                                            <div class="nested-list-content">
+                                                                                <input name="group-tickets-3-hide_until" id="id_group-tickets-3-hide_until" type="hidden" class="js-hide-until" value="2016-10-13 06:40:00" disabled="disabled">
+                                                                            </div>
+                                                                        </section>
+                                                                        <section class="l-mar-top-1">
+                                                                            <input type="checkbox" name="group-tickets-3-auto_hide_after" id="id_group-tickets-3-auto_hide_after" class="js-auto-hide-after">
+                                                                            <label for="id_group-tickets-3-auto_hide_after">Hide after</label>
+                                                                            <div class="nested-list-content">
+                                                                                <input name="group-tickets-3-hide_after" id="id_group-tickets-3-hide_after" type="hidden" class="js-hide-after" value="2016-11-22 18:00:00" disabled="disabled">
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </section>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <div class="js-help-target js-min-max-tickets l-mar-top-3 g-group">
+                                                    <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">
+                                                        Tickets allowed per order
+                                                    </h4>
+                                                    <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                                                        <div class="g-group">
+                                                            <div class="g-cell g-cell-1-2 g-cell-md-1-4 g-cell--no-gutters l-mar-top-3">
+                                                                <input type="text" name="group-tickets-3-order_minimum" value="1" id="id_group-tickets-3-order_minimum" class="js-order-minimum l-pad-hor-1" pattern="[0-9]*">
+                                                                <label for="id_group-tickets-3-order_minimum">
+                                                                    minimum
+                                                                </label>
+                                                                <div class="js-error-for-order_min form__field-error"></div>
+                                                            </div>
+                                                            <div class="g-cell g-cell-1-2 g-cell-md-1-4 g-cell--no-gutters l-block-h-1 l-mar-top-3">
+                                                                <input type="text" name="group-tickets-3-order_limit" placeholder="10" id="id_group-tickets-3-order_limit" class="js-order-maximum l-pad-hor-1" pattern="[0-9]*">
+                                                                <label for="id_group-tickets-3-order_limit">
+                                                                    maximum
+                                                                </label>
+                                                                <div class="js-error-for-order_limit form__field-error"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="js-help-text hide-small g-cell g-cell-md-1-3 g-cell-lg-1-4 form__group--help-text">
+                                                        <div class="form__group--help-text-container">
+                                                            Optional: Limit the minimum or maximum number of tickets per order
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="js-group-tickets--1470 g-cell g-cell-1-1 l-mar-top-3 group-tickets-container">
+                                                    <label class="label-primary">Ticket Code Group</label>
+                                                    <div class="l-pad-vert-2">
+                                                        <div class="js-ticket-group-list--1470">
+                                                            <section>
+                                                                <div>
+                                                                    <span>None specified.</span>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                        <div class="js-ticket-group-search--1470"></div>
+                                                        <div class="l-pad-vert-2">
+                                                            <a class="js-add-ticket-group--1470 not-decorated" data-automation="add-ticket-group--1470"><i class="ico-circle-plus"></i> Add to group</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="l-align-center g-cell g-cell-1-1">
+                                                <hr>
+                                                <div class="l-pad-vert-3">
+                                                    <a class="js-minimize-settings-link">
+                                                        <i class="ico-circle ico-omnes-arrow-up ico--bullet"></i>
+                                                        Minimize settings
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Payment information -->
+                        <div class="js-change-payout">
+                            <section class="js-change-payout-container g-group" style="opacity: 1;">
+                                <div class="g-cell g-cell-1-1 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-10-12 change-payout-container">
+                                    <div class="create-payout--fields g-group" data-editable="true">
+                                        <div class="js-payout-paypal-email g-cell g-cell-1-1 g-cell-md-11-12 g-cell--no-gutters">
+                                            <div data-automation="paypal-form-container" class="js-payout-paypal-email l-mar-top-5" style="margin-bottom: -5px;">
+                                                <span class="g-cell g-cell-1-1">
+                                                    <label for="id_group-payment_options-paypal_email">Enter your existing PayPal account email address.</label>
+                                                    <span class="required requires-paypal processor-is-paypal">*</span>
+                                                </span>
+                                                <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
+                                                    <input class="js-xd-janus-checkpoint-event" id="PaymentEmail" name="PaymentEmail" placeholder="PayPal Email" type="text">
+                                                    <span class="form__field-error is-hidden js-error-for-paypalEmail"></span>
+                                                </div>
+                                                <span class="g-cell g-cell-1-1 l-mar-top-2 l-pad-vert-1">
+                                                    Don't have a PayPal account?
+                                                    <a href="https://www.paypal.com/us/webapps/mpp/referral/paypal-express-checkout?partner_id=W9QW5TKUA246E" target="_EB_PayPal_Sign_Up">Create a free PayPal merchant account.</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+
+                    <!-- Third step: Additional settings -->
+                    <div id="privacy_and_promotion_wrapper" class="g-group">
+                        <!-- Header -->
+                        <div id="privacy_header" class="">
+                            <div class="l-mar-top-6">
+                                <div class="g-cell g-cell-1-1 g-cell-lg-7-12 g-cell-md-8-12 g-offset-lg-1-12">
+                                    <div class="l-media-v-center">
+                                        <div class="l-media-v-center__row">
+                                            <span class="ico-box ico--small ico--color-teal ico--color-brand-white">3</span>
+                                            <span class="text-large l-pad-hor-1">
+                                                Additional Settings
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="g-cell g-cell-12-12 g-cell-lg-10-12 g-offset-lg-1-12">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div id="privacy_and_promotion_content">
+                            <!-- Event type and Event toppic -->
+                            <div id="privacy_and_promotion_categories" class="promotion g-group">
+                                <!-- Event type -->
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-2 select">
+                                    <label for="id_group-privacy_and_promotion-primary_category" class="label-primary">Event Type<span class="required is-hidden">*</span></label>
+                                </div>
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-1">
+                                    <select id="EventType" name="EventType" class="responsive-form__select create_select_time_field custom-select-container clrfix">
+                                        <option value="" selected="selected">Select the type of event</option>
+                                        <option value="19">Appearance or Signing</option>
+                                        <option value="17">Attraction</option>
+                                        <option value="18">Camp, Trip, or Retreat</option>
+                                        <option value="9">Class, Training, or Workshop</option>
+                                        <option value="6">Concert or Performance</option>
+                                        <option value="1">Conference</option>
+                                        <option value="4">Convention</option>
+                                        <option value="8">Dinner or Gala</option>
+                                        <option value="5">Festival or Fair</option>
+                                        <option value="14">Game or Competition</option>
+                                        <option value="10">Meeting or Networking Event</option>
+                                        <option value="100">Other</option>
+                                        <option value="11">Party or Social Gathering</option>
+                                        <option value="15">Race or Endurance Event</option>
+                                        <option value="12">Rally</option>
+                                        <option value="7">Screening</option>
+                                        <option value="2">Seminar or Talk</option>
+                                        <option value="16">Tour</option>
+                                        <option value="13">Tournament</option>
+                                        <option value="3">Tradeshow, Consumer Show, or Expo</option>
+                                    </select>
+                                    <div class="form__field-error is-hidden">
+                                        None
+                                    </div>
+                                    <p class="js-create-format-error is-hidden l-padded-2 form__field-error">Please select an event type.</p>
+                                </div>
+                                <!-- Event topic -->
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-2 select l-mar-top-2">
+                                    <label for="id_group-privacy_and_promotion-primary_category" class="label-primary">Event Topic<span class="required is-hidden">*</span></label>
+                                </div>
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-1">
+                                    <select id="EventTopic" name="EventTopic" class="responsive-form__select">
+                                        <option value="" selected="selected">Select a topic</option>
+                                        <option value="118">Auto, Boat &amp; Air</option>
+                                        <option value="101">Business &amp; Professional</option>
+                                        <option value="111">Charity &amp; Causes</option>
+                                        <option value="113">Community &amp; Culture</option>
+                                        <option value="115">Family &amp; Education</option>
+                                        <option value="106">Fashion &amp; Beauty</option>
+                                        <option value="104">Film, Media &amp; Entertainment</option>
+                                        <option value="110">Food &amp; Drink</option>
+                                        <option value="112">Government &amp; Politics</option>
+                                        <option value="107">Health &amp; Wellness</option>
+                                        <option value="119">Hobbies &amp; Special Interest</option>
+                                        <option value="117">Home &amp; Lifestyle</option>
+                                        <option value="103">Music</option>
+                                        <option value="199">Other</option>
+                                        <option value="105">Performing &amp; Visual Arts</option>
+                                        <option value="114">Religion &amp; Spirituality</option>
+                                        <option value="102">Science &amp; Technology</option>
+                                        <option value="116">Seasonal &amp; Holiday</option>
+                                        <option value="108">Sports &amp; Fitness</option>
+                                        <option value="109">Travel &amp; Outdoor</option>
+                                    </select>
+                                    <p class="js-create-category-error is-hidden l-padded-2 form__field-error">Please select an event topic.</p>
+                                    <div class="form__field-error hidden">
+                                        None
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Remainning tickets -->
+                            <div id="remaining_ticket_display" class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-3 nonrepeating_only ">
+                                <label class="label-primary">
+                                    Remaining tickets
+                                </label>
+                                <div id="remaining_ticket_display_options" class="l-mar-top-1 privacy_and_promotion_label">
+                                    <div class="l-media">
+                                        <div><input id="IsShowRemainingNumberTicket" name="IsShowRemainingNumberTicket" type="checkbox"></div>
+                                        <div>
+                                            <label class="" for="IsShowRemainingNumberTicket">Show the number of tickets remaining on the registration page</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Functional buttons -->
+    <div class="js-publish-callout l-align-center l-mar-top-4 responsive-form">
+        <div id="starburst" class="l-pad-hor-2 l-pad-vert-4 l-sm-pad-vert-3">
+            <div id="next_step_buttons" class="g-cell g-cell-1-1 btn-group btn-group--responsive">
+                <a class="btn btn--secondary btn-center" onclick="EventManagement.createEvent(); return false;" id="save-event-button-almost-done">Save</a>
+                <a id="make-event-live-button-almost-done" class="btn btn--epic submit_for_live  btn-center">Make Your Event Live</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        EventManagement.init();
+    });
+</script>
+@RenderPage("_TicketTemplate.cshtml")

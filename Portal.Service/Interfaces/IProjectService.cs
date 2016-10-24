@@ -13,7 +13,6 @@ namespace Portal.Service.Interfaces
     {
         IEnumerable<ProjectSummaryViewModel> GetListProjects();
         IEnumerable<ProjectSummaryViewModel> GetProjects(int pageNumber, int pageSize, out int totalItems);
-
         /// <summary>
         /// Add new image to database
         /// </summary>
