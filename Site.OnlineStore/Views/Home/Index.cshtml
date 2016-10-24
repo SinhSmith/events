@@ -2,449 +2,372 @@
     ViewBag.Title = "Trang chủ";
 }
 
-<section class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="~/Content/Images/Temp/banner-vinhome-81.jpg" alt="Vinhomes Central Park">
-                            <div class="header-text hidden-xs">
-                                <div class="col-md-12 text-center">
-                                    <h3><span>Vinhomes Central Park</span></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /carousel -->
-            </div>
-        </div>
-    </div>
-</section>
-<section class="duan">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="title os-tuyendart w3danima">
-                    <div class="fleft">
-                        <h3 style="color: #062245;font-size: 19px;margin-top: 25px;">Dự án tiêu biểu</h3>
-                    </div>
-                    <div class="fright">
-                        <ul id="filters" class="clearfix">
-                            <li style="margin-right:10px;">@Html.ActionLink("Thiết kế và thi công", "GetProjectByType", "Project", new { type = (int)Portal.Infractructure.Utility.Define.ProjectType.DesignAndConstruction},null)</li>
-                            <li style="margin-right:10px;">@Html.ActionLink("Dân dụng", "GetProjectByType", "Project", new { type = (int)Portal.Infractructure.Utility.Define.ProjectType.CivilEngineering }, null)</li>
-                            <li style="margin-right:10px;">@Html.ActionLink("Công Nghiệp", "GetProjectByType", "Project", new { type = (int)Portal.Infractructure.Utility.Define.ProjectType.Industry }, null)</li>
-                            <li style="margin-right:10px;">@Html.ActionLink("Hạ tầng", "GetProjectByType", "Project", new { type = (int)Portal.Infractructure.Utility.Define.ProjectType.Infrastructure }, null)</li>
-                        </ul>
-                    </div>
-                    <br clear="all">
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <div id="portfoliolist" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-                    @foreach (var project in ViewBag.FeaturedProjects)
-                    {
-                        <div class="item">
-                            <div class="portfolio-wrapper pic">
-                                <a href="~/Project/ProjectDetails/@project.Id">
-                                    <img class="pic-image" src=@project.CoverImage.ImagePath alt="The Landmark 81">
-                                </a>
-                                <div>
-                                    <br>
-                                    <div>
-                                        <a href="~/Project/ProjectDetails/@project.Id" class="text-title" style="font-weight:bold;">@project.Name</a>
-                                    </div>
-                                    <div style="font-size:11px;">
-                                        @project.Description
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="new">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-8">
+<div id="content" class="clrfix">
+    <h1 class="is-hidden-accessible">Eventbrite</h1>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="row" style="margin-top: -20px;">
-                        <a href="http://www.coteccons.vn/thong-tin/">
-                            <h1 class="page-heading"><span class="h-title" style="text-transform: uppercase;">Tin tức</span></h1>
+    <section class="hero-image-container">
+        <div class="js-d-carousel hero-carousel slick-initialized slick-slider" data-d-carousel-options="{&quot;autoplay&quot;:true, &quot;fade&quot;: true, &quot;cssEase&quot;: &quot;ease-in&quot;, &quot;speed&quot;:650, &quot;autoplaySpeed&quot;:3000, &quot;lazyLoad&quot;: &quot;ondemand&quot;, &quot;arrows&quot;: false, &quot;slidesToShow&quot;: 1, &quot;slidesToScroll&quot;: 1}" dorsal-guid="8d6089b1-ac25-0b6e-6b4a-f389a9e7cafc" data-xd-wired="carousel" style="display: block;">
+            <div class="slick-list draggable" tabindex="0">
+                <div class="slick-track" style="opacity: 1; width: 7612px;">
+                    <div class="g-group slick-slide" index="0" style="width: 1903px; position: relative; left: 0px; top: 0px; z-index: 800; opacity: 0;">
+                        <div class="g-cell g-cell-12-12 carousel-image-container">
+                            <div class="hero-image" style="background-image: url('https://cdn.evbstatic.com/s3-build/perm_001/8218f5/django/images/home/banners/homepage_hero_banner_1.jpg');"></div>
+                        </div>
+                    </div><div class="g-group slick-slide slick-active" index="1" style="width: 1903px; position: relative; left: -1903px; top: 0px; z-index: 900; opacity: 1;">
+                        <div class="g-cell g-cell-12-12 carousel-image-container">
+                            <div class="hero-image" style="background-image: url('https://cdn.evbstatic.com/s3-build/perm_001/b5a1f0/django/images/home/banners/homepage_hero_banner_2.jpg');"></div>
+                        </div>
+                    </div><div class="g-group slick-slide" index="2" style="width: 1903px; position: relative; left: -3806px; top: 0px; z-index: 800; opacity: 0;">
+                        <div class="g-cell g-cell-12-12 carousel-image-container">
+                            <div class="hero-image" style="background-image: url('https://cdn.evbstatic.com/s3-build/perm_001/e75ba3/django/images/home/banners/homepage_hero_banner_3.jpg');"></div>
+                        </div>
+                    </div><div class="g-group slick-slide" index="3" style="width: 1903px; position: relative; left: -5709px; top: 0px; z-index: 800; opacity: 0;">
+                        <div class="g-cell g-cell-12-12 carousel-image-container">
+                            <div class="hero-image" style="background-image: url('https://cdn.evbstatic.com/s3-build/perm_001/21c395/django/images/home/banners/homepage_hero_banner_4.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-image__content l-mar-top-2">
+            <div class="g-cell g-cell-12-12 org-banner-cta">
+                <h2 class="l-mar-top-3 text-epic text-heading--emphasized l-align-center">
+                    Sell Tickets
+                </h2>
+                <div class="text-default l-mar-top-1 l-pad-hor-2 text-body text-heading--emphasized l-align-center hide-small">
+                    Promote, manage, and host successful events.
+                    <a class="text-body text-heading--emphasized learn-more-emphasized" href="#">
+                        Learn more <span class="is-hidden-accessible">about Eventbrite</span>
+                    </a>
+                </div>
+                <div class="text-default l-mar-top-1 l-pad-hor-2 text-body text-heading--emphasized l-align-center hide-medium hide-large">
+                    Promote, manage, and host events.
+                </div>
+                <div class="l-mar-top-3 l-pad-bot-4 l-sm-pad-bot-3 l-align-center">
+                    <a href="#" class="js-organizer-cta-btn btn btn--action js-xd-janus-checkpoint-event js-modal-auth" data-modal-auth-action="signup" data-checkpoint-name="homepage_organizer_cta_clicked" data-modal-auth-forward="/create/" data-automation="global-nav-create">
+                        Get Started
+                    </a>
+                </div>
+            </div><!--org-banner-cta-->
+        </div><!--hero-image__content-->
+    </section>
+
+    <h2 class="is-hidden-accessible">Search for events</h2>
+    <div class="js-search-bar">
+        <div class="g-group org-consumer-search-bar">
+            <section class="hero-banner-form__content l-mar-top-2">
+                <div class="g-grid">
+                    <form action="/d/" method="GET" class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
+                        <div class="g-cell g-cell-9-12 g-cell-md-5-12 g-cell-lg-4-12 g-cell--has-overflow">
+                            <div class="autocomplete-component">
+                                <label class="is-hidden-accessible" for="consumer-header-event-search">Search for events or categories</label>
+                                <input id="consumer-header-event-search" name="q" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="list" role="textbox" aria-haspopup="true">
+                                <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; display: none;"></ul>
+                            </div>
+                        </div>
+                        <div class="g-cell g-cell-1-1 g-cell-lg-3-12 show-large g-cell--no-gutters g-cell--has-overflow autocomplete-component">
+                            <label class="is-hidden-accessible" for="consumer-header-event-location">Enter city or location</label>
+                            <input id="consumer-header-event-location" name="loc" type="text" class="js-location-input" placeholder="Enter city or location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="Da Nang, Vietnam">
+                        </div>
+                        <div class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 hide-small g-cell--no-gutters search-dropdown">
+                            <label class="is-hidden-accessible" for="consumer-header-date-range">Select a date range</label>
+                            <div class="responsive-form__select custom-select-container clrfix">
+                                <span class="custom-select-value">All Dates</span>
+                                <div class="custom-select-arrow"></div>
+                                <select id="consumer-header-date-range" name="date" class="js-d-select-box" dorsal-guid="9a1eaba7-3ca7-3791-6fa2-36c994f84696" data-xd-wired="select-box">
+                                    <option value="" selected="selected">All Dates</option>
+                                    <option value="today">Today</option>
+                                    <option value="tomorrow">Tomorrow</option>
+                                    <option value="this_week">This Week</option>
+                                    <option value="this_weekend">This Weekend</option>
+                                    <option value="next_week">Next Week</option>
+                                    <option value="next_month">Next Month</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="g-cell g-cell-3-12 g-cell-md-3-12 g-cell-lg-2-12">
+                            <input type="submit" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search" data-checkpoint-name="homepage_search_submitted">
+                            <input type="submit" class="js-home-search-btn btn btn--action btn--block show-small js-xd-janus-checkpoint-link" value="" alt="Search" data-checkpoint-name="homepage_search_submitted">
+                            <input type="hidden" name="mode" value="search">
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <h2 class="is-hidden-accessible">Suggested Events</h2>
+
+    <section class="g-grid l-pad-bot-5 l-sm-pad-bot-3">
+
+        <div class="js-search-bar">
+            <div class="g-group--full-width l-pad-vert-1 consumer-location popular-location">
+                <div class="g-grid">
+                    <div class="g-cell g-cell-1-1 g-cell--has-overflow responsive-form responsive-form--inline">
+                        <h3 class="text-medium">
+                            <span data-automation="home-popular-events-header">Popular Events in </span>
+                            <a href="#" class="consumer-location-link js-consumer-location-link">
+                                <span class="js-displayed-consumer-location">
+                                    Da Nang, Vietnam
+                                    <i class="ico-circle-cross"></i>
+                                </span>
+                            </a>
+                        </h3>
+                        <div class="autocomplete-component popular-autocomplete">
+                            <label class="is-hidden-accessible" for="consumer-location-input-edit">Change location</label>
+                            <input id="consumer-location-input-edit" name="loc" type="text" class="js-consumer-location-input" placeholder="Enter city or location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="js-popular-events">
+
+            <section class="js-events-list">
+
+
+
+                <div class="g-cell g-cell--has-overflow g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 ">
+
+                    <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/hoi-thi-au-bep-gioi-a-nang-mo-rong-lan-viii-2016-tranh-cup-sunhouse-tickets-27671594484?aff=ehomecard" data-share-name="Hội thi “ Đầu bếp giỏi Đà Nẵng mở rộng lần VIII – 2016 , tranh cup Sunhouse”" dorsal-guid="1403b0ae-92d4-4e7d-c71f-6df5de6581c4" data-xd-wired="poster">
+                        <a href="#" class="
+            poster-card__main
+            js-event-link
+
+        " data-type="popular" data-source="home:popular" data-rank="0" data-eid="27671594484" data-automation="event-card">
+                            <div class="poster-card__header">
+                                <div class="poster-card__image" style="background-color:#b19988;">
+                                    <img class="js-poster-image " src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F24066588%2F186588871803%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C22%2C600%2C300&amp;s=99b492d17a4437ce9d602c444ea2a97f" alt="Hội thi “ Đầu bếp giỏi Đà Nẵng mở rộng lần VIII – 2016 , tranh cup Sunhouse” tickets">
+                                </div>
+
+
+
+                                <span class="poster-card__label">Free</span>
+
+                            </div>
+                            <div class="poster-card__body">
+                                <time class="poster-card__date">
+
+
+                                    Fri, Oct 21
+                                    7:00 PM
+
+
+                                </time>
+                                <div class="poster-card__title">
+                                    Hội thi “ Đầu bếp giỏi Đà Nẵng mở rộng lần VIII – 2016 , tranh cup Sunhouse”
+                                </div>
+                                <div class="poster-card__venue">
+
+
+                                </div>
+                            </div>
                         </a>
-                    </div>
-                </div>
-                <div class="clearfix">
+                        <div class="poster-card__footer">
 
-                    <div class="col-xs-12 col-sm-12 col-md-6" id="col-l" style="height: 405px;">
-                        <div class="row">
+                            <div class="poster-card__tags">
 
-                            <div id="clientTestimonials" class="news os-tuyendart w3danima">
-                                <div id="itm-news0" class="itm-news">
-                                    <a href="http://www.coteccons.vn/coteccons-hoan-thanh-ket-cau-toa-thap-landmark-1-vuot-tien-do/"><img src="~/Content/Images/Temp/ctc-landmark1-catnoc-h3-655x437.jpg" alt=""></a>
-                                    <a href="http://www.coteccons.vn/coteccons-hoan-thanh-ket-cau-toa-thap-landmark-1-vuot-tien-do/"><h2>Coteccons hoàn thành kết cấu tòa tháp Landmark 1 vượt tiến độ</h2></a>
-                                    <div style="text-overflow: ellipsis; word-wrap: break-word; overflow: hidden; max-height: 3.6em; line-height: 1.8em; padding:0px 10px;">
-                                        Ngày 06/09/2016, Coteccons đã tiến hành làm lễ cất nóc tòa tháp Landmark 1 thuộc Khu đô thị Vinhomes Central Park
-                                    </div>
-                                </div><div id="itm-news1" class="itm-news" style="display: none;">
-                                    <a href="http://www.coteccons.vn/coteccons-to-chuc-cotecconss-night-voi-chu-de-giai-nhiet-mua-he/"><img src="~/Content/Images/Temp/ctc-coteccons-night-h8-655x437.jpg" alt=""></a>
-                                    <a href="http://www.coteccons.vn/coteccons-to-chuc-cotecconss-night-voi-chu-de-giai-nhiet-mua-he/"><h2>Coteccons tổ chức Coteccons’ Night với chủ đề “Giải Nhiệt Mùa Hè”</h2></a>
-                                    <div style="text-overflow: ellipsis; word-wrap: break-word; overflow: hidden; max-height: 3.6em; line-height: 1.8em; padding:0px 10px;">
-                                        Tối 12/08/2016, Ban Lãnh Đạo Coteccons Group đã tổ chức buổi tiệc thân mật dành cho gần 800 CBNV đang làm việc tại các dự án miền Bắc tại TT Hội nghị Quốc Gia (Hà Nội).
-                                    </div>
-                                </div><div id="itm-news2" class="itm-news" style="display: none;">
-                                    <a href="http://www.coteccons.vn/coteccons-lam-tong-thau-thiet-ke-va-thi-cong-du-an-panorama-nha-trang/"><img src="~/Content/Images/Temp/ctc_panorama_kyket_h1-658x437.jpg" alt=""></a>
-                                    <a href="http://www.coteccons.vn/coteccons-lam-tong-thau-thiet-ke-va-thi-cong-du-an-panorama-nha-trang/"><h2>Coteccons làm Tổng thầu Thiết kế và Thi công dự án Panorama Nha Trang</h2></a>
-                                    <div style="text-overflow: ellipsis; word-wrap: break-word; overflow: hidden; max-height: 3.6em; line-height: 1.8em; padding:0px 10px;">
-                                        Sáng ngày 01/08/2016, Coteccons cùng Chủ đầu tư Công ty CP Đầu tư Xây dựng Vịnh Nha Trang tiến hành ký kết hợp đồng Tổng thầu Thiết kế và Thi công dự án Panorama Nha Trang.
-                                    </div>
-                                </div><div id="itm-news3" class="itm-news" style="display: none;">
-                                    <a href="http://www.coteccons.vn/coteccons-duoc-binh-chon-vao-top-30-bao-cao-thuong-nien-tot-nhat-2016/"><img src="~/Content/Images/Temp/ctc_bctn_2016_h1-657x437.jpg" alt=""></a>
-                                    <a href="http://www.coteccons.vn/coteccons-duoc-binh-chon-vao-top-30-bao-cao-thuong-nien-tot-nhat-2016/"><h2>Coteccons được bình chọn vào top 30 báo cáo thường niên tốt nhất 2016</h2></a>
-                                    <div style="text-overflow: ellipsis; word-wrap: break-word; overflow: hidden; max-height: 3.6em; line-height: 1.8em; padding:0px 10px;">
-                                        Lễ trao giải cuộc bình chọn Báo cáo thường niên tốt nhất do HOSE và Báo Đầu tư Chứng khoán phối hợp tổ chức ngày 29/07/2016, Coteccons tiếp tục được bình chọn là một trong 30 đơn vị có Báo cáo thường niên tốt nhất.
-                                    </div>
-                                </div><div id="itm-news4" class="itm-news" style="display: none;">
-                                    <a href="http://www.coteccons.vn/coteccons-khoi-cong-du-an-truong-quoc-te-vinschool-va-trien-khai-thi-cong-co-dien-cho-3-thap-thuoc-du-an-vinhomes-central-park/"><img src="~/Content/Images/Temp/ctc_vinschool_khoicong_h2-655x437.jpg" alt=""></a>
-                                    <a href="http://www.coteccons.vn/coteccons-khoi-cong-du-an-truong-quoc-te-vinschool-va-trien-khai-thi-cong-co-dien-cho-3-thap-thuoc-du-an-vinhomes-central-park/"><h2>Coteccons khởi công dự án trường quốc tế Vinschool và triển khai thi công cơ điện cho 3 tháp thuộc dự án Vinhomes Central Park</h2></a>
-                                    <div style="text-overflow: ellipsis; word-wrap: break-word; overflow: hidden; max-height: 3.6em; line-height: 1.8em; padding:0px 10px;">
-                                        Sáng ngày 25/07/2016 tại Vinhomes Central Park, Thành phố Hồ Chí Minh, Nhà thầu Coteccons cùng với Chủ đầu tư, Công ty QLXD Vincom 1 tổ chức Lễ cúng khởi công Trường quốc tế liên cấp Vinschool.
-                                    </div>
-                                </div>
+
+                                <a class="event-category" href="#">#FoodDrink</a>
+
+
+
+
+                                <a class="event-format" href="#">#Networking</a>
+
+
+
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 " id="col-r">
-                        <div class="row">
-
-                            <div class="os-tuyendart w3danima">
-                                <div class="tab-content">
-                                    <div class="tab-pane active news_list" id="home">
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="http://www.coteccons.vn/coteccons-hoan-thanh-ket-cau-toa-thap-landmark-1-vuot-tien-do/" onmouseover="Slidenews(0)" title="Coteccons hoàn thành kết cấu tòa tháp Landmark 1 vượt tiến độ">
-                                                    <img class="media-object" src="~/Content/Images/Temp/ctc-landmark1-catnoc-h3-258x172.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body my_max_line">
-                                                <a href="http://www.coteccons.vn/coteccons-hoan-thanh-ket-cau-toa-thap-landmark-1-vuot-tien-do/" onmouseover="Slidenews(0)" title="Coteccons hoàn thành kết cấu tòa tháp Landmark 1 vượt tiến độ" class="new_title">Coteccons hoàn thành kết cấu tòa tháp Landmark 1 vượt tiến độ</a>
-                                            </div>
-                                        </div><div class="media">
-                                            <div class="media-left">
-                                                <a href="http://www.coteccons.vn/coteccons-to-chuc-cotecconss-night-voi-chu-de-giai-nhiet-mua-he/" onmouseover="Slidenews(1)" title="Coteccons tổ chức Coteccons’ Night với chủ đề “Giải Nhiệt Mùa Hè”">
-                                                    <img class="media-object" src="~/Content/Images/Temp/ctc-coteccons-night-h8-258x172.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body my_max_line">
-                                                <a href="http://www.coteccons.vn/coteccons-to-chuc-cotecconss-night-voi-chu-de-giai-nhiet-mua-he/" onmouseover="Slidenews(1)" title="Coteccons tổ chức Coteccons’ Night với chủ đề “Giải Nhiệt Mùa Hè”" class="new_title">Coteccons tổ chức Coteccons’ Night với chủ đề “Giải Nhiệt Mùa Hè”</a>
-                                            </div>
-                                        </div><div class="media">
-                                            <div class="media-left">
-                                                <a href="http://www.coteccons.vn/coteccons-lam-tong-thau-thiet-ke-va-thi-cong-du-an-panorama-nha-trang/" onmouseover="Slidenews(2)" title="Coteccons làm Tổng thầu Thiết kế và Thi công dự án Panorama Nha Trang">
-                                                    <img class="media-object" src="~/Content/Images/Temp/ctc_panorama_kyket_h1-259x172.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body my_max_line">
-                                                <a href="http://www.coteccons.vn/coteccons-lam-tong-thau-thiet-ke-va-thi-cong-du-an-panorama-nha-trang/" onmouseover="Slidenews(2)" title="Coteccons làm Tổng thầu Thiết kế và Thi công dự án Panorama Nha Trang" class="new_title">Coteccons làm Tổng thầu Thiết kế và Thi công dự án Panorama Nha Trang</a>
-                                            </div>
-                                        </div><div class="media">
-                                            <div class="media-left">
-                                                <a href="http://www.coteccons.vn/coteccons-duoc-binh-chon-vao-top-30-bao-cao-thuong-nien-tot-nhat-2016/" onmouseover="Slidenews(3)" title="Coteccons được bình chọn vào top 30 báo cáo thường niên tốt nhất 2016">
-                                                    <img class="media-object" src="~/Content/Images/Temp/ctc_bctn_2016_h1-259x172.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body my_max_line">
-                                                <a href="http://www.coteccons.vn/coteccons-duoc-binh-chon-vao-top-30-bao-cao-thuong-nien-tot-nhat-2016/" onmouseover="Slidenews(3)" title="Coteccons được bình chọn vào top 30 báo cáo thường niên tốt nhất 2016" class="new_title">Coteccons được bình chọn vào top 30 báo cáo thường niên tốt nhất 2016</a>
-                                            </div>
-                                        </div><div class="media">
-                                            <div class="media-left">
-                                                <a href="http://www.coteccons.vn/coteccons-khoi-cong-du-an-truong-quoc-te-vinschool-va-trien-khai-thi-cong-co-dien-cho-3-thap-thuoc-du-an-vinhomes-central-park/" onmouseover="Slidenews(4)" title="Coteccons khởi công dự án trường quốc tế Vinschool và triển khai thi công cơ điện cho 3 tháp thuộc dự án Vinhomes Central Park">
-                                                    <img class="media-object" src="~/Content/Images/Temp/ctc_vinschool_khoicong_h2-258x172.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body my_max_line">
-                                                <a href="http://www.coteccons.vn/coteccons-khoi-cong-du-an-truong-quoc-te-vinschool-va-trien-khai-thi-cong-co-dien-cho-3-thap-thuoc-du-an-vinhomes-central-park/" onmouseover="Slidenews(4)" title="Coteccons khởi công dự án trường quốc tế Vinschool và triển khai thi công cơ điện cho 3 tháp thuộc dự án Vinhomes Central Park" class="new_title">Coteccons khởi công dự án trường quốc tế Vinschool và triển khai thi công cơ điện cho 3 tháp thuộc dự án Vinhomes Central Park</a>
-                                            </div>
-                                        </div>                                            <a class="xemtatca pull-right" style="padding-top: 5px;" href="http://www.coteccons.vn/thong-tin/">» Xem tất cả</a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--.news-->
-
-                <hr style="padding-bottom:0px;margin-bottom: 0px;">
-                <div class="row">
-                    <h3 class="text-center text-uppercase os-tuyendart w3danima"><p>Lĩnh vực hoạt động</p></h3>
-                    <div id="owl-demo" class="owl-carousel os-tuyendart owl-theme w3danima" style="opacity: 1; display: block;">
-                        <div class="owl-wrapper-outer">
-                            <div class="owl-wrapper" style="width: 2600px; left: 0px; display: block;">
-                                <div class="owl-item" style="width: 260px;">
-                                    <div class="item col-xs-12">
-                                        <div class="bord">
-                                            <div class="pic">
-                                                <a href="http://www.coteccons.vn/coteccons-gia-tri-vuot-troi-cua-mot-tong-thau/">
-                                                    <img class="pic-image" src="~/Content/Images/Temp/Tong-thau1-services.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <h4 style="padding: 0px; margin: 10px 0px;">Tổng thầu xây lắp</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><div class="owl-item" style="width: 260px;">
-                                    <div class="item col-xs-12">
-                                        <div class="bord">
-                                            <div class="pic">
-                                                <a href="http://www.coteccons.vn/coteccons-su-tai-tinh-cua-thiet-ke-va-thi-cong/">
-                                                    <img class="pic-image" src="~/Content/Images/Temp/design-build.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <h4 style="padding: 0px; margin: 10px 0px;">Thiết kế và Thi công</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><div class="owl-item" style="width: 260px;">
-                                    <div class="item col-xs-12">
-                                        <div class="bord">
-                                            <div class="pic">
-                                                <a href="http://www.coteccons.vn/noi-that/">
-                                                    <img class="pic-image" src="~/Content/Images/Temp/Noi-that-Service-330x220.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <h4 style="padding: 0px; margin: 10px 0px;">Nội Thất</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><div class="owl-item" style="width: 260px;">
-                                    <div class="item col-xs-12">
-                                        <div class="bord">
-                                            <div class="pic">
-                                                <a href="http://www.coteccons.vn/">
-                                                    <img class="pic-image" src="~/Content/Images/Temp/ha-tang.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <h4 style="padding: 0px; margin: 10px 0px;">Hạ tầng</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><div class="owl-item" style="width: 260px;">
-                                    <div class="item col-xs-12">
-                                        <div class="bord">
-                                            <div class="pic">
-                                                <a href="http://www.coteccons.vn/linh-vuc-co-dien-mep/">
-                                                    <img class="pic-image" src="~/Content/Images/Temp/m-e-300x195.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="info">
-                                                <h4 style="padding: 0px; margin: 10px 0px;">Cơ điện</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div>
-                    </div>
-                </div><!-- .linhvuchoatdong-->
-            </div> <!-- .column left-->
-
-            <div class="col-xs-12 col-sm-4 col-md-4">
-
-                <div class="box">
-                    <div class="title title-bg clearfix os-tuyendart w3danima">
-                        <h3>Hợp tác cùng CotecCons</h3>
-                    </div>
-                    <div>
-                        <div class="media pad15"><div class="media-left"><a href="http://www.coteccons.vn/#" data-toggle="modal" data-target="#videoModal" data-thevideo="http://www.youtube.com/embed/GkZsYZPH9TE"> <img class="media-object" style="width: auto;" src="~/Content/Images/icon3_3.png" alt="..."> </a></div><div class="media-body"><p>Thương hiệu Coteccons giờ đây đã trở thành bảo chứng chất lượng cho những công trình mang đẳng cấp quốc tế. Nhấp chuột vào link liên kết để tham gia vào chuỗi cung ứng của CotecCons</p></div></div><div class="text-center button-link"><a class="btn btn-primary" href="http://www.coteccons.vn/thong-tin-nang-luc/">Giới thiệu Năng lực</a> <a class="btn btn-primary" style="width: 148px;" href="http://www.coteccons.vn/gop-y/">Góp ý</a></div><div class="text-center"><table border="0" width="95%"><tbody><tr><td style="text-align: right;"><div style="font-size: 22px;"><a href="tel:0931106080">0931 106 080</a></div></td><td rowspan="2"><a href="tel:0931106080"><img class="hotline" src="~/Content/Images/icon-hotline.jpg" alt=""></a></td></tr><tr><td style="text-align: right;"><div style="font-size: 15px; color: #337ab7;">HOTLINE</div></td></tr></tbody></table></div>
-                    </div>
-                </div>
-                <div class="box custom-duan">
-                    <div class="title title-bg os-tuyendart w3danima">
-                        <a href="http://www.coteccons.vn/du-an/" style="text-decoration: none;"><h3>Thông tin dự án</h3></a>
-                    </div>
-                    @foreach (var project in ViewBag.FeaturedProjects)
-                    {
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="~/Project/ProjectDetails/@project.Id">
-                                    <img class="media-object" src=@project.CoverImage.ImagePath alt="">
+                            <div class="poster-card__actions">
+                                <a class="js-share-event-card share-action" href="#" data-eid="27671594484" title="Share">
+                                    <i class="ico-share ico--medium"></i>
+                                    <span class="is-hidden-accessible">Share this event</span>
+                                </a>
+                                <a class="js-d-bookmark" data-eid="27671594484" data-bookmarked="false" title="Save" data-source-page="home:popular" href="#" dorsal-guid="a1e48384-de2f-1e54-ee5b-323416dad107" data-xd-wired="bookmark">
+                                    <i class="ico-bookmark ico--medium"></i>
+                                    <span class="is-hidden-accessible">Bookmark this event</span>
                                 </a>
                             </div>
-                            <div class="media-body">
-                                <a href="~/Project/ProjectDetails/@project.Id">@project.Name</a>
-                                <div><p>@project.Address</p></div>
-                            </div>
                         </div>
-                    }
+
+                    </div>
+
+
                 </div>
-            </div>
-            <!-- left col-md-4-->
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="title os-tuyendart w3danima">
-                    <div class="fleft">
-                        <a href="http://www.coteccons.vn/quan-he-co-dong/thong-tin-co-dong/" style="text-decoration: none;">
-                            <h3 style="color:#062245;">Thông tin cổ đông</h3>
-                        </a>
-                    </div>
-                    <br clear="all">
-                </div>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="http://www.coteccons.vn/giay-chung-nhan-dang-ky-chung-khoan-thay-doi-lan-7/">
-                            <img class="media-object" src="~/Content/Images/Temp/102-2009-GCNCP-VSD-7-259x172.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="http://www.coteccons.vn/giay-chung-nhan-dang-ky-chung-khoan-thay-doi-lan-7/">Giấy chứng nhận đăng ký chứng khoán - Thay đổi lần 7</a>
-                    </div>
-                </div><div class="media">
-                    <div class="media-left">
-                        <a href="http://www.coteccons.vn/coteccons-nhan-giay-chung-nhan-dang-ky-doanh-nghiep-thay-doi-lan-thu-16/">
-                            <img class="media-object" src="~/Content/Images/Temp/CTD_Giay_CNDKDN_lan_thu_16-271x172.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="http://www.coteccons.vn/coteccons-nhan-giay-chung-nhan-dang-ky-doanh-nghiep-thay-doi-lan-thu-16/">Coteccons nhận giấy Chứng nhận đăng ký doanh nghiệp – thay đổi lần thứ 16</a>
-                    </div>
-                </div><div class="media">
-                    <div class="media-left">
-                        <a href="http://www.coteccons.vn/cbtt-ve-viec-thay-doi-so-luong-co-phieu-co-quyen-bieu-quyet-luu-hanh/">
-                            <img class="media-object" src="~/Content/Images/Temp/2293-2019-CV-BTC-COVER-278x172.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="http://www.coteccons.vn/cbtt-ve-viec-thay-doi-so-luong-co-phieu-co-quyen-bieu-quyet-luu-hanh/">CBTT về việc thay đổi số lượng cổ phiếu có quyền biểu quyết lưu hành</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="title os-tuyendart w3danima">
-                    <div class="fleft">
-                        <a href="http://www.coteccons.vn/thong-tin/tin-thi-truong/" style="text-decoration: none;">
-                            <h3 style="color:#062245;">Tin thị trường</h3>
-                        </a>
-                    </div>
-                    <br clear="all">
-                </div>
-                <div class="media">
-                    <div class="media-left">
-                        <a href="http://www.coteccons.vn/tnr-holdings-viet-nam-va-moi-duyen-voi-cac-giai-thuong/">
-                            <img class="media-object" src="~/Content/Images/Temp/20160622081135-943d-271x172.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="http://www.coteccons.vn/tnr-holdings-viet-nam-va-moi-duyen-voi-cac-giai-thuong/">TNR Holdings Việt Nam và mối “duyên” với các giải thưởng</a>
-                    </div>
-                </div><div class="media">
-                    <div class="media-left">
-                        <a href="http://www.coteccons.vn/doanh-nghiep-viet-thang-thau-nuoc-ngoai/">
-                            <img class="media-object" src="~/Content/Images/Temp/pc_vinhomes_central_park-269x172.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="http://www.coteccons.vn/doanh-nghiep-viet-thang-thau-nuoc-ngoai/">Doanh nghiệp Việt thắng thầu nước ngoài</a>
-                    </div>
-                </div><div class="media">
-                    <div class="media-left">
-                        <a href="http://www.coteccons.vn/coteccons-va-cau-chuyen-sieu-du-an-the-landmark-81/">
-                            <img class="media-object" src="~/Content/Images/Temp/blp0807_141711712-229x172.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="http://www.coteccons.vn/coteccons-va-cau-chuyen-sieu-du-an-the-landmark-81/">Coteccons và câu chuyện "siêu dự án" The Landmark 81</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4" style="padding-top: 8px;">
-                <div class="title title-bg os-tuyendart w3danima">
-                    <a href="http://www.coteccons.vn/tuyen-dung/" style="text-decoration: none;"><h3>Tuyển dụng</h3></a>
-                </div>
-                <div class="boxlink">
-                    <ul>
-                        <li>
-                            » <a href="http://www.coteccons.vn/recruitment/ky-su-trac-dia/">Kỹ sư Trắc Địa</a>
-                        </li>
-                        <li>
-                            » <a href="http://www.coteccons.vn/recruitment/nhan-vien-bim-khoi-co-dien/">Nhân viên BIM – Khối Cơ Điện</a>
-                        </li>
-                        <li>
-                            » <a href="http://www.coteccons.vn/recruitment/giam-sat-me/">Giám sát M&amp;E</a>
-                        </li>
-                        <li>
-                            » <a href="http://www.coteccons.vn/recruitment/giam-sat-thi-cong-xay-dung/">Giám sát thi công xây dựng</a>
-                        </li>
-                        <li>
-                            » <a href="http://www.coteccons.vn/recruitment/nhan-vien-ke-toan/">Nhân viên kế toán</a>
-                        </li>
-                        <li>
-                            » <a href="http://www.coteccons.vn/recruitment/chuyen-vien-an-toan/">Chuyên viên An toàn</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
+            </section>
+
+
+
+
         </div>
 
+
+        <div class="g-group l-pad-bot-3">
+            <div class="g-cell g-cell-1-1 l-mar-top-4">
+                <h3 class="text-medium">
+                    Browse by Top Categories
+                </h3>
+            </div>
+
+            <div class="g-cell g-cell-1-1 g-cell-md-2-2 g-cell-lg-2-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
+                <a class="category-card js-category-link js-d-track-link category-music js-xd-janus-checkpoint-link" href="#" data-category="Music" data-event-action="ViewCategory" data-event-category="home" data-event-label="Music" data-checkpoint-name="homepage_category_card_click" dorsal-guid="447d7848-686d-878c-d9b4-cd2f239ccc81" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Music
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Intimate house concerts, major music festivals, and the occasional dance party
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
+                <a class="category-card js-category-link js-d-track-link category-food js-xd-janus-checkpoint-link" href="#" data-category="Food &amp;amp; Drink" data-event-action="ViewCategory" data-event-category="home" data-event-label="Food &amp;amp; Drink" data-checkpoint-name="homepage_category_card_click" dorsal-guid="848ddd46-2bfd-f50c-ddd0-2e6c3eff0e23" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Food &amp; Drink
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Dinner parties, tastings, and big-time festivals
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
+                <a class="category-card js-category-link js-d-track-link category-classes js-xd-janus-checkpoint-link" href="#" data-category="Class" data-event-action="ViewCategory" data-event-category="home" data-event-label="Class" data-checkpoint-name="homepage_category_card_click" dorsal-guid="66ca2eb7-25bc-12f9-7cdc-63422c3d1b8c" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Classes
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Enlightening seminars, technical workshops, and fitness classes
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
+                <a class="category-card js-category-link js-d-track-link category-arts js-xd-janus-checkpoint-link" href="#" data-category="Arts" data-event-action="ViewCategory" data-event-category="home" data-event-label="Arts" data-checkpoint-name="homepage_category_card_click" dorsal-guid="20aaf632-6af2-8e3f-00c9-b80bf6006594" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Arts
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Plays, comedy nights, art exhibitions and film festivals
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
+                <a class="category-card js-category-link js-d-track-link category-parties js-xd-janus-checkpoint-link" href="#" data-category="Party" data-event-action="ViewCategory" data-event-category="home" data-event-label="Party" data-checkpoint-name="homepage_category_card_click" dorsal-guid="e3e26bf6-e92c-799b-07df-4e7ab97356ce" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Parties
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Casual happy hours, singles nights, and all-night celebrations
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 hide-medium hide-small">
+                <a class="category-card js-category-link js-d-track-link category-sports js-xd-janus-checkpoint-link" href="#" data-category="Sports" data-event-action="ViewCategory" data-event-category="home" data-event-label="Sports" data-checkpoint-name="homepage_category_card_click" dorsal-guid="8c6ba245-e071-826c-85fa-0247af7b91b7" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Sports &amp; Wellness
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Obstacle races, drop-in yoga classes, and the big game
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="g-cell g-cell-1-1 g-cell-md-2-2 g-cell-lg-2-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
+                <a class="category-card js-category-link js-d-track-link category-networking js-xd-janus-checkpoint-link" href="#" data-category="Networking" data-event-action="ViewCategory" data-event-category="home" data-event-label="Networking" data-checkpoint-name="homepage_category_card_click" dorsal-guid="f716ce48-afed-0403-a431-970d45fefc8e" data-xd-wired="track-link">
+                    <div class="category-card__wrapper">
+                        <div class="category-card__tint">
+                            <div class="category-card__image"></div>
+                        </div>
+                        <div class="category-card__text-wrapper">
+                            <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
+                                Networking
+                            </h4>
+                            <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
+                                Business mixers, hobby meetups, and panel discussions
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id="bookmark-login-popup" class="omnes g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-6-12 g-cell-lg-4-12 mfp-hide">
+        <h1 class="modal__heading">Save This Event</h1>
+        <div class="modal__body l-align-center">
+            <div>Log in or sign up for Eventbrite to save events you're interested in.</div>
+            <div class="l-pad-vert-2">
+                <a href="#" class="js-bookmark-signup btn btn--block l-pad-vert-2" style="color:#fff;">
+                    Sign Up
+                </a>
+            </div>
+            <div class="text-body-small">Already have an account? <a class="js-bookmark-login" href="#">Log in</a></div>
+        </div>
     </div>
-</section>
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div>
-                    <iframe width="100%" height="350" src="~/Content/Images/Temp/saved_resource.html" frameborder="0" allowfullscreen=""></iframe>
-                </div>
+
+    <div id="bookmark-success-popup" class="omnes g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-6-12 g-cell-lg-4-12 mfp-hide">
+        <h1 class="modal__heading">Event Saved</h1>
+        <div class="modal__body">
+            <div class="l-pad-vert-3 l-align-center">
+                <i class="ico-circle-checkmark ico--color-brand-dark-green" style="font-size: 140px;"></i>
             </div>
         </div>
     </div>
 </div>
-<br clear="all">
-
-
-@section LocalStyles{
-    <style>
-        .media-body, .media-left, .media-right {
-            display: table-cell;
-            vertical-align: top;
-        }
-
-        .media-left, .media > .pull-left {
-            padding-right: 10px;
-        }
-
-        .caret {
-            border-top: 4px dashed;
-        }
-
-        .nav a:hover .caret {
-            border-top-color: initial !important;
-            border-bottom-color: initial !important;
-        }
-
-        .nav .caret {
-            border-top-color: initial !important;
-            border-bottom-color: initial !important;
-        }
-    </style>
-}
-
-@section LocalScripts{
-    <script src="~/Scripts/home/footer-homepage.js"></script>
-    <script type="text/javascript">
-        var read_more = "Xem thêm";
-    </script>
-    <script src="~/Scripts/home/custom-footer.js"></script>
-}
 
