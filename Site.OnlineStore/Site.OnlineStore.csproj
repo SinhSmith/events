@@ -2060,6 +2060,7 @@
     <Content Include="Scripts\project\jquery.prettyPhoto.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\user\accountController.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Content\css\blockcart.css" />
     <Content Include="Content\css\blockcategories.css" />
