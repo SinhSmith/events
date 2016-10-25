@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -176,6 +177,7 @@
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -509,9 +511,6 @@
     <Content Include="Content\common\ie8.css" />
     <Content Include="Content\common\owl.carousel.css" />
     <Content Include="Content\common\owl.theme.css" />
-    <Content Include="Content\css\site.css" />
-    <Content Include="Content\css\site1.css" />
-    <Content Include="Content\css\site2.css" />
     <Content Include="Content\admin\dist\css\AdminLTE.addon.css" />
     <Content Include="Content\admin\dist\css\AdminLTE.css" />
     <Content Include="Content\admin\dist\css\AdminLTE.min.css" />
@@ -577,6 +576,14 @@
     <Content Include="Content\admin\font-awesome\4.3.0\css\font-awesome.min.css" />
     <Content Include="Content\admin\font-awesome\4.3.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\admin\html5shiv\3.7.2\html5shiv.min.js" />
+    <Content Include="Content\css\base_styles.css" />
+    <Content Include="Content\css\css.css" />
+    <Content Include="Content\css\event_pages_C.css" />
+    <Content Include="Content\css\event_page_advanced.css" />
+    <Content Include="Content\css\global_header.css" />
+    <Content Include="Content\css\home.css" />
+    <Content Include="Content\css\home_consumer.css" />
+    <Content Include="Content\css\icons.data.svg.css" />
     <Content Include="Content\event\base_styles.css" />
     <Content Include="Content\event\bundle%281%29.css" />
     <Content Include="Content\event\bundle.css" />
@@ -2062,50 +2069,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\user\accountController.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Content\css\blockcart.css" />
-    <Content Include="Content\css\blockcategories.css" />
-    <Content Include="Content\css\blockcurrencies.css" />
-    <Content Include="Content\css\blocklanguages.css" />
-    <Content Include="Content\css\blocklayered.css" />
-    <Content Include="Content\css\blocknewsletter.css" />
-    <Content Include="Content\css\blockpermanentlinks.css" />
-    <Content Include="Content\css\blocktags.css" />
-    <Content Include="Content\css\blockviewed.css" />
-    <Content Include="Content\css\blockwishlist.css" />
-    <Content Include="Content\css\category.css" />
-    <Content Include="Content\css\cbb092d6554938a9549cb716ffcb1f94.css" />
-    <Content Include="Content\css\cms.css" />
-    <Content Include="Content\css\contact-form.css" />
-    <Content Include="Content\css\css%281%29.css" />
-    <Content Include="Content\css\css%282%29.css" />
-    <Content Include="Content\css\css.css" />
-    <Content Include="Content\css\front%281%29.css" />
-    <Content Include="Content\css\front%282%29.css" />
-    <Content Include="Content\css\front.css" />
-    <Content Include="Content\css\global.css" />
-    <Content Include="Content\css\highdpi.css" />
-    <Content Include="Content\css\homeslider.css" />
-    <Content Include="Content\css\hooks.css" />
-    <Content Include="Content\css\jquery.autocomplete.css" />
-    <Content Include="Content\css\jquery.bxslider.css" />
-    <Content Include="Content\css\jquery.fancybox.css" />
-    <Content Include="Content\css\jquery.ui.slider.css" />
-    <Content Include="Content\css\jquery.ui.theme.css" />
-    <Content Include="Content\css\live_configurator.css" />
-    <Content Include="Content\css\product.css" />
-    <Content Include="Content\css\productcomments.css" />
-    <Content Include="Content\css\product_list.css" />
-    <Content Include="Content\css\responsive-tables.css" />
-    <Content Include="Content\css\smartbloglatestnews.css" />
-    <Content Include="Content\css\smartblogstyle.css" />
-    <Content Include="Content\css\smartblogtags.css" />
-    <Content Include="Content\css\themeconfiglink.css" />
-    <Content Include="Content\css\tmmegamenu.css" />
-    <Content Include="Content\css\tmnewsletter.css" />
-    <Content Include="Content\css\tmproductvideos.css" />
-    <Content Include="Content\css\tmrelatedproducts.css" />
-    <Content Include="Content\css\tmsearch.css" />
-    <Content Include="Content\css\uniform.default.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\advertisement.png" />
@@ -2174,6 +2137,7 @@
     <Content Include="Views\Project\ProjectDetails.cshtml" />
     <Content Include="Views\Shared\_ProjectLayout.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\E\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
