@@ -23,7 +23,7 @@ namespace Site.OnlineStore.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +35,9 @@ namespace Site.OnlineStore.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -79,16 +79,24 @@ namespace Site.OnlineStore.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
+                //case SignInStatus.Success:
+                //    return RedirectToLocal(returnUrl);
+                //case SignInStatus.LockedOut:
+                //    return View("Lockout");
+                //case SignInStatus.RequiresVerification:
+                //    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                //case SignInStatus.Failure:
+                //default:
+                //    ModelState.AddModelError("", "Invalid login attempt.");
+                //    return PartialView(model);
+
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return Json(new { success = true });
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return PartialView(model);
+                    return Json(new { success = false, message = "Invalid login attempt." });
             }
         }
 
@@ -121,7 +129,7 @@ namespace Site.OnlineStore.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -147,7 +155,7 @@ namespace Site.OnlineStore.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -156,8 +164,8 @@ namespace Site.OnlineStore.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // Add new profile
                     var _profileService = new ProfileService();
                     _profileService.AddProfile(new Portal.Model.ViewModel.ProfileViewModel
@@ -176,13 +184,24 @@ namespace Site.OnlineStore.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return Json(new { success = true });
                 }
-                AddErrors(result);
+                else
+                {
+                    string errors = "";
+                    foreach (var error in result.Errors)
+                    {
+                        errors += error;
+                    }
+                    return Json(new { success = false, message = errors });
+                }
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return PartialView(model);
+            //return PartialView(model);
+            return Json(new { success = false, message = "An error has occurred. Please try again." });
         }
 
         //

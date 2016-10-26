@@ -1,14 +1,11 @@
 ﻿@using Site.OnlineStore.Models
 @model LoginViewModel
-@{
-    ViewBag.Title = "Login";
-}
 
 <div id="columns">
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "form-login", @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <span id="errorMessage" class="text-danger"></span>
         <div class="form-group">
             <div class="col-md-12">
                 @Html.TextBoxFor(m => m.Email, new { @class = "is_required validate account_input form-control", placeholder = "Email" })
@@ -20,20 +17,19 @@
                 @Html.PasswordFor(m => m.Password, new { @class = "is_required validate account_input form-control", placeholder = "Password" })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
-        </div>        
+        </div>
         <div class="form-group">
             <div class="col-md-12">
                 <input type="submit" value="Login" class="btn btn-primary btn-sm col-md-12" />
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.ActionLink("Or Sign up", "/Register")
-            </div>
-        </div>
+        @*<div class="l-mar-top-3 form__row form-group">            
+            <a class="js-authentication-reset-password authentication__forgot-password layout-stackable__aside text-body-small js-d-track-link pull-right" href="/resetpassword">Forgot password?</a>
+        </div>*@
+        @*<div class="form-group">
+                <div class="col-md-12">
+                    @Html.ActionLink("Or Sign up", "/Register")
+                </div>
+            </div>*@
     }
 </div>
-
-@section LocalScripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
