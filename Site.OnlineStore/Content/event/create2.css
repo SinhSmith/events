@@ -3437,6 +3437,6 @@ div.form__group--help-text .form__group--help-text-container {
     src: url('../fonts/briteicons.woff2');
 }
 
-div {
+/*#event_form {
     font-family: myFirstFont;
-}
+}*/

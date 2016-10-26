@@ -297,7 +297,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         /// </summary>
         /// <param name="selectedType"></param>
         /// <returns></returns>
-        protected IEnumerable<SelectListItem> GetEventTypeList(string selectedType = null)
+        protected IEnumerable<SelectListItem> GetEventTypeList(int? selectedType = null)
         {
             IEnumerable<SelectListItem> types = new List<SelectListItem>
             {
@@ -325,7 +325,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
 
             if (selectedType != null)
             {
-                var selected = types.Where(x => x.Value == selectedType.Trim()).First();
+                var selected = types.Where(x => x.Value == selectedType.ToString()).First();
                 selected.Selected = true;
             }
 
@@ -337,7 +337,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         /// </summary>
         /// <param name="selectedTopic"></param>
         /// <returns></returns>
-        protected IEnumerable<SelectListItem> GetEventTopicList(string selectedTopic = null)
+        protected IEnumerable<SelectListItem> GetEventTopicList(int? selectedTopic = null)
         {
             IEnumerable<SelectListItem> topics = new List<SelectListItem>
             {
@@ -365,7 +365,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
 
             if (selectedTopic != null)
             {
-                var selected = topics.Where(x => x.Value == selectedTopic.Trim()).First();
+                var selected = topics.Where(x => x.Value == selectedTopic.ToString()).First();
                 selected.Selected = true;
             }
 
@@ -377,23 +377,23 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         /// </summary>
         /// <param name="selectedTopic"></param>
         /// <returns></returns>
-        protected IEnumerable<SelectListItem> GetSaleChanelList(string selectedChanel = null)
-        {
-            IEnumerable<SelectListItem> saleChanels = new List<SelectListItem>
-            {
-                new SelectListItem() {Value="0",Text="Everywhere"},
-                new SelectListItem() {Value="1",Text="Online only"},
-                new SelectListItem() {Value="2",Text="At the door only"}
-            };
+        //protected IEnumerable<SelectListItem> GetSaleChanelList(int? selectedChanel = null)
+        //{
+        //    IEnumerable<SelectListItem> saleChanels = new List<SelectListItem>
+        //    {
+        //        new SelectListItem() {Value="0",Text="Everywhere"},
+        //        new SelectListItem() {Value="1",Text="Online only"},
+        //        new SelectListItem() {Value="2",Text="At the door only"}
+        //    };
 
-            if (selectedChanel != null)
-            {
-                var selected = saleChanels.Where(x => x.Value == selectedChanel.Trim()).First();
-                selected.Selected = true;
-            }
+        //    if (selectedChanel != null)
+        //    {
+        //        var selected = saleChanels.Where(x => x.Value == selectedChanel.ToString()).First();
+        //        selected.Selected = true;
+        //    }
 
-            return saleChanels;
-        }
+        //    return saleChanels;
+        //}
 
         /// <summary>
         /// Create list ticket types using for TicketType Dropdownlist

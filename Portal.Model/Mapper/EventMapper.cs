@@ -73,5 +73,38 @@ namespace Portal.Model.Mapper
 
             return ticketResponses;
         }
+
+        public static DisplayEventSummaryView ConvertToEventSummaryView(this event_Event eventObject)
+        {
+            DisplayEventSummaryView eventSummaryView = new DisplayEventSummaryView()
+            {
+                Id = eventObject.Id,
+                Title = eventObject.Title,
+                StartDate = ((DateTime)eventObject.StartDate).ToString(EventConstants.DefaultDateTimeFormat),
+                EndDate = ((DateTime)eventObject.EndDate).ToString(EventConstants.DefaultDateTimeFormat),
+                Description = eventObject.Description,
+                OrganizationName = eventObject.OrganizationName,
+                CoverImage = eventObject.CoverImage,
+                EventType = eventObject.EventType,
+                EventTopic = eventObject.EventTopic,
+                Location_StreetName = eventObject.Location_StreetName,
+                Location_Address = eventObject.Location_Address,
+                Location_Address2 = eventObject.Location_Address2,
+                Location_City = eventObject.Location_City,
+                Location_State = eventObject.Location_State,
+                ZipCode = eventObject.ZipCode,
+                Country = eventObject.Country,
+            };
+
+            return eventSummaryView;
+        }
+
+        public static IEnumerable<DisplayEventSummaryView> ConvertToEventSummaryViews(this IEnumerable<event_Event> eventObjects)
+        {
+            foreach (event_Event item in eventObjects)
+            {
+                yield return item.ConvertToEventSummaryView();
+            }
+        }
     }
 }

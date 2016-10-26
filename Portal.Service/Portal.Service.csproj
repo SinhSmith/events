@@ -59,6 +59,7 @@
     <Compile Include="Implements\CMSCategoryService.cs" />
     <Compile Include="Implements\CMSNewsService.cs" />
     <Compile Include="Implements\CommonService.cs" />
+    <Compile Include="Implements\DisplayEventService.cs" />
     <Compile Include="Implements\DisplayProjectService.cs" />
     <Compile Include="Implements\EventManagementService.cs" />
     <Compile Include="Implements\MenuService.cs" />
@@ -69,12 +70,14 @@
     <Compile Include="Interfaces\ICMSCategoryService.cs" />
     <Compile Include="Interfaces\ICMSNewsService.cs" />
     <Compile Include="Interfaces\ICommonService.cs" />
+    <Compile Include="Interfaces\IDisplayEventService.cs" />
     <Compile Include="Interfaces\IDisplayProjectService.cs" />
     <Compile Include="Interfaces\IEventManagementService.cs" />
     <Compile Include="Interfaces\IMenuService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\IProjectService.cs" />
     <Compile Include="Interfaces\ISystemConfigService.cs" />
+    <Compile Include="MessageModel\EventDisplayModel.cs" />
     <Compile Include="MessageModel\EventManagement.cs" />
     <Compile Include="MessageModel\ProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

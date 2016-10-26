@@ -30,8 +30,8 @@ namespace Portal.Model.Context
         public string OrganizationDescription { get; set; }
         public Nullable<int> CoverImageId { get; set; }
         public string PaymentEmail { get; set; }
-        public string EventType { get; set; }
-        public string EventTopic { get; set; }
+        public int EventType { get; set; }
+        public int EventTopic { get; set; }
         public bool IsShowRemainingNumberTicket { get; set; }
         public string Location_StreetName { get; set; }
         public string Location_Address { get; set; }

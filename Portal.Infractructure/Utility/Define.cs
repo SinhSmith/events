@@ -111,5 +111,19 @@ namespace Portal.Infractructure.Utility
             Paid,
             Donation
         }
+        public enum TicketPriceType
+        {
+            AllPrices,
+            Paid,
+            Free
+        }
+
+        public enum EventSortBy
+        {
+            [Description("Sort by Event Title")]
+            Name = 1,
+            [Description("Sort by Date")]
+            Date = 2
+        }
     }
 }

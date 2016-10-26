@@ -118,8 +118,8 @@
           <Property Name="OrganizationDescription" Type="nvarchar" MaxLength="300" />
           <Property Name="CoverImageId" Type="int" />
           <Property Name="PaymentEmail" Type="nvarchar" MaxLength="50" />
-          <Property Name="EventType" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="EventTopic" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EventType" Type="int" Nullable="false" />
+          <Property Name="EventTopic" Type="int" Nullable="false" />
           <Property Name="IsShowRemainingNumberTicket" Type="bit" Nullable="false" />
           <Property Name="Location_StreetName" Type="nvarchar" MaxLength="500" />
           <Property Name="Location_Address" Type="nvarchar" MaxLength="500" />
@@ -1052,8 +1052,8 @@
           <Property Name="OrganizationDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="CoverImageId" Type="Int32" />
           <Property Name="PaymentEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EventType" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="EventTopic" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EventType" Type="Int32" Nullable="false" />
+          <Property Name="EventTopic" Type="Int32" Nullable="false" />
           <Property Name="IsShowRemainingNumberTicket" Type="Boolean" Nullable="false" />
           <Property Name="Location_StreetName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Location_Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />

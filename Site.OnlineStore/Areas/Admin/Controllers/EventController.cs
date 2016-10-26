@@ -108,7 +108,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         /// Get list options for event type dropdownlist and assign to Variable in ViewBag of view
         /// </summary>
         /// <param name="status"></param>
-        private void PopulateEventTypeDropDownList(string type = null)
+        private void PopulateEventTypeDropDownList(int? type)
         {
             IEnumerable<SelectListItem> items = GetEventTypeList(type);
 
@@ -119,7 +119,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         /// Get list options for event topic dropdownlist and assign to Variable in ViewBag of view
         /// </summary>
         /// <param name="status"></param>
-        private void PopulateEventTopicDropDownList(string topic = null)
+        private void PopulateEventTopicDropDownList(int? topic)
         {
             IEnumerable<SelectListItem> items = GetEventTopicList(topic);
 

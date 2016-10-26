@@ -26,8 +26,8 @@ namespace Portal.Service.MessageModel
         public string OrganizationDescription { get; set; }
         public Nullable<int> CoverImageId { get; set; }
         public string PaymentEmail { get; set; }
-        public string EventType { get; set; }
-        public string EventTopic { get; set; }
+        public int EventType { get; set; }
+        public int EventTopic { get; set; }
         public bool IsShowRemainingNumberTicket { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Location_StreetName { get; set; }
@@ -91,8 +91,8 @@ namespace Portal.Service.MessageModel
         public string OrganizationDescription { get; set; }
         public Nullable<int> CoverImageId { get; set; }
         public string PaymentEmail { get; set; }
-        public string EventType { get; set; }
-        public string EventTopic { get; set; }
+        public int EventType { get; set; }
+        public int EventTopic { get; set; }
         public bool IsShowRemainingNumberTicket { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Location_StreetName { get; set; }

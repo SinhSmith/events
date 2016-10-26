@@ -32,7 +32,7 @@
         <EntityTypeShape EntityType="PortalModel.event_Ticket" Width="2.5" PointX="13.5" PointY="6" />
         <EntityTypeShape EntityType="PortalModel.event_TicketOrder" Width="2.125" PointX="16.625" PointY="7" />
         <AssociationConnector Association="PortalModel.event_Ticket_OrderTicket" />
-        <EntityTypeShape EntityType="PortalModel.event_Event" Width="1.5" PointX="10.25" PointY="5.875" />
+        <EntityTypeShape EntityType="PortalModel.event_Event" Width="1.5" PointX="10.25" PointY="6" />
         <AssociationConnector Association="PortalModel.FK_event_Event_AspNetUsers" />
         <AssociationConnector Association="PortalModel.FK_event_Event_share_Images" />
         <AssociationConnector Association="PortalModel.FK_event_Ticket_event_Event" />
