@@ -1,7 +1,9 @@
-﻿using PagedList;
+﻿using OnlineStoreMVC.Models.Message;
+using PagedList;
 using Portal.Model.ViewModel;
 using Portal.Service.Implements;
 using Portal.Service.Interfaces;
+using Portal.Service.MessageModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace Site.OnlineStore.Controllers
         IBannerService _bannerService = new BannerService();
         ICMSNewsService _cmsNewsService = new CMSNewsService();
         IDisplayProjectService _projectService = new DisplayProjectService();
+        IDisplayEventService _eventService = new DisplayEventService();
 
         #endregion
 
@@ -27,8 +30,34 @@ namespace Site.OnlineStore.Controllers
             _bannerService = new BannerService();
             _cmsNewsService = new CMSNewsService();
             _projectService = new DisplayProjectService();
+            _eventService = new DisplayEventService();
         }
 
+        #endregion
+
+        #region Private functions
+
+        /// <summary>
+        /// Genarate initial request object to get list events in selected location
+        /// </summary>
+        /// <param name="country">country name of selected location</param>
+        /// <param name="city">city name of selected location</param>
+        /// <returns></returns>
+        private GetEventsByCategoryRequest CreateGetEventInLocationRequest(string country,string city)
+        {
+            GetEventsByCategoryRequest request = new GetEventsByCategoryRequest()
+            {
+                Index = 1,
+                NumberOfResultsPerPage = 12,
+                SortBy = Portal.Infractructure.Utility.Define.EventSortBy.Date,
+                SearchString = null,
+                StartDate = DateTime.Now,
+                Country = country,
+                City = city
+            };
+
+            return request;
+        }
         #endregion
 
         #region Actions
@@ -38,7 +67,6 @@ namespace Site.OnlineStore.Controllers
             ViewBag.FeaturedProjects = _projectService.GetFeaturedProjects(6).ToList();
             return View();
         }
-
 
         public ActionResult About()
         {
@@ -76,6 +104,20 @@ namespace Site.OnlineStore.Controllers
             SearchResultResponse result = SeachData(keyword, page);
             IPagedList<SearchResultViewModel> pageProjects = new StaticPagedList<SearchResultViewModel>(result.Items, (int)page, Portal.Infractructure.Utility.Define.DISPLAY_PROJECT_PAGE_SIZE, result.TotalItems);
             return View("Search", pageProjects);
+        }
+
+        [HttpPost]
+        public ActionResult GetEventsInCurrentLocation(string country,string city)
+        {
+            GetEventsByCategoryRequest request = CreateGetEventInLocationRequest(country,city);
+            GetEventsByCategoryResponse result = _eventService.GetEventsByCategory(request);
+
+            return PartialView("_ListEventItemSmall", result.Events);
+            //return Json(new GetEventsInCurrentLocationResponse() { 
+            //    IsSuccess = true,
+            //    Message = "Get event by location successful.",
+            //    Result = result
+            //},JsonRequestBehavior.AllowGet);
         }
         #endregion
 

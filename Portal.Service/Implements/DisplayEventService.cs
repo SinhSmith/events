@@ -81,12 +81,12 @@ namespace Portal.Service.Implements
 
             if (request.Country != null)
             {
-                searchQuery = searchQuery.And(e => e.Country.Contains("/"+request.Country+"/"));
+                searchQuery = searchQuery.And(e => e.Country.Contains(request.Country));
             }
 
             if (request.City != null)
             {
-                searchQuery = searchQuery.And(e => e.Location_City.Contains("/" + request.City + "/"));
+                searchQuery = searchQuery.And(e => e.Location_City.Contains(request.City));
             }
 
             if (request.SearchString != null && request.SearchString != string.Empty)
@@ -238,8 +238,8 @@ namespace Portal.Service.Implements
             {
                 EventTypes = request.EventTypes,
                 Topics = request.Topics,
-                StartDate = ((DateTime)request.StartDate).ToString(EventConstants.DefaultDateTimeFormat),
-                EndDate = ((DateTime)request.EndDate).ToString(EventConstants.DefaultDateTimeFormat),
+                StartDate = request.StartDate!=null?((DateTime)request.StartDate).ToString(EventConstants.DefaultDateTimeFormat):null,
+                EndDate = request.EndDate!=null?((DateTime)request.EndDate).ToString(EventConstants.DefaultDateTimeFormat):null,
                 NumberOfTitlesFound = foundEvents.Count(),
                 TotalNumberOfPages = (int)Math.Ceiling((double)foundEvents.Count() / request.NumberOfResultsPerPage),
                 CurrentPage = request.Index,

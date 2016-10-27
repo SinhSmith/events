@@ -191,6 +191,8 @@
     <Compile Include="Models\ImageModels\ImageResult.cs" />
     <Compile Include="Models\ImageModels\ImageUpload.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message\BaseMessage.cs" />
+    <Compile Include="Models\Message\EventMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2030,6 +2032,7 @@
     <Content Include="Scripts\home\footer-homepage.js" />
     <Content Include="Scripts\home\footer-not-homepage.js" />
     <Content Include="Scripts\home\front.js" />
+    <Content Include="Scripts\home\homepage-management.js" />
     <Content Include="Scripts\home\jquery-migrate.min.js" />
     <Content Include="Scripts\home\jquery-ui.js" />
     <Content Include="Scripts\home\jquery.form.min.js" />
@@ -2139,6 +2142,8 @@
     <Content Include="Views\Shared\_ProjectLayout.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\E\Detail.cshtml" />
+    <Content Include="Views\Shared\_EventItemSmall.cshtml" />
+    <Content Include="Views\Shared\_ListEventItemSmall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,47 @@
+﻿@model Portal.Model.ViewModel.DisplayEventSummaryView
+
+<div class="g-cell g-cell--has-overflow g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 ">
+    <div class="poster-card js-d-poster">
+        <a href="/Event/ProductDetails?id=@Model.Id" class="poster-card__main js-event-link" data-eid="@Model.Id">
+            <div class="poster-card__header">
+                <div class="poster-card__image" style="background-color:#b19988;">
+                    @if (Model.CoverImage != null && Model.CoverImage.ImagePath != String.Empty)
+                    {
+                        <img class="js-poster-image " src="@Model.CoverImage.ImagePath" alt="@Model.Title">
+                    }
+                    else
+                    {
+                        <img class="js-poster-image " src="@Portal.Infractructure.Utility.EventConstants.ImageNotFoundPath" alt="@Model.Title">
+                    }
+                </div>
+                <span class="poster-card__label">Free</span>
+            </div>
+            <div class="poster-card__body">
+                <time class="poster-card__date">
+                    @Model.StartDate
+                </time>
+                <div class="poster-card__title">
+                    @Model.Title
+                </div>
+                <div class="poster-card__venue">
+                    @Model.Location_StreetName @Model.Location_City @Model.Country
+                </div>
+            </div>
+        </a>
+        <div class="poster-card__footer">
+            <div class="poster-card__tags">
+                <a class="event-category" href="#">@Model.EventTopic</a>
+            </div>
+            <div class="poster-card__actions">
+                <a class="js-share-event-card share-action" href="#" data-eid="@Model.Id" title="Share">
+                    <i class="ico-share ico--medium"></i>
+                    <span class="is-hidden-accessible">Share this event</span>
+                </a>
+                <a class="js-d-bookmark" data-eid="@Model.Id" data-bookmarked="false" title="Save" data-source-page="home:popular" href="#" dorsal-guid="a1e48384-de2f-1e54-ee5b-323416dad107" data-xd-wired="bookmark">
+                    <i class="ico-bookmark ico--medium"></i>
+                    <span class="is-hidden-accessible">Bookmark this event</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

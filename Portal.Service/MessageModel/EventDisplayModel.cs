@@ -19,8 +19,8 @@ namespace Portal.Service.MessageModel
         public List<int> EventTypes { get; set; }
         public Portal.Infractructure.Utility.Define.EventSortBy SortBy { get; set; }
         public Portal.Infractructure.Utility.Define.TicketPriceType Price { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public Nullable<DateTime> StartDate { get; set; }
+        public Nullable<DateTime> EndDate { get; set; }
         public int Index { get; set; }
         public string SearchString { get; set; }
         public string Country { get; set; }

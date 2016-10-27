@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Portal.Model.ViewModel.DisplayEventSummaryView>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_EventItemSmall", item);
+}
