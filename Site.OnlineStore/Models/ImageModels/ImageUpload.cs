@@ -16,6 +16,7 @@ namespace Site.OnlineStore.Models.ImageModels
         public static readonly string LoadPath = "/Content/Images/UploadImages/ProjectImages/";
         public static readonly string LoadPathCMSNews = "/Content/Images/CMSNewsImages/";
         public static readonly string LoadPathBanners = "/Content/Images/Banners/";
+        public static readonly string LoadPathOrganisers = "/Content/Images/Organiser/";
 
         // set default size here
         public int Width { get; set; }

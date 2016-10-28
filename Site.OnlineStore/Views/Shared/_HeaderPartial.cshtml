@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
 
 <a class="skip-links js-d-skip-links" href="#skip-heading" dorsal-guid="111a378e-ec93-a834-fa81-3cac6e0f7593" data-xd-wired="skip-links">Skip Main Navigation</a>
 
@@ -108,7 +111,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="js-d-track-link">
+                                    <a href="@Url.Action("Details","Organiser")" class="js-d-track-link">
                                         Organiser Profile
                                     </a>
                                 </li>

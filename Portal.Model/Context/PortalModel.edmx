@@ -292,6 +292,24 @@
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="system_Organisers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="AvatarId" Type="int" />
+          <Property Name="OrganiserName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="About" Type="ntext" />
+          <Property Name="Website" Type="nvarchar" MaxLength="255" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="255" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="system_Profiles">
           <Key>
             <PropertyRef Name="UserId" />
@@ -300,9 +318,29 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="200" />
           <Property Name="Emaill" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="200" />
-          <Property Name="Address" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" />
+          <Property Name="Prefix" Type="char" MaxLength="1" />
+          <Property Name="HomePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="Company" Type="nvarchar" MaxLength="250" />
+          <Property Name="Website" Type="nvarchar" MaxLength="255" />
+          <Property Name="Blog" Type="nvarchar" MaxLength="255" />
+          <Property Name="Home_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Home_Address2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Home_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_Address2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_Address2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Work_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Work_Address2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Work_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Age" Type="int" />
         </EntityType>
         <Association Name="FK_cms_News_cms_Categories">
           <End Role="cms_Categories" Type="Self.cms_Categories" Multiplicity="1" />
@@ -516,6 +554,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_system_Organisers_share_Images">
+          <End Role="share_Images" Type="Self.share_Images" Multiplicity="0..1" />
+          <End Role="system_Organisers" Type="Self.system_Organisers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="share_Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="system_Organisers">
+              <PropertyRef Name="AvatarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PortalModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -538,6 +588,7 @@
           <EntitySet Name="system_Banners" EntityType="Self.system_Banners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="system_Config" EntityType="Self.system_Config" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="system_Menu" EntityType="Self.system_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="system_Organisers" EntityType="Self.system_Organisers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="system_Profiles" EntityType="Self.system_Profiles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_cms_News_cms_Categories" Association="Self.FK_cms_News_cms_Categories">
             <End Role="cms_Categories" EntitySet="cms_Categories" />
@@ -606,6 +657,10 @@
           <AssociationSet Name="FK_system_Banners_share_Images" Association="Self.FK_system_Banners_share_Images">
             <End Role="share_Images" EntitySet="share_Images" />
             <End Role="system_Banners" EntitySet="system_Banners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_system_Organisers_share_Images" Association="Self.FK_system_Organisers_share_Images">
+            <End Role="share_Images" EntitySet="share_Images" />
+            <End Role="system_Organisers" EntitySet="system_Organisers" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -745,6 +800,7 @@
           <NavigationProperty Name="portal_Projects" Relationship="PortalModel.portal_Projects_Images" FromRole="share_Images" ToRole="portal_Projects" />
           <NavigationProperty Name="portal_Projects1" Relationship="PortalModel.FK_portal_Projects_share_Images" FromRole="share_Images" ToRole="portal_Projects" />
           <NavigationProperty Name="event_Event" Relationship="PortalModel.FK_event_Event_share_Images" FromRole="share_Images" ToRole="event_Event" />
+          <NavigationProperty Name="system_Organisers" Relationship="PortalModel.FK_system_Organisers_share_Images" FromRole="share_Images" ToRole="system_Organisers" />
         </EntityType>
         <EntityType Name="system_Banners">
           <Key>
@@ -801,6 +857,28 @@
           <Property Name="Phone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="Prefix" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Blog" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Home_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Home_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Home_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Work_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Work_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Work_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Age" Type="Int32" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -917,7 +995,6 @@
             <End Role="portal_Projects" EntitySet="portal_Projects" />
             <End Role="share_Images" EntitySet="share_Images" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="PortalModel.sysdiagram" />
           <AssociationSet Name="FK_portal_Projects_share_Images" Association="PortalModel.FK_portal_Projects_share_Images">
             <End Role="share_Images" EntitySet="share_Images" />
             <End Role="portal_Projects" EntitySet="portal_Projects" />
@@ -941,6 +1018,12 @@
             <End Role="event_Event" EntitySet="event_Event" />
             <End Role="event_Ticket" EntitySet="event_Ticket" />
           </AssociationSet>
+          <EntitySet Name="system_Organisers" EntityType="PortalModel.system_Organisers" />
+          <AssociationSet Name="FK_system_Organisers_share_Images" Association="PortalModel.FK_system_Organisers_share_Images">
+            <End Role="share_Images" EntitySet="share_Images" />
+            <End Role="system_Organisers" EntitySet="system_Organisers" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="PortalModel.sysdiagram" />
           </EntityContainer>
         <EntityType Name="portal_Projects">
           <Key>
@@ -973,16 +1056,6 @@
           <End Type="PortalModel.portal_Projects" Role="portal_Projects" Multiplicity="*" />
           <End Type="PortalModel.share_Images" Role="share_Images" Multiplicity="*" />
         </Association>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <Association Name="FK_portal_Projects_share_Images">
           <End Type="PortalModel.share_Images" Role="share_Images" Multiplicity="0..1" />
           <End Type="PortalModel.portal_Projects" Role="portal_Projects" Multiplicity="*" />
@@ -1105,6 +1178,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="system_Organisers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="AvatarId" Type="Int32" />
+          <Property Name="OrganiserName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="share_Images" Relationship="PortalModel.FK_system_Organisers_share_Images" FromRole="system_Organisers" ToRole="share_Images" />
+        </EntityType>
+        <Association Name="FK_system_Organisers_share_Images">
+          <End Type="PortalModel.share_Images" Role="share_Images" Multiplicity="0..1" />
+          <End Type="PortalModel.system_Organisers" Role="system_Organisers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="share_Images">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="system_Organisers">
+              <PropertyRef Name="AvatarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1284,12 +1398,32 @@
           <EntitySetMapping Name="system_Profiles">
             <EntityTypeMapping TypeName="PortalModel.system_Profiles">
               <MappingFragment StoreEntitySet="system_Profiles">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Work_City" ColumnName="Work_City" />
+                <ScalarProperty Name="Work_Address2" ColumnName="Work_Address2" />
+                <ScalarProperty Name="Work_Address" ColumnName="Work_Address" />
+                <ScalarProperty Name="Shipping_City" ColumnName="Shipping_City" />
+                <ScalarProperty Name="Shipping_Address2" ColumnName="Shipping_Address2" />
+                <ScalarProperty Name="Shipping_Address" ColumnName="Shipping_Address" />
+                <ScalarProperty Name="Billing_City" ColumnName="Billing_City" />
+                <ScalarProperty Name="Billing_Address2" ColumnName="Billing_Address2" />
+                <ScalarProperty Name="Billing_Address" ColumnName="Billing_Address" />
+                <ScalarProperty Name="Home_City" ColumnName="Home_City" />
+                <ScalarProperty Name="Home_Address2" ColumnName="Home_Address2" />
+                <ScalarProperty Name="Home_Address" ColumnName="Home_Address" />
+                <ScalarProperty Name="Blog" ColumnName="Blog" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Emaill" ColumnName="Emaill" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1339,17 +1473,6 @@
               <ScalarProperty Name="Id" ColumnName="ProjectId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PortalModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="event_Ticket">
             <EntityTypeMapping TypeName="PortalModel.event_Ticket">
               <MappingFragment StoreEntitySet="event_Ticket">
@@ -1422,6 +1545,36 @@
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="Guid" ColumnName="Guid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="system_Organisers">
+            <EntityTypeMapping TypeName="PortalModel.system_Organisers">
+              <MappingFragment StoreEntitySet="system_Organisers">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="OrganiserName" ColumnName="OrganiserName" />
+                <ScalarProperty Name="AvatarId" ColumnName="AvatarId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PortalModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

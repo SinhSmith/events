@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Site.OnlineStore.Models;
 using Portal.Service.Implements;
+using Portal.Infractructure.Utility;
 
 namespace Site.OnlineStore.Controllers
 {
@@ -176,6 +177,14 @@ namespace Site.OnlineStore.Controllers
                         Password = model.Password,
                         Phone = model.Phone,
                         Address = model.Address
+                    });
+
+                    // Add new organiser
+                    var _organiserService = new OrganiserService();
+                    _organiserService.AddOrganiser(new Portal.Model.ViewModel.OrganiserViewModel
+                    {
+                        UserId = Guid.Parse(user.Id),
+                        OrganiserName = string.Empty
                     });
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
