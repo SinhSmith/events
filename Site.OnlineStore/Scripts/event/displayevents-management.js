@@ -444,7 +444,7 @@ DisplayEventsManagement = {
 
         this.model.filterRules.Topics = model.Topics;
         this.model.filterRules.EventTypes = model.EventTypes;
-
+        
         // init paging control
         DisplayEventsManagement.initPagingControl(model.TotalEvents, this.model.filterRules.NumberOfResultsPerPage);
     },
@@ -461,6 +461,30 @@ DisplayEventsManagement = {
             $("#EventList").append("<h3>Sorry, no  events found. Try another search or adjust your filters.</h3>")
         }
         
+    },
+    updateDataAndLayoutInSearchMode:function(model){
+        // Call when page in search mode
+        debugger
+        // Update model
+        this.model.filterRules.City = model.City;
+        this.model.filterRules.Country = model.Country;
+        this.model.filterRules.DateFilterType = model.DateFilterType;
+        this.model.filterRules.Topics = model.Topics;
+        this.model.filterRules.EventTypes = model.EventTypes;
+
+        // Update layout
+        $("#SearchLocation_AutoComplete").val(this.model.filterRules.City + ", " + this.model.filterRules.Country);
+        if(this.model.filterRules.Topics && this.model.filterRules.Topics.length>0){
+            $.each(this.model.filterRules.Topics,function(index,item){
+                $("#ckb-event-topic-" + item.Id).prop("checked", true);
+            });
+        } else {
+            $("#ckb-event-topic-0").prop("checked", true);
+        }
+
+        // init paging control
+        DisplayEventsManagement.initPagingControl(model.TotalEvents, this.model.filterRules.NumberOfResultsPerPage);
+
     },
     showSpin: function (target) {
         /// <summary>

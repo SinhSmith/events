@@ -69,7 +69,8 @@ namespace Site.OnlineStore.Controllers
                 StartDate = DateTime.Now,
                 DateFilterType = DateFilterType,
                 City = City,
-                Country = Country
+                Country = Country,
+                Price = Define.TicketPriceType.AllPrices
             };
 
             return request;
@@ -193,11 +194,6 @@ namespace Site.OnlineStore.Controllers
             }
             GetEventsByCategoryRequest request = CreateInitialEventSearchRequest((int)id);
             GetEventsByCategoryResponse response = service.GetEventsByCategory(request);
-            //PopulateStatusDropDownList();
-            //PopulateNewProductList();
-            //PopulateBestSellProductList();
-            //PopulateCategoryList();
-            //PopulateTopCategoryList();
             return View("DisplayProducts", response);
         }
 
@@ -239,7 +235,6 @@ namespace Site.OnlineStore.Controllers
         /// </summary>
         /// <param name="id">id of category</param>
         /// <returns></returns>
-        [HttpPost]
         public ActionResult SearchEvent(string City, string Country, string SearchString, Portal.Infractructure.Utility.Define.DateFilterType DateFilterType)
         {
 
@@ -248,6 +243,22 @@ namespace Site.OnlineStore.Controllers
             ViewBag.ListEventTopics = service.GetListEventTopics();
             ViewBag.ListEventTypes = service.GetListEventTypes();
             ViewBag.ListEventDateFilterRules = GetListEventFilterDate(DateFilterType);
+
+            var filterModel = new Portal.Service.MessageModel.SearchFilterModel()
+            {
+                City = response.City,
+                Country = response.Country,
+                DateFilterType = response.DateFilterType,
+                SearchString = response.SearchString,
+                TotalNumberOfPages = response.TotalNumberOfPages,
+                EventTypes = response.EventTypes,
+                Topics = response.Topics,
+                TotalEvents = response.TotalEvents
+            };
+
+            ViewBag.FilterModel = filterModel;
+
+
 
             return View("DisplayEvents", response);
         }

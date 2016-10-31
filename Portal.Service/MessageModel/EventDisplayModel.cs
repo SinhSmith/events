@@ -55,6 +55,7 @@ namespace Portal.Service.MessageModel
         public IEnumerable<DisplayEventSummaryView> Events { get; set; }
         public IEnumerable<EventTopicModel> ListTopics { get; set; }
         public IEnumerable<EventTypeModel> ListEventTypes { get; set; }
+        public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
     }
 
     public class SearchEventRequest
@@ -123,5 +124,17 @@ namespace Portal.Service.MessageModel
         public string Name { get; set; }
         public int Id { get; set; }
         public bool IsSelected { get; set; }
+    }
+
+    public class SearchFilterModel
+    {
+        public int TotalNumberOfPages { get; set; }
+        public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
+        public string SearchString { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public List<int> Topics { get; set; }
+        public List<int> EventTypes { get; set; }
+        public int TotalEvents { get; set; }
     }
 }

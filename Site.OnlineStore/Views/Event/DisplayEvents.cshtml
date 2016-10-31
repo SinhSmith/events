@@ -11,13 +11,24 @@
     <link href="~/Content/admin/plugins/pagingcontrol/simplePagination.css" rel="stylesheet" />
 }
 
+@{ 
+    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+    var responseModel = jss.Serialize(ViewBag.FilterModel);
+}
+
 @section LocalScripts{
     <script src="~/Content/admin/plugins/pagingcontrol/jquery.simplePagination.js"></script>
     <script src="~/Library/datetime-picker/jquery.datetimepicker.full.js"></script>
     <script src="~/Scripts/event/displayevents-management.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=DisplayEventsManagement.googleApiCallBackFunction">
-</script>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            DisplayEventsManagement.updateDataAndLayoutInSearchMode(JSON.parse('@Html.Raw(responseModel)'))
+        });
+    </script>
 
 }
 
@@ -94,7 +105,7 @@
                                 <ul id="collapseTwo" class="panel-collapse collapse js-xd-drawers-content js-format-filters" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="js-filter-list">
                                         <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                            <input id="ckb-event-type-0" type="checkbox" class="ckb-event-type js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
+                                            <input id="ckb-event-type-0" checked type="checkbox" class="ckb-event-type js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
                                             <label for="ckb-event-type-0" class="lbl-filter-item">All Event Types</label>
                                         </li>
                                         @foreach (Portal.Service.MessageModel.EventTypeModel item in ViewBag.ListEventTypes)
@@ -119,38 +130,10 @@
                                             @foreach (Portal.Service.MessageModel.EventFilterDate item in ViewBag.ListEventDateFilterRules)
                                             {
                                                 <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                    <input id="ckb-event-date-@item.Id" @( item.IsSelected ? Html.Raw("chekced") : Html.Raw("")) name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=@item.Id />
+                                                    <input id="ckb-event-date-@item.Id" @( item.IsSelected ? Html.Raw("checked") : Html.Raw("")) name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=@item.Id />
                                                     <label for="ckb-event-date-@item.Id" class="lbl-filter-item">@item.Name</label>
                                                 </li>
                                             }
-                                            @*<li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-0" checked name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
-                                                <label for="ckb-event-date-0" class="lbl-filter-item">All Dates</label>
-                                            </li>
-                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-1" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=1 />
-                                                <label for="ckb-event-date-1" class="lbl-filter-item">Today</label>
-                                            </li>
-                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-2" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=2 />
-                                                <label for="ckb-event-date-2" class="lbl-filter-item">Tomorrow</label>
-                                            </li>
-                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-3" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=3 />
-                                                <label for="ckb-event-date-3" class="lbl-filter-item">This Week</label>
-                                            </li>
-                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-4" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=4 />
-                                                <label for="ckb-event-date-4" class="lbl-filter-item">This Weekend</label>
-                                            </li>
-                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-5" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=5 />
-                                                <label for="ckb-event-date-5" class="lbl-filter-item">Next Week</label>
-                                            </li>
-                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
-                                                <input id="ckb-event-date-6" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=6 />
-                                                <label for="ckb-event-date-6" class="lbl-filter-item">Next Month</label>
-                                            </li>*@
                                         </div>
 
                                     </ul>

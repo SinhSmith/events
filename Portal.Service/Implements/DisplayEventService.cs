@@ -201,7 +201,8 @@ namespace Portal.Service.Implements
                 City = request.City,
                 Events = CropEventListToSatisfyGivenIndex(foundEvents, request.Index, request.NumberOfResultsPerPage).ConvertToEventSummaryViews().ToList(),
                 ListEventTypes = GetListEventTypes(foundEvents.Select(p => p.EventType).Distinct().ToList()),
-                ListTopics = GetListEventTopics(foundEvents.Select(p => p.EventTopic).Distinct().ToList())
+                ListTopics = GetListEventTopics(foundEvents.Select(p => p.EventTopic).Distinct().ToList()),
+                DateFilterType = request.DateFilterType
             };
 
             return reponse;

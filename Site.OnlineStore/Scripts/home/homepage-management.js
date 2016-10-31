@@ -60,12 +60,12 @@ HomePageManagement = {
     bindEventForElement:function(){
         // Bind event for controls in page
 
-        $("#BtnSeach").unbind("click").bind("click", function () {
-            var searchString = $("#Txt_SearchString").val();
-            var dateFilter = $("#Ddl_DateFilter").val();
-            HomePageManagement.redirectToDisplayEventsPage(HomePageManagement.model.CurrentLocation.City.short_name,
-                HomePageManagement.model.CurrentLocation.Country.short_name, searchString, dateFilter);
-        });
+        //$("#BtnSeach").unbind("click").bind("click", function () {
+        //    var searchString = $("#Txt_SearchString").val();
+        //    var dateFilter = $("#Ddl_DateFilter").val();
+        //    HomePageManagement.redirectToDisplayEventsPage(HomePageManagement.model.CurrentLocation.City.short_name,
+        //        HomePageManagement.model.CurrentLocation.Country.short_name, searchString, dateFilter);
+        //});
     },
     getEventsInLocation: function (country, city) {
         /// <summary>
@@ -176,6 +176,8 @@ HomePageManagement = {
 
             if (places.length > 0) {
                 HomePageManagement.model.CurrentLocation = HomePageManagement.getAddressDetails(places[0]);
+                $("#Txt_CityFilter").val(HomePageManagement.model.CurrentLocation.City.short_name);
+                $("#Txt_CountryFilter").val(HomePageManagement.model.CurrentLocation.Country.short_name);
             }
         });
     },

@@ -74,18 +74,20 @@
         <div class="g-group org-consumer-search-bar">
             <section class="hero-banner-form__content l-mar-top-2">
                 <div class="g-grid">
-                    <div class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
+                    <form method="get" action="/Event/SearchEvent" class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
                         <div class="g-cell g-cell-9-12 g-cell-md-5-12 g-cell-lg-4-12 g-cell--has-overflow">
                             <div class="autocomplete-component">
                                 <label class="is-hidden-accessible" for="consumer-header-event-search">Search for events or categories</label>
-                                <input id="Txt_SearchString" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" >
+                                <input id="Txt_SearchString" name="SearchString" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" >
                             </div>
                         </div>
                         <div class="g-cell g-cell-1-1 g-cell-lg-3-12 show-large g-cell--no-gutters g-cell--has-overflow autocomplete-component">
                             <label class="is-hidden-accessible" for="consumer-header-event-location">Enter city or location</label>
                             <input id="EventLocation_AutoComplete" type="text" class="js-location-input" placeholder="Enter city or location">
+                            <input id="Txt_CityFilter" type="hidden" name="City"/>
+                            <input id="Txt_CountryFilter" type="hidden" name="Country" />
                         </div>
-                        <select id="Ddl_DateFilter" class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 g-cell--no-gutters">
+                        <select id="Ddl_DateFilter" name="DateFilterType" class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 g-cell--no-gutters">
                             <option value="0" selected="selected">All Dates</option>
                             <option value="1">Today</option>
                             <option value="2">Tomorrow</option>
@@ -95,9 +97,9 @@
                             <option value="6">Next Month</option>
                         </select>
                         <div class="g-cell g-cell-3-12 g-cell-md-3-12 g-cell-lg-2-12">
-                            <input id="BtnSeach" type="button" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search">
+                            <input id="BtnSeach" type="submit" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search">
                         </div>
-                    </div>
+                    </form>
                 </div>
             </section>
         </div>
