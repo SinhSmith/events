@@ -278,23 +278,23 @@ namespace Portal.Service.Implements
                 new EventTypeModel() {Id=19, Name="Appearance or Signing"},
                 new EventTypeModel() {Id=17, Name="Attraction"},
                 new EventTypeModel() {Id=18, Name="Camp, Trip, or Retreat"},
-                new EventTypeModel() {Id=9, Name="lass, Training, or Workshop"},
-                new EventTypeModel() {Id=6, Name="oncert or Performance"},
-                new EventTypeModel() {Id=1, Name="onference"},
-                new EventTypeModel() {Id=4, Name="onvention"},
-                new EventTypeModel() {Id=8, Name="inner or Gala"},
-                new EventTypeModel() {Id=5, Name="estival or Fair"},
+                new EventTypeModel() {Id=9, Name="Class, Training, or Workshop"},
+                new EventTypeModel() {Id=6, Name="Concert or Performance"},
+                new EventTypeModel() {Id=1, Name="Conference"},
+                new EventTypeModel() {Id=4, Name="Convention"},
+                new EventTypeModel() {Id=8, Name="Dinner or Gala"},
+                new EventTypeModel() {Id=5, Name="Festival or Fair"},
                 new EventTypeModel() {Id=14, Name="Game or Competition"},
                 new EventTypeModel() {Id=10, Name="Meeting or Networking Event"},
                 new EventTypeModel() {Id=100, Name="Other"},
                 new EventTypeModel() {Id=11, Name="Party or Social Gathering"},
                 new EventTypeModel() {Id=15, Name="Race or Endurance Event"},
                 new EventTypeModel() {Id=12, Name="Rally"},
-                new EventTypeModel() {Id=7, Name="creening"},
-                new EventTypeModel() {Id=2, Name="eminar or Talk"},
+                new EventTypeModel() {Id=7, Name="Screening"},
+                new EventTypeModel() {Id=2, Name="Ceminar or Talk"},
                 new EventTypeModel() {Id=16, Name="Tour"},
                 new EventTypeModel() {Id=13, Name="Tournament"},
-                new EventTypeModel() {Id=3, Name="radeshow, Consumer Show, or Expo"}
+                new EventTypeModel() {Id=3, Name="Tradeshow, Consumer Show, or Expo"}
             };
 
             return listEventTypes;

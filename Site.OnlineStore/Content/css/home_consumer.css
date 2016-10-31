@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ============== Browser Support ============== */
 /* ================== Colors ================== */
 /* ================ Typography ================= */
@@ -156,6 +156,7 @@
         background: white;
         border-top: 1px solid #D2D6DF;
         border-bottom: 1px solid #D2D6DF;
+        border-left:none;
     }
     .consumer-search-bar .g-cell:nth-child(3) select {
         opacity: 0;

@@ -28,6 +28,10 @@ HomePageManagement = {
             }
         }, true);
 
+        $(document).on("keypress", "form", function (event) {
+            return event.keyCode != 13;
+        });
+
         // Init spin
         this.controls.spin = new Spinner({
             lines: 13 // The number of lines to draw

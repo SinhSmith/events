@@ -321,9 +321,9 @@ DisplayEventsManagement = {
     },
     searchEventWithFilters:function(){
         // Request to server to get list events match with filter rules
-
+        debugger
         $.ajax({
-            url: '/Event/GetEventsByAjax',
+            url: '/Event/SearchEvent',
             type: 'POST',
             data: JSON.stringify(DisplayEventsManagement.model.filterRules),
             dataType: 'json',
@@ -387,12 +387,13 @@ DisplayEventsManagement = {
         return itemTemplate;
     },
     updateFiltersModel: function () {
+        debugger
         // Update search string
         this.model.filterRules.SearchString = $("#Txt_EventSearchBox").val().trim();
 
         // Update location
         this.model.filterRules.Country = this.model.selectedLocation.Country.short_name;
-        this.model.filterRules.City = this.model.selectedLocation.City.long_name;
+        this.model.filterRules.City = this.model.selectedLocation.City.short_name;
 
         // Update list event topics
         this.model.filterRules.Topics = [];
@@ -468,6 +469,8 @@ DisplayEventsManagement = {
         // Update model
         this.model.filterRules.City = model.City;
         this.model.filterRules.Country = model.Country;
+        this.model.selectedLocation.City.short_name = model.City;
+        this.model.selectedLocation.Country.short_name = model.Country;
         this.model.filterRules.DateFilterType = model.DateFilterType;
         this.model.filterRules.Topics = model.Topics;
         this.model.filterRules.EventTypes = model.EventTypes;
@@ -476,15 +479,45 @@ DisplayEventsManagement = {
         $("#SearchLocation_AutoComplete").val(this.model.filterRules.City + ", " + this.model.filterRules.Country);
         if(this.model.filterRules.Topics && this.model.filterRules.Topics.length>0){
             $.each(this.model.filterRules.Topics,function(index,item){
-                $("#ckb-event-topic-" + item.Id).prop("checked", true);
+                $("#ckb-event-topic-" + item).prop("checked", true);
             });
         } else {
             $("#ckb-event-topic-0").prop("checked", true);
         }
 
+        if (this.model.filterRules.EventTypes && this.model.filterRules.EventTypes.length > 0) {
+            $.each(this.model.filterRules.EventTypes, function (index, item) {
+                $("#ckb-event-type-" + item).prop("checked", true);
+            });
+        } else {
+            $("#ckb-event-type-0").prop("checked", true);
+        }
+
         // init paging control
         DisplayEventsManagement.initPagingControl(model.TotalEvents, this.model.filterRules.NumberOfResultsPerPage);
+        // Update map
+        DisplayEventsManagement.updateMapForNewLocation(model.City + ", " + model.Country);
+    },
+    updateMapForNewLocation: function (address) {
 
+        var map = new google.maps.Map(document.getElementById('LocationMap'), {
+            //center: { lat: -33.8688, lng: 151.2195 },
+            zoom: 13,
+            mapTypeId: 'roadmap'
+        });
+        undefined
+        geocoder = new google.maps.Geocoder();
+        var address = address; //input box value
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results[0].geometry.location);
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            }
+        });
     },
     showSpin: function (target) {
         /// <summary>
