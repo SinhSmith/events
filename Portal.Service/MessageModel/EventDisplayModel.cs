@@ -26,11 +26,19 @@ namespace Portal.Service.MessageModel
         public string Country { get; set; }
         public string City { get; set; }
         public int NumberOfResultsPerPage { get; set; }
-
+        public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
     }
 
     public class GetEventsByCategoryResponse
     {
+        public GetEventsByCategoryResponse()
+        {
+            Events = new List<DisplayEventSummaryView>();
+            ListTopics = new List<EventTopicModel>();
+            ListEventTypes = new List<EventTypeModel>();
+            Topics = new List<int>();
+            EventTypes = new List<int>();
+        }
         public List<int> Topics { get; set; }
         public List<int> EventTypes { get; set; }
         public string StartDate { get; set; }
@@ -79,6 +87,11 @@ namespace Portal.Service.MessageModel
 
     public class GetEventsWithFiltersRequest
     {
+        public GetEventsWithFiltersRequest()
+        {
+            Topics = new List<int>();
+            EventTypes = new List<int>();
+        }
         public List<int> Topics { get; set; }
         public List<int> EventTypes { get; set; }
         public Portal.Infractructure.Utility.Define.EventSortBy SortBy { get; set; }
@@ -90,6 +103,7 @@ namespace Portal.Service.MessageModel
         public string Country { get; set; }
         public string City { get; set; }
         public int NumberOfResultsPerPage { get; set; }
+        public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
     }
 
     public class EventTopicModel
@@ -102,5 +116,12 @@ namespace Portal.Service.MessageModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class EventFilterDate
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

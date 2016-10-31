@@ -1,10 +1,23 @@
 ﻿@{
     ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/home/homepage-management.js"></script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&callback=HomePageManagement.getCurrentLocation">
-</script>
+@section LocalStyles{
+    <style>
+    .pac-logo:after {
+        background-image:none;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="~/Content/css/home.css">
+<link rel="stylesheet" type="text/css" href="~/Content/css/home_consumer.css">
+}
+
+@section LocalScripts{
+    <script src="~/Scripts/home/homepage-management.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=HomePageManagement.googleApiCallBackFunction">
+    </script>
+}
 <div id="content" class="clrfix">
     <h1 class="is-hidden-accessible">Eventbrite</h1>
 
@@ -61,40 +74,30 @@
         <div class="g-group org-consumer-search-bar">
             <section class="hero-banner-form__content l-mar-top-2">
                 <div class="g-grid">
-                    <form action="/d/" method="GET" class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
+                    <div class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
                         <div class="g-cell g-cell-9-12 g-cell-md-5-12 g-cell-lg-4-12 g-cell--has-overflow">
                             <div class="autocomplete-component">
                                 <label class="is-hidden-accessible" for="consumer-header-event-search">Search for events or categories</label>
-                                <input id="consumer-header-event-search" name="q" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="list" role="textbox" aria-haspopup="true">
-                                <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; display: none;"></ul>
+                                <input id="Txt_SearchString" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" >
                             </div>
                         </div>
                         <div class="g-cell g-cell-1-1 g-cell-lg-3-12 show-large g-cell--no-gutters g-cell--has-overflow autocomplete-component">
                             <label class="is-hidden-accessible" for="consumer-header-event-location">Enter city or location</label>
-                            <input id="consumer-header-event-location" name="loc" type="text" class="js-location-input" placeholder="Enter city or location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="Da Nang, Vietnam">
+                            <input id="EventLocation_AutoComplete" type="text" class="js-location-input" placeholder="Enter city or location">
                         </div>
-                        <div class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 hide-small g-cell--no-gutters search-dropdown">
-                            <label class="is-hidden-accessible" for="consumer-header-date-range">Select a date range</label>
-                            <div class="responsive-form__select custom-select-container clrfix">
-                                <span class="custom-select-value">All Dates</span>
-                                <div class="custom-select-arrow"></div>
-                                <select id="consumer-header-date-range" name="date" class="js-d-select-box" dorsal-guid="9a1eaba7-3ca7-3791-6fa2-36c994f84696" data-xd-wired="select-box">
-                                    <option value="" selected="selected">All Dates</option>
-                                    <option value="today">Today</option>
-                                    <option value="tomorrow">Tomorrow</option>
-                                    <option value="this_week">This Week</option>
-                                    <option value="this_weekend">This Weekend</option>
-                                    <option value="next_week">Next Week</option>
-                                    <option value="next_month">Next Month</option>
-                                </select>
-                            </div>
-                        </div>
+                        <select id="Ddl_DateFilter" class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 g-cell--no-gutters">
+                            <option value="0" selected="selected">All Dates</option>
+                            <option value="1">Today</option>
+                            <option value="2">Tomorrow</option>
+                            <option value="3">This Week</option>
+                            <option value="4">This Weekend</option>
+                            <option value="5">Next Week</option>
+                            <option value="6">Next Month</option>
+                        </select>
                         <div class="g-cell g-cell-3-12 g-cell-md-3-12 g-cell-lg-2-12">
-                            <input type="submit" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search" data-checkpoint-name="homepage_search_submitted">
-                            <input type="submit" class="js-home-search-btn btn btn--action btn--block show-small js-xd-janus-checkpoint-link" value="" alt="Search" data-checkpoint-name="homepage_search_submitted">
-                            <input type="hidden" name="mode" value="search">
+                            <input id="BtnSeach" type="button" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search">
                         </div>
-                    </form>
+                    </div>
                 </div>
             </section>
         </div>
@@ -113,15 +116,14 @@
                             <span data-automation="home-popular-events-header">Popular Events in </span>
                             <a href="#" class="consumer-location-link js-consumer-location-link">
                                 <span class="js-displayed-consumer-location">
-                                    Da Nang, Vietnam
-                                    <i class="ico-circle-cross"></i>
+                                    @*<i class="ico-circle-cross"></i>*@
                                 </span>
                             </a>
                         </h3>
-                        <div class="autocomplete-component popular-autocomplete">
+                        @*<div class="autocomplete-component popular-autocomplete">
                             <label class="is-hidden-accessible" for="consumer-location-input-edit">Change location</label>
                             <input id="consumer-location-input-edit" name="loc" type="text" class="js-consumer-location-input" placeholder="Enter city or location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="">
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

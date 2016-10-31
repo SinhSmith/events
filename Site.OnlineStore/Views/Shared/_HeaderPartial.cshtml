@@ -9,20 +9,20 @@
                 <i class="ico-eventbrite-wordmark ico--color-brand-orange ico--large"></i>
                 <span class="is-hidden-accessible">Eventbrite</span>
             </a>
+
             <div class="gh-dd header-search">
-                <form action="/d/" method="GET" class="responsive-form" id="search-autocomplete">
                     <div class="search-autocomplete js-header-search-autocomplete is-init">
                         <a href="#" class="hide-large js-header-search-icon mobile-action-b" title="Search">
                             <i class="ico-search-v2 header-search-icon"></i>
                             <span class="is-hidden-accessible">Search menu</span>
                         </a>
                         <div class="search-autocomplete__query-input js-search-query-area show-large">
-                            <div class="responsive-form__input--icon js-d-clearable-input" dorsal-guid="3b9688fe-3c16-663c-e291-66c255752155" data-xd-wired="clearable-input">
+                            <div class="responsive-form__input--icon js-d-clearable-input">
                                 <label for="q" class="is-hidden-accessible">Search for events</label>
                                 <div class="responsive-form__input--icon__container show-large">
                                     <i class="ico-search-v2 js-search-query-icon"></i>
                                 </div>
-                                <input type="search" class="js-search-query-input ui-autocomplete-input" data-automation="search-input" id="q" name="q" placeholder="Search for events" data-role="none" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+                                <input type="search" class="js-search-query-input ui-autocomplete-input" data-automation="search-input" id="Txt_EventSearchBox" placeholder="Search for events">
                                 <div class="responsive-form__input--icon__container close-button hide-large is-hidden">
                                     <a href="#" class="js-clear-input">
                                         <i class="ico-cross"></i><span class="is-hidden-accessible">x</span>
@@ -33,8 +33,7 @@
                         <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 3; display: none;"></ul>
                     </div>
                     <input type="hidden" name="mode" value="search">
-                </form>
-            </div>
+                </div>
             <div class="gh-dd global-header__browse-events show-large text--truncated">
                 <a href="#" class="header-link gh-discover js-d-track-link js-xd-janus-checkpoint-link" data-checkpoint-name="discover_header_link_clicked" data-event-action="Discover" data-event-category="header" data-event-label="home" dorsal-guid="54e739b2-cd62-fecc-265b-c05f223d17b1" data-xd-wired="track-link">
                     Browse Events
@@ -42,42 +41,10 @@
             </div>
         </div>
         <div class="minor">
-            <div class="gh-dd gh-help-box js-gh-dd">
-                <a class="header-link gh-help js-gh-action" href="#" data-automation="helpcenter-link" alt="Help menu">Help <i class="ico-arrow-tail-down"></i></a>
-                <div class="gh-dd-menu on-right js-gh-dd-menu">
-                    <ul class="list list--has-highlight">
-                        <li>
-                            <a href="#" class="js-d-track-link" target="_blank" data-event-action="HelpArticle" data-event-category="header" data-event-label="HowItWorks" dorsal-guid="20cde028-b401-0de8-32de-a3988e8384fe" data-xd-wired="track-link">
-                                How it works
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="js-d-track-link" target="_blank" data-event-action="HelpArticle" data-event-category="header" data-event-label="WhatItCosts" dorsal-guid="f6739b57-82d6-945e-50ba-c9ea1cbd2c7a" data-xd-wired="track-link">
-                                What does it cost to create an event?
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="js-d-track-link" target="_blank" data-event-action="HelpArticle" data-event-category="header" data-event-label="WhereToFind" dorsal-guid="2b01bbaa-5594-c07d-12cd-b64ca5f675ce" data-xd-wired="track-link">
-                                Where are my tickets?
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="js-d-track-link" target="_blank" data-event-action="HelpArticle" data-event-category="header" data-event-label="HowToContact" dorsal-guid="b5480383-e9a4-13ad-493d-d45fd7fc9999" data-xd-wired="track-link">
-                                How to contact the event organizer
-                            </a>
-                        </li>
-                        <li class="list--with-divider-top">
-                            <a class="help-link js-d-track-link" target="_blank" data-event-action="HelpArticle" data-event-category="header" data-event-label="Help Center" href="#" dorsal-guid="c4a9949c-4a26-3dff-8eaf-7fcf94d86581" data-xd-wired="track-link">
-                                Help Center
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
             @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right",@style="margin:0!important;" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="gh-dd gh-profile-box js-gh-dd">
@@ -154,7 +121,7 @@
                     <a id="switch-to-signup" class="js-switch-to-signup mfp-prevent-close js-d-track-event" href="#" data-toggle="modal">Or, sign up.</a>
                 </p>
 
-                @Html.Action("Login", "Account")
+                @*@Html.Action("Login", "Account")*@
             </div>
         </div>
     </div>

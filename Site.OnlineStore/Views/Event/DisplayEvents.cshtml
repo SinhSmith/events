@@ -1,0 +1,260 @@
+﻿@model Portal.Service.MessageModel.GetEventsByCategoryResponse
+@{
+    ViewBag.Title = "DisplayEvents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+@section LocalStyles{
+    <link href="~/Content/event/search.css" rel="stylesheet" />
+    <link href="~/Library/datetime-picker/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/admin/plugins/pagingcontrol/simplePagination.css" rel="stylesheet" />
+}
+
+@section LocalScripts{
+    <script src="~/Content/admin/plugins/pagingcontrol/jquery.simplePagination.js"></script>
+    <script src="~/Library/datetime-picker/jquery.datetimepicker.full.js"></script>
+    <script src="~/Scripts/event/displayevents-management.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=DisplayEventsManagement.googleApiCallBackFunction">
+</script>
+
+}
+
+
+<a id="skip-heading" tabindex="-1" class="is-hidden-accessible">Page Content</a>
+<div class="global-mask"></div>
+<div aria-live="assertive" aria-relevant="additions" class="js-search-update-accessible is-hidden-accessible">
+</div>
+
+<!-- Content page -->
+<div class="g-grid js-search l-pad-bot-5 l-sm-pad-bot-3">
+    <!-- Filter panel -->
+    <section class="l-mar-top-3 map-filter-container g-vertical-group g-cell-1-1 g-cell-lg-3-12">
+        <h2 class="is-hidden-accessible">Refine search</h2>
+        <div class="js-sticky-container">
+            <div class="js-sticky-wrapper">
+                <!-- Map -->
+                <div class="hide-small map-container js-map-container g-cell g-cell-1-1">
+                    <div class="js-map ratio-3-1-parent-sm ratio-3-1-parent-md ratio-1-1-parent-lg">
+                        <div id="LocationMap" class="map-area js-map-area ratio-child">
+                            <div class="map_canvas js-map-canvas"></div>
+                        </div>
+                        <div class="js-small-screen-helper show-small"></div>
+                    </div>
+                </div>
+
+                <!-- Location SearchBox -->
+                <div class="g-cell g-cell-1-1 g-cell--has-overflow">
+                    <div class="location-container search-autocomplete">
+                        <section class="responsive-form search-location-input l-pad-hor-2 l-pad-vert-2">
+                            <div class="responsive-form__input--icon js-location-container autocomplete-component autocomplete-component--location">
+                                <h3 class="is-hidden-accessible">Location</h3>
+                                <div class="responsive-form__input--icon__container js-location-pin">
+                                    <i class="ico-location js-location-reset-current"></i>
+                                </div>
+                                <label for="sidebar-search-location-input" class="is-hidden-accessible">change the location of your search</label>
+                                <input id="SearchLocation_AutoComplete" class="js-location-input" type="text">
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="js-filter-container g-cell g-cell-1-1 filter">
+                    <section class="js-d-toggle">
+                        <div id="FilterTabList" role="tablist" aria-multiselectable="true" class="js-xd-toggle-view side-nav__toggle-view filter__group js-d-drawers js-accordion-view">
+                            <!-- Filter by category -->
+                            <div role="tab" id="headingOne" class="filter__group">
+                                <h3 class="js-xd-drawers-header filter__header filter__header--has-action">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Category</a>
+                                </h3>
+                                <ul id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse js-xd-drawers-content js-category-filters">
+                                    <div class="js-filter-list">
+                                        <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                            <input id="ckb-event-topic-0" type="checkbox" class="ckb-event-topic js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
+                                            <label for="ckb-event-topic-0" class="lbl-filter-item">All Categories</label>
+                                        </li>
+                                        @foreach (Portal.Service.MessageModel.EventTopicModel item in ViewBag.ListEventTopics)
+                                        {
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-topic-@item.Id" type="checkbox" class="ckb-event-topic js-filter-item js-xd-janus-checkpoint-event" data-id=@item.Id />
+                                                <label for="ckb-event-topic-@item.Id" class="lbl-filter-item">@item.Name</label>
+                                            </li>
+                                        }
+                                    </div>
+                                </ul>
+                            </div>
+
+                            <!-- Filter by event type -->
+                            <div role="tab" id="headingTwo" class="filter__group">
+                                <h3 class="js-xd-drawers-header filter__header filter__header--has-action">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Event Type</a>
+                                </h3>
+                                <ul id="collapseTwo" class="panel-collapse collapse js-xd-drawers-content js-format-filters" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="js-filter-list">
+                                        <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                            <input id="ckb-event-type-0" type="checkbox" class="ckb-event-type js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
+                                            <label for="ckb-event-type-0" class="lbl-filter-item">All Event Types</label>
+                                        </li>
+                                        @foreach (Portal.Service.MessageModel.EventTypeModel item in ViewBag.ListEventTypes)
+                                        {
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-type-@item.Id" type="checkbox" class="ckb-event-type js-filter-item js-xd-janus-checkpoint-event" data-id=@item.Id />
+                                                <label for="ckb-event-type-@item.Id" class="lbl-filter-item">@item.Name</label>
+                                            </li>
+                                        }
+                                    </div>
+                                </ul>
+                            </div>
+
+                            <!-- Filter by date -->
+                            <div role="tab" id="headingThree" class="filter__group">
+                                <h3 class="js-xd-drawers-header filter__header filter__header--has-action">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Date</a>
+                                </h3>
+                                <div id="collapseThree" class="panel-collapse collapse s-xd-drawers-content" role="tabpanel" aria-labelledby="headingThree">
+                                    <ul class="js-date-filters">
+                                        <div class="js-filter-list">
+                                            @foreach (Portal.Service.MessageModel.EventFilterDate item in ViewBag.ListEventDateFilterRules)
+                                            {
+                                                <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                    <input id="ckb-event-date-@item.Id" @( item.IsSelected ? Html.Raw("chekced") : Html.Raw("")) name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=@item.Id />
+                                                    <label for="ckb-event-date-@item.Id" class="lbl-filter-item">@item.Name</label>
+                                                </li>
+                                            }
+                                            @*<li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-0" checked name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
+                                                <label for="ckb-event-date-0" class="lbl-filter-item">All Dates</label>
+                                            </li>
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-1" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=1 />
+                                                <label for="ckb-event-date-1" class="lbl-filter-item">Today</label>
+                                            </li>
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-2" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=2 />
+                                                <label for="ckb-event-date-2" class="lbl-filter-item">Tomorrow</label>
+                                            </li>
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-3" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=3 />
+                                                <label for="ckb-event-date-3" class="lbl-filter-item">This Week</label>
+                                            </li>
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-4" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=4 />
+                                                <label for="ckb-event-date-4" class="lbl-filter-item">This Weekend</label>
+                                            </li>
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-5" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=5 />
+                                                <label for="ckb-event-date-5" class="lbl-filter-item">Next Week</label>
+                                            </li>
+                                            <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                                <input id="ckb-event-date-6" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=6 />
+                                                <label for="ckb-event-date-6" class="lbl-filter-item">Next Month</label>
+                                            </li>*@
+                                        </div>
+
+                                    </ul>
+                                    <div class="js-date-filter-custom ">
+                                        <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                            <input id="ckb-event-date-7" name="rdo_date_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=7 />
+                                            <label for="ckb-event-date-7" class="lbl-filter-item">Custom Date</label>
+                                        </li>
+                                        <section class="custom-date-section js-date-inputs l-mar-top-1 hidden g-group responsive-form">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-1 g-cell--no-gutters l-mar-top-1">
+                                                <label for="search-start-date">Start Date</label>
+                                                <div class="date-input-row start-date-input">
+                                                    <i class="ico-calendar"></i>
+                                                    <input id="Txt_CustomDate_StartDate" type="text" class="js-start-date date-input hasDatepicker" placeholder="Start Date" value="">
+                                                </div>
+                                            </div>
+                                            <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-1 g-cell--no-gutters l-mar-top-1">
+                                                <label for="search-end-date">End Date</label>
+                                                <div class="date-input-row">
+                                                    <i class="ico-calendar"></i>
+                                                    <input id="Txt_CustomDate_EndDate" type="text" class="js-end-date date-input hasDatepicker" placeholder="End Date" value="">
+                                                </div>
+                                            </div>
+                                            <div class="g-cell g-cell-1-1 g-cell--no-gutters l-mar-top-1">
+                                                <a id="Btn_UpdateCustomDateFilter" class="js-update-search js-search-click-action-ajax btn btn--ico btn--small btn--block">
+                                                    <i class="ico-refresh"></i>Update
+                                                </a>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Filter by price -->
+                            <div role="tab" id="headingFour" class="filter__group">
+                                <h3 class="js-xd-drawers-header filter__header filter__header--has-action">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Price</a>
+                                </h3>
+                                <ul id="collapseFour" class="panel-collapse collapse s-xd-drawers-content" role="tabpanel" aria-labelledby="headingFour">
+                                    <div class="js-filter-list">
+                                        <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                            <input id="ckb-event-price-2" checked name="rdo_price_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=2 />
+                                            <label for="ckb-event-price-2" class="lbl-filter-item">All Prices</label>
+                                        </li>
+                                        <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                            <input id="ckb-event-price-1" name="rdo_price_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=1 />
+                                            <label for="ckb-event-price-1" class="lbl-filter-item">Paid</label>
+                                        </li>
+                                        <li class="form-group g-cell g-cell--no-gutters g-cell-1-1 g-cell-md-1-4 g-cell-lg-1-1">
+                                            <input id="ckb-event-price-0" name="rdo_price_filter" type="radio" class="js-filter-item js-xd-janus-checkpoint-event" data-id=0 />
+                                            <label for="ckb-event-price-0" class="lbl-filter-item">Free</label>
+                                        </li>
+                                    </div>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="js-xd-toggle-director side-nav__toggle-director filter__group filter__header">
+                            <i class="ico--bullet"></i>
+                            <span class="js-see-more-label">filter results</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- List events panel -->
+    <section class="l-mar-top-3 js-search-content g-vertical-group g-cell-1-1 g-cell-lg-9-12 ">
+        <div class="js-top-match-container l-mar-stack g-cell g-cell-9-9">
+        </div>
+        <h2 class="is-hidden-accessible">Sort By</h2>
+        <div class="g-cell g-cell-1-1 js-sort-container l-sm-align-center l-align-right">
+            <span class="segmented-control js-sort-btns">
+                <a class="segmented-control__segment js-sort-btn is-selected" data-id=1>
+                    <span class="is-hidden-accessible">Sort by</span> name
+                </a>
+                <a class="segmented-control__segment js-sort-btn" data-id=2>
+                    <span class="is-hidden-accessible">Sort by</span> date
+                </a>
+            </span>
+        </div>
+        <h2 class="is-hidden-accessible">Search Results</h2>
+
+        <!-- list event results -->
+        <div class="g-cell g-cell-1-1">
+            <div class="js-event-list-container l-mar-stack l-mar-top-2" id="EventList">
+                @foreach (Portal.Model.ViewModel.DisplayEventSummaryView item in Model.Events)
+                {
+                    @Html.Partial("_SummaryEventItem",item);
+                }
+            </div>
+            <div class="js-loading-view-container loading-spinner is-hidden"><div class="spinner--large" role="progressbar" style="position: relative; width: 0px; z-index: 1;"><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-0-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(0deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-1-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(30deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-2-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(60deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-3-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(90deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-4-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(120deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-5-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(150deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-6-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(180deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-7-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(210deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-8-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(240deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-9-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(270deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-10-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(300deg) translate(9px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: opacity-60-25-11-12 1s linear infinite;"><div style="position: absolute; width: 9px; height: 4px; background: rgb(0, 0, 0); box-shadow: rgba(0, 0, 0, 0.0980392) 0px 0px 1px; transform-origin: left center 0px; transform: rotate(330deg) translate(9px, 0px); border-radius: 2px;"></div></div></div></div>
+        </div>
+
+        <!-- Paging -->
+        <div class="g-cell g-cell-1-1">
+            <nav class="l-mar-top-4">
+                <h2 class="is-hidden-accessible">Search Navigation</h2>
+                <div class="js-pagination-container l-align-center l-pad-vert-2" style="float:right;">
+                    
+                </div>
+            </nav>
+        </div>
+    </section>
+</div>
+

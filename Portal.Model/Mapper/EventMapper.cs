@@ -84,7 +84,7 @@ namespace Portal.Model.Mapper
                 EndDate = ((DateTime)eventObject.EndDate).ToString(EventConstants.DefaultDateTimeFormat),
                 Description = eventObject.Description,
                 OrganizationName = eventObject.OrganizationName,
-                CoverImage = eventObject.CoverImage,
+                CoverImage = eventObject.CoverImage !=null? eventObject.CoverImage.ImagePath:"/Content/Images/no-image.png",
                 EventType = eventObject.EventType,
                 EventTopic = eventObject.EventTopic,
                 Location_StreetName = eventObject.Location_StreetName,

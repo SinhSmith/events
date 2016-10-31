@@ -1,0 +1,47 @@
+﻿@model Portal.Model.ViewModel.DisplayEventSummaryView
+
+<div class="list-card-v2 l-mar-top-2 js-d-poster" >
+    <a href="/Event/EventDetails?id=@Model.Id"
+       class="list-card__main js-event-link js-xd-janus-checkpoint-link">
+        <div class="list-card__header">
+            <div class="list-card__image" style="background-color:#5b5355;">
+                @if (Model.CoverImage != null)
+                {
+                    <img src="@Model.CoverImage" alt="Image not found" title="@Model.Title" class="js-poster-image" />
+                }
+                else
+                {
+                    <img src="~/Content/Images/no-image.png" class="js-poster-image" alt="Image not found"/>
+                }
+            </div>
+            <span class="list-card__label">$0 - $20</span>
+        </div>
+        <div class="list-card__body">
+            <time class="list-card__date" style="box-sizing:content-box;">
+                @Model.StartDate
+            </time>
+            <div class="list-card__title">
+                @Model.Title
+            </div>
+            <div class="list-card__venue">
+                @Model.Location_State, @Model.Country
+            </div>
+        </div>
+    </a>
+    <div class="list-card__footer">
+        <div class="list-card__tags">
+        </div>
+        <div class="list-card__actions">
+            <a href="" class="js-share-event-card share-action" title="Share">
+                <i class="ico-share ico--medium"></i>
+                <span class="is-hidden-accessible">Share this event</span>
+            </a>
+            <a href="" class="js-d-bookmark bookmarked saved">
+                <i class="ico-bookmarked ico--medium"></i>
+                <span class="is-hidden-accessible">
+                    Event Bookmarked
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

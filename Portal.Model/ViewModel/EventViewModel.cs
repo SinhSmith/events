@@ -98,7 +98,7 @@ namespace Portal.Model.ViewModel
         public string EndDate { get; set; }
         public string Description { get; set; }
         public string OrganizationName { get; set; }
-        public share_Images CoverImage { get; set; }
+        public string CoverImage { get; set; }
         public int EventType { get; set; }
         public int EventTopic { get; set; }
         public string Location_StreetName { get; set; }

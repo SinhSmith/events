@@ -53,7 +53,8 @@ namespace Site.OnlineStore.Controllers
                 SearchString = null,
                 StartDate = DateTime.Now,
                 Country = country,
-                City = city
+                City = city,
+                Price = Portal.Infractructure.Utility.Define.TicketPriceType.AllPrices
             };
 
             return request;

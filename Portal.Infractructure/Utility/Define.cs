@@ -113,9 +113,29 @@ namespace Portal.Infractructure.Utility
         }
         public enum TicketPriceType
         {
-            AllPrices,
-            Paid,
-            Free
+            AllPrices=2,
+            Paid=1,
+            Free=0
+        }
+
+        public enum DateFilterType
+        {
+            [Description("All Dates")]
+            AllDates = 0,
+            [Description("Today")]
+            Today = 1,
+            [Description("Tomorrow")]
+            Tomorrow = 2,
+            [Description("This Week")]
+            ThisWeek = 3,
+            [Description("This Weekend")]
+            ThisWeekend = 4,
+            [Description("Next Week")]
+            NextWeek = 5,
+            [Description("Next Month")]
+            NextMonth = 6,
+            [Description("Custom Date")]
+            CustomDate =7
         }
 
         public enum EventSortBy

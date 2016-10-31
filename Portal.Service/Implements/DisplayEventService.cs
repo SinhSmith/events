@@ -63,7 +63,7 @@ namespace Portal.Service.Implements
 
             if (request.EndDate!=null)
             {
-                searchQuery = searchQuery.And(p => p.EndDate <= request.EndDate);
+                searchQuery = searchQuery.And(p => p.StartDate <= request.EndDate);
             }
 
             if (request.Price != null)
@@ -104,7 +104,7 @@ namespace Portal.Service.Implements
                     break;
                 case Portal.Infractructure.Utility.Define.EventSortBy.Date:
                     eventsMatchingRefinement = eventsMatchingRefinement
-                    .OrderByDescending(p => p.StartDate);
+                    .OrderBy(p => p.StartDate);
                     break;
             }
 
@@ -134,38 +134,6 @@ namespace Portal.Service.Implements
         }
 
         /// <summary>
-        /// Get event topics list
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerable<EventTopicModel> GetListEventTopics()
-        {
-            IList<EventTopicModel> GetListEventTopics = new List<EventTopicModel>(){
-                new EventTopicModel() {Id=118,Name="Auto, Boat &amp; Air"},
-                new EventTopicModel() {Id=101,Name="Business &amp; Professional"},
-                new EventTopicModel() {Id=111,Name="Charity &amp; Causes"},
-                new EventTopicModel() {Id=113,Name="Community &amp; Culture"},
-                new EventTopicModel() {Id=115,Name="Family &amp; Education"},
-                new EventTopicModel() {Id=106,Name="Fashion &amp; Beauty"},
-                new EventTopicModel() {Id=104,Name="Film, Media &amp; Entertainment"},
-                new EventTopicModel() {Id=110,Name="Food &amp; Drink"},
-                new EventTopicModel() {Id=112,Name="Government &amp; Politics"},
-                new EventTopicModel() {Id=107,Name="Health &amp; Wellness"},
-                new EventTopicModel() {Id=119,Name="Hobbies &amp; Special Interest"},
-                new EventTopicModel() {Id=117,Name="Home &amp; Lifestyle"},
-                new EventTopicModel() {Id=103,Name="Music"},
-                new EventTopicModel() {Id=199,Name="Other"},
-                new EventTopicModel() {Id=105,Name="Performing &amp; Visual Arts"},
-                new EventTopicModel() {Id=114,Name="Religion &amp; Spirituality"},
-                new EventTopicModel() {Id=102,Name="Science &amp; Technology"},
-                new EventTopicModel() {Id=116,Name="Seasonal &amp; Holiday"},
-                new EventTopicModel() {Id=108,Name="Sports &amp; Fitness"},
-                new EventTopicModel() {Id=109,Name="Travel &amp; Outdoor"}
-            };
-
-            return GetListEventTopics;
-        }
-
-        /// <summary>
         /// Get event topic name by id
         /// </summary>
         /// <param name="eventId"></param>
@@ -183,42 +151,24 @@ namespace Portal.Service.Implements
            }
         }
 
+        /// <summary>
+        /// Get list event topics by ids
+        /// </summary>
+        /// <param name="topicIds"></param>
+        /// <returns></returns>
         private IEnumerable<EventTopicModel> GetListEventTopics(List<int> topicIds)
         {
-            return GetListEventTopics().Where(t => topicIds.Contains(t.Id));
+            return GetListEventTopics().Where(t => topicIds.Contains(t.Id)).ToList();
         }
 
-        private IEnumerable<EventTypeModel> GetListEventTypes()
-        {
-            IList<EventTypeModel> listEventTypes = new List<EventTypeModel>(){
-                new EventTypeModel() {Id=19, Name="Appearance or Signing"},
-                new EventTypeModel() {Id=17, Name="Attraction"},
-                new EventTypeModel() {Id=18, Name="Camp, Trip, or Retreat"},
-                new EventTypeModel() {Id=9, Name="lass, Training, or Workshop"},
-                new EventTypeModel() {Id=6, Name="oncert or Performance"},
-                new EventTypeModel() {Id=1, Name="onference"},
-                new EventTypeModel() {Id=4, Name="onvention"},
-                new EventTypeModel() {Id=8, Name="inner or Gala"},
-                new EventTypeModel() {Id=5, Name="estival or Fair"},
-                new EventTypeModel() {Id=14, Name="Game or Competition"},
-                new EventTypeModel() {Id=10, Name="Meeting or Networking Event"},
-                new EventTypeModel() {Id=100, Name="Other"},
-                new EventTypeModel() {Id=11, Name="Party or Social Gathering"},
-                new EventTypeModel() {Id=15, Name="Race or Endurance Event"},
-                new EventTypeModel() {Id=12, Name="Rally"},
-                new EventTypeModel() {Id=7, Name="creening"},
-                new EventTypeModel() {Id=2, Name="eminar or Talk"},
-                new EventTypeModel() {Id=16, Name="Tour"},
-                new EventTypeModel() {Id=13, Name="Tournament"},
-                new EventTypeModel() {Id=3, Name="radeshow, Consumer Show, or Expo"}
-            };
-
-            return listEventTypes;
-        }
-
+        /// <summary>
+        /// Get list event types by ids
+        /// </summary>
+        /// <param name="eventTypeIds"></param>
+        /// <returns></returns>
         private IEnumerable<EventTypeModel> GetListEventTypes(List<int> eventTypeIds)
         {
-            return GetListEventTypes().Where(t => eventTypeIds.Contains(t.Id));
+            return GetListEventTypes().Where(t => eventTypeIds.Contains(t.Id)).ToList();
         }
 
         #endregion
@@ -249,7 +199,7 @@ namespace Portal.Service.Implements
                 Price = request.Price,
                 Country = request.Country,
                 City = request.City,
-                Events = CropEventListToSatisfyGivenIndex(foundEvents, request.Index, request.NumberOfResultsPerPage).ConvertToEventSummaryViews(),
+                Events = CropEventListToSatisfyGivenIndex(foundEvents, request.Index, request.NumberOfResultsPerPage).ConvertToEventSummaryViews().ToList(),
                 ListEventTypes = GetListEventTypes(foundEvents.Select(p => p.EventType).Distinct().ToList()),
                 ListTopics = GetListEventTopics(foundEvents.Select(p => p.EventTopic).Distinct().ToList())
             };
@@ -315,6 +265,70 @@ namespace Portal.Service.Implements
             };
 
             return response;
+        }
+
+        /// <summary>
+        /// Get list event types
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<EventTypeModel> GetListEventTypes()
+        {
+            IList<EventTypeModel> listEventTypes = new List<EventTypeModel>(){
+                new EventTypeModel() {Id=19, Name="Appearance or Signing"},
+                new EventTypeModel() {Id=17, Name="Attraction"},
+                new EventTypeModel() {Id=18, Name="Camp, Trip, or Retreat"},
+                new EventTypeModel() {Id=9, Name="lass, Training, or Workshop"},
+                new EventTypeModel() {Id=6, Name="oncert or Performance"},
+                new EventTypeModel() {Id=1, Name="onference"},
+                new EventTypeModel() {Id=4, Name="onvention"},
+                new EventTypeModel() {Id=8, Name="inner or Gala"},
+                new EventTypeModel() {Id=5, Name="estival or Fair"},
+                new EventTypeModel() {Id=14, Name="Game or Competition"},
+                new EventTypeModel() {Id=10, Name="Meeting or Networking Event"},
+                new EventTypeModel() {Id=100, Name="Other"},
+                new EventTypeModel() {Id=11, Name="Party or Social Gathering"},
+                new EventTypeModel() {Id=15, Name="Race or Endurance Event"},
+                new EventTypeModel() {Id=12, Name="Rally"},
+                new EventTypeModel() {Id=7, Name="creening"},
+                new EventTypeModel() {Id=2, Name="eminar or Talk"},
+                new EventTypeModel() {Id=16, Name="Tour"},
+                new EventTypeModel() {Id=13, Name="Tournament"},
+                new EventTypeModel() {Id=3, Name="radeshow, Consumer Show, or Expo"}
+            };
+
+            return listEventTypes;
+        }
+
+        /// <summary>
+        /// Get event topics list
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<EventTopicModel> GetListEventTopics()
+        {
+            IList<EventTopicModel> GetListEventTopics = new List<EventTopicModel>(){
+                new EventTopicModel() {Id=118,Name="Auto, Boat & Air"},
+                new EventTopicModel() {Id=101,Name="Business & Professional"},
+                new EventTopicModel() {Id=111,Name="Charity & Causes"},
+                new EventTopicModel() {Id=113,Name="Community & Culture"},
+                new EventTopicModel() {Id=115,Name="Family & Education"},
+                new EventTopicModel() {Id=106,Name="Fashion & Beauty"},
+                new EventTopicModel() {Id=104,Name="Film, Media & Entertainment"},
+                new EventTopicModel() {Id=110,Name="Food & Drink"},
+                new EventTopicModel() {Id=112,Name="Government & Politics"},
+                new EventTopicModel() {Id=107,Name="Health & Wellness"},
+                new EventTopicModel() {Id=119,Name="Hobbies & Special Interest"},
+                new EventTopicModel() {Id=117,Name="Home & Lifestyle"},
+                new EventTopicModel() {Id=103,Name="Music"},
+                new EventTopicModel() {Id=199,Name="Other"},
+                new EventTopicModel() {Id=105,Name="Performing & Visual Arts"},
+                new EventTopicModel() {Id=114,Name="Religion & Spirituality"},
+                new EventTopicModel() {Id=102,Name="Science & Technology"},
+                new EventTopicModel() {Id=116,Name="Seasonal & Holiday"},
+                new EventTopicModel() {Id=108,Name="Sports & Fitness"},
+                new EventTopicModel() {Id=109,Name="Travel & Outdoor"}
+            };
+
+            return GetListEventTopics;
         }
 
         #endregion
