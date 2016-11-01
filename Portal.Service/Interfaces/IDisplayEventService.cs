@@ -16,5 +16,6 @@ namespace Portal.Service.Interfaces
         GetEventsByCategoryResponse SearchByEventName(GetEventsByCategoryRequest request);
         IEnumerable<EventTopicModel> GetListEventTopics();
         IEnumerable<EventTypeModel> GetListEventTypes();
+        IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId);
     }
 }

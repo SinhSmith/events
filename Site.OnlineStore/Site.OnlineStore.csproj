@@ -594,6 +594,8 @@
     <Content Include="Content\event\create2.css" />
     <Content Include="Content\event\create_event_tinymce.css" />
     <Content Include="Content\event\eb.persistent_header.css" />
+    <Content Include="Content\event\event_pages_C.css" />
+    <Content Include="Content\event\event_page_advanced.css" />
     <Content Include="Content\event\global_header.css" />
     <Content Include="Content\event\search.css" />
     <Content Include="Content\event\ticket_grouping.css" />
@@ -664,6 +666,7 @@
     <Content Include="Content\Images\Temp\Tong-thau1-services.jpg" />
     <Content Include="Content\Images\Unicons_Logo_27062016.jpg" />
     <Content Include="Content\Images\yt.jpg" />
+    <Content Include="Content\img\event\bookmark-default.png" />
     <Content Include="Content\img\home\img_category_arts.jpg" />
     <Content Include="Content\img\home\img_category_arts_small.jpg" />
     <Content Include="Content\img\home\img_category_classes.jpg" />
@@ -1831,6 +1834,8 @@
     <Content Include="Library\time-picker\jquery.timepicker.min.css" />
     <Content Include="Library\time-picker\jquery.timepicker.min.js" />
     <Content Include="New York, New York Events For You _ Eventbrite.html" />
+    <Content Include="SCOPE 2.html" />
+    <Content Include="SCOPE Miami Beach 2016 Tickets, Miami Beach _ Eventbrite.html" />
     <Content Include="Scripts\admin\Common.js" />
     <Content Include="Scripts\admin\event-management.js" />
     <Content Include="Scripts\admin\project-management.js" />
@@ -2044,6 +2049,7 @@
     <Content Include="Scripts\common\html5.js" />
     <Content Include="Scripts\common\html5shiv.min.js" />
     <Content Include="Scripts\event\displayevents-management.js" />
+    <Content Include="Scripts\event\eventdetails-management.js" />
     <Content Include="Scripts\home\chosen.jquery.min.js" />
     <Content Include="Scripts\home\custom-footer.js" />
     <Content Include="Scripts\home\footer-homepage.js" />

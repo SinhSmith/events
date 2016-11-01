@@ -1,987 +1,830 @@
-﻿
+﻿@model Portal.Model.ViewModel.EventFullView
 @{
-    ViewBag.Title = "EventDetails";
+    ViewBag.Title = "Event details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="js-hidden-when-expired event-listing event-listing--has-image " role="article">
-    <!-- Event Listing Header -->
-    <div class="notification-box--listing">
-        <div class="js-notification-box" data-id="" data-message="" data-type="aaa" data-close-btn="" data-delay=""></div>
-    </div>
-    <header class="event-listing__header clrfix hide-small hide-medium">
-        <div class="listing-hero-image__blurry-background fx--fade-in fx--delay-4">
+@section LocalStyles{
+    <link href="~/Content/event/event_pages_C.css" rel="stylesheet" />
+    <link href="~/Content/event/event_page_advanced.css" rel="stylesheet" />
 
-        </div>
-    </header>
-    <div class="g-grid g-grid--page-margin-manual">
-        <!-- Event Listing Body -->
-        <div class="event-listing__body l-sm-pad-top-0">
-            <!-- Listing Hero Details -->
-            <div class="listing-hero-details__main-container fx--fade-in fx--delay-4">
-                <div class="g-group">
-                    <div class="g-cell g-cell-1-1 g-cell-lg-8-12 g-cell--no-gutters listing-hero--image-container">
-                        <div class="listing-hero__badge-container js-hero-badge-container">
-                            <span class="badge--overlay badge-status hide-large badge-price" data-automation="hero-badge">
-                                $10 – $15
-                            </span>
-                        </div>
-                        <div class="listing-hero listing-hero--bkg clrfix fx--delay-6 fx--fade-in">
-                            <picture content="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23994897%2F185283414122%2F1%2Foriginal.jpg?w=1000&amp;rect=0%2C0%2C2160%2C1080&amp;s=7f755500c612bb679ad6d240e1ecb398">
-                                <!--[if IE 9]><video style="display: none;"><![endif]-->
-                                <source srcset="
-								https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23994897%2F185283414122%2F1%2Foriginal.jpg?w=480&amp;rect=0%2C0%2C2160%2C1080&amp;s=9a0a2821c98ea8896b61f3b36209f23b 480w,
-								https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23994897%2F185283414122%2F1%2Foriginal.jpg?w=600&amp;rect=0%2C0%2C2160%2C1080&amp;s=32549ea1d0ca760f41532d99183a6068 600w,
-								https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23994897%2F185283414122%2F1%2Foriginal.jpg?w=800&amp;rect=0%2C0%2C2160%2C1080&amp;s=2b5b29347daab151ccd281914632a46e 800w
-							" sizes="100vw">
-                                <!--[if IE 9]></video><![endif]-->
-                                <!--[if lt IE 9]>
-                                <img class="listing-hero-image js-picturefill-img"
-                                    data-automation="listing-hero-image"
-                                    alt="Halloween Bash at House of Horror Haunted Carnival"
-                                    src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23994897%2F185283414122%2F1%2Foriginal.jpg?w=800&amp;rect=0%2C0%2C2160%2C1080&amp;s=2b5b29347daab151ccd281914632a46e"
-                                />
-                                <![endif]-->
-                                <!--[if !lt IE 9]> -->
-                                <img class="listing-hero-image js-picturefill-img listing-image--main" data-automation="listing-hero-image" alt="Halloween Bash at House of Horror Haunted Carnival">
-                                <!-- <![endif]-->
-                            </picture>
-                        </div>
-                    </div>
-                    <div class="g-cell g-cell-1-1 g-cell-lg-4-12 g-cell--no-gutters listing-hero__detailed-info">
-                        <ul class="listing-panel-actions show-small" role="menubar">
-                            <li>
-                                <a class="js-d-bookmark btn btn--collapsible btn--target is-collapsed btn--opaque l-sm-mar-bot-2 listing-panel-actions__btn" data-eid="27611729426" role="menuitem" data-bookmarked="false" alt="Save" dorsal-guid="0e4bca09-92c6-6be8-e4b6-069784a5f036" data-xd-wired="bookmark">
-                                    <i class="ico-bookmark"></i><span class="btn--context">SAVE THIS EVENT</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="l-pad-top-6 l-pad-bot-2 l-lg-pad-bot-4 l-pad-hor-6">
-                            <div class="listing-hero-header hide-small ">
-                            </div>
-                            <div class="listing-hero-body ">
-                                <h1 class="listing-hero-title" data-automation="listing-title">Halloween Bash at House of Horror Haunted Carnival</h1>
-                                <meta content="Halloween Bash at House of Horror Haunted Carnival">
-                                <div class="l-mar-top-3">
-                                    <div class="l-media clrfix listing-organizer-title">
-                                        <div class="l-align-left">
-                                            <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#listing-organizer" class="js-d-scroll-to listing-organizer-name text-default" data-d-duration="1500" data-d-offset="-70" data-d-destination="#listing-organizer" dorsal-guid="23d7a89e-52f0-64ca-2b70-17fc13cbca55" data-xd-wired="scroll-to">
-                                                by House of Horror - Haunted Carnival
-                                            </a>
-                                        </div>
-                                        <div class="l-align-left">
-                                            <a href="http://www.eventbrite.com/o/house-of-horror-haunted-carnival-11252947068" class="js-follow js-follow-target follow-me fx--fade-in is-hidden"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="js-display-price-container listing-hero-footer hide-small hide-medium" data-automation="micro-ticket-box-price">
-                                <div class="js-display-price">
-                                    $10 – $15
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <style>
+        #contentpub .main, #customheader .main, #customfooter .main, #headpub .main, #footpub .main {
+            min-width: 700px;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        .panel_628, .panel_280 {
+            width: 100%;
+            margin-bottom: 26px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .panel_628 {
+            min-width: 400px;
+        }
+
+        .panel_280 {
+            min-width: 300px;
+        }
+
+        p {
+            line-height: normal;
+        }
+
+        #subhead {
+            margin-bottom: 0;
+        }
+
+        #subfooter {
+            margin-top: 0;
+        }
+
+        #regprocess {
+            margin: 0;
+        }
+
+            #regprocess ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+                #regprocess ul li {
+                    width: 189px;
+                    height: 20px;
+                    padding: 5px 9px 3px;
+                    font-size: 14px;
+                    line-height: 18px;
+                    font-weight: bold;
+                    display: inline-block;
+                    float: left;
+                    border-top: 1px solid;
+                    border-bottom: 0 solid;
+                    border-right: 1px solid;
+                    font-weight: normal;
+                }
+
+                    #regprocess ul li.first {
+                        width: 191px;
+                        border-left: 1px solid;
+                    }
+
+                    #regprocess ul li span {
+                        font-size: 13px;
+                        margin-left: 5px;
+                    }
+
+                    #regprocess ul li.active {
+                        color: #FFF;
+                        background-color: #E60;
+                    }
+
+        #processing {
+            text-align: center;
+        }
+
+            #processing ul {
+                width: 100px;
+                margin: 0 auto;
+                padding: 0;
+                list-style: none;
+            }
+
+                #processing ul li {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 10px;
+                    display: inline-block;
+                    float: left;
+                    border: 1px solid;
+                }
+
+        .login_button {
+            width: 58px;
+            height: 24px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/login.png);
+            background-color: transparent;
+            vertical-align: middle;
+            border: none;
+        }
+
+        .reviewyourorder_button a {
+            width: 180px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/reviewyourorder.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .paybycheque_button a {
+            width: 153px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paybycheque.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .paybycheck_button a {
+            width: 143px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paybycheck.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .payatthedoor_button a {
+            width: 160px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/payatthedoor.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .sendinvoice_button a {
+            width: 135px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/sendinvoice.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .completeregistration_button a {
+            width: 209px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/completeregistration.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .register_button a {
+            width: 99px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/register.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .ordernow_button a {
+            width: 116px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/ordernow.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .payoffline_button a {
+            width: 120px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/payoffline.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .paynow_button a {
+            width: 101px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paynow.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .save_button a {
+            width: 71px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/save.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        .addmetowaitlist_button a {
+            width: 204px;
+            height: 26px;
+            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/addmetowaitlist.png);
+            display: block;
+            vertical-align: middle;
+        }
+
+        a.on, button:hover, .login_button a:hover, .reviewyourorder_button a:hover, .paybycheque_button a:hover, .paybycheck_button a:hover, .payatthedoor_button a:hover, .sendinvoice_button a:hover, .completeregistration_button a:hover, .register_button a:hover, .ordernow_button a:hover, .payoffline_button a:hover, .paynow_button a:hover, .save_button a:hover {
+            background-position: bottom;
+        }
+
+        a.active {
+            background-position: 0 -26px;
+        }
+
+        body {
+            background: #f7f7f7;
+        }
+
+            body a, a:link, a:visited {
+                color: #0f90ba;
+            }
+
+        h2 {
+            color: #404040;
+        }
+
+        h1 {
+            font-size: 26px;
+            line-height: 28px;
+            font-weight: bold;
+            margin: 0;
+            padding-bottom: 5px;
+        }
+
+        .main {
+            color: #404040;
+        }
+
+        #subheader {
+            border-bottom: 1px dotted #dedede;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+        }
+
+        #subheader_table {
+            width: 960px;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        #subheader_info_cell {
+            vertical-align: bottom;
+        }
+
+        #subheader_logo_cell {
+            width: 344 + 10px;
+            text-align: right;
+        }
+
+        .panel_head2, .panel_footer {
+            background-color: #fafafa;
+            border-color: #dedede;
+            color: #404040;
+        }
+
+        .panel_body, .ticket_row, .passwd_info, .panel_628_share, .panel_footer, .panel_section {
+            background-color: #ffffff;
+            border-color: #dedede;
+            color: #666666;
+        }
+
+            .panel_body a {
+                color: #0f90ba;
+            }
+
+        .panel_border {
+            border-color: #dedede;
+        }
+
+        .ticket_container {
+            border-color: #dedede;
+            border: 1px solid #dedede;
+        }
+
+        .ticket_table_head, .ticket_table_head td {
+            color: #666666;
+            background-color: #ffffff;
+        }
+
+        .ticket_table td {
+            border-top: 1px solid #dedede;
+        }
+
+        .ticket_table .offer_row td {
+            border-top: none;
+        }
+
+        .unit_row td {
+            padding-top: 0px;
+            padding-bottom: 12px;
+            padding-right: 5px;
+            padding-left: 20px;
+            border-top: none;
+        }
+
+        .unit_row_v2 td {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-right: 5px;
+            padding-left: 5px;
+            border-top: none;
+        }
+
+        .passwd_info {
+            background-color: #ffffff;
+            border: 1px solid #dedede;
+        }
+
+        #processing ul li {
+            border-color: #0f90ba;
+        }
+
+            #processing ul li.active {
+                background-color: #0f90ba;
+            }
+
+        #regprocess {
+            border-color: #dedede;
+        }
+
+            #regprocess ul li, #regprocess ul li.first {
+                color: #666666;
+                background-color: #ffffff;
+                border-color: #dedede;
+            }
+
+                #regprocess ul li.active {
+                    color: #404040;
+                    background-color: #0f90ba;
+                }
+
+        .panel_edit {
+            width: 400px;
+            color: #404040;
+            background-color: #ffffff;
+            border-color: #dedede;
+            border-style: solid;
+            border-width: 1px;
+            padding: 8px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        #event_header h1 {
+            margin-top: 8px;
+        }
+
+        #event_header h2 {
+            font-size: 17px;
+            text-align: left;
+            line-height: 21px;
+            color: #404040;
+            margin: 0;
+            padding: 0;
+            font-weight: 300;
+        }
+
+            #event_header h2 > a {
+                color: #404040;
+            }
+
+        #event_network h2 {
+            margin: 0;
+            padding: 0;
+            line-height: 21px;
+        }
+
+        .panel_head2 h3 {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 500;
+            color: #404040;
+            padding: 0;
+        }
+
+        .panel_body h2 {
+            font-size: 16px;
+            line-height: 1.2em;
+            font-weight: bold;
+            color: #666666;
+            margin: 2px 0 0;
+            padding: 0;
+        }
+
+        #panel_address h2 {
+            font-size: 1.0em;
+            line-height: normal;
+            font-weight: normal;
+            color: #666666;
+            margin: 0;
+            padding: 0 0 8px;
+            text-align: left;
+        }
+
+        #panel_when h2 {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1.0em;
+            line-height: normal;
+            font-weight: normal;
+            color: #666666;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        #RSVPBody {
+            background-color: #ffffff;
+            border: 1px solid #dedede;
+            color: #666666;
+        }
+
+        .RSVPMessage {
+            display: block;
+            margin: 24px 0 10px;
+        }
+
+        .rsvp_responded_thanks {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .rsvp_responded_msg {
+            margin-top: 13px;
+        }
+
+        /* social sharing module on /orderconfirmation */
+        .panel_628_share {
+            border: 1px solid #dedede;
+        }
+
+        #optouts_div {
+            border-left: 1px dotted #dedede;
+        }
+        /* end social sharing module on /orderconfirmation */
+        .registrationTable h3 {
+            border-bottom: 1px solid #dedede;
+        }
+
+        /* event tracking button */
+        #track_event_container {
+            border-color: #dedede;
+            background-color: #ffffff;
+        }
+
+
+        .js-advanced-team-landing .pod,
+        .advanced-team-navigation .js-advanced-team-landing .pod:hover {
+            background-color: #ffffff;
+            border: 1px solid #dedede;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+
+        a:hover .advanced-team-landing__primary-text {
+            opacity: 0.66;
+        }
+
+        .advanced-team-landing__primary-text {
+            color: #666666;
+        }
+
+        .grayscale {
+            /* Firefox 10+, Firefox on Android */
+            filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+            /* IE 6-9 */
+            filter: gray;
+            /*
+          Chrome 19+,
+          Safari 6+,
+          Safari 6+ iOS,
+          Opera 15+
+        */
+            -webkit-filter: grayscale(100%);
+        }
+    </style>
+}
+
+@section LocalScripts{
+    <script src="~/Content/admin/plugins/slider-bar-library/sly.min.js"></script>
+    <script src="~/Scripts/event/eventdetails-management.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=EventDetailsManagement.googleApiCallBackFunction">
+</script>
+<script>
+    (function () {
+        var $frame = $('#Events_Horizontal_Bar');
+        var $wrap = $frame.parent();
+
+        // Call Sly on frame
+        $frame.sly({
+            horizontal: 1,
+            itemNav: 'centered',
+            smart: 1,
+            activateOn: 'click',
+            mouseDragging: 1,
+            touchDragging: 1,
+            releaseSwing: 1,
+            startAt: 4,
+            scrollBar: $wrap.find('.scrollbar'),
+            scrollBy: 1,
+            speed: 300,
+            elasticBounds: 1,
+            easing: 'easeOutExpo',
+            dragHandle: 1,
+            dynamicHandle: 1,
+            clickBar: 1,
+        });
+    }());
+</script>
+<script>
+    EventDetailsManagement.model.Address = '@Model.Location_City, @Model.Country';
+</script>
+
+}
+
+<!-- Event details and Order content -->
+<div id="contentpub" class="js-hidden-when-expired ">
+    <div class="main">
+        <!-- Error panel -->
+        <div id="ticket_error_message_container" class="deprecated-notification2 error_notification hidden">
+            <div class="error_notification_msg">
+                <span id="ticket_error_message" style="display:none;">None</span>
             </div>
-            <!-- Listing Card Panel -->
-            <div class="listing-panel-wrapper js-listing-panel-wrapper clrfix" role="menu">
-                <div class="listing-panel clrfix sticky-listing-panel-placeholder hide-small"></div>
-                <div class="listing-panel js-sticky-panel sticky-listing-panel sticky clrfix is-unstick">
-                    <div class="g-group g-group--page-margin-reset">
-                        <div class="g-cell g-cell-1-1 g-cell-md-5-12 g-cell-lg-6-12 hide-small listing-panel__g-cell">
-                            <ul class="listing-panel-actions" role="menubar">
-                                <li class="fx--fade-in-down fx--duration-1 fx--delay-12">
-                                    <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" class="js-d-tooltip btn btn--target btn--collapsible js-share-listing-button listing-panel-actions__btn" role="menuitem" alt="Share" title="" data-trigger="hover" data-d-disabled-in-touch="true" data-placement="bottom" data-container="body" dorsal-guid="47827f37-c0c0-0307-b292-ae6de2d4a776" data-original-title="Share Event" data-xd-wired="tooltip"><i class="ico-share"></i><span class="is-hidden-accessible">Share this event</span></a>
-                                </li>
-                                <li class="fx--fade-in-down fx--duration-2 fx--delay-14">
-                                    <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" class="js-d-bookmark js-d-tooltip btn btn--target btn--collapsible is-collapsed l-sm-mar-bot-2" data-automation="bookmark-link" role="menuitem" data-eid="27611729426" data-bookmarked="false" alt="Save Event" title="" data-trigger="hover" data-d-disabled-in-touch="true" data-placement="bottom" data-container="body" dorsal-guid="82c33d78-e752-aaf4-3c1b-9b7b986df1b4" data-original-title="Save Event" data-xd-wired="tooltip bookmark"><i class="ico-bookmark"></i><span class="btn--context">SAVE THIS EVENT</span></a>
-                                </li>
-                            </ul>
-                            <div class="listing-panel-info__details hide-small hide-medium l-mar-left-4 hide-large">
-                                <p class="is-truncated listing-title listing-panel-info__details-title
-					">Halloween Bash at House of Horror Haunted Carnival</p>
-                            </div>
-                        </div>
-                        <div class="g-cell g-cell-1-1 g-cell-md-3-12 g-cell-lg-2-12">
-                            <div class="listing-panel-info__price-or-status">
-                                <div class="listing-panel-info__display-price is-truncated js-display-price-container hide-large">
-                                    <div class="js-display-price">
-                                        $10 – $15
-                                    </div>
+        </div>
+
+        <!-- Header row content panel -->
+        <div id="subheader">
+            <table id="subheader_table">
+                <tbody>
+                    <tr>
+                        <!-- Event title and location -->
+                        <td id="subheader_info_cell" class="g-cell g-cell-1-3 g-cell-md-1-3">
+                            <div id="event_header">
+                                <h1><span class="summary">@Model.Title</span></h1>
+                                <div id="event_network">
+                                    <h2>
+                                        <a>@Model.Location_Address</a>
+                                    </h2>
                                 </div>
                             </div>
+                        </td>
+                        <!-- Event image -->
+                        <td id="subheader_logo_cell" class="g-cell g-cell-2-3 g-cell-md-2-3">
+                            <div class="event-title-image-panel">
+                                @if (Model.CoverImage != null)
+                                {
+                                    <img src="@Model.CoverImage.ImagePath" alt="@Model.CoverImage.ImageName" class="event-image-cover">
+                                }
+                                else
+                                {
+                                    <img src="@Portal.Infractructure.Utility.EventConstants.ImageNotFoundPath" alt="Cannot find image" class="event-image-cover">
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Left column content panel -->
+        <div id="col_628">
+            <!-- Book ticket form -->
+            <div id="ticket_information_wrapper" class="panel_628" style="position: relative;">
+                <form name="mgform" onsubmit="return validateform();" action="https://www.eventbrite.com/orderstart?ebtv=C" method="post" target="_top" style="margin: 0px;">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="bd6f7b11ad6740eda07b94c32aa20206">
+                    <input type="hidden" name="eid" value="26607894930">
+                    <input type="hidden" name="referral_code" value="">
+                    <input type="hidden" name="referrer" value="">
+                    <input type="hidden" id="ticketCurrency" value="$">
+                    <input type="hidden" name="varnish_hit_event_id" value="">
+                    <input type="hidden" name="_nomo" value="">
+                    <input type="hidden" name="source_id" value="08fc4035a02e11e68f6c068430af67ed">
+                    <input type="hidden" name="w" value="">
+                    <input type="hidden" name="waitlist_code" value="">
+                    <input type="hidden" name="payment_type" value="eventbrite">
+                    <!-- List tickets -->
+                    <div class="l-mar-stack">
+                        <div class="panel_head2 l-mar-top-3" id="ticketInfo">
+                            <h3>Ticket Information</h3>
                         </div>
-                        <div class="g-cell g-cell-1-1 g-cell-md-4-12 l-sm-pad-top-1">
-                            <div class="listing-panel-info fx--delay-18 fx--fade-in js-listing-panel-info-event-header">
-                                <div class="micro-ticket-box
-">
-                                    <div class="micro-ticket-box__body js-micro-ticket-box__body
-	">
-                                        <form class="js-order-registration responsive-form
-		" name="ticketsForm" action="https://www.eventbrite.com/orderstart" method="post" target="_top">
-                                            <input type="hidden" name="eid" value="27611729426" class="">
-                                            <input type="hidden" name="has_javascript" id="has_javascript" value="1" class="">
-                                            <input type="hidden" name="source_id" value="dad6d77d9f7f11e6bd24066a313deebf" class="">
-                                            <input type="hidden" name="payment_type" value="eventbrite" class="">
-                                            <input type="hidden" name="invite" value="" class="">
-                                            <input type="hidden" name="legacy_event_page" value="1" class="">
-                                            <input type="hidden" name="affiliate" value="ehomecard" class="">
-                                            <input type="hidden" name="referrer" value="" class="">
-                                            <input type="hidden" name="referral_code" value="" class="">
-                                            <input type="hidden" name="w" value="" class="">
-                                            <input type="hidden" name="waitlist_code" value="" class="">
-                                            <input type="hidden" name="eventpassword" value="" class="">
-                                            <span class="js-micro-order-container">
-                                                <span class="micro-ticket-box__btn-wrapper">
-                                                    <button type="button" class="micro-ticket-box__btn btn btn--epic btn--responsive js-ticket-modal-btn" data-automation="ticket-modal-btn">Tickets</button>
+                    </div>
+                    <div id="TicketReg" class="panel_body">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="ticket_table" id="ticket_table" data-automation="ticket_table">
+                            <tbody>
+                                <tr class="ticket_table_head">
+                                    <td width="40%" nowrap="nowrap">
+                                        Ticket Type
+                                    </td>
+                                    <td>
+                                        Price
+                                    </td>
+                                    <td width="70" align="right">Quantity</td>
+                                </tr>
+                                @foreach (Portal.Model.ViewModel.EventTicketResponse ticket in Model.Tickets)
+	                            {
+                                <tr class="ticket_row">
+                                    <input type="hidden" name="TicketId" value="@ticket.Id" />
+
+                                    <td class="ticket_type_name">
+                                        @ticket.Name
+
+                                        <div id="descriptionDiv52517343" style="font-size: 11px; line-height: 12px; margin: 5px 0 0 0;">@ticket.Description</div>
+                                    </td>
+                                    <td nowrap="nowrap" class="price_td">
+                                        <input type="hidden" name="cost_52517343_None" value="150.00">
+                                        @ticket.Price VND
+                                    </td>
+                                    <td align="right" nowrap="nowrap">
+                                        <label class="is-hidden-accessible">Ticket Quantity Select</label>
+                                        <select class="ticket_table_select" name="TicketQuantity">
+                                            @for (int i = 0; i < ticket.MaximunTicketOrder; i++)
+			                                    {
+                                            <option value="@i">@i</option>
+			                                    }
+                                        </select>
+                                    </td>
+                                </tr>
+	                            }
+                            </tbody>
+                        </table>
+                    </div><!-- end panel_body -->
+                    <div id="OrderReg" class="panel_footer" style="text-align: right; padding: 10px;height:initial;">
+                        <table id="freeButton" align="right" style="display: none;">
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <span id="primary_cta" class="button_css">
+                                            <a href="javascript: freeCheckout();" class="js-checkout-button" data-automation="register-button" style="text-decoration:none;color:#FFFFFF;">Register</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="paidButton" style="display: block;" data-automation="paidButton">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td align="right">
+                                            <div class="cta_container">
+                                                <span id="primary_cta" class="button_css">
+                                                    <a href="javascript: eventbriteCheckout();" data-automation="order-now-button" style="text-decoration:none;color:#fff;">
+                                                        Order Now
+                                                    </a>
                                                 </span>
-                                            </span>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <script>
-	// EB-31924 - With slow page loading, when the JavaScript has not yet fully loaded
-	// nothing will happen when clicking the Call To Action button. If the button is
-	// clicked before the page has loaded, we show a spinner.
-	var ticketModalButtons = document.getElementsByClassName('js-ticket-modal-btn');
-	if (ticketModalButtons && ticketModalButtons.length) {
-		ticketModalButtons[0].addEventListener(
-			'click',
-			function(e) {
-				e.preventDefault();
-				e.target.classList.add('btn--large--loader');
-				e.target.dataset.clicked = 'clicked';
-				e.target.removeEventListener(e.type, arguments.callee);
-			}
-		);
-	}
-                            </script>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Listing Card Info -->
-            <section class="listing-info clrfix">
-                <header class="listing-info__header l-md-pad-top-2  g-group g-group--page-margin-reset">
-                    <div class="g-cell g-cell-1-1 g-cell-lg-8-12 g-offset-lg-2-12 listing-info__header-container">
-                        <h2 class="is-hidden-accessible hide-small">Event Information</h2>
-                        <div class="g-cell g-cell-1-1 show-small hide-medium hide-large">
-                            <dl class="event-details">
-                                <div class="g-group l-mar-top-6 l-md-mar-bot-4 l-lg-mar-bot-6">
-                                    <div class="g-cell g-cell-2-12 g-cell--no-gutters">
-                                        <i class="ico-location ico--medium"></i><span class="is-hidden-accessible">Location</span>
-                                    </div>
-                                    <div class="g-cell g-cell-10-12 g-cell--no-gutters">
-                                        <dt class="label-primary l-mar-bot-2">Location</dt>
-                                        <dd class="event-details__data">
-                                            <p>Miami International Mall</p>
-                                            <p>1455 Northwest 107th Avenue </p>
-                                            <p>Doral, FL 33172 </p>
-                                            <p>United States </p>
-                                            <p>
-                                                <a class="js-d-scroll-to js-scroll-to-map" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#map-target" data-d-duration="1500" data-d-destination="#map-target" dorsal-guid="f0891886-196e-ec3a-b0e2-d1ce1687cbf4" data-xd-wired="scroll-to">View Map</a>
-                                                <a class="js-view-map-link is-hidden" href="https://maps.google.com/maps?hl=en&amp;q=25.786656,-80.364938&amp;sll=25.786656,-80.364938&amp;z=13&amp;markers=25.786656,-80.364938" target="_blank">View Map</a>
-                                            </p>
-                                        </dd>
-                                    </div>
-                                </div>
-                                <div class="g-group l-mar-top-6 l-md-mar-bot-4 l-lg-mar-bot-6">
-                                    <div class="g-cell g-cell-2-12 g-cell--no-gutters">
-                                        <i class="ico-friends ico--medium"></i><span class="is-hidden-accessible">Friends Who Are Going</span>
-                                    </div>
-                                    <div class="g-cell g-cell-10-12 g-cell--no-gutters">
-                                        <dd class="event-details__data">
-                                            <div class="friends-wrapper">
-                                                <!-- Listing Who is Going -->
-                                                <div class="js-who-is-going who-is-going">
-                                                    <div class="js-who-is-going-connect">
-                                                        <h3 class="label-primary">Friends Who Are Going</h3>
-                                                        <a class="js-fb-connect text-default fb-connect-link" data-automation="see-whos-going"><img class="g-img js-d-retina" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/see-whos-going-facebook-icon.png" data-d-retina-src="https://cdn.evbstatic.com/s3-build/perm_001/e04b30/django/images/listings/see-whos-going-facebook-icon@2x.png " width="60" alt="" dorsal-guid="11c9992f-947d-2d1c-f218-39645e96130e" data-xd-wired="retina"> <p>Connect <span>to Facebook</span></p></a>
-                                                    </div>
-                                                    <div class="js-who-is-going-loading who-is-going-loading who-is-going-wobble" style="display: none;">
-                                                        <h3 class="label-primary">Friends Attending</h3>
-                                                        <ul class="grouped-ico js-friend-list l-mar-top-2">
-                                                            <li><i class="ico-person ico--large"></i></li>
-                                                            <li><i class="ico-person ico--large"></i></li>
-                                                            <li><i class="ico-person ico--large"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="js-who-is-going-empty who-is-going-empty" style="display: none;">
-                                                        <h3 class="label-primary">Friends Attending</h3>
-                                                        <ul class="grouped-ico js-friend-list no-friends">
-                                                            <li class="fb-friend-item no-space">
-                                                                <p class="l-mar-top-2">None yet</p>
-                                                            </li>
-                                                            <li class="fb-friend-item">
-                                                                <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#fb-settings-modal" class="btn btn--target is-collapsed js-d-modal js-d-tooltip single-line-tooltip" title="" data-d-disabled-in-touch="true" dorsal-guid="8c804057-3579-608c-ed8e-73e1664d239f" data-xd-wired="modal tooltip" data-original-title="Social settings">
-                                                                    <i class="ico-settings"></i><span class="btn--context">Settings</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="js-who-is-going-error who-is-going-error" style="display: none;">
-                                                        <h3 class="label-primary">Friends Attending</h3>
-                                                        <ul class="grouped-ico js-friend-list">
-                                                            <li class="fb-friend-item no-space">
-                                                                <p class="l-mar-top-2 fb-connect-error">Whoops! <span>Couldn't connect</span></p>
-                                                            </li>
-                                                            <li class="fb-friend-item">
-                                                                <a href="https://www.eventbrite.com/social-settings" target="_blank" class="btn btn--target is-collapsed" title="Fix this problem">
-                                                                    <i class="ico-settings"></i><span class="btn--context">Settings</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </dd>
-                                    </div>
-                                </div>
-                            </dl>
-                        </div>
-                    </div>
-                </header>
-                <div class="listing-info__body l-sm-pad-vert-0 l-sm-pad-vert-6 clrfix g-group g-group--page-margin-reset">
-                    <div class="g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12 l-mar-stack l-section-stack">
-                        <div class="g-group">
-                            <div class="g-cell g-cell-1-1 g-cell-md-7-12 g-cell--no-gutters l-lg-pad-right-6">
-                                <div class="g-group l-lg-mar-bot-6 l-md-mar-bot-4 l-pad-bot-6 ">
-                                    <div class="g-cell g-cell-2-12 show-small">
-                                        <i class="ico-document ico--medium"></i><span class="is-hidden-accessible">Event description</span>
-                                    </div>
-                                    <div class="g-cell g-cell-10-12 g-cell-md-1-1">
-                                        <h2 class="label-primary">Description</h2>
-                                        <div class="has-user-generated-content js-d-read-more read-more js-read-more read-more--medium-down read-more--expanded" dorsal-guid="ee6d2cb3-8443-95bd-66c5-77dce3cc6ccc" data-xd-wired="read-more">
-                                            <div class="js-xd-read-more-toggle-view read-more__toggle-view">
-                                                <div class="js-xd-read-more-contents l-mar-top-3">
-                                                    <p>The hurricane of 1926 devastated South Florida. Taking a death toll of over 1,000 people. The most affected was the travelling Griffin &amp; Son’s Carnival Company. The violent winds ripped limbs right off and carnies’ bodies were entangled with the iron of their carnival rides. Mother nature brought death.</p>
-                                                    <p>Over the 2015 season, the staff at The House of Horror noticed that the carnival rides would inexplicably lose power or gain speed all on their own.&nbsp; After the recent storms of this summer a sinkhole appeared in the northeast corner of the House of Horror grounds at International Mall exposing what some call the existing of human remains. After careful research it has been discovered that the midway workers of the Griffin &amp; Son’s Carnival Company were all buried right beneath the grounds at House of Horror. The bad weather that killed them is the weather that brought them back.&nbsp; Accepting our history is what will lead us to the future, the carnies have taken over… Welcome to the House of Horror Haunted Carnival.</p>
-                                                    <p>Dare to experience and bring to life the legend the Carnies left behind!</p>
-                                                    <p>Weekday tickets will be valid on Halloween, Monday Oct. 31, 2016.</p>
-                                                    <p>Discounted rates applies ONLY to online purchases.</p>
-                                                    <p>*******************************************************************************</p>
-                                                    <p>*** MONDAY, TUESDAY, WEDNESDAY or THURSDAY TICKET ***<br>Not valid on Nov. 4th (concert night) <br>Not valid on any days except Monday, Tuesday, Wednesday or Thursday<br>Ticket may only be used for one single-day admission</p>
-                                                    <p>THE POSSESSION OF A TICKET SHALL CONSTITUTE AN ACCEPTANCE BY THE HOLDER OF THE TERMS, CONDITIONS AND ADVICE DETAILED BELOW AND IMPLIES AN UNDERTAKING ON THE PART OF THE HOLDER TO UNDERSTAND AND ACCEPT THEM.<br>• There are NO REFUNDS, RETURNS, RAIN CHECKS, CANCELLATIONS OR EXCHANGES.<br>• Event is not responsible for lost or stolen tickets.<br>• Event is not responsible for any personal property.<br>• No animals will be admitted to the event site, except guide dogs or hearing dogs.<br>Ticket holders consent to the photography, filming/sound recording of the event as members of the audience, which may be used without payment or restriction by the event or its sponsors for any purpose whatsoever including, but not limited to resale, advertising, commercial or promotional material.<br>Event tickets are security printed. Please keep them dry as to get wet may invalidate them.<br>Event tickets are NON-TRANSFERABLE<br>Event tickets remain the property of the event management until payment is received in full. <br>Resale of tickets and/or wristbands is prohibited.<br>Event is an outdoor event. It is advised you to bring appropriate clothing and footwear to protect against potential inclement weather.<br>The event management reserve the right to implement any restrictions/conditions deemed necessary before and during the event to ensure the safe management of the event site.<br>RELEASE OF LIABILITY - It is expressly understood that all participants in event enter at their own risk and that House of Horror or Rodomar, Inc. their officers and directors and all persons connected directly or indirectly with the operations of the event, or any sponsor of the event shall be exempt from any liability for slander, loss, damage, negligence, harm, injury or death suffered by any participant, entrant, vendors, exhibitors, or attendee of any form and equipment which may occur during the event.<br>The event management reserves the right to refuse admission to the holder if in the reasonable opinion of the event management admission of the holder to the event site might be a risk to the safety of the audience and/or the holder and/or affect the enjoyment of the audience and/or the running of the event, for example, if the holder appears to be under the influence of drink and/or drugs and/or is acting aggressively. Strictly no illegal substances will be permitted into the event site, persons entering the event site may be searched as a condition of the event premises license.<br>The event management reserve the right to amend the terms and conditions of this ticket in accordance with any new laws, legislation or internal company policies.<br></p>
-                                                </div>
-                                            </div>
-                                            <div class="js-xd-read-more-toggle-director read-more__toggle-director l-pad-bot-4 l-sm-pad-bot-3">
-                                                <a href="javascript://" class="read-more__more" data-read-type="ReadMore" data-checkpoint-name="read_more">Read more</a>
-                                                <a href="javascript://" class="read-more__less" data-read-type="ReadLess" data-checkpoint-name="read_less">Read less</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="g-group l-lg-mar-bot-6 l-md-mar-bot-4 l-pad-bot-6">
-                                    <div class="g-cell g-cell-2-12 show-small">
-                                        <i class="ico-cash ico--medium"></i><span class="is-hidden-accessible">Tags</span>
-                                    </div>
-                                    <div class="g-cell g-cell-10-12 g-cell-md-12-12">
-                                        <dl>
-                                            <dt class="label-primary" data-automation="ListingsBreadcrumbsTitle">Tags</dt>
-                                            <dd class="event-details__data" data-automation="ListingsBreadcrumbs">
-                                                <section>
-                                                    <span>
-                                                        <a href="https://www.eventbrite.com/things-to-do/fl--doral/" class="js-d-track-link badge badge--tag l-mar-top-2" data-event-action="BreadcrumbAddress" data-event-category="listing" data-event-label="/things-to-do/fl--doral/" data-automation="BreadcrumbAddress" dorsal-guid="d0a545c0-7c0f-2474-34fa-f428932a6ad8" data-xd-wired="track-link">
-                                                            <span>Things to do in Doral, FL</span>
-                                                        </a>
-                                                    </span>
-                                                    <span>
-                                                        <a href="https://www.eventbrite.com/d/fl--doral/attractions/" class="js-d-track-link badge badge--tag l-mar-top-2" data-event-action="BreadcrumbFormat" data-event-category="listing" data-event-label="/d/fl--doral/attractions/" data-automation="BreadcrumbFormat" dorsal-guid="bddee8c4-0747-a1e1-671c-b9051777dd41" data-xd-wired="track-link">
-                                                            <span>Attraction</span>
-                                                        </a>
-                                                    </span>
-                                                    <span>
-                                                        <a href="https://www.eventbrite.com/d/fl--doral/holiday--attractions/" class="js-d-track-link badge badge--tag l-mar-top-2" data-event-action="BreadcrumbCategory" data-event-category="listing" data-event-label="/d/fl--doral/holiday--attractions/" data-automation="BreadcrumbCategory" dorsal-guid="2c79c33c-6e96-1dfb-69d5-d718640d772c" data-xd-wired="track-link">
-                                                            <span>Holiday</span>
-                                                        </a>
-                                                    </span>
-                                                </section>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                                <div class="g-group">
-                                    <div class="g-cell g-cell-2-12 show-small">
-                                        <i class="ico-share ico--medium"></i><span class="is-hidden-accessible">Share with friends</span>
-                                    </div>
-                                    <div class="g-cell g-cell-10-12 g-cell-md-12-12">
-                                        <div class="listing-info__footer clrfix">
-                                            <div class="share-wrapper l-sm-mar-bot-4">
-                                                <h3 class="label-primary l-sm-align-left">Share with friends</h3>
-                                                <!-- Listing Share Options -->
-                                                <div class="js-share-wrapper l-sm-align-left">
-                                                    <section>
-                                                        <section>
-                                                            <ul class="grouped-ico grouped-ico--share-links js-social-share-list fx--fade-in" data-automation="social-share-inline">
-                                                                <li>
-                                                                    <a class="js-social-share" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" target="_blank" title="Share this page on Facebook">
-                                                                        <i class="ico-facebook-badge ico--color-understated-link ico--xlarge" data-automation="facebook-share-link">
-                                                                        </i>
-                                                                        <span class="is-hidden-accessible">Facebook</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="js-social-share" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" target="_blank" title="Share this page on Facebook Messenger">
-                                                                        <i class="ico-facebook-messenger-badge ico--color-understated-link ico--xlarge" data-automation="facebook-messenger-share-link">
-                                                                        </i>
-                                                                        <span class="is-hidden-accessible">Facebook Messenger</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="js-social-share" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" target="_blank" title="Share this page on LinkedIn">
-                                                                        <i class="ico-linkedin-badge ico--color-understated-link ico--xlarge" data-automation="linkedin-share-link">
-                                                                        </i>
-                                                                        <span class="is-hidden-accessible">LinkedIn</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="js-social-share" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" target="_blank" title="Share this page on Twitter">
-                                                                        <i class="ico-twitter-badge ico--color-understated-link ico--xlarge" data-automation="twitter-share-link">
-                                                                        </i>
-                                                                        <span class="is-hidden-accessible">Twitter</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="js-social-share" href="https://www.eventbrite.com/invite-friends?utm-medium=discovery&amp;utm-campaign=social&amp;utm-content=attendeeshare&amp;utm-source=strongmail&amp;eid=27611729426" target="_blank" title="Share this page on email">
-                                                                        <i class="ico-email-badge ico--color-understated-link ico--xlarge" data-automation="email-share-link">
-                                                                        </i>
-                                                                        <span class="is-hidden-accessible">email</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </section>
-                                                    </section>
-                                                </div>
-                                            </div>
-                                            <!-- Fallback anchor for the link to the ticket area -->
-                                            <span id="listing-ticket"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="g-cell g-cell-12-12 g-cell-md-4-12 g-offset-md-1-12 g-cell--no-gutters l-lg-pad-left-6 hide-small">
-                                <dl class="event-details l-lg-mar-left-6 l-lg-pad-left-6">
-                                    <dt class="label-primary l-mar-bot-2">Location</dt>
-                                    <dd class="event-details__data">
-                                        <p>Miami International Mall</p>
-                                        <p>1455 Northwest 107th Avenue </p>
-                                        <p>Doral, FL 33172 </p>
-                                        <p>United States </p>
-                                        <p>
-                                            <a class="js-d-scroll-to js-scroll-to-map" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#map-target" data-d-duration="1500" data-d-destination="#map-target" dorsal-guid="c9f7bd46-0037-7384-6043-f2c071c3e06f" data-xd-wired="scroll-to">View Map</a>
-                                            <a class="js-view-map-link is-hidden" href="https://maps.google.com/maps?hl=en&amp;q=25.786656,-80.364938&amp;sll=25.786656,-80.364938&amp;z=13&amp;markers=25.786656,-80.364938" target="_blank">View Map</a>
-                                        </p>
-                                    </dd>
-                                    <div class="friends-wrapper">
-                                        <!-- Listing Who is Going -->
-                                        <div class="js-who-is-going who-is-going">
-                                            <div class="js-who-is-going-connect">
-                                                <h3 class="label-primary">Friends Who Are Going</h3>
-                                                <a class="js-fb-connect text-default fb-connect-link" data-automation="see-whos-going"><img class="g-img js-d-retina" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/see-whos-going-facebook-icon.png" data-d-retina-src="https://cdn.evbstatic.com/s3-build/perm_001/e04b30/django/images/listings/see-whos-going-facebook-icon@2x.png " width="60" alt="" dorsal-guid="a27480e8-abfa-dc81-bf21-13323282fba1" data-xd-wired="retina"> <p>Connect <span>to Facebook</span></p></a>
-                                            </div>
-                                            <div class="js-who-is-going-loading who-is-going-loading who-is-going-wobble" style="display: none;">
-                                                <h3 class="label-primary">Friends Attending</h3>
-                                                <ul class="grouped-ico js-friend-list l-mar-top-2">
-                                                    <li><i class="ico-person ico--large"></i></li>
-                                                    <li><i class="ico-person ico--large"></i></li>
-                                                    <li><i class="ico-person ico--large"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="js-who-is-going-empty who-is-going-empty" style="display: none;">
-                                                <h3 class="label-primary">Friends Attending</h3>
-                                                <ul class="grouped-ico js-friend-list no-friends">
-                                                    <li class="fb-friend-item no-space">
-                                                        <p class="l-mar-top-2">None yet</p>
-                                                    </li>
-                                                    <li class="fb-friend-item">
-                                                        <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#fb-settings-modal" class="btn btn--target is-collapsed js-d-modal js-d-tooltip single-line-tooltip" title="" data-d-disabled-in-touch="true" dorsal-guid="dff1dbc5-a04b-87c6-812a-9c2132ea0628" data-xd-wired="modal tooltip" data-original-title="Social settings">
-                                                            <i class="ico-settings"></i><span class="btn--context">Settings</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="js-who-is-going-error who-is-going-error" style="display: none;">
-                                                <h3 class="label-primary">Friends Attending</h3>
-                                                <ul class="grouped-ico js-friend-list">
-                                                    <li class="fb-friend-item no-space">
-                                                        <p class="l-mar-top-2 fb-connect-error">Whoops! <span>Couldn't connect</span></p>
-                                                    </li>
-                                                    <li class="fb-friend-item">
-                                                        <a href="https://www.eventbrite.com/social-settings" target="_blank" class="btn btn--target is-collapsed" title="Fix this problem">
-                                                            <i class="ico-settings"></i><span class="btn--context">Settings</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="js-listing-social-stream"></div>
-                <div class="js-defer-map"></div>
-            </section>
-            <!-- Listing Card Organizer -->
-            <div id="listing-organizer" class="js-organizer-panel listing-organizer g-group l-sm-pad-vert-5 l-pad-vert-6 g-group--page-margin-reset">
-                <div class="l-section g-cell-lg-10-12 g-offset-lg-1-12">
-                    <div class="g-group">
-                        <div class="g-cell g-cell-1-1 g-cell-md-10-12 g-offset-md-1-12 l-sm-pad-top-5 l-pad-top-6">
-                            <div class="g-group g-group--page-margin-reset l-sm-pad-top-5 l-pad-top-6">
-                                <div class="l-align-center l-pad-bot-1">
-                                    <picture content="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23807783%2F185283414122%2F2%2Flogo.jpg?h=80&amp;w=80&amp;s=d48662e3abf1e7e23dddbcf414fad89a">
-                                        <source srcset="
-                                    https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23807783%2F185283414122%2F2%2Flogo.jpg?h=80&amp;w=80&amp;s=d48662e3abf1e7e23dddbcf414fad89a,
-                                    https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23807783%2F185283414122%2F2%2Flogo.jpg?h=160&amp;w=160&amp;s=c4618f92c3f69aef31fb0c456147ed52 2x">
-                                        <!--[if IE 9]></video><![endif]-->
-                                        <!--[if lt IE 9]>
-                                        <img class=" photo js-picturefill-img image--medium"
-                                            src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23807783%2F185283414122%2F2%2Flogo.jpg?h=80&amp;w=80&amp;s=d48662e3abf1e7e23dddbcf414fad89a" data-d-retina-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F23807783%2F185283414122%2F2%2Flogo.jpg?h=160&amp;w=160&amp;s=c4618f92c3f69aef31fb0c456147ed52"
-                                            alt="Organizer Image"
-                                            data-automation="organizer-logo"
-                                        />
-                                        <![endif]-->
-                                        <!--[if !lt IE 9]> -->
-                                        <img class="photo js-picturefill-img image--medium" alt="Organizer Image" data-automation="organizer-logo">
-                                        <!-- <![endif]-->
-                                    </picture>
-                                </div>
-                                <div class="l-align-center">
-                                    <h3 class="heading-secondary-responsive" data-automation="organizer-name">House of Horror - Haunted Carnival</h3>
-                                    <p class="l-mar-top-1 g-cell text-heading-secondary">Organizer of Halloween Bash at House of Horror Haunted Carnival</p>
-                                </div>
-                                <div class="g-cell g-cell-1-1 l-align-center">
-                                    <ul class="inline-link-list">
-                                        <li>
-                                            <a href="https://www.facebook.com/houseofhorrormiami" target="_blank" class="">
-                                                <i class="ico-facebook-badge ico--medium"><span class="is-hidden-accessible">Organizer Facebook Profile</span></i> houseofhorrormiami
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.twitter.com/@houseofhorrormi" target="_blank" class="">
-                                                <i class="ico-twitter-badge ico--medium"><span class="is-hidden-accessible">Organizer Twitter Profile</span></i> @houseofhorrormi
-                                            </a>
-                                        </li>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>		<!-- end paidButton -->
+                        <div class="clearfloat"></div>
+                    </div><!-- OrderReg end panel_footer -->
 
-                                    </ul>
-                                </div>
-                                <div class="g-cell g-cell-1-1 g-cell--no-gutters ">
-                                    <div class="js-d-read-more read-more js-read-more read-more--medium-down read-more--expanded" dorsal-guid="b29d5d6d-2af3-ba44-63b5-a4c18f85c797" data-xd-wired="read-more">
-                                        <div class="js-xd-read-more-toggle-view read-more__toggle-view">
-                                            <div class="js-xd-read-more-contents l-mar-top-3 has-user-generated-content" data-automation="organizer-description">
-                                                <p>Bringing you South Florida's largest Halloween event since 2000.</p>
-                                            </div>
-                                        </div>
-                                        <div class="js-xd-read-more-toggle-director read-more__toggle-director l-pad-bot-4 l-sm-pad-bot-3">
-                                            <a href="javascript://" class="read-more__more" data-read-type="ReadMore" data-checkpoint-name="read_more">Read more</a>
-                                            <a href="javascript://" class="read-more__less" data-read-type="ReadLess" data-checkpoint-name="read_less">Read less</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="l-align-center g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12 l-sm-pad-bot-5 l-pad-bot-6 org-panel-actions btn-group l-mar-top-2">
-                            <a href="http://www.eventbrite.com/o/house-of-horror-haunted-carnival-11252947068" target="_blank" class="l-mar-top-2 btn btn--ico btn--target" data-automation="organizer-profile-link">
-                                Profile
-                            </a>
-                            <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#lightbox_contact" class="l-mar-top-2 btn btn--ico btn--target js-d-modal js-contact-organizer-link" data-organizer-id="11252947068" data-event-id="27611729426" data-automation="organizer-contact-link" dorsal-guid="a64cca97-7416-5dc3-df68-42850fab16d1" data-xd-wired="modal">
-                                Contact
-                            </a>
-                        </div>
-                        <div class="g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12 l-mar-top-5 l-pad-bot-6">
-                            <h4 class="heading-secondary-responsive l-align-center">
-                                More Events From This Organizer
-                            </h4>
-                            <section class="js-organizer-related-events l-mar-top-2">
-                                <div>
-                                    <div class="list-card-v2 l-mar-top-2 js-d-poster" data-share-url="https://www.eventbrite.com/e/the-chainsmokers-shaggy-oscar-g-jonas-blue-grandtheft-tickets-27466566239?aff=erelpanelorg" data-share-name="The Chainsmokers, Shaggy, Oscar G, Jonas Blue &amp; Grandtheft" dorsal-guid="3b87f8b0-ad8c-3a18-4f33-92018213fce5" data-xd-wired="poster">
-                                        <a href="https://www.eventbrite.com/e/the-chainsmokers-shaggy-oscar-g-jonas-blue-grandtheft-tickets-27466566239?aff=erelpanelorg" class="list-card__main             js-event-link" data-eid="27466566239" data-rank="" data-source="" data-automation="event-card">
-                                            <div class="list-card__header">
-                                                <div class="list-card__image" style="background-color:#5c0203;">
-                                                    <img class="js-poster-image" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/https-%2F%2Fcdn.evbuc.com%2Fimages%2F25341617%2F185283414122%2F1%2Foriginal.jpg" alt="The Chainsmokers, Shaggy, Oscar G, Jonas Blue &amp; Grandtheft tickets">
-                                                </div>
-                                                <span class="list-card__label">$29 - $100</span>
-                                            </div>
-                                            <div class="list-card__body">
-                                                <time class="list-card__date">
-                                                    Fri, Nov 4
-                                                    5:30 PM
-                                                </time>
-                                                <div class="list-card__title">
-                                                    The Chainsmokers, Shaggy, Oscar G, Jonas Blue &amp; Grandtheft
-                                                </div>
-                                                <div class="list-card__venue">
-                                                    House of Horror Haunted Carnival, Doral
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="list-card__footer">
-                                            <div class="list-card__tags">
-                                                <a href="https://www.eventbrite.com/d/fl--doral/music--events/" class="">#Music</a>
-                                                <a href="https://www.eventbrite.com/d/fl--doral/performances/" class="">#Performance</a>
-                                            </div>
-                                            <div class="list-card__actions">
-                                                <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" class="js-share-event-card share-action" data-eid="27466566239" title="Share">
-                                                    <i class="ico-share ico--medium"></i>
-                                                    <span class="is-hidden-accessible">Share this event</span>
-                                                </a>
-                                                <a href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" class="js-d-bookmark" data-eid="27466566239" data-bookmarked="" title="Save" data-source-page="" dorsal-guid="204cc6e1-a90f-87c3-a16b-4fad4c2c833e" data-xd-wired="bookmark">
-                                                    <i class="ico-bookmark ico--medium"></i>
-                                                    <span class="is-hidden-accessible">
-                                                        Bookmark this event
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
+                </form>
+                <div class="clearfloat"></div>
             </div>
-            <!-- Listing Card Map -->
-            <div class="event-listing-footer l-sm-pad-bot-5 l-pad-bot-6">
-                <section class="listing-map g-cell g-cell-1-1 g-cell--no-gutters js-listing-map" id="map-target">
-                    <div class="listing-map-body">
-                        <div class="js-map-canvas map-canvas l-align-center" data-automation="event-map-container">
-                            <a href="https://maps.google.com/maps?hl=en&amp;q=25.786656,-80.364938&amp;sll=25.786656,-80.364938&amp;z=13&amp;markers=25.786656,-80.364938" class="listing-map-link js-listing-map-link btn btn--dynamo">View Map</a>
-                        </div>
-                    </div>
-                </section>
-                <section class="listing-map-footer">
-                    <section class="listing-map-card js-listing-map-card l-align-center is-hidden l-sm-pad-bot-5 l-pad-bot-6" data-automation="event-map-card">
-                        <div class="listing-map-card-body g-cell g-cell-1-1 g-cell-lg-8-12 g-cell--no-gutters l-pad-top-6 l-pad-bot-4">
-                            <h2 class="listing-map-card-title text-medium">
-                                Halloween Bash at House of Horror Haunted Carnival
-                                <span class="text-body-medium text-body--faint text-header-inline-as-block">at</span>
-                                Miami International Mall
-                            </h2>
-                            <div>
-                                <p class="listing-map-card-street-address text-default">
-                                    1455 Northwest 107th Avenue, Doral, FL 33172, United States
-                                </p>
-                            </div>
-                        </div>
-                        <footer class="listing-map-card-footer g-cell g-cell-1-1 g-cell-lg-8-12 g-cell--no-gutters">
-                            <div>
-                                <ul class="grouped-ico">
-                                    <li>
-                                        <a href="https://maps.google.com/?saddr=Current+Location&amp;daddr=25.786656,-80.364938&amp;driving" target="_blank" class="btn btn--target is-collapsed js-drive-directions-link btn--invert">
-                                            <i class="ico-car"></i><span class="btn--context">By Car</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://maps.google.com/?saddr=Current+Location&amp;dirflg=w&amp;daddr=25.786656,-80.364938" target="_blank" class="btn btn--target is-collapsed js-walk-directions-link btn--invert">
-                                            <i class="ico-walking"></i><span class="btn--context">Walking</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://maps.google.com/?saddr=Current+Location&amp;dirflg=r&amp;daddr=25.786656,-80.364938&amp;mode=transit" target="_blank" class="btn btn--target is-collapsed js-transit-directions-link btn--invert">
-                                            <i class="ico-public-transit"></i><span class="btn--context">Public Transport</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://maps.google.com/?saddr=Current+Location&amp;dirflg=b&amp;daddr=25.786656,-80.364938&amp;mode=bicycling" target="_blank" class="btn btn--target is-collapsed js-bike-directions-link btn--invert">
-                                            <i class="ico-bike"></i><span class="btn--context">Bike</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </footer>
-                    </section>
-                </section>
-            </div>
-        </div>
-    </div>
 
-    <!-- Related events -->
-    <section class="listing-related-events g-grid g-grid--page-margin-manual">
-        <div class="g-cell g-cell-1-1 g-cell--no-gutters related-events js-related-events l-pad-bottom-3 show">
-            <div class="g-group">
-                <div class="g-cell g-cell-1-1 g-cell--no-gutters l-align-center l-mar-top-5">
-                    <h3 class="heading-secondary-responsive related-events-title text--truncated l-mar-top-6">
-                        Other Events You May Like
+            <!-- Event details -->
+            <div class="panel_628">
+                <div class="panel_head2">
+                    <h3>
+                        Event Details
                     </h3>
                 </div>
-
+                <div class="panel_body">
+                    @Html.Raw(Model.Description)
+                </div><!-- end panel_body -->
             </div>
-            <section class="js-event-list event-list  l-mar-top-2">
-                <nav class="js-scroll-control js-scroll-control-left scroll-control scroll-control-left" style="display: none;">
-                    <i class="ico-arrow-left ico--xlarge"></i>
-                </nav>
-                <nav class="js-scroll-control js-scroll-control-right scroll-control scroll-control-right">
-                    <i class="ico-arrow-right ico--xlarge"></i>
-                </nav>
-                <div class="scroll-wrapper">
-                    <div class="scrollable-area" style="width: 2780px;">
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/hallowyn-wynwood-halloween-block-party-tickets-27726665202?aff=erellivmlt" data-share-name="HalloWyn: Wynwood Halloween Block Party" dorsal-guid="c0790f26-a0b1-a00a-8560-d485b533b331" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/hallowyn-wynwood-halloween-block-party-tickets-27726665202?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="27726665202" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#31292e;">
-                                            <img class="js-poster-image" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F24155551%2F184586633563%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C38%2C600%2C300&amp;s=82e1cfaf4ef1d529fbc1f6b806f27540" alt="HalloWyn: Wynwood Halloween Block Party tickets" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/https-%2F%2Fcdn.evbuc.com%2Fimages%2F24155551%2F184586633563%2F1%2Foriginal.jpg">
-                                        </div>
-                                        <span class="poster-card__label">Free</span>
+        </div>
+
+        <!-- Right column content panel -->
+        <div id="col_280">
+            <!--[if lte IE 6]>
+            <style type="text/css">
+            #track_event_container {
+                display: none;
+            }
+            </style>
+            <![endif]-->
+            <div id="track_event_container" class="common_box panel_280">
+                <a href="" id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
+                <div class="count_subview"></div>
+                <div class="summary_subview"></div>
+            </div>
+
+            <!-- Where -->
+            <div class="panel_280">
+                <div class="panel_head2">
+                    <h3>
+                        Where
+                    </h3>
+                </div>
+                <div class="panel_body" id="panel_when">
+
+                    <div id="map_canvas" style="width: 260px; height: 260px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;">
+                    </div>
+                    <h2 class="location" style="margin-top: 3px;">
+                        <br>
+                        <b>@Model.Title</b>
+                        <br>
+                        @Model.Location_Address, @Model.Location_StreetName <br>
+                        @Model.Location_City<br>
+                        @Model.Country<br>
+                        <br>
+                    </h2>
+                </div><!-- end panel_body -->
+            </div>
+
+            <!-- Organizer -->
+            <div id="hostedByDiv" class="panel_280">
+                <div class="panel_head2"><h3>Organizer</h3></div>
+                <div id="new_organizer_module" class="panel_body">
+                    <div id="organizer_header" class="fn panel_border">
+                        <h2>@Model.OrganizationName</h2>
+                        <div class="note">
+                            <div title="Page 1">
+                                @Html.Raw(Model.OrganizationDescription)
+                            </div>
+                            <!--[if IE]><![endif]-->
+                        </div>
+                    </div>
+                    <div id="organizer_content">
+                        <h2>Contact</h2>
+
+                        <div id="organizer_profile" class="organizer_link">
+                            <a id="profile_link" class="url js-event-track" data-tracking-action="ViewOrgProfile" href="http://www.eventbrite.com/o/scope-art-show-7205653955" target="_blank">
+                                View organizer profile
+                            </a>
+                        </div>
+                        <div id="organizer_website" class="organizer_link">
+                            <a href="http://scope-art.com/" target="_blank" rel="nofollow" class="url js-event-track" data-tracking-action="ViewOrgWebsite">
+                                http://scope-art.com
+                            </a>
+                        </div>
+
+                    </div>  <!-- end organizer_context -->
+
+                </div> <!-- end panel_body -->
+            </div> <!-- end panel_280 -->
+        </div>
+
+        <div class="clearfloat"></div>
+
+    </div> <!-- end main -->
+</div> <!-- end contentpub -->
+<!-- Related events -->
+<div class="g-cell g-cell-1-1 related-events js-related-events show">
+    <!-- Title -->
+    <div class="g-group">
+        <div class="g-cell g-cell-1-1 g-cell--no-gutters l-align-center l-mar-top-5">
+            <h3 class="heading-secondary-responsive related-events-title text--truncated l-mar-top-6">
+                Other Events You May Like
+            </h3>
+        </div>
+    </div>
+    <!-- Horizontal bar show list related events -->
+    <section class="js-event-list event-list  l-mar-top-2">
+        <div class="scroll-wrapper">
+            <div class="scrollable-area" style="width: 100%;" id="Events_Horizontal_Bar">
+
+                @foreach (Portal.Model.ViewModel.DisplayEventSummaryView item in ViewBag.RelatedEvents)
+                {
+                    <div class="scroll-item l-pad-vert-1">
+                        <div class="poster-card js-d-poster">
+                            <a href="/Event/EventDetails?id=@item.Id" class="poster-card__main js-event-link js-xd-janus-checkpoint-link">
+                                <div class="poster-card__header">
+                                    <div class="poster-card__image" style="background-color:#23191a;">
+                                        @if (item.CoverImage != "")
+                                        {
+                                            <img class="js-poster-image" src="@item.CoverImage">
+                                        }
+                                        else
+                                        {
+                                            <img class="js-poster-image" src="@Portal.Infractructure.Utility.EventConstants.ImageNotFoundPath " alt=" cannot find image">
+                                        }
                                     </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Mon, Oct 31
-                                            7:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            HalloWyn: Wynwood Halloween Block Party
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            Mana Production Lots, Miami
-                                        </div>
+                                    <span class="poster-card__label">$10 - $65</span>
+                                </div>
+                                <div class="poster-card__body">
+                                    <time class="poster-card__date">
+                                        @item.StartDate
+                                    </time>
+                                    <div class="poster-card__title">
+                                        @item.Title
                                     </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--miami/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--miami/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="27726665202" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="27726665202" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="ceceba3b-aac2-db50-de1b-939634aa40e1" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
+                                    <div class="poster-card__venue">
+                                        @item.Location_Address, @item.Location_City, @item.Country
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/halloween-monsters-ball-tickets-28406623977?aff=erellivmlt" data-share-name="Halloween Monsters Ball" dorsal-guid="87b56505-51cd-ca2e-5f0f-1e5a4b8f18f2" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/halloween-monsters-ball-tickets-28406623977?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28406623977" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image">
-                                            <img class="js-poster-image" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F25349617%2F175913946763%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C0%2C2400%2C1200&amp;s=9684fc5bd4bb0e79de367fcd5dd04fec" alt="Halloween Monsters Ball tickets" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/https-%2F%2Fcdn.evbuc.com%2Fimages%2F25349617%2F175913946763%2F1%2Foriginal.jpg">
-                                        </div>
-                                        <span class="poster-card__label">$30 - $50</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Mon, Oct 31
-                                            11:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            Halloween Monsters Ball
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            380 District, Miami
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--miami/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--miami/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28406623977" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28406623977" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="efaf60cb-ad3b-5b33-9ce6-5753887b9e4e" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
+                            </a>
+                            <div class="poster-card__footer">
+                                <div class="poster-card__tags">
+                                    <a class="event-category" href="">#Arts</a>
+                                    <a class="event-format" href="">#Festival</a>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/2016-haunted-carn-evil-at-bg-whiskey-creek-hideout-tickets-28173486657?aff=erellivmlt" data-share-name="2016 Haunted Carn-Evil at BG Whiskey Creek Hideout" dorsal-guid="3ff5d8b8-c8a6-0054-2fb8-e63e1c0a16c5" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/2016-haunted-carn-evil-at-bg-whiskey-creek-hideout-tickets-28173486657?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28173486657" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#58321e;">
-                                            <img class="js-poster-image" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F24474807%2F154021472719%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C104%2C5098%2C2549&amp;s=3b153493c9eba9e8a325a8d2a3780d42" alt="2016 Haunted Carn-Evil at BG Whiskey Creek Hideout tickets" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/https-%2F%2Fcdn.evbuc.com%2Fimages%2F24474807%2F154021472719%2F1%2Foriginal.jpg">
-                                        </div>
-                                        <span class="poster-card__label">$0 - $50</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Sun, Oct 30
-                                            7:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            2016 Haunted Carn-Evil at BG Whiskey Creek Hideout
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            BG Whiskey Creek Hideout, Dania Beach
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--dania-beach/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--dania-beach/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28173486657" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28173486657" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="0c582421-7a23-f5e5-ea90-e877aa219d18" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/track-or-treat-2016-tickets-28771475257?aff=erellivmlt" data-share-name="Track or Treat 2016" dorsal-guid="037ba518-7f2a-5277-f3e7-d9ed879aecbd" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/track-or-treat-2016-tickets-28771475257?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28771475257" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#ffffff;">
-                                            <img class="js-poster-image" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F25234612%2F138261366855%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=25%2C0%2C270%2C135&amp;s=248027f205640dea90d31cbdf62c0d2d" alt="Track or Treat 2016 tickets" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/https-%2F%2Fcdn.evbuc.com%2Fimages%2F25234612%2F138261366855%2F1%2Foriginal.jpg">
-                                        </div>
-                                        <span class="poster-card__label">Free</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Mon, Oct 31
-                                            5:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            Track or Treat 2016
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            Evelyn Greer Park, Pinecrest
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--pinecrest/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--pinecrest/festivals/">#Festival</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28771475257" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28771475257" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="c50b26bb-5744-4429-8c8a-ffb5bf514bd5" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/halloween-at-foxhole-costume-contest-1000-1st-prize-tickets-28006682742?aff=erellivmlt" data-share-name="HALLOWEEN AT FOXHOLE! COSTUME CONTEST $1000 1st PRIZE" dorsal-guid="648e9e06-114a-8340-8c10-13d20bbfc64f" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/halloween-at-foxhole-costume-contest-1000-1st-prize-tickets-28006682742?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28006682742" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#000000;">
-                                            <img class="js-poster-image" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F24416210%2F159996006740%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C0%2C1650%2C825&amp;s=47ac1553624c7301f7697f928f9899f6" alt="HALLOWEEN AT FOXHOLE! COSTUME CONTEST $1000 1st PRIZE tickets" src="./Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite_files/https-%2F%2Fcdn.evbuc.com%2Fimages%2F24416210%2F159996006740%2F1%2Foriginal.jpg">
-                                        </div>
-                                        <span class="poster-card__label">Free</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Mon, Oct 31
-                                            11:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            HALLOWEEN AT FOXHOLE! COSTUME CONTEST $1000 1st PRIZE
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            Foxhole, Miami Beach
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--miami-beach/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--miami-beach/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28006682742" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28006682742" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="23b94c1a-fa77-427f-da78-12ec603d3135" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/tent-of-terror-at-blackbird-ordinary-tickets-28851484567?aff=erellivmlt" data-share-name="Tent of Terror at Blackbird Ordinary!" dorsal-guid="0e897b21-198d-2180-ae55-05e9832d04d9" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/tent-of-terror-at-blackbird-ordinary-tickets-28851484567?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28851484567" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#000000;">
-                                            <img class="js-poster-image is-hidden" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F25329907%2F171852158892%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C0%2C2160%2C1080&amp;s=9d40688856f296e8d4e34287cfa007e4" alt="Tent of Terror at Blackbird Ordinary! tickets">
-                                        </div>
-                                        <span class="poster-card__label">Free</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Tue, Oct 25
-                                            10:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            Tent of Terror at Blackbird Ordinary!
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            Blackbird Ordinary, Miami
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--miami/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--miami/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28851484567" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28851484567" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="8da81619-41a2-bdb0-1e50-50dc061a4970" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/a-nightmare-on-washington-avenue-at-commonwealth-tickets-28877802284?aff=erellivmlt" data-share-name="A Nightmare on Washington Avenue at Commonwealth" dorsal-guid="cdf3f701-c13d-7f57-f7c4-d8f10a6f9e21" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/a-nightmare-on-washington-avenue-at-commonwealth-tickets-28877802284?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28877802284" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#000000;">
-                                            <img class="js-poster-image is-hidden" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F25390889%2F47562049003%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C13%2C1080%2C540&amp;s=2c4dc3f3b853ea36943496a4284fd15c" alt="A Nightmare on Washington Avenue at Commonwealth tickets">
-                                        </div>
-                                        <span class="poster-card__label">Free</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Mon, Oct 31
-                                            9:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            A Nightmare on Washington Avenue at Commonwealth
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            Commonwealth Miami, Miami Beach
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--miami-beach/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--miami-beach/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28877802284" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28877802284" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="d68facdf-3378-22e6-f8a1-4c8a8e00c812" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/purge-the-ultimate-halloween-costume-rave-tickets-28893978668?aff=erellivmlt" data-share-name="PURGE &quot;The Ultimate Halloween Costume Rave&quot;" dorsal-guid="91723c3e-d7d9-6939-b6df-07f968e3e12c" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/purge-the-ultimate-halloween-costume-rave-tickets-28893978668?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28893978668" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#4e4b50;">
-                                            <img class="js-poster-image is-hidden" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F25388158%2F192226509946%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C226%2C1024%2C512&amp;s=3353a9438ea6797cf65832f447962523" alt="PURGE &quot;The Ultimate Halloween Costume Rave&quot; tickets">
-                                        </div>
-                                        <span class="poster-card__label">$0 - $10</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Mon, Oct 31
-                                            9:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            PURGE "The Ultimate Halloween Costume Rave"
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            115 N 21st Ave, Hollywood
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--hollywood/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--hollywood/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28893978668" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28893978668" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="18470aea-9649-bc11-ff57-ea3c614a6bd4" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-item l-pad-vert-1">
-                            <div class="poster-card js-d-poster" data-share-url="https://www.eventbrite.com/e/halloween-party-at-b-bar-tapas-and-grill-tickets-28773359894?aff=erellivmlt" data-share-name="Halloween Party at B Bar Tapas and Grill" dorsal-guid="49899932-51d0-9390-3a1d-5f7c6539853b" data-xd-wired="poster">
-                                <a href="https://www.eventbrite.com/e/halloween-party-at-b-bar-tapas-and-grill-tickets-28773359894?aff=erellivmlt" class="poster-card__main js-event-link js-xd-janus-checkpoint-link" data-type="" data-source="" data-rank="" data-eid="28773359894" data-checkpoint-name="click_RE_new_listing" data-automation="event-card">
-                                    <div class="poster-card__header">
-                                        <div class="poster-card__image" style="background-color:#54370e;">
-                                            <img class="js-poster-image is-hidden" data-src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F25236786%2F191077959984%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;rect=0%2C250%2C3000%2C1500&amp;s=ac5634d5ca68647d403bf573de74eb7b" alt="Halloween Party at B Bar Tapas and Grill tickets">
-                                        </div>
-                                        <span class="poster-card__label">Free</span>
-                                    </div>
-                                    <div class="poster-card__body">
-                                        <time class="poster-card__date">
-                                            Tue, Nov 29
-                                            7:00 PM
-                                        </time>
-                                        <div class="poster-card__title">
-                                            Halloween Party at B Bar Tapas and Grill
-                                        </div>
-                                        <div class="poster-card__venue">
-                                            BBar Tapas &amp; Grill, North Miami Beach
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="poster-card__footer">
-                                    <div class="poster-card__tags">
-                                        <a class="event-category" href="https://www.eventbrite.com/d/fl--north-miami-beach/holiday--events/">#Holiday</a>
-                                        <a class="event-format" href="https://www.eventbrite.com/d/fl--north-miami-beach/parties/">#Party</a>
-                                    </div>
-                                    <div class="poster-card__actions">
-                                        <a class="js-share-event-card share-action" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" data-eid="28773359894" title="Share">
-                                            <i class="ico-share ico--medium"></i>
-                                            <span class="is-hidden-accessible">Share this event</span>
-                                        </a>
-                                        <a class="js-d-bookmark" data-eid="28773359894" data-bookmarked="" title="Save" data-source-page="" href="https://www.eventbrite.com/e/halloween-bash-at-house-of-horror-haunted-carnival-tickets-27611729426?aff=ehomecard#" dorsal-guid="bb1ee223-9533-c5ec-502b-418234e841e7" data-xd-wired="bookmark">
-                                            <i class="ico-bookmark ico--medium"></i>
-                                            <span class="is-hidden-accessible">Bookmark this event</span>
-                                        </a>
-                                    </div>
+                                <div class="poster-card__actions">
+                                    <a class="js-share-event-card share-action" href="" title="Share">
+                                        <i class="ico-share ico--medium"></i>
+                                        <span class="is-hidden-accessible">Share this event</span>
+                                    </a>
+                                    <a class="js-d-bookmark" href="">
+                                        <i class="ico-bookmark ico--medium"></i>
+                                        <span class="is-hidden-accessible">Bookmark this event</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                }
+            </div>
         </div>
     </section>
 </div>
-

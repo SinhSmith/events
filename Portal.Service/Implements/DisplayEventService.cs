@@ -332,6 +332,13 @@ namespace Portal.Service.Implements
             return GetListEventTopics;
         }
 
+
+        public IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId)
+        {
+            IEnumerable<event_Event> events = db.GetAllEventsWithoutDelete().Where(e => e.EventTopic == topicId).ToList();
+
+            return events.ConvertToEventSummaryViews().ToList();
+        }
         #endregion
 
         #region Release resources

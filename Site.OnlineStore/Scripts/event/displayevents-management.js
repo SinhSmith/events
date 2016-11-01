@@ -505,7 +505,6 @@ DisplayEventsManagement = {
             zoom: 13,
             mapTypeId: 'roadmap'
         });
-        undefined
         geocoder = new google.maps.Geocoder();
         var address = address; //input box value
         geocoder.geocode({ 'address': address }, function (results, status) {
