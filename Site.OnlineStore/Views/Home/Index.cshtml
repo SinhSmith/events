@@ -1,10 +1,23 @@
 ﻿@{
     ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/home/homepage-management.js"></script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&callback=HomePageManagement.getCurrentLocation">
-</script>
+@section LocalStyles{
+    <style>
+    .pac-logo:after {
+        background-image:none;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="~/Content/css/home.css">
+<link rel="stylesheet" type="text/css" href="~/Content/css/home_consumer.css">
+}
+
+@section LocalScripts{
+    <script src="~/Scripts/home/homepage-management.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=HomePageManagement.googleApiCallBackFunction">
+    </script>
+}
 <div id="content" class="clrfix">
     <h1 class="is-hidden-accessible">Eventbrite</h1>
 
@@ -61,38 +74,30 @@
         <div class="g-group org-consumer-search-bar">
             <section class="hero-banner-form__content l-mar-top-2">
                 <div class="g-grid">
-                    <form action="/d/" method="GET" class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
+                    <form method="get" action="/Event/SearchEvent/" class="consumer-search-bar l-mar-top-4 responsive-form org-consumer-search-input">
                         <div class="g-cell g-cell-9-12 g-cell-md-5-12 g-cell-lg-4-12 g-cell--has-overflow">
                             <div class="autocomplete-component">
                                 <label class="is-hidden-accessible" for="consumer-header-event-search">Search for events or categories</label>
-                                <input id="consumer-header-event-search" name="q" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="list" role="textbox" aria-haspopup="true">
-                                <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; display: none;"></ul>
+                                <input id="Txt_SearchString" name="SearchString" type="text" class="js-query-input ui-autocomplete-input" placeholder="Search for events or categories" >
                             </div>
                         </div>
                         <div class="g-cell g-cell-1-1 g-cell-lg-3-12 show-large g-cell--no-gutters g-cell--has-overflow autocomplete-component">
                             <label class="is-hidden-accessible" for="consumer-header-event-location">Enter city or location</label>
-                            <input id="consumer-header-event-location" name="loc" type="text" class="js-location-input" placeholder="Enter city or location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="Da Nang, Vietnam">
+                            <input id="EventLocation_AutoComplete" type="text" class="js-location-input" placeholder="Enter city or location">
+                            <input id="Txt_CityFilter" type="hidden" name="City"/>
+                            <input id="Txt_CountryFilter" type="hidden" name="Country" />
                         </div>
-                        <div class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 hide-small g-cell--no-gutters search-dropdown">
-                            <label class="is-hidden-accessible" for="consumer-header-date-range">Select a date range</label>
-                            <div class="responsive-form__select custom-select-container clrfix">
-                                <span class="custom-select-value">All Dates</span>
-                                <div class="custom-select-arrow"></div>
-                                <select id="consumer-header-date-range" name="date" class="js-d-select-box" dorsal-guid="9a1eaba7-3ca7-3791-6fa2-36c994f84696" data-xd-wired="select-box">
-                                    <option value="" selected="selected">All Dates</option>
-                                    <option value="today">Today</option>
-                                    <option value="tomorrow">Tomorrow</option>
-                                    <option value="this_week">This Week</option>
-                                    <option value="this_weekend">This Weekend</option>
-                                    <option value="next_week">Next Week</option>
-                                    <option value="next_month">Next Month</option>
-                                </select>
-                            </div>
-                        </div>
+                        <select id="Ddl_DateFilter" name="DateFilterType" class="g-cell g-cell-1-1 g-cell-md-4-12 g-cell-lg-3-12 g-cell--no-gutters">
+                            <option value="0" selected="selected">All Dates</option>
+                            <option value="1">Today</option>
+                            <option value="2">Tomorrow</option>
+                            <option value="3">This Week</option>
+                            <option value="4">This Weekend</option>
+                            <option value="5">Next Week</option>
+                            <option value="6">Next Month</option>
+                        </select>
                         <div class="g-cell g-cell-3-12 g-cell-md-3-12 g-cell-lg-2-12">
-                            <input type="submit" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search" data-checkpoint-name="homepage_search_submitted">
-                            <input type="submit" class="js-home-search-btn btn btn--action btn--block show-small js-xd-janus-checkpoint-link" value="" alt="Search" data-checkpoint-name="homepage_search_submitted">
-                            <input type="hidden" name="mode" value="search">
+                            <input id="BtnSeach" type="submit" class="js-home-search-btn btn btn--action btn--block hide-small js-xd-janus-checkpoint-link" value="Search">
                         </div>
                     </form>
                 </div>
@@ -113,15 +118,14 @@
                             <span data-automation="home-popular-events-header">Popular Events in </span>
                             <a href="#" class="consumer-location-link js-consumer-location-link">
                                 <span class="js-displayed-consumer-location">
-                                    Da Nang, Vietnam
-                                    <i class="ico-circle-cross"></i>
+                                    @*<i class="ico-circle-cross"></i>*@
                                 </span>
                             </a>
                         </h3>
-                        <div class="autocomplete-component popular-autocomplete">
+                        @*<div class="autocomplete-component popular-autocomplete">
                             <label class="is-hidden-accessible" for="consumer-location-input-edit">Change location</label>
                             <input id="consumer-location-input-edit" name="loc" type="text" class="js-consumer-location-input" placeholder="Enter city or location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="">
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -140,8 +144,9 @@
                 </h3>
             </div>
 
+            <!-- Music -->
             <div class="g-cell g-cell-1-1 g-cell-md-2-2 g-cell-lg-2-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
-                <a class="category-card js-category-link js-d-track-link category-music js-xd-janus-checkpoint-link" href="#" data-category="Music" data-event-action="ViewCategory" data-event-category="home" data-event-label="Music" data-checkpoint-name="homepage_category_card_click" dorsal-guid="447d7848-686d-878c-d9b4-cd2f239ccc81" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-music js-xd-janus-checkpoint-link" data-id=103 data-type=0>
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>
@@ -158,9 +163,9 @@
                 </a>
             </div>
 
-
+            <!-- Food and Drink -->
             <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
-                <a class="category-card js-category-link js-d-track-link category-food js-xd-janus-checkpoint-link" href="#" data-category="Food &amp;amp; Drink" data-event-action="ViewCategory" data-event-category="home" data-event-label="Food &amp;amp; Drink" data-checkpoint-name="homepage_category_card_click" dorsal-guid="848ddd46-2bfd-f50c-ddd0-2e6c3eff0e23" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-food js-xd-janus-checkpoint-link" data-type=0 data-id=110 href="" data-category="Food &amp;amp; Drink" data-event-action="ViewCategory" data-event-category="home" data-event-label="Food &amp;amp; Drink" data-checkpoint-name="homepage_category_card_click" dorsal-guid="848ddd46-2bfd-f50c-ddd0-2e6c3eff0e23" data-xd-wired="track-link">
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>
@@ -179,7 +184,7 @@
 
 
             <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
-                <a class="category-card js-category-link js-d-track-link category-classes js-xd-janus-checkpoint-link" href="#" data-category="Class" data-event-action="ViewCategory" data-event-category="home" data-event-label="Class" data-checkpoint-name="homepage_category_card_click" dorsal-guid="66ca2eb7-25bc-12f9-7cdc-63422c3d1b8c" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-classes js-xd-janus-checkpoint-link" data-type=1 data-id=9>
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>
@@ -196,9 +201,9 @@
                 </a>
             </div>
 
-
+            <!-- Arts -->
             <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
-                <a class="category-card js-category-link js-d-track-link category-arts js-xd-janus-checkpoint-link" href="#" data-category="Arts" data-event-action="ViewCategory" data-event-category="home" data-event-label="Arts" data-checkpoint-name="homepage_category_card_click" dorsal-guid="20aaf632-6af2-8e3f-00c9-b80bf6006594" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-arts js-xd-janus-checkpoint-link" data-type=0 data-id=105>
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>
@@ -215,9 +220,9 @@
                 </a>
             </div>
 
-
+            <!-- Parties -->
             <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
-                <a class="category-card js-category-link js-d-track-link category-parties js-xd-janus-checkpoint-link" href="#" data-category="Party" data-event-action="ViewCategory" data-event-category="home" data-event-label="Party" data-checkpoint-name="homepage_category_card_click" dorsal-guid="e3e26bf6-e92c-799b-07df-4e7ab97356ce" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-parties js-xd-janus-checkpoint-link" data-type=1 data-id=11>
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>
@@ -234,16 +239,16 @@
                 </a>
             </div>
 
-
+            <!-- Sports and Welless -->
             <div class="g-cell g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 hide-medium hide-small">
-                <a class="category-card js-category-link js-d-track-link category-sports js-xd-janus-checkpoint-link" href="#" data-category="Sports" data-event-action="ViewCategory" data-event-category="home" data-event-label="Sports" data-checkpoint-name="homepage_category_card_click" dorsal-guid="8c6ba245-e071-826c-85fa-0247af7b91b7" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-sports js-xd-janus-checkpoint-link" data-type=0 data-id=108>
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>
                         </div>
                         <div class="category-card__text-wrapper">
                             <h4 class="category-card__label l-pad-hor-2 text-large text-body--significant text-heading--emphasized">
-                                Sports &amp; Wellness
+                                Sports & Wellness
                             </h4>
                             <p class="category-card__desc l-mar-top-2 l-pad-hor-2 text-body text-heading--emphasized">
                                 Obstacle races, drop-in yoga classes, and the big game
@@ -253,9 +258,9 @@
                 </a>
             </div>
 
-
+            <!-- Networking -->
             <div class="g-cell g-cell-1-1 g-cell-md-2-2 g-cell-lg-2-3 l-pad-vert-3 l-md-pad-vert-2 lsm-pad-vert-1 ">
-                <a class="category-card js-category-link js-d-track-link category-networking js-xd-janus-checkpoint-link" href="#" data-category="Networking" data-event-action="ViewCategory" data-event-category="home" data-event-label="Networking" data-checkpoint-name="homepage_category_card_click" dorsal-guid="f716ce48-afed-0403-a431-970d45fefc8e" data-xd-wired="track-link">
+                <a class="category-card js-category-link js-d-track-link category-networking js-xd-janus-checkpoint-link" data-type=1 data-id=10>
                     <div class="category-card__wrapper">
                         <div class="category-card__tint">
                             <div class="category-card__image"></div>

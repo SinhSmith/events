@@ -14,5 +14,7 @@ namespace Portal.Service.Interfaces
         EventFullView GetEventDetails(int id);
         IEnumerable<DisplayEventSummaryView> GetAllNearestEvent();
         GetEventsByCategoryResponse SearchByEventName(GetEventsByCategoryRequest request);
+        IEnumerable<EventTopicModel> GetListEventTopics();
+        IEnumerable<EventTypeModel> GetListEventTypes();
     }
 }

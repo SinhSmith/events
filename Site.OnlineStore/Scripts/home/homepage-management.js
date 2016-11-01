@@ -28,6 +28,10 @@ HomePageManagement = {
             }
         }, true);
 
+        $(document).on("keypress", "form", function (event) {
+            return event.keyCode != 13;
+        });
+
         // Init spin
         this.controls.spin = new Spinner({
             lines: 13 // The number of lines to draw
@@ -52,12 +56,36 @@ HomePageManagement = {
             , position: 'fixed' // Element positioning
         }).spin();
 
-        //this.bindEventForElement();
-        //this.initElement();
-        this.getEventsInLocation();
+        this.bindEventForElement();
     },
     controls: {
         spin: null
+    },
+    bindEventForElement:function(){
+        // Bind event for controls in page
+
+        $("a.category-card").unbind("click").bind("click", function () {
+            var filterType = $(this).data("type");
+            var id = $(this).data("id");
+            HomePageManagement.searchEventByCategory(filterType,id);
+        });
+    },
+    searchEventByCategory:function(filterType,id){
+        // search events by category
+
+        var url = "/Event/SearchEvent/?";
+        url += "City=" + this.model.CurrentLocation.City.short_name + "&";
+        url += "Country=" + this.model.CurrentLocation.Country.short_name + "&";
+        switch (filterType) {
+            case 0:
+                url += "Topic=" + id + "&";
+                break;
+            case 1:
+                url += "EventType=" + id + "";
+                break;
+        }
+
+        window.location.replace(url);
     },
     getEventsInLocation: function (country, city) {
         /// <summary>
@@ -66,58 +94,124 @@ HomePageManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
-        // Request to server to create new event
         $.ajax({
             url: '/Home/GetEventsInCurrentLocation',
             type: 'POST',
-            data: { country: "VN", city: "da nang" },
+            data: { country: country, city: city },
             success: function (result) {
                 console.log(result);
                 $("#content .js-popular-events .js-events-list").empty();
                 $("#content .js-popular-events .js-events-list").append(result);
             },
             error: function () {
-                alert("Get events fail!");
+                console.log("Get events fail!");
             }
         });
     },
+    googleApiCallBackFunction:function(){
+        /// <summary>
+        /// This function will be call when google api ready for use
+        /// </summary>
+        /// <param>N/A</param>
+        /// <returns>N/A</returns>
+
+        this.getCurrentLocation();
+        this.initLocationAutoComplete();
+    },
     getCurrentLocation: function () {
+        /// <summary>
+        /// Using google api to get information of current location
+        /// </summary>
+        /// <param>N/A</param>
+        /// <returns>N/A</returns>s
 
-        //var map = new google.maps.Map(document.getElementById('map'), {
-        //    center: { lat: -34.397, lng: 150.644 },
-        //    zoom: 6
-        //});
-        //var infoWindow = new google.maps.InfoWindow({ map: map });
-
-        // Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                //var pos = {
-                //    lat: position.coords.latitude,
-                //    lng: position.coords.longitude
-                //};
+                var geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-                //infoWindow.setPosition(pos);
-                //infoWindow.setContent('Location found.');
-                //map.setCenter(pos);
+                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var address = HomePageManagement.getAddressDetails(results[0]);
+                        HomePageManagement.model.CurrentLocation = address;
+                        $("#Txt_CityFilter").val(address.City.short_name);
+                        $("#Txt_CountryFilter").val(address.Country.short_name);
 
-                console.log(position);
+                        HomePageManagement.getEventsInLocation(address.Country.short_name, address.City.short_name);
+                        // Update title on list events in current location
+                        $(".js-search-bar .js-displayed-consumer-location").empty().append(address.City.long_name + ", " + address.Country.long_name);
+                    };
+                });
             }, function () {
-                //handleLocationError(true, infoWindow, map.getCenter());
-                alert("error");
+                console.log("Cannot get current location");
             });
         } else {
             // Browser doesn't support Geolocation
-            //handleLocationError(false, infoWindow, map.getCenter());
-            alert("error");
+            console.log("Browser doesn't support Geolocation");
         }
 
+    },
+    getAddressDetails: function (arrAddress) {
+        /// <summary>
+        /// Filter returned data to get address  
+        /// </summary>
+        /// <param>N/A</param>
+        /// <returns>N/A</returns>
+
+        var resultAddress = {
+            City: {
+                long_name: "",
+                short_name:""
+            },
+            Country: {
+                long_name: "",
+                short_name: ""
+            },
+        };
+
+        $.each(arrAddress.address_components, function (i, address_component) {
+            if (address_component.types[0] == "country") {
+                console.log("country:" + address_component.long_name);
+                resultAddress.Country.short_name = address_component.short_name;
+                resultAddress.Country.long_name = address_component.long_name;
+
+            }
+
+            if (address_component.types[0] == "administrative_area_level_1") {
+                console.log("city:" + address_component.long_name);
+                resultAddress.City.short_name = address_component.short_name;
+                resultAddress.City.long_name = address_component.long_name;
+            }
+        });
+
+        return resultAddress;
+    },
+    initLocationAutoComplete:function(){
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById("EventLocation_AutoComplete");
+        var searchBox = new google.maps.places.SearchBox(input);
+
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+
+            if (places.length > 0) {
+                HomePageManagement.model.CurrentLocation = HomePageManagement.getAddressDetails(places[0]);
+                $("#Txt_CityFilter").val(HomePageManagement.model.CurrentLocation.City.short_name);
+                $("#Txt_CountryFilter").val(HomePageManagement.model.CurrentLocation.Country.short_name);
+            }
+        });
     },
     handleLocationError: function (browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
+    },
+    redirectToDisplayEventsPage: function (city,country,searchString,datefilter) {
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        $.post("/Event/SearchEvent", { City: city, country: country, SearchString: searchString, DateFilterType: datefilter, __RequestVerificationToken: token });
     },
     showSpin: function (target) {
         /// <summary>
@@ -136,5 +230,8 @@ HomePageManagement = {
         /// <returns>N/A</returns>
 
         HomePageManagement.controls.spin.stop();
+    },
+    model: {
+        CurrentLocation: null
     }
 }

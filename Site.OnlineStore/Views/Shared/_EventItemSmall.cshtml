@@ -5,9 +5,9 @@
         <a href="/Event/ProductDetails?id=@Model.Id" class="poster-card__main js-event-link" data-eid="@Model.Id">
             <div class="poster-card__header">
                 <div class="poster-card__image" style="background-color:#b19988;">
-                    @if (Model.CoverImage != null && Model.CoverImage.ImagePath != String.Empty)
+                    @if (Model.CoverImage != null && Model.CoverImage != String.Empty)
                     {
-                        <img class="js-poster-image " src="@Model.CoverImage.ImagePath" alt="@Model.Title">
+                        <img class="js-poster-image " src="@Model.CoverImage" alt="@Model.Title">
                     }
                     else
                     {
