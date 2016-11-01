@@ -664,6 +664,19 @@
     <Content Include="Content\Images\Temp\Tong-thau1-services.jpg" />
     <Content Include="Content\Images\Unicons_Logo_27062016.jpg" />
     <Content Include="Content\Images\yt.jpg" />
+    <Content Include="Content\img\home\img_category_arts.jpg" />
+    <Content Include="Content\img\home\img_category_arts_small.jpg" />
+    <Content Include="Content\img\home\img_category_classes.jpg" />
+    <Content Include="Content\img\home\img_category_classes_small.jpg" />
+    <Content Include="Content\img\home\img_category_food.jpg" />
+    <Content Include="Content\img\home\img_category_food_small.jpg" />
+    <Content Include="Content\img\home\img_category_music.jpg" />
+    <Content Include="Content\img\home\img_category_music_small.jpg" />
+    <Content Include="Content\img\home\img_category_networking.jpg" />
+    <Content Include="Content\img\home\img_category_networking_small.jpg" />
+    <Content Include="Content\img\home\img_category_parties.jpg" />
+    <Content Include="Content\img\home\img_category_parties_small.jpg" />
+    <Content Include="Content\img\home\img_category_sports.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\admin\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\admin\plugins\bootstrap-slider\slider.css" />
@@ -1499,6 +1512,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite.html" />
     <Content Include="Library\ckeditor\adapters\jquery.js" />
     <Content Include="Library\ckeditor\build-config.js" />
     <Content Include="Library\ckeditor\ckeditor.js" />
@@ -2149,6 +2163,7 @@
     <Content Include="Views\Shared\_ListEventItemSmall.cshtml" />
     <Content Include="Views\Event\DisplayEvents.cshtml" />
     <Content Include="Views\Event\_SummaryEventItem.cshtml" />
+    <Content Include="Views\Event\EventDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

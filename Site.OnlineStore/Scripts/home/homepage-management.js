@@ -64,12 +64,28 @@ HomePageManagement = {
     bindEventForElement:function(){
         // Bind event for controls in page
 
-        //$("#BtnSeach").unbind("click").bind("click", function () {
-        //    var searchString = $("#Txt_SearchString").val();
-        //    var dateFilter = $("#Ddl_DateFilter").val();
-        //    HomePageManagement.redirectToDisplayEventsPage(HomePageManagement.model.CurrentLocation.City.short_name,
-        //        HomePageManagement.model.CurrentLocation.Country.short_name, searchString, dateFilter);
-        //});
+        $("a.category-card").unbind("click").bind("click", function () {
+            var filterType = $(this).data("type");
+            var id = $(this).data("id");
+            HomePageManagement.searchEventByCategory(filterType,id);
+        });
+    },
+    searchEventByCategory:function(filterType,id){
+        // search events by category
+
+        var url = "/Event/SearchEvent/?";
+        url += "City=" + this.model.CurrentLocation.City.short_name + "&";
+        url += "Country=" + this.model.CurrentLocation.Country.short_name + "&";
+        switch (filterType) {
+            case 0:
+                url += "Topic=" + id + "&";
+                break;
+            case 1:
+                url += "EventType=" + id + "";
+                break;
+        }
+
+        window.location.replace(url);
     },
     getEventsInLocation: function (country, city) {
         /// <summary>
@@ -118,6 +134,9 @@ HomePageManagement = {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var address = HomePageManagement.getAddressDetails(results[0]);
                         HomePageManagement.model.CurrentLocation = address;
+                        $("#Txt_CityFilter").val(address.City.short_name);
+                        $("#Txt_CountryFilter").val(address.Country.short_name);
+
                         HomePageManagement.getEventsInLocation(address.Country.short_name, address.City.short_name);
                         // Update title on list events in current location
                         $(".js-search-bar .js-displayed-consumer-location").empty().append(address.City.long_name + ", " + address.Country.long_name);
@@ -128,7 +147,6 @@ HomePageManagement = {
             });
         } else {
             // Browser doesn't support Geolocation
-            //handleLocationError(false, infoWindow, map.getCenter());
             console.log("Browser doesn't support Geolocation");
         }
 
@@ -192,8 +210,6 @@ HomePageManagement = {
                               'Error: Your browser doesn\'t support geolocation.');
     },
     redirectToDisplayEventsPage: function (city,country,searchString,datefilter) {
-        //window.location.replace("/Admin/Event/Index?");
-        debugger
         var token = $('input[name="__RequestVerificationToken"]').val();
         $.post("/Event/SearchEvent", { City: city, country: country, SearchString: searchString, DateFilterType: datefilter, __RequestVerificationToken: token });
     },

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ============== Browser Support ============== */
 /* ================== Colors ================== */
 /* ================ Typography ================= */
@@ -273,59 +273,60 @@
     }
 }
 .category-card.category-music .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_music.jpg");
+    background-image: url("/Content/img/home/img_category_music.jpg");
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-music .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_music.jpg");
+        background-image: url("/Content/img/home/img_category_music_small.jpg");
     }
 }
 .category-card.category-food .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_food.jpg");
+    background-image: url("/Content/img/home/img_category_food.jpg");
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-food .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_food.jpg");
+        background-image: url("/Content/img/home/img_category_food_small.jpg");
     }
 }
 .category-card.category-classes .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_classes.jpg");
+    background-image: url("/Content/img/home/img_category_classes.jpg");
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-classes .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_classes.jpg");
+        background-image: url("/Content/img/home/img_category_classes_small.jpg");
     }
 }
 .category-card.category-arts .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_arts.jpg");
+    background-image: url("/Content/img/home/img_category_arts.jpg");
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-arts .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_arts.jpg");
+        background-image: url("/Content/img/home/img_category_arts_small.jpg");
     }
 }
 .category-card.category-parties .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_parties.jpg");
+    background-image: url("/Content/img/home/img_category_parties.jpg");
+}
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-parties .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_parties.jpg");
+        background-image: url("/Content/img/home/img_category_parties_small.jpg");
     }
 }
 .category-card.category-sports .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_sports.jpg");
+    background-image: url("/Content/img/home/img_category_sports.jpg");
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-sports .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_sports.jpg");
+        background-image: url("/Content/img/home/img_category_sports.jpg");
     }
 }
 .category-card.category-networking .category-card__image {
-    background-image: url("../../../../images/home/categories/220/img_category_networking.jpg");
+    background-image: url("/Content/img/home/img_category_networking.jpg");
 }
 @media only screen and (max-width: 479px) {
     .category-card.category-networking .category-card__image {
-        background-image: url("../../../../images/home/categories/150/img_category_networking.jpg");
+        background-image: url("/Content/img/home/img_category_networking_small.jpg");
     }
 }
 @media only screen and (max-width: 799px) {

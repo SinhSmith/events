@@ -552,7 +552,7 @@ DisplayEventsManagement = {
             Topics: [],
             EventTypes: [],
             SortBy: 1,
-            Price: 1,
+            Price: 2,
             DateFilterType:0,
             StartDate: null,
             EndDate: null,
