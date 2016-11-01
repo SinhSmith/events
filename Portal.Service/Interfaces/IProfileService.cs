@@ -12,8 +12,8 @@ namespace Portal.Service.Interfaces
     {
         IList<ProfileViewModel> GetProfiles(int pageNumber, int pageSize, out int totalItems);
         bool AddProfile(ProfileViewModel profileViewModel);
-        //bool EditCMSNews(CMSNewsView cmsNewsView);
+        bool EditProfile(ProfileViewModel viewModel);
         bool DeleteProfile(Guid userId);
-        //CMSNewsView GetCMSNewsById(int? newsId);
+        ProfileViewModel GetProfileByUserId(Guid? userId);
     }
 }

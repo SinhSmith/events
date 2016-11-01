@@ -2151,6 +2151,7 @@
     <Content Include="Views\Organiser\Details.cshtml" />
     <Content Include="Views\Organiser\Edit.cshtml" />
     <Content Include="Views\Organiser\Index.cshtml" />
+    <Content Include="Views\Account\ProfileSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

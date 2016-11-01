@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="PortalModel.system_Banners" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.system_Config" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.system_Menu" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="PortalModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModel.FK_cms_News_cms_Categories" ManuallyRouted="false" />
@@ -38,6 +37,7 @@
         <EntityTypeShape EntityType="PortalModel.system_Organisers" Width="1.5" PointX="10.25" PointY="13.375" />
         <AssociationConnector Association="PortalModel.FK_system_Organisers_share_Images" />
         <EntityTypeShape EntityType="PortalModel.sysdiagram" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="12.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
