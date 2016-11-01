@@ -1,0 +1,149 @@
+﻿@model Portal.Model.ViewModel.OrganiserViewModel
+
+@{
+    ViewBag.Title = "Organiser Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Library/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/myprofile.css">
+<script>
+    $(document).ready(function () {
+        // CKEditor
+        CKEDITOR.replace('About');
+    })
+</script>
+
+<div class="g-grid global-sub-header l-pad-vert-4 l-sm-pad-vert-3">
+    <div class="g-group">
+        <div class="g-cell g-cell-12-12 g-cell-md-6-12 g-cell-lg-6-12">
+            <h1 class="text-heading-primary text-body--significant">Organiser Profile</h1>
+        </div>
+    </div>
+</div>
+<div id="content" class="clrfix" style="width: auto !important;">
+    <div class="g-grid">
+        @using (Html.BeginForm("Details", "Organiser", null, FormMethod.Post, new { id = "organizer_form", @class = "js-organizer_form responsive-form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.UserId)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="g-group l-mar-top-4">
+                <section class="g-cell g-cell-12-12 l-pad-bot-3"></section>
+
+                <section class="g-vertical-group g-cell-12-12 g-cell-lg-3-12 js-organizer-logo-container">
+
+                    <div class="g-cell g-cell-4-12 g-cell-md-3-12 g-cell-lg-3-3">
+                        <div class="organizer-logo-wrapper ratio-parent-1-1">
+                            <div class="ratio-child">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="js-logo-cell">
+                                                @if (string.IsNullOrEmpty(Model.AvatarPath))
+                                                {
+                                                    <i class="ico-person ico--xxlarge">
+                                                    </i>
+                                                }
+                                                else
+                                                {
+                                                    <img src="@(Model.AvatarPath)" />
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="g-cell g-cell-8-12 g-cell-md-9-12 g-cell-lg-3-3 l-lg-align-center">
+                        <section class="js-select-file-section ">
+                            <p class="text-body--faint">
+                                JPG, GIF or PNG no larger than 1MB.
+                                Square images look the best!
+                            </p>
+                            <div class="l-mar-top-2">
+                                <input class="organizer-logo-btn btn btn--secondary file-picker__button js-file-picker__button" id="id_logo" name="avatar" type="file" value="choose file">
+                            </div>
+                        </section>
+                        <section class="js-remove-logo-section is-hidden">
+                            <div class="l-mar-top-2">
+                                <span class="organizer-logo-btn btn btn--secondary js-logo-remove-btn">
+                                    Remove
+                                </span>
+                            </div>
+                        </section>
+                        <section class="js-upload-image-section is-hidden">
+                            <p class="text-body--faint">
+                                <span class="js-file-name"></span>
+                                <a href="" class="js-cancel-upload-link">[cancel]</a>
+                            </p>
+                            <div class="l-mar-top-2">
+                                <span class="organizer-logo-btn btn js-logo-upload-btn">
+                                    Upload
+                                </span>
+                            </div>
+                        </section>
+                    </div>
+                    <input id="id_logo_id" name="logo_id" type="hidden" value="">
+                    <input id="id_logo_version" name="logo_version" type="hidden" value="">
+                    <input id="id_logo_ext" name="logo_ext" type="hidden" value="">
+                    <input id="id_logo_sizes" name="logo_sizes" type="hidden" value="{}">
+                    <input id="logo_option_name" name="option_name" type="hidden" value="organizer_logo">
+                </section>
+
+                <section class="g-vertical-group g-cell-12-12 g-cell-lg-9-12">
+                    <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-7-9 js-organizer-info-container">
+                        <label class="label-primary">Organiser name</label>
+                        <p class="l-mar-top-1">
+                            @Html.TextBoxFor(m => m.OrganiserName)
+                        </p>
+                        <div class="l-mar-top-2">
+                            <label class="label-primary">About the organiser</label>
+                            <p class="l-mar-top-1">@Html.TextAreaFor(m => m.About)</p>
+                        </div>
+
+                        <div class="l-mar-top-2">
+                            <label class="label-primary">
+                                Website
+                            </label>
+                            <p class="l-mar-top-1">@Html.TextBoxFor(m => m.Website)</p>
+                        </div>
+
+                    </div>
+
+                    <div class="js-social-settings social-settings js-social-settings">
+                        <div class="g-cell g-cell-12-12 g-cell-md-8-12 g-cell-lg-4-9">
+                            <h2 class="text-heading-secondary">
+                                Integrate Social Networks
+                            </h2>
+                            <div class="l-mar-top-2">
+                                <label class="label-primary">Facebook page</label>
+                                <p class="l-mar-top-1 social-input">
+                                    <span>facebook.com/</span>
+                                    @Html.TextBoxFor(m => m.Facebook)
+                                </p>
+                            </div>
+
+                            <div class="l-mar-top-2">
+                                <label class="label-primary">Twitter</label>
+                                <p class="l-mar-top-1 text-body-large">
+                                    @Html.TextBoxFor(m => m.Twitter)
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="g-cell g-cell-12-12">
+                        <div class="organizer-buttons-divider"></div>
+                        <input id="submitForm" type="submit" class="btn btn--medium" value="Save">
+                    </div>
+                </section>
+            </div>
+        }
+    </div>
+</div>

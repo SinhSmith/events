@@ -21,6 +21,7 @@ namespace Portal.Model.Context
             this.portal_Projects = new HashSet<portal_Projects>();
             this.portal_Projects1 = new HashSet<portal_Projects>();
             this.event_Event = new HashSet<event_Event>();
+            this.system_Organisers = new HashSet<system_Organisers>();
         }
     
         public int Id { get; set; }
@@ -37,5 +38,6 @@ namespace Portal.Model.Context
         public virtual ICollection<portal_Projects> portal_Projects { get; set; }
         public virtual ICollection<portal_Projects> portal_Projects1 { get; set; }
         public virtual ICollection<event_Event> event_Event { get; set; }
+        public virtual ICollection<system_Organisers> system_Organisers { get; set; }
     }
 }
