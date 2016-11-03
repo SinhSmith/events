@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Portal.Model.Mapper;
+using Microsoft.AspNet.Identity;
 
 namespace Site.OnlineStore.Controllers
 {
@@ -18,8 +19,16 @@ namespace Site.OnlineStore.Controllers
 
         protected ICommonService _service;
 
+        protected Guid GetUserId()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return Guid.Parse(User.Identity.GetUserId());
+            }
+            return Guid.Empty;
+        }
         #endregion
-        
+
         #region Constructures
 
         public BaseController()

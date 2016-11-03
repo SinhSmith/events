@@ -122,6 +122,9 @@
     <Compile Include="Context\system_Menu.cs">
       <DependentUpon>PortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\system_Organisers.cs">
+      <DependentUpon>PortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\system_Profiles.cs">
       <DependentUpon>PortalModel.tt</DependentUpon>
     </Compile>
@@ -137,6 +140,8 @@
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="ViewModel\BannerViewModel.cs" />
     <Compile Include="ViewModel\cmsCategoryView.cs" />
+    <Compile Include="ViewModel\ImageViewModel.cs" />
+    <Compile Include="ViewModel\OrganiserViewModel.cs" />
     <Compile Include="ViewModel\CMSNewsView.cs" />
     <Compile Include="ViewModel\EventViewModel.cs" />
     <Compile Include="ViewModel\MenuView.cs" />

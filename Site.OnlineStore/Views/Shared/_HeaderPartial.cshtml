@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
 
 <a class="skip-links js-d-skip-links" href="#skip-heading" dorsal-guid="111a378e-ec93-a834-fa81-3cac6e0f7593" data-xd-wired="skip-links">Skip Main Navigation</a>
 
@@ -11,40 +14,35 @@
             </a>
 
             <div class="gh-dd header-search">
-                    <div class="search-autocomplete js-header-search-autocomplete is-init">
-                        <a href="#" class="hide-large js-header-search-icon mobile-action-b" title="Search">
-                            <i class="ico-search-v2 header-search-icon"></i>
-                            <span class="is-hidden-accessible">Search menu</span>
-                        </a>
-                        <div class="search-autocomplete__query-input js-search-query-area show-large">
-                            <div class="responsive-form__input--icon js-d-clearable-input">
-                                <label for="q" class="is-hidden-accessible">Search for events</label>
-                                <div class="responsive-form__input--icon__container show-large">
-                                    <i class="ico-search-v2 js-search-query-icon"></i>
-                                </div>
-                                <input type="search" class="js-search-query-input ui-autocomplete-input" data-automation="search-input" id="Txt_EventSearchBox" placeholder="Search for events">
-                                <div class="responsive-form__input--icon__container close-button hide-large is-hidden">
-                                    <a href="#" class="js-clear-input">
-                                        <i class="ico-cross"></i><span class="is-hidden-accessible">x</span>
-                                    </a>
-                                </div>
+                <div class="search-autocomplete js-header-search-autocomplete is-init">
+                    <a href="#" class="hide-large js-header-search-icon mobile-action-b" title="Search">
+                        <i class="ico-search-v2 header-search-icon"></i>
+                        <span class="is-hidden-accessible">Search menu</span>
+                    </a>
+                    <div class="search-autocomplete__query-input js-search-query-area show-large">
+                        <div class="responsive-form__input--icon js-d-clearable-input">
+                            <label for="q" class="is-hidden-accessible">Search for events</label>
+                            <div class="responsive-form__input--icon__container show-large">
+                                <i class="ico-search-v2 js-search-query-icon"></i>
+                            </div>
+                            <input type="search" class="js-search-query-input ui-autocomplete-input" data-automation="search-input" id="Txt_EventSearchBox" placeholder="Search for events">
+                            <div class="responsive-form__input--icon__container close-button hide-large is-hidden">
+                                <a href="#" class="js-clear-input">
+                                    <i class="ico-cross"></i><span class="is-hidden-accessible">x</span>
+                                </a>
                             </div>
                         </div>
-                        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 3; display: none;"></ul>
                     </div>
-                    <input type="hidden" name="mode" value="search">
+                    <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 3; display: none;"></ul>
                 </div>
-            <div class="gh-dd global-header__browse-events show-large text--truncated">
-                <a href="#" class="header-link gh-discover js-d-track-link js-xd-janus-checkpoint-link" data-checkpoint-name="discover_header_link_clicked" data-event-action="Discover" data-event-category="header" data-event-label="home" dorsal-guid="54e739b2-cd62-fecc-265b-c05f223d17b1" data-xd-wired="track-link">
-                    Browse Events
-                </a>
+                <input type="hidden" name="mode" value="search">
             </div>
         </div>
         <div class="minor">
 
             @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right",@style="margin:0!important;" }))
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", @style = "margin:0!important;" }))
                 {
                     @Html.AntiForgeryToken()
                     <div class="gh-dd gh-profile-box js-gh-dd">
@@ -75,7 +73,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="js-d-track-link">
+                                    <a href="@Url.Action("Details","Organiser")" class="js-d-track-link">
                                         Organiser Profile
                                     </a>
                                 </li>
@@ -100,6 +98,11 @@
             }
             else
             {
+                <div class="gh-dd global-header__browse-events show-large text--truncated">
+                    <a href="#" class="header-link gh-discover js-d-track-link js-xd-janus-checkpoint-link" data-checkpoint-name="discover_header_link_clicked" data-event-action="Discover" data-event-category="header" data-event-label="home" dorsal-guid="54e739b2-cd62-fecc-265b-c05f223d17b1" data-xd-wired="track-link">
+                        Browse Events
+                    </a>
+                </div>
                 <a class="js-modal-auth js-d-track-link header-link" data-target="#modalRegister" data-toggle="modal" href="#" id="registerLink">Sign up</a>
                 <a class="header-link primary-link js-d-track-link js-modal-auth show-large" data-target="#modalLogin" data-toggle="modal" href="#" id="loginLink">Login</a>
             }

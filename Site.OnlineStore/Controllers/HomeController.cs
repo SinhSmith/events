@@ -83,11 +83,6 @@ namespace Site.OnlineStore.Controllers
             return View();
         }
 
-        public ActionResult _HeaderPartial()
-        {
-            return PartialView();
-        }
-
         public ActionResult BannerPartial()
         {
             return PartialView(_bannerService.GetBanners1ForHomePage());

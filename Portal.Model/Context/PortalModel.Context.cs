@@ -37,11 +37,12 @@ namespace Portal.Model.Context
         public virtual DbSet<system_Banners> system_Banners { get; set; }
         public virtual DbSet<system_Config> system_Config { get; set; }
         public virtual DbSet<system_Menu> system_Menu { get; set; }
-        public virtual DbSet<system_Profiles> system_Profiles { get; set; }
         public virtual DbSet<portal_Projects> portal_Projects { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<event_Ticket> event_Ticket { get; set; }
         public virtual DbSet<event_TicketOrder> event_TicketOrder { get; set; }
         public virtual DbSet<event_Event> event_Event { get; set; }
+        public virtual DbSet<system_Organisers> system_Organisers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<system_Profiles> system_Profiles { get; set; }
     }
 }

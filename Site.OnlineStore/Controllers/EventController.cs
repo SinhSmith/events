@@ -16,7 +16,7 @@ namespace Site.OnlineStore.Controllers
 {
     public class EventController : Controller
     {
-         #region Properties
+        #region Properties
 
         public IDisplayEventService service = new DisplayEventService();
         private static int productPerPage = 10;
@@ -228,11 +228,10 @@ namespace Site.OnlineStore.Controllers
             }
 
             EventFullView foundEvent = service.GetEventDetails((int)id);
-            //PopulateNewProductList();
-            //PopulateCategoryList();
-            //PopulateTopCategoryList();
 
-            return View("ProductDetails", foundEvent);
+            ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
+
+            return View("EventDetails", foundEvent);
         }
 
         /// <summary>

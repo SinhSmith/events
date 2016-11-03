@@ -10,23 +10,27 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Site.OnlineStore.Models;
 using Portal.Service.Implements;
+using Portal.Infractructure.Utility;
+using Portal.Model.ViewModel;
 
 namespace Site.OnlineStore.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ProfileService _profileService;
         public AccountController()
         {
+            _profileService = new ProfileService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _profileService = new ProfileService();
         }
 
         public ApplicationSignInManager SignInManager
@@ -166,17 +170,31 @@ namespace Site.OnlineStore.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // Add new profile
-                    var _profileService = new ProfileService();
-                    _profileService.AddProfile(new Portal.Model.ViewModel.ProfileViewModel
+                    try
                     {
-                        UserId = Guid.Parse(user.Id),
-                        UserName = model.Email,
-                        Emaill = model.Email,
-                        Password = model.Password,
-                        Phone = model.Phone,
-                        Address = model.Address
-                    });
+                        // Add new profile
+                        _profileService.AddProfile(new ProfileViewModel
+                        {
+                            UserId = Guid.Parse(user.Id),
+                            UserName = model.Email,
+                            Emaill = model.Email,
+                            Password = model.Password,
+                        });
+
+                        // Add new organiser
+                        var _organiserService = new OrganiserService();
+                        _organiserService.AddOrganiser(new OrganiserViewModel
+                        {
+                            UserId = Guid.Parse(user.Id),
+                            OrganiserName = string.Empty
+                        });
+
+                        return Json(new { success = true });
+                    }
+                    catch (Exception ex)
+                    {
+                        return Json(new { success = false, message = ex.Message });
+                    }
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -185,7 +203,6 @@ namespace Site.OnlineStore.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //return RedirectToAction("Index", "Home");
-                    return Json(new { success = true });
                 }
                 else
                 {
@@ -202,6 +219,31 @@ namespace Site.OnlineStore.Controllers
             // If we got this far, something failed, redisplay form
             //return PartialView(model);
             return Json(new { success = false, message = "An error has occurred. Please try again." });
+        }
+
+        public ActionResult ProfileSetting()
+        {
+            var profile = _profileService.GetProfileByUserId(GetUserId());
+            if (profile == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(profile);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfileSetting(ProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _profileService.EditProfile(model);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
         }
 
         //
