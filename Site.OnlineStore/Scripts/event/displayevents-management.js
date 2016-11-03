@@ -476,7 +476,6 @@ DisplayEventsManagement = {
     },
     updateDataAndLayoutInSearchMode:function(model){
         // Call when page in search mode
-        debugger
         // Update model
         this.model.filterRules.City = model.City;
         this.model.filterRules.State = model.State;

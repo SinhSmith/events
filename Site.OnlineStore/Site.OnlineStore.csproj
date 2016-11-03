@@ -182,7 +182,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\OrganiserController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -588,7 +587,6 @@
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\home_consumer.css" />
     <Content Include="Content\css\icons.data.svg.css" />
-    <Content Include="Content\css\myprofile.css" />
     <Content Include="Content\event\base_styles.css" />
     <Content Include="Content\event\bundle%281%29.css" />
     <Content Include="Content\event\bundle.css" />
@@ -596,8 +594,6 @@
     <Content Include="Content\event\create2.css" />
     <Content Include="Content\event\create_event_tinymce.css" />
     <Content Include="Content\event\eb.persistent_header.css" />
-    <Content Include="Content\event\event_pages_C.css" />
-    <Content Include="Content\event\event_page_advanced.css" />
     <Content Include="Content\event\global_header.css" />
     <Content Include="Content\event\search.css" />
     <Content Include="Content\event\ticket_grouping.css" />
@@ -668,20 +664,6 @@
     <Content Include="Content\Images\Temp\Tong-thau1-services.jpg" />
     <Content Include="Content\Images\Unicons_Logo_27062016.jpg" />
     <Content Include="Content\Images\yt.jpg" />
-    <Content Include="Content\img\event\bookmark-default.png" />
-    <Content Include="Content\img\home\img_category_arts.jpg" />
-    <Content Include="Content\img\home\img_category_arts_small.jpg" />
-    <Content Include="Content\img\home\img_category_classes.jpg" />
-    <Content Include="Content\img\home\img_category_classes_small.jpg" />
-    <Content Include="Content\img\home\img_category_food.jpg" />
-    <Content Include="Content\img\home\img_category_food_small.jpg" />
-    <Content Include="Content\img\home\img_category_music.jpg" />
-    <Content Include="Content\img\home\img_category_music_small.jpg" />
-    <Content Include="Content\img\home\img_category_networking.jpg" />
-    <Content Include="Content\img\home\img_category_networking_small.jpg" />
-    <Content Include="Content\img\home\img_category_parties.jpg" />
-    <Content Include="Content\img\home\img_category_parties_small.jpg" />
-    <Content Include="Content\img\home\img_category_sports.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\admin\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\admin\plugins\bootstrap-slider\slider.css" />
@@ -1511,13 +1493,13 @@
     <Content Include="Content\project\jquery.desoslide.css" />
     <Content Include="Content\project\prettyPhoto.css" />
     <Content Include="Content\project\slideshow.css" />
+    <Content Include="EventbriteArmourTheParkChargedRun.html" />
     <Content Include="Eventbrite - Create a new event.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Halloween Bash at House of Horror Haunted Carnival Tickets, Doral _ Eventbrite.html" />
     <Content Include="Library\ckeditor\adapters\jquery.js" />
     <Content Include="Library\ckeditor\build-config.js" />
     <Content Include="Library\ckeditor\ckeditor.js" />
@@ -1836,8 +1818,6 @@
     <Content Include="Library\time-picker\jquery.timepicker.min.css" />
     <Content Include="Library\time-picker\jquery.timepicker.min.js" />
     <Content Include="New York, New York Events For You _ Eventbrite.html" />
-    <Content Include="SCOPE 2.html" />
-    <Content Include="SCOPE Miami Beach 2016 Tickets, Miami Beach _ Eventbrite.html" />
     <Content Include="Scripts\admin\Common.js" />
     <Content Include="Scripts\admin\event-management.js" />
     <Content Include="Scripts\admin\project-management.js" />
@@ -2051,7 +2031,6 @@
     <Content Include="Scripts\common\html5.js" />
     <Content Include="Scripts\common\html5shiv.min.js" />
     <Content Include="Scripts\event\displayevents-management.js" />
-    <Content Include="Scripts\event\eventdetails-management.js" />
     <Content Include="Scripts\home\chosen.jquery.min.js" />
     <Content Include="Scripts\home\custom-footer.js" />
     <Content Include="Scripts\home\footer-homepage.js" />
@@ -2171,13 +2150,7 @@
     <Content Include="Views\Shared\_ListEventItemSmall.cshtml" />
     <Content Include="Views\Event\DisplayEvents.cshtml" />
     <Content Include="Views\Event\_SummaryEventItem.cshtml" />
-    <Content Include="Views\Event\EventDetails.cshtml" />
-    <Content Include="Views\Organiser\Create.cshtml" />
-    <Content Include="Views\Organiser\Delete.cshtml" />
-    <Content Include="Views\Organiser\Details.cshtml" />
-    <Content Include="Views\Organiser\Edit.cshtml" />
-    <Content Include="Views\Organiser\Index.cshtml" />
-    <Content Include="Views\Account\ProfileSetting.cshtml" />
+    <Content Include="Views\Event\OrderEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
