@@ -321,7 +321,6 @@ DisplayEventsManagement = {
     },
     searchEventWithFilters:function(){
         // Request to server to get list events match with filter rules
-        debugger
         $.ajax({
             url: '/Event/SearchEvent',
             type: 'POST',
@@ -387,7 +386,6 @@ DisplayEventsManagement = {
         return itemTemplate;
     },
     updateFiltersModel: function () {
-        debugger
         // Update search string
         this.model.filterRules.SearchString = $("#Txt_EventSearchBox").val().trim();
 
@@ -465,7 +463,6 @@ DisplayEventsManagement = {
     },
     updateDataAndLayoutInSearchMode:function(model){
         // Call when page in search mode
-        debugger
         // Update model
         this.model.filterRules.City = model.City;
         this.model.filterRules.Country = model.Country;

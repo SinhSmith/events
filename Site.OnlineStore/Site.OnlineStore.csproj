@@ -1493,6 +1493,7 @@
     <Content Include="Content\project\jquery.desoslide.css" />
     <Content Include="Content\project\prettyPhoto.css" />
     <Content Include="Content\project\slideshow.css" />
+    <Content Include="Eventbrite - Armour%40ThePark_ Charged Run.html" />
     <Content Include="Eventbrite - Create a new event.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -2149,6 +2150,7 @@
     <Content Include="Views\Shared\_ListEventItemSmall.cshtml" />
     <Content Include="Views\Event\DisplayEvents.cshtml" />
     <Content Include="Views\Event\_SummaryEventItem.cshtml" />
+    <Content Include="Views\Event\OrderEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
