@@ -43,7 +43,7 @@ namespace Site.OnlineStore.Controllers
         /// <param name="country">country name of selected location</param>
         /// <param name="city">city name of selected location</param>
         /// <returns></returns>
-        private GetEventsByCategoryRequest CreateGetEventInLocationRequest(string country,string city)
+        private GetEventsByCategoryRequest CreateGetEventInLocationRequest(string country,string state,string city)
         {
             GetEventsByCategoryRequest request = new GetEventsByCategoryRequest()
             {
@@ -53,6 +53,7 @@ namespace Site.OnlineStore.Controllers
                 SearchString = null,
                 StartDate = DateTime.Now,
                 Country = country,
+                State = state,
                 City = city,
                 Price = Portal.Infractructure.Utility.Define.TicketPriceType.AllPrices
             };
@@ -103,17 +104,12 @@ namespace Site.OnlineStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetEventsInCurrentLocation(string country,string city)
+        public ActionResult GetEventsInCurrentLocation(string country,string state,string city)
         {
-            GetEventsByCategoryRequest request = CreateGetEventInLocationRequest(country,city);
+            GetEventsByCategoryRequest request = CreateGetEventInLocationRequest(country,state,city);
             GetEventsByCategoryResponse result = _eventService.GetEventsByCategory(request);
 
             return PartialView("_ListEventItemSmall", result.Events);
-            //return Json(new GetEventsInCurrentLocationResponse() { 
-            //    IsSuccess = true,
-            //    Message = "Get event by location successful.",
-            //    Result = result
-            //},JsonRequestBehavior.AllowGet);
         }
         #endregion
 

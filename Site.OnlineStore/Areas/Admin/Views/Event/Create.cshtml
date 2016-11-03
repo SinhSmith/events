@@ -8,6 +8,10 @@
 <script src="~/Library/ckeditor/ckeditor.js"></script>
 <script src="~/Scripts/admin/event-management.js"></script>
 
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=EventManagement.googleApiCallBackFunction">
+</script>
+
 <link href="~/Content/event/base_styles.css" rel="stylesheet" />
 <link href="~/Content/event/create_event_tinymce.css" rel="stylesheet" />
 <link href="~/Content/event/create2.css" rel="stylesheet" />
@@ -96,7 +100,18 @@
                                 <div>
                                     <div id="create_location_content">
                                         <div>
-                                            <div class="g-group">
+                                            <div class="autocomplate-location-panel inputtext g-cell g-cell-1-1">
+                                                <input id="Location_AutoComplete" class="js-location-input-new placeholder" type="text">
+                                                <ul class="bullet-list-ico bullet-list-ico--compact text-body-small">
+                                                    <li>
+                                                        <a id="Btn_EnableDetailAddressPanel" class="js-location-cant-find">
+                                                            <i class="ico-location ico--small"></i>
+                                                            Enter Address
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="detail-location-panel g-group hidden">
                                                 <div id="location_edit_form" class="g-vertical-group g-cell-1-1 g-cell-md-5-8">
                                                     <div class="g-cell g-cell-1-1">
                                                         <input class="js-location-edit-venue l-mar-top-1" id="Location_StreetName" name="Location_StreetName" type="text" placeholder="Enter the venue&#39;s name">
@@ -369,7 +384,7 @@
                                                         <div class="g-cell g-cell-1-2">
                                                             <ul class="bullet-list-ico bullet-list-ico--compact text-body-small">
                                                                 <li>
-                                                                    <a href="#" class="location-reset"><i class="ico-refresh ico--small"></i>Reset location</a>
+                                                                    <a id="Btn_ResetAddressPanel" class="location-reset"><i class="ico-refresh ico--small"></i>Reset location</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -1394,7 +1409,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        EventManagement.init();
+        //EventManagement.init();
     });
 </script>
 @RenderPage("_TicketTemplate.cshtml")

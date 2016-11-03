@@ -75,6 +75,7 @@ HomePageManagement = {
 
         var url = "/Event/SearchEvent/?";
         url += "City=" + this.model.CurrentLocation.City.short_name + "&";
+        url += "State=" + this.model.CurrentLocation.State.short_name + "&";
         url += "Country=" + this.model.CurrentLocation.Country.short_name + "&";
         switch (filterType) {
             case 0:
@@ -87,7 +88,7 @@ HomePageManagement = {
 
         window.location.replace(url);
     },
-    getEventsInLocation: function (country, city) {
+    getEventsInLocation: function (country, state, city) {
         /// <summary>
         /// Request to server to get all events in specific location
         /// </summary>
@@ -97,7 +98,7 @@ HomePageManagement = {
         $.ajax({
             url: '/Home/GetEventsInCurrentLocation',
             type: 'POST',
-            data: { country: country, city: city },
+            data: { country: country, state:state, city: city },
             success: function (result) {
                 console.log(result);
                 $("#content .js-popular-events .js-events-list").empty();
@@ -135,11 +136,12 @@ HomePageManagement = {
                         var address = HomePageManagement.getAddressDetails(results[0]);
                         HomePageManagement.model.CurrentLocation = address;
                         $("#Txt_CityFilter").val(address.City.short_name);
+                        $("#Txt_StateFilter").val(address.State.short_name);
                         $("#Txt_CountryFilter").val(address.Country.short_name);
 
-                        HomePageManagement.getEventsInLocation(address.Country.short_name, address.City.short_name);
+                        HomePageManagement.getEventsInLocation(address.Country.short_name, address.State.short_name, address.City.short_name);
                         // Update title on list events in current location
-                        $(".js-search-bar .js-displayed-consumer-location").empty().append(address.City.long_name + ", " + address.Country.long_name);
+                        $(".js-search-bar .js-displayed-consumer-location").empty().append(address.City.long_name + ", " + address.State.long_name + ", " + address.Country.long_name);
                     };
                 });
             }, function () {
@@ -163,6 +165,10 @@ HomePageManagement = {
                 long_name: "",
                 short_name:""
             },
+            State: {
+                long_name: "",
+                short_name: ""
+            },
             Country: {
                 long_name: "",
                 short_name: ""
@@ -178,6 +184,12 @@ HomePageManagement = {
             }
 
             if (address_component.types[0] == "administrative_area_level_1") {
+                console.log("state:" + address_component.long_name);
+                resultAddress.State.short_name = address_component.short_name;
+                resultAddress.State.long_name = address_component.long_name;
+            }
+
+            if (address_component.types[0] == "administrative_area_level_2") {
                 console.log("city:" + address_component.long_name);
                 resultAddress.City.short_name = address_component.short_name;
                 resultAddress.City.long_name = address_component.long_name;
@@ -194,11 +206,13 @@ HomePageManagement = {
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function () {
+            debugger
             var places = searchBox.getPlaces();
 
             if (places.length > 0) {
                 HomePageManagement.model.CurrentLocation = HomePageManagement.getAddressDetails(places[0]);
                 $("#Txt_CityFilter").val(HomePageManagement.model.CurrentLocation.City.short_name);
+                $("#Txt_StateFilter").val(HomePageManagement.model.CurrentLocation.State.short_name);
                 $("#Txt_CountryFilter").val(HomePageManagement.model.CurrentLocation.Country.short_name);
             }
         });
@@ -209,9 +223,9 @@ HomePageManagement = {
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
     },
-    redirectToDisplayEventsPage: function (city,country,searchString,datefilter) {
+    redirectToDisplayEventsPage: function (city, state, country, searchString, datefilter) {
         var token = $('input[name="__RequestVerificationToken"]').val();
-        $.post("/Event/SearchEvent", { City: city, country: country, SearchString: searchString, DateFilterType: datefilter, __RequestVerificationToken: token });
+        $.post("/Event/SearchEvent", { City: city, State: state, country: country, SearchString: searchString, DateFilterType: datefilter, __RequestVerificationToken: token });
     },
     showSpin: function (target) {
         /// <summary>

@@ -84,10 +84,15 @@ namespace Portal.Service.Implements
                 searchQuery = searchQuery.And(e => e.Country.Contains(request.Country));
             }
 
-            if (request.City != null)
+            if (request.State != null)
             {
-                searchQuery = searchQuery.And(e => e.Location_City.Contains(request.City));
+                searchQuery = searchQuery.And(e => e.Location_State.Contains(request.State));
             }
+
+            //if (request.City != null)
+            //{
+            //    searchQuery = searchQuery.And(e => e.Location_City.Contains(request.City));
+            //}
 
             if (request.SearchString != null && request.SearchString != string.Empty)
             {
@@ -198,6 +203,7 @@ namespace Portal.Service.Implements
                 SortBy = request.SortBy,
                 Price = request.Price,
                 Country = request.Country,
+                State = request.State,
                 City = request.City,
                 Events = CropEventListToSatisfyGivenIndex(foundEvents, request.Index, request.NumberOfResultsPerPage).ConvertToEventSummaryViews().ToList(),
                 ListEventTypes = GetListEventTypes(foundEvents.Select(p => p.EventType).Distinct().ToList()),

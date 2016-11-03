@@ -58,7 +58,7 @@ namespace Site.OnlineStore.Controllers
         /// </summary>
         /// <param name="categoryId">id of selected category</param>
         /// <returns></returns>
-        private GetEventsByCategoryRequest CreateInitialSearchRequest(string City,string Country,string SearchString,
+        private GetEventsByCategoryRequest CreateInitialSearchRequest(string City,string State,string Country,string SearchString,
             Portal.Infractructure.Utility.Define.DateFilterType DateFilterType, 
             int? Topic,int? EventType)
         {
@@ -71,6 +71,7 @@ namespace Site.OnlineStore.Controllers
                 StartDate = DateTime.Now,
                 DateFilterType = DateFilterType,
                 City = City,
+                State = State,
                 Country = Country,
                 Price = Define.TicketPriceType.AllPrices,
                 Topics = Topic != null ? new List<int>() { (int)Topic} :new List<int>(),
@@ -99,6 +100,7 @@ namespace Site.OnlineStore.Controllers
                 Index = request.Index,
                 SearchString = request.SearchString,
                 Country = request.Country,
+                State = request.State,
                 City = request.City,
                 NumberOfResultsPerPage = request.NumberOfResultsPerPage,
             };
@@ -239,12 +241,12 @@ namespace Site.OnlineStore.Controllers
         /// </summary>
         /// <param name="id">id of category</param>
         /// <returns></returns>
-        public ActionResult SearchEvent(string City = "", string Country = "", string SearchString = "",
+        public ActionResult SearchEvent(string City = "", string State = "", string Country = "", string SearchString = "",
             Portal.Infractructure.Utility.Define.DateFilterType DateFilterType = Portal.Infractructure.Utility.Define.DateFilterType.AllDates, 
             int? Topic = null,int? EventType = null)
         {
 
-            GetEventsByCategoryRequest request = CreateInitialSearchRequest(City, Country, SearchString, DateFilterType,Topic,EventType);
+            GetEventsByCategoryRequest request = CreateInitialSearchRequest(City,State, Country, SearchString, DateFilterType,Topic,EventType);
             GetEventsByCategoryResponse response = service.GetEventsByCategory(request);
             ViewBag.ListEventTopics = service.GetListEventTopics();
             ViewBag.ListEventTypes = service.GetListEventTypes();
@@ -253,6 +255,7 @@ namespace Site.OnlineStore.Controllers
             var filterModel = new Portal.Service.MessageModel.SearchFilterModel()
             {
                 City = response.City,
+                State = response.State,
                 Country = response.Country,
                 DateFilterType = response.DateFilterType,
                 SearchString = response.SearchString,

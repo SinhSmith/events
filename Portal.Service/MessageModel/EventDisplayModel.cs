@@ -24,6 +24,7 @@ namespace Portal.Service.MessageModel
         public int Index { get; set; }
         public string SearchString { get; set; }
         public string Country { get; set; }
+        public string State { get; set; }
         public string City { get; set; }
         public int NumberOfResultsPerPage { get; set; }
         public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
@@ -49,6 +50,7 @@ namespace Portal.Service.MessageModel
         public string SearchString { get; set; }
         public int TotalEvents { get; set; }
         public string Country { get; set; }
+        public string State { get; set; }
         public string City { get; set; }
         public Portal.Infractructure.Utility.Define.EventSortBy SortBy { get; set; }
         public Portal.Infractructure.Utility.Define.TicketPriceType Price { get; set; }
@@ -102,6 +104,7 @@ namespace Portal.Service.MessageModel
         public int Index { get; set; }
         public string SearchString { get; set; }
         public string Country { get; set; }
+        public string State { get; set; }
         public string City { get; set; }
         public int NumberOfResultsPerPage { get; set; }
         public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
@@ -132,6 +135,7 @@ namespace Portal.Service.MessageModel
         public Portal.Infractructure.Utility.Define.DateFilterType DateFilterType { get; set; }
         public string SearchString { get; set; }
         public string Country { get; set; }
+        public string State { get; set; }
         public string City { get; set; }
         public List<int> Topics { get; set; }
         public List<int> EventTypes { get; set; }

@@ -125,6 +125,12 @@ EventManagement = {
                 }
             });
         });
+        $("#Btn_ResetAddressPanel").unbind("click").bind("click", function () {
+            EventManagement.updateModeLocationPanel(true);
+        });
+        $("#Btn_EnableDetailAddressPanel").unbind("click").bind("click", function () {
+            EventManagement.updateModeLocationPanel(false);
+        });
     },
     initElement: function () {
         //////////////
@@ -165,6 +171,181 @@ EventManagement = {
         });
 
         this.initControlForTicketForms();
+    },
+    googleApiCallBackFunction: function () {
+        /// <summary>
+        /// This function will be call when google api ready for use
+        /// </summary>
+        /// <param>N/A</param>
+        /// <returns>N/A</returns>
+
+        EventManagement.init();
+        EventManagement.initLocationAutoComplete();
+    },
+    initLocationAutoComplete: function () {
+        // Create location searchbox and map
+
+        //var map = new google.maps.Map(document.getElementById('LocationMap'), {
+        //    //center: { lat: -33.8688, lng: 151.2195 },
+        //    zoom: 13,
+        //    mapTypeId: 'roadmap'
+        //});
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById("Location_AutoComplete");
+        var searchBox = new google.maps.places.SearchBox(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        //map.addListener('bounds_changed', function () {
+        //    searchBox.setBounds(map.getBounds());
+        //});
+
+        //var markers = [];
+
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+            if (places.length == 0) {
+                return;
+            }
+            if (places.length > 0) {
+                var address = EventManagement.getAddressDetails(places[0]);
+                EventManagement.updateAddressDetailsLayout(address);
+                EventManagement.updateModeLocationPanel(false);
+            }
+
+            // Clear out the old markers.
+            //markers.forEach(function (marker) {
+            //    marker.setMap(null);
+            //});
+            //markers = [];
+
+            // For each place, get the icon, name and location.
+            //var bounds = new google.maps.LatLngBounds();
+            //places.forEach(function (place) {
+            //    if (!place.geometry) {
+            //        console.log("Returned place contains no geometry");
+            //        return;
+            //    }
+            //    var icon = {
+            //        url: place.icon,
+            //        size: new google.maps.Size(71, 71),
+            //        origin: new google.maps.Point(0, 0),
+            //        anchor: new google.maps.Point(17, 34),
+            //        scaledSize: new google.maps.Size(25, 25)
+            //    };
+
+            //    // Create a marker for each place.
+            //    markers.push(new google.maps.Marker({
+            //        map: map,
+            //        icon: icon,
+            //        title: place.name,
+            //        position: place.geometry.location
+            //    }));
+
+            //    if (place.geometry.viewport) {
+            //        // Only geocodes have viewport.
+            //        bounds.union(place.geometry.viewport);
+            //    } else {
+            //        bounds.extend(place.geometry.location);
+            //    }
+            //});
+            //map.fitBounds(bounds);
+        });
+
+        $(input).unbind("focus").bind("focus", function () {
+            $(this).val("");
+        });
+    },
+    getAddressDetails: function (arrAddress) {
+        /// <summary>
+        /// Filter returned data to get address  
+        /// </summary>
+        /// <param>N/A</param>
+        /// <returns>N/A</returns>
+
+        var resultAddress = {
+            Address1:{
+                long_name: "",
+                short_name: ""
+            },
+            City: {
+                long_name: "",
+                short_name: ""
+            },
+            State:{
+                long_name: "",
+                short_name: ""
+            },
+            Country: {
+                long_name: "",
+                short_name: ""
+            },
+        };
+
+        $.each(arrAddress.address_components, function (i, address_component) {
+            if (address_component.types[0] == "country") {
+                console.log("country:" + address_component.long_name);
+                resultAddress.Country.short_name = address_component.short_name;
+                resultAddress.Country.long_name = address_component.long_name;
+
+            }
+
+            if (address_component.types[0] == "administrative_area_level_1") {
+                console.log("state:" + address_component.long_name);
+                resultAddress.State.short_name = address_component.short_name;
+                resultAddress.State.long_name = address_component.long_name;
+            }
+
+            if (address_component.types[0] == "administrative_area_level_2") {
+                console.log("city:" + address_component.long_name);
+                resultAddress.City.short_name = address_component.short_name;
+                resultAddress.City.long_name = address_component.long_name;
+            }
+
+            if (address_component.types[0] == "route") {
+                console.log("route:" + address_component.long_name);
+                resultAddress.Address1.short_name = resultAddress.Address1.short_name+ " " + address_component.short_name;
+                resultAddress.Address1.long_name = resultAddress.Address1.long_name + " " + address_component.long_name;
+            }
+
+            if (address_component.types[0] == "street_number") {
+                console.log("street_number:" + address_component.long_name);
+                resultAddress.Address1.short_name = address_component.short_name + " " + resultAddress.Address1.short_name;
+                resultAddress.Address1.long_name = address_component.long_name + " " + resultAddress.Address1.long_name;
+            }
+        });
+
+        return resultAddress;
+    },
+    updateAddressDetailsLayout:function(address){
+        // Update value for controls, which using for show address details
+
+        this.model.Location_StreetName = "";
+        $("#Location_StreetName").val("");
+        this.model.Location_Address = address.Address1.long_name;
+        $("#Location_Address").val(address.Address1.long_name || "");
+        this.model.Location_Address2 = "";
+        $("#Location_Address2").val("");
+        this.model.Location_City = address.City.long_name;
+        $("#Location_City").val(address.City.long_name || "");
+        this.model.Location_State = address.State.long_name;
+        $("#Location_State").val(address.State.long_name || "");
+        this.model.ZipCode = "";
+        $("#Location_ZipCode").val("");
+        this.model.Country = address.Country.short_name;
+        $("#Country").val(address.Country.short_name || "");
+    },
+    updateModeLocationPanel:function(isAutoCompleteMode){
+        // Update layout depend on mode 
+        if (isAutoCompleteMode) {
+            $(".autocomplate-location-panel").removeClass("hidden");
+            $(".detail-location-panel").removeClass("hidden").addClass("hidden");
+        } else {
+            $(".autocomplate-location-panel").removeClass("hidden").addClass("hidden");
+            $(".detail-location-panel").removeClass("hidden");
+        }
     },
     initControlForTicketForms: function () {
         // Init control for exist ticket forms in edit mode 

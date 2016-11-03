@@ -168,7 +168,7 @@ DisplayEventsManagement = {
             DisplayEventsManagement.searchEventWithFilters();
         });
     },
-    getEventsInLocation: function (country, city) {
+    getEventsInLocation: function (country,state, city) {
         /// <summary>
         /// Request to server to get all events in specific location
         /// </summary>
@@ -178,7 +178,7 @@ DisplayEventsManagement = {
         $.ajax({
             url: '/Home/GetEventsInCurrentLocation',
             type: 'POST',
-            data: { country: country, city: city },
+            data: { country: country,state:state, city: city },
             success: function (result) {
                 console.log(result);
                 $("#content .js-popular-events .js-events-list").empty();
@@ -211,6 +211,10 @@ DisplayEventsManagement = {
                 long_name: "",
                 short_name: ""
             },
+            State: {
+                long_name: "",
+                short_name: ""
+            },
             Country: {
                 long_name: "",
                 short_name: ""
@@ -226,6 +230,12 @@ DisplayEventsManagement = {
             }
 
             if (address_component.types[0] == "administrative_area_level_1") {
+                console.log("state:" + address_component.long_name);
+                resultAddress.State.short_name = address_component.short_name;
+                resultAddress.State.long_name = address_component.long_name;
+            }
+
+            if (address_component.types[0] == "administrative_area_level_2") {
                 console.log("city:" + address_component.long_name);
                 resultAddress.City.short_name = address_component.short_name;
                 resultAddress.City.long_name = address_component.long_name;
@@ -321,7 +331,7 @@ DisplayEventsManagement = {
     },
     searchEventWithFilters:function(){
         // Request to server to get list events match with filter rules
-        debugger
+
         $.ajax({
             url: '/Event/SearchEvent',
             type: 'POST',
@@ -387,12 +397,12 @@ DisplayEventsManagement = {
         return itemTemplate;
     },
     updateFiltersModel: function () {
-        debugger
         // Update search string
         this.model.filterRules.SearchString = $("#Txt_EventSearchBox").val().trim();
 
         // Update location
         this.model.filterRules.Country = this.model.selectedLocation.Country.short_name;
+        this.model.filterRules.State = this.model.selectedLocation.State.short_name;
         this.model.filterRules.City = this.model.selectedLocation.City.short_name;
 
         // Update list event topics
@@ -436,6 +446,7 @@ DisplayEventsManagement = {
         // Get filter rules from layout
 
         this.model.filterRules.Country = this.model.selectedLocation.Country.short_name;
+        this.model.filterRules.State = this.model.selectedLocation.State.long_name;
         this.model.filterRules.City = this.model.selectedLocation.City.long_name;
 
         return this.model.filterRules;
@@ -468,6 +479,7 @@ DisplayEventsManagement = {
         debugger
         // Update model
         this.model.filterRules.City = model.City;
+        this.model.filterRules.State = model.State;
         this.model.filterRules.Country = model.Country;
         this.model.selectedLocation.City.short_name = model.City;
         this.model.selectedLocation.Country.short_name = model.Country;
@@ -476,7 +488,7 @@ DisplayEventsManagement = {
         this.model.filterRules.EventTypes = model.EventTypes;
 
         // Update layout
-        $("#SearchLocation_AutoComplete").val(this.model.filterRules.City + ", " + this.model.filterRules.Country);
+        $("#SearchLocation_AutoComplete").val(this.model.filterRules.State + ", " + this.model.filterRules.Country);
         if(this.model.filterRules.Topics && this.model.filterRules.Topics.length>0){
             $.each(this.model.filterRules.Topics,function(index,item){
                 $("#ckb-event-topic-" + item).prop("checked", true);
@@ -496,7 +508,7 @@ DisplayEventsManagement = {
         // init paging control
         DisplayEventsManagement.initPagingControl(model.TotalEvents, this.model.filterRules.NumberOfResultsPerPage);
         // Update map
-        DisplayEventsManagement.updateMapForNewLocation(model.City + ", " + model.Country);
+        DisplayEventsManagement.updateMapForNewLocation(model.City + ", " + model.State + ", " + model.Country);
     },
     updateMapForNewLocation: function (address) {
 
@@ -542,6 +554,10 @@ DisplayEventsManagement = {
                 long_name:"",
                 short_name:""
             },
+            State:{
+                long_name:"",
+                short_name:""
+            },
             City:{
                 long_name:"",
                 short_name:""
@@ -557,6 +573,7 @@ DisplayEventsManagement = {
             EndDate: null,
             Index: 1,
             Country: "",
+            State: "",
             City: "",
             SearchString:"",
             NumberOfResultsPerPage: 10
