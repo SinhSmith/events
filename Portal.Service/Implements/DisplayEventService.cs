@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Portal.Model.Mapper;
 using Portal.Model.ViewModel;
+using Portal.Model.MessageModel;
 
 namespace Portal.Service.Implements
 {
@@ -21,6 +22,7 @@ namespace Portal.Service.Implements
 
         private static PortalEntities context = new PortalEntities();
         private EventRepository db = new EventRepository(context);
+        private Repository<event_Order> orderRepository = new Repository<event_Order>(context); 
 
         #endregion
 
@@ -30,6 +32,7 @@ namespace Portal.Service.Implements
         {
             context = new PortalEntities();
             db = new EventRepository(context);
+            orderRepository = new Repository<event_Order>(context);
         }
 
         #endregion
@@ -351,6 +354,40 @@ namespace Portal.Service.Implements
             return events.ConvertToEventSummaryViews().ToList();
         }
 
+        public Guid? AddOrder(GetOrderTicketFormRequest orderRequest)
+        {
+           try
+            {
+                event_Order order = new event_Order()
+                {
+                    EventId = orderRequest.EventId
+                };
+                db.Save();
+
+                foreach (var item in orderRequest.Tickets)
+                {
+                    order.event_TicketOrder.Add(new event_TicketOrder()
+                    {
+                        TicketId = item.TicketId,
+                        Quantity = item.TicketQuantity,
+                        OrderId = order.Id
+                    });
+                }
+
+                db.Save();
+
+                return order.Guid;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public event_Order GetOrderByGuid(Guid orderGuid)
+        {
+            orderRepository.get
+        }
         #endregion
 
         #region Release resources

@@ -337,21 +337,31 @@ namespace Site.OnlineStore.Controllers
 
             // Check quantity of order tikcets is valid or not
 
-            EventDetailsResponse eventObject = service.GetEventDetails(orderTicketRequest.EventId);
-            foreach (OrderTicketRequest ticket in orderTicketRequest.Tickets)
+            Guid? guid = service.AddOrder(orderTicketRequest);
+
+            if (guid ==null)
             {
-                OrderEventTicketModel tk = eventObject.Tickets.Where(t => t.Id == ticket.TicketId).FirstOrDefault();
-                if (tk != null)
-                {
-                    tk.Quantity = ticket.TicketQuantity;
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            TempData["orderItems"] = eventObject;
-            return RedirectToAction("OrderTicketPage");
+
+
+            //EventDetailsResponse eventObject = service.GetEventDetails(orderTicketRequest.EventId);
+            //foreach (OrderTicketRequest ticket in orderTicketRequest.Tickets)
+            //{
+            //    OrderEventTicketModel tk = eventObject.Tickets.Where(t => t.Id == ticket.TicketId).FirstOrDefault();
+            //    if (tk != null)
+            //    {
+            //        tk.Quantity = ticket.TicketQuantity;
+            //    }
+            //}
+
+
+
+            return RedirectToAction("OrderTicketPage", new { order = guid});
         }
 
-        public ActionResult OrderTicketPage()
+        public ActionResult OrderTicketPage(Guid orderId)
         {
             var model = TempData["orderItems"] as EventDetailsResponse;
             return View(model);

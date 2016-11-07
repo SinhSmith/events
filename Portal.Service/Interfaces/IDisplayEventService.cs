@@ -1,4 +1,5 @@
 ﻿using Portal.Model.Context;
+using Portal.Model.MessageModel;
 using Portal.Model.ViewModel;
 using Portal.Service.MessageModel;
 using System;
@@ -19,5 +20,6 @@ namespace Portal.Service.Interfaces
         IEnumerable<EventTopicModel> GetListEventTopics();
         IEnumerable<EventTypeModel> GetListEventTypes();
         IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId);
+        Guid? AddOrder(GetOrderTicketFormRequest orderRequest);
     }
 }

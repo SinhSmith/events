@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\FreelanceProject\Event Brite\events\Portal.Model\Context\PortalModel.edmx'. 
+﻿// T4 code generation is enabled for model 'K:\Personal resources\Free Project\Event\events\Portal.Model\Context\PortalModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
