@@ -219,7 +219,7 @@ namespace Portal.Service.Implements
         ///// </summary>
         ///// <param name="id">id of product</param>
         ///// <returns>Product details object</returns>
-        public EventFullView GetEventDetails(int id)
+        public EventDetailsResponse GetEventDetails(int id)
         {
             event_Event eventObject = db.GetEventById(id);
             if (eventObject == null)
@@ -228,7 +228,7 @@ namespace Portal.Service.Implements
             }
             else
             {
-                return eventObject.ConvertToEventFullView();
+                return eventObject.ConvertToEventDetailsModel();
             }
         }
 
@@ -272,6 +272,11 @@ namespace Portal.Service.Implements
             };
 
             return response;
+        }
+
+        public event_Event GetEventById(int id)
+        {
+            return db.GetEventById(id);
         }
 
         /// <summary>
@@ -345,6 +350,7 @@ namespace Portal.Service.Implements
 
             return events.ConvertToEventSummaryViews().ToList();
         }
+
         #endregion
 
         #region Release resources

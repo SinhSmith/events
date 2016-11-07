@@ -1,4 +1,4 @@
-﻿@model Portal.Model.ViewModel.EventFullView
+﻿@model Portal.Model.ViewModel.EventDetailsResponse
 @{
     ViewBag.Title = "Event details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,488 +7,7 @@
 @section LocalStyles{
     <link href="~/Content/event/event_pages_C.css" rel="stylesheet" />
     <link href="~/Content/event/event_page_advanced.css" rel="stylesheet" />
-
-    <style>
-        #contentpub .main, #customheader .main, #customfooter .main, #headpub .main, #footpub .main {
-            min-width: 700px;
-            vertical-align: top;
-            text-align: left;
-        }
-
-        .panel_628, .panel_280 {
-            width: 100%;
-            margin-bottom: 26px;
-            -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-        }
-
-        .panel_628 {
-            min-width: 400px;
-        }
-
-        .panel_280 {
-            min-width: 300px;
-        }
-
-        p {
-            line-height: normal;
-        }
-
-        #subhead {
-            margin-bottom: 0;
-        }
-
-        #subfooter {
-            margin-top: 0;
-        }
-
-        #regprocess {
-            margin: 0;
-        }
-
-            #regprocess ul {
-                margin: 0;
-                padding: 0;
-                list-style: none;
-            }
-
-                #regprocess ul li {
-                    width: 189px;
-                    height: 20px;
-                    padding: 5px 9px 3px;
-                    font-size: 14px;
-                    line-height: 18px;
-                    font-weight: bold;
-                    display: inline-block;
-                    float: left;
-                    border-top: 1px solid;
-                    border-bottom: 0 solid;
-                    border-right: 1px solid;
-                    font-weight: normal;
-                }
-
-                    #regprocess ul li.first {
-                        width: 191px;
-                        border-left: 1px solid;
-                    }
-
-                    #regprocess ul li span {
-                        font-size: 13px;
-                        margin-left: 5px;
-                    }
-
-                    #regprocess ul li.active {
-                        color: #FFF;
-                        background-color: #E60;
-                    }
-
-        #processing {
-            text-align: center;
-        }
-
-            #processing ul {
-                width: 100px;
-                margin: 0 auto;
-                padding: 0;
-                list-style: none;
-            }
-
-                #processing ul li {
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 10px;
-                    display: inline-block;
-                    float: left;
-                    border: 1px solid;
-                }
-
-        .login_button {
-            width: 58px;
-            height: 24px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/login.png);
-            background-color: transparent;
-            vertical-align: middle;
-            border: none;
-        }
-
-        .reviewyourorder_button a {
-            width: 180px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/reviewyourorder.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .paybycheque_button a {
-            width: 153px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paybycheque.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .paybycheck_button a {
-            width: 143px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paybycheck.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .payatthedoor_button a {
-            width: 160px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/payatthedoor.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .sendinvoice_button a {
-            width: 135px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/sendinvoice.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .completeregistration_button a {
-            width: 209px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/completeregistration.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .register_button a {
-            width: 99px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/register.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .ordernow_button a {
-            width: 116px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/ordernow.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .payoffline_button a {
-            width: 120px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/payoffline.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .paynow_button a {
-            width: 101px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paynow.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .save_button a {
-            width: 71px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/save.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        .addmetowaitlist_button a {
-            width: 204px;
-            height: 26px;
-            background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/addmetowaitlist.png);
-            display: block;
-            vertical-align: middle;
-        }
-
-        a.on, button:hover, .login_button a:hover, .reviewyourorder_button a:hover, .paybycheque_button a:hover, .paybycheck_button a:hover, .payatthedoor_button a:hover, .sendinvoice_button a:hover, .completeregistration_button a:hover, .register_button a:hover, .ordernow_button a:hover, .payoffline_button a:hover, .paynow_button a:hover, .save_button a:hover {
-            background-position: bottom;
-        }
-
-        a.active {
-            background-position: 0 -26px;
-        }
-
-        body {
-            background: #f7f7f7;
-        }
-
-            body a, a:link, a:visited {
-                color: #0f90ba;
-            }
-
-        h2 {
-            color: #404040;
-        }
-
-        h1 {
-            font-size: 26px;
-            line-height: 28px;
-            font-weight: bold;
-            margin: 0;
-            padding-bottom: 5px;
-        }
-
-        .main {
-            color: #404040;
-        }
-
-        #subheader {
-            border-bottom: 1px dotted #dedede;
-            margin-bottom: 18px;
-            padding-bottom: 14px;
-        }
-
-        #subheader_table {
-            width: 960px;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-
-        #subheader_info_cell {
-            vertical-align: bottom;
-        }
-
-        #subheader_logo_cell {
-            width: 344 + 10px;
-            text-align: right;
-        }
-
-        .panel_head2, .panel_footer {
-            background-color: #fafafa;
-            border-color: #dedede;
-            color: #404040;
-        }
-
-        .panel_body, .ticket_row, .passwd_info, .panel_628_share, .panel_footer, .panel_section {
-            background-color: #ffffff;
-            border-color: #dedede;
-            color: #666666;
-        }
-
-            .panel_body a {
-                color: #0f90ba;
-            }
-
-        .panel_border {
-            border-color: #dedede;
-        }
-
-        .ticket_container {
-            border-color: #dedede;
-            border: 1px solid #dedede;
-        }
-
-        .ticket_table_head, .ticket_table_head td {
-            color: #666666;
-            background-color: #ffffff;
-        }
-
-        .ticket_table td {
-            border-top: 1px solid #dedede;
-        }
-
-        .ticket_table .offer_row td {
-            border-top: none;
-        }
-
-        .unit_row td {
-            padding-top: 0px;
-            padding-bottom: 12px;
-            padding-right: 5px;
-            padding-left: 20px;
-            border-top: none;
-        }
-
-        .unit_row_v2 td {
-            padding-top: 0px;
-            padding-bottom: 0px;
-            padding-right: 5px;
-            padding-left: 5px;
-            border-top: none;
-        }
-
-        .passwd_info {
-            background-color: #ffffff;
-            border: 1px solid #dedede;
-        }
-
-        #processing ul li {
-            border-color: #0f90ba;
-        }
-
-            #processing ul li.active {
-                background-color: #0f90ba;
-            }
-
-        #regprocess {
-            border-color: #dedede;
-        }
-
-            #regprocess ul li, #regprocess ul li.first {
-                color: #666666;
-                background-color: #ffffff;
-                border-color: #dedede;
-            }
-
-                #regprocess ul li.active {
-                    color: #404040;
-                    background-color: #0f90ba;
-                }
-
-        .panel_edit {
-            width: 400px;
-            color: #404040;
-            background-color: #ffffff;
-            border-color: #dedede;
-            border-style: solid;
-            border-width: 1px;
-            padding: 8px;
-            -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-        }
-
-        #event_header h1 {
-            margin-top: 8px;
-        }
-
-        #event_header h2 {
-            font-size: 17px;
-            text-align: left;
-            line-height: 21px;
-            color: #404040;
-            margin: 0;
-            padding: 0;
-            font-weight: 300;
-        }
-
-            #event_header h2 > a {
-                color: #404040;
-            }
-
-        #event_network h2 {
-            margin: 0;
-            padding: 0;
-            line-height: 21px;
-        }
-
-        .panel_head2 h3 {
-            font-size: 16px;
-            line-height: 22px;
-            font-weight: 500;
-            color: #404040;
-            padding: 0;
-        }
-
-        .panel_body h2 {
-            font-size: 16px;
-            line-height: 1.2em;
-            font-weight: bold;
-            color: #666666;
-            margin: 2px 0 0;
-            padding: 0;
-        }
-
-        #panel_address h2 {
-            font-size: 1.0em;
-            line-height: normal;
-            font-weight: normal;
-            color: #666666;
-            margin: 0;
-            padding: 0 0 8px;
-            text-align: left;
-        }
-
-        #panel_when h2 {
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 1.0em;
-            line-height: normal;
-            font-weight: normal;
-            color: #666666;
-            margin: 0;
-            padding: 0;
-            text-align: left;
-        }
-
-        #RSVPBody {
-            background-color: #ffffff;
-            border: 1px solid #dedede;
-            color: #666666;
-        }
-
-        .RSVPMessage {
-            display: block;
-            margin: 24px 0 10px;
-        }
-
-        .rsvp_responded_thanks {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .rsvp_responded_msg {
-            margin-top: 13px;
-        }
-
-        /* social sharing module on /orderconfirmation */
-        .panel_628_share {
-            border: 1px solid #dedede;
-        }
-
-        #optouts_div {
-            border-left: 1px dotted #dedede;
-        }
-        /* end social sharing module on /orderconfirmation */
-        .registrationTable h3 {
-            border-bottom: 1px solid #dedede;
-        }
-
-        /* event tracking button */
-        #track_event_container {
-            border-color: #dedede;
-            background-color: #ffffff;
-        }
-
-
-        .js-advanced-team-landing .pod,
-        .advanced-team-navigation .js-advanced-team-landing .pod:hover {
-            background-color: #ffffff;
-            border: 1px solid #dedede;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
-        }
-
-        a:hover .advanced-team-landing__primary-text {
-            opacity: 0.66;
-        }
-
-        .advanced-team-landing__primary-text {
-            color: #666666;
-        }
-
-        .grayscale {
-            /* Firefox 10+, Firefox on Android */
-            filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
-            /* IE 6-9 */
-            filter: gray;
-            /*
-          Chrome 19+,
-          Safari 6+,
-          Safari 6+ iOS,
-          Opera 15+
-        */
-            -webkit-filter: grayscale(100%);
-        }
-    </style>
+    <link href="~/Content/event/event_eventdetails.css" rel="stylesheet" />
 }
 
 @section LocalScripts{
@@ -496,37 +15,10 @@
     <script src="~/Scripts/event/eventdetails-management.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=EventDetailsManagement.googleApiCallBackFunction">
-</script>
-<script>
-    (function () {
-        var $frame = $('#Events_Horizontal_Bar');
-        var $wrap = $frame.parent();
-
-        // Call Sly on frame
-        $frame.sly({
-            horizontal: 1,
-            itemNav: 'centered',
-            smart: 1,
-            activateOn: 'click',
-            mouseDragging: 1,
-            touchDragging: 1,
-            releaseSwing: 1,
-            startAt: 4,
-            scrollBar: $wrap.find('.scrollbar'),
-            scrollBy: 1,
-            speed: 300,
-            elasticBounds: 1,
-            easing: 'easeOutExpo',
-            dragHandle: 1,
-            dynamicHandle: 1,
-            clickBar: 1,
-        });
-    }());
-</script>
-<script>
-    EventDetailsManagement.model.Address = '@Model.Location_City, @Model.Country';
-</script>
-
+    </script>
+    <script>
+        EventDetailsManagement.model.Address = '@Model.Location_State, @Model.Country';
+    </script>
 }
 
 <!-- Event details and Order content -->
@@ -577,18 +69,8 @@
         <div id="col_628">
             <!-- Book ticket form -->
             <div id="ticket_information_wrapper" class="panel_628" style="position: relative;">
-                <form name="mgform" onsubmit="return validateform();" action="https://www.eventbrite.com/orderstart?ebtv=C" method="post" target="_top" style="margin: 0px;">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="bd6f7b11ad6740eda07b94c32aa20206">
-                    <input type="hidden" name="eid" value="26607894930">
-                    <input type="hidden" name="referral_code" value="">
-                    <input type="hidden" name="referrer" value="">
-                    <input type="hidden" id="ticketCurrency" value="$">
-                    <input type="hidden" name="varnish_hit_event_id" value="">
-                    <input type="hidden" name="_nomo" value="">
-                    <input type="hidden" name="source_id" value="08fc4035a02e11e68f6c068430af67ed">
-                    <input type="hidden" name="w" value="">
-                    <input type="hidden" name="waitlist_code" value="">
-                    <input type="hidden" name="payment_type" value="eventbrite">
+                <form id="Form_OrderTicket" enctype="multipart/form-data" action="/Event/OrderTicket" method="post" style="margin: 0px;">
+                    <input type="hidden" name="EventId" value="@Model.Id">
                     <!-- List tickets -->
                     <div class="l-mar-stack">
                         <div class="panel_head2 l-mar-top-3" id="ticketInfo">
@@ -607,47 +89,42 @@
                                     </td>
                                     <td width="70" align="right">Quantity</td>
                                 </tr>
-                                @foreach (Portal.Model.ViewModel.EventTicketResponse ticket in Model.Tickets)
-	                            {
-                                <tr class="ticket_row">
-                                    <input type="hidden" name="TicketId" value="@ticket.Id" />
+                                @for (int i = 0; i < Model.Tickets.Count; i++)
+                                {
+                                    <tr class="ticket_row">
+                                        <input type="hidden" name="Tickets[@i].TicketId" value="@Model.Tickets[i].Id" />
 
-                                    <td class="ticket_type_name">
-                                        @ticket.Name
+                                        <td class="ticket_type_name">
+                                            @Model.Tickets[i].Name
 
-                                        <div id="descriptionDiv52517343" style="font-size: 11px; line-height: 12px; margin: 5px 0 0 0;">@ticket.Description</div>
-                                    </td>
-                                    <td nowrap="nowrap" class="price_td">
-                                        <input type="hidden" name="cost_52517343_None" value="150.00">
-                                        @ticket.Price VND
-                                    </td>
-                                    <td align="right" nowrap="nowrap">
-                                        <label class="is-hidden-accessible">Ticket Quantity Select</label>
-                                        <select class="ticket_table_select" name="TicketQuantity">
-                                            @for (int i = 0; i < ticket.MaximunTicketOrder; i++)
-			                                    {
-                                            <option value="@i">@i</option>
-			                                    }
-                                        </select>
-                                    </td>
-                                </tr>
-	                            }
+                                            <div style="font-size: 11px; line-height: 12px; margin: 5px 0 0 0;">@Model.Tickets[i].Description</div>
+                                        </td>
+                                        <td nowrap="nowrap" class="price_td">
+                                            @Model.Tickets[i].Price VND
+                                        </td>
+                                        <td align="right" nowrap="nowrap">
+                                            <label class="is-hidden-accessible">Ticket Quantity Select</label>
+                                            <select class="ticket_table_select" name="Tickets[@i].TicketQuantity">
+                                                @for (int j = 0; j < Model.Tickets[i].MaximunTicketOrder; j++)
+                                                {
+                                                    if (Model.Tickets[i].Quantity == j)
+                                                    {
+                                                        <option value="@j" selected="selected">@j</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@j">@j</option>
+                                                    }
+                                                }
+                                            </select>
+
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div><!-- end panel_body -->
                     <div id="OrderReg" class="panel_footer" style="text-align: right; padding: 10px;height:initial;">
-                        <table id="freeButton" align="right" style="display: none;">
-                            <tbody>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <span id="primary_cta" class="button_css">
-                                            <a href="javascript: freeCheckout();" class="js-checkout-button" data-automation="register-button" style="text-decoration:none;color:#FFFFFF;">Register</a>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                         <div id="paidButton" style="display: block;" data-automation="paidButton">
                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                 <tbody>
@@ -655,7 +132,7 @@
                                         <td align="right">
                                             <div class="cta_container">
                                                 <span id="primary_cta" class="button_css">
-                                                    <a href="javascript: eventbriteCheckout();" data-automation="order-now-button" style="text-decoration:none;color:#fff;">
+                                                    <a id="Btn_OrderTicket" style="text-decoration:none;color:#fff;">
                                                         Order Now
                                                     </a>
                                                 </span>
@@ -687,13 +164,6 @@
 
         <!-- Right column content panel -->
         <div id="col_280">
-            <!--[if lte IE 6]>
-            <style type="text/css">
-            #track_event_container {
-                display: none;
-            }
-            </style>
-            <![endif]-->
             <div id="track_event_container" class="common_box panel_280">
                 <a href="" id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
                 <div class="count_subview"></div>

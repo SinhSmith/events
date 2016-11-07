@@ -14,17 +14,11 @@ namespace Portal.Model.Context
     
     public partial class event_TicketOrder
     {
-        public event_TicketOrder()
-        {
-            this.event_Ticket = new HashSet<event_Ticket>();
-        }
+        public int TicketId { get; set; }
+        public int OrderId { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
-        public int Id { get; set; }
-        public System.Guid Guid { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string EmailAddress { get; set; }
-    
-        public virtual ICollection<event_Ticket> event_Ticket { get; set; }
+        public virtual event_Order Order { get; set; }
+        public virtual event_Ticket Ticket { get; set; }
     }
 }

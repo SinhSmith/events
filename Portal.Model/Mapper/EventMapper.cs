@@ -106,5 +106,63 @@ namespace Portal.Model.Mapper
                 yield return item.ConvertToEventSummaryView();
             }
         }
+
+        public static EventDetailsResponse ConvertToEventDetailsModel(this event_Event eventObject)
+        {
+            EventDetailsResponse eventFullView = new EventDetailsResponse()
+            {
+                Id = eventObject.Id,
+                Title = eventObject.Title,
+                StartDate = ((DateTime)eventObject.StartDate).ToString(EventConstants.DefaultDateTimeFormat),
+                EndDate = ((DateTime)eventObject.EndDate).ToString(EventConstants.DefaultDateTimeFormat),
+                Description = eventObject.Description,
+                OrganizationName = eventObject.OrganizationName,
+                OrganizationDescription = eventObject.OrganizationDescription,
+                CoverImage = eventObject.CoverImage,
+                EventType = eventObject.EventType,
+                EventTopic = eventObject.EventTopic,
+                IsShowRemainingNumberTicket = eventObject.IsShowRemainingNumberTicket,
+                Location_StreetName = eventObject.Location_StreetName,
+                Location_Address = eventObject.Location_Address,
+                Location_Address2 = eventObject.Location_Address2,
+                Location_City = eventObject.Location_City,
+                Location_State = eventObject.Location_State,
+                ZipCode = eventObject.ZipCode,
+                Country = eventObject.Country,
+                Tickets = eventObject.Tickets.ConvertToOrderEventTicketModels()
+            };
+
+            return eventFullView;
+        }
+
+        public static OrderEventTicketModel ConvertToOrderEventTicketModel(this event_Ticket ticket)
+        {
+            OrderEventTicketModel responseTicket = new OrderEventTicketModel()
+            {
+                Id = ticket.Id,
+                Name = ticket.Name,
+                Quantity = 0,
+                Description = ticket.Description,
+                MinimunTicketOrder = ticket.MinimunTicketOrder,
+                MaximunTicketOrder = ticket.MaximunTicketOrder,
+                StartSaleDateTime = ticket.StartSaleDateTime.ToString(EventConstants.DefaultDateTimeFormat),
+                EndSaleDateTime = ((DateTime)ticket.EndSaleDateTime).ToString(EventConstants.DefaultDateTimeFormat),
+                Type = ticket.Type,
+                Price = ticket.Price
+            };
+
+            return responseTicket;
+        }
+
+        public static IList<OrderEventTicketModel> ConvertToOrderEventTicketModels(this IEnumerable<event_Ticket> tickets)
+        {
+            List<OrderEventTicketModel> ticketResponses = new List<OrderEventTicketModel>();
+            foreach (var item in tickets)
+            {
+                ticketResponses.Add(item.ConvertToOrderEventTicketModel());
+            }
+
+            return ticketResponses.ToList();
+        }
     }
 }

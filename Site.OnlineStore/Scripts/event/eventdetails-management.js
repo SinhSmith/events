@@ -2,31 +2,31 @@
 EventDetailsManagement = {
     init: function () {
         // support ajax to upload images
-        window.addEventListener("submit", function (e) {
-            EventDetailsManagement.showSpin();
-            var form = e.target;
-            if (form.getAttribute("enctype") === "multipart/form-data") {
-                if (form.dataset.ajax) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    var xhr = new XMLHttpRequest();
-                    xhr.open(form.method, form.action);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            if (form.dataset.ajaxUpdate) {
-                                var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
-                                if (updateTarget) {
-                                    updateTarget.innerHTML = xhr.responseText;
+        //window.addEventListener("submit", function (e) {
+        //    EventDetailsManagement.showSpin();
+        //    var form = e.target;
+        //    if (form.getAttribute("enctype") === "multipart/form-data") {
+        //        if (form.dataset.ajax) {
+        //            e.preventDefault();
+        //            e.stopImmediatePropagation();
+        //            var xhr = new XMLHttpRequest();
+        //            xhr.open(form.method, form.action);
+        //            xhr.onreadystatechange = function () {
+        //                if (xhr.readyState == 4 && xhr.status == 200) {
+        //                    if (form.dataset.ajaxUpdate) {
+        //                        var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
+        //                        if (updateTarget) {
+        //                            updateTarget.innerHTML = xhr.responseText;
 
-                                    EventDetailsManagement.hideSpin();
-                                }
-                            }
-                        }
-                    };
-                    xhr.send(new FormData(form));
-                }
-            }
-        }, true);
+        //                            EventDetailsManagement.hideSpin();
+        //                        }
+        //                    }
+        //                }
+        //            };
+        //            xhr.send(new FormData(form));
+        //        }
+        //    }
+        //}, true);
 
         $(document).on("keypress", "form", function (event) {
             return event.keyCode != 13;
@@ -61,6 +61,29 @@ EventDetailsManagement = {
     controls: {
         spin: null
     },
+    bindEventForElement:function(){
+        // Bind events for controls
+
+        $("#Btn_OrderTicket").unbind("click").bind("click", function () {
+            if (EventDetailsManagement.validateOrderTicketForm()) {
+                $("#Form_OrderTicket").submit();
+            }
+        });
+    },
+    validateOrderTicketForm:function(){
+        // Validate form
+
+        var valid = false;
+        $("#Form_OrderTicket .ticket_table_select").each(function (index, element) {
+            var value = parseInt($(element).val());
+            if (value != NaN && value > 0) {
+                valid = true;
+                return
+            }
+        });
+
+        return valid;
+    },
     googleApiCallBackFunction: function () {
         /// <summary>
         /// This function will be call when google api ready for use
@@ -68,6 +91,7 @@ EventDetailsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>
 
+        this.init();
         this.updateMapForNewLocation();
     },
     updateMapForNewLocation: function () {

@@ -40,7 +40,7 @@ namespace Portal.Model.Context
         public Nullable<System.DateTime> EndSaleDateTime { get; set; }
         public int Type { get; set; }
     
+        public virtual event_Event Event { get; set; }
         public virtual ICollection<event_TicketOrder> event_TicketOrder { get; set; }
-        public virtual event_Event event_Event { get; set; }
     }
 }

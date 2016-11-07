@@ -594,6 +594,10 @@
     <Content Include="Content\event\create2.css" />
     <Content Include="Content\event\create_event_tinymce.css" />
     <Content Include="Content\event\eb.persistent_header.css" />
+    <Content Include="Content\event\event_eventdetails.css" />
+    <Content Include="Content\event\event_orderticket.css" />
+    <Content Include="Content\event\event_pages_C.css" />
+    <Content Include="Content\event\event_page_advanced.css" />
     <Content Include="Content\event\global_header.css" />
     <Content Include="Content\event\search.css" />
     <Content Include="Content\event\ticket_grouping.css" />
@@ -2031,6 +2035,7 @@
     <Content Include="Scripts\common\html5.js" />
     <Content Include="Scripts\common\html5shiv.min.js" />
     <Content Include="Scripts\event\displayevents-management.js" />
+    <Content Include="Scripts\event\eventdetails-management.js" />
     <Content Include="Scripts\home\chosen.jquery.min.js" />
     <Content Include="Scripts\home\custom-footer.js" />
     <Content Include="Scripts\home\footer-homepage.js" />
@@ -2150,7 +2155,8 @@
     <Content Include="Views\Shared\_ListEventItemSmall.cshtml" />
     <Content Include="Views\Event\DisplayEvents.cshtml" />
     <Content Include="Views\Event\_SummaryEventItem.cshtml" />
-    <Content Include="Views\Event\OrderEvent.cshtml" />
+    <Content Include="Views\Event\OrderTicketPage.cshtml" />
+    <Content Include="Views\Event\EventDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -80,6 +80,9 @@
     <Compile Include="Context\event_Event.cs">
       <DependentUpon>PortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\event_Order.cs">
+      <DependentUpon>PortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\event_Ticket.cs">
       <DependentUpon>PortalModel.tt</DependentUpon>
     </Compile>
@@ -131,6 +134,7 @@
     <Compile Include="Mapper\CommonMapper.cs" />
     <Compile Include="Mapper\EventMapper.cs" />
     <Compile Include="Mapper\ProjectMapper.cs" />
+    <Compile Include="MessageModel\EventModel.cs" />
     <Compile Include="MessageModel\ProjectManagement.cs" />
     <Compile Include="MessageModel\SearchResultItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

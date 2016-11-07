@@ -1,5 +1,7 @@
 ﻿using Portal.Infractructure.Helper;
 using Portal.Infractructure.Utility;
+using Portal.Model.Context;
+using Portal.Model.MessageModel;
 using Portal.Model.ViewModel;
 using Portal.Service.Implements;
 using Portal.Service.Interfaces;
@@ -229,7 +231,7 @@ namespace Site.OnlineStore.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            EventFullView foundEvent = service.GetEventDetails((int)id);
+            EventDetailsResponse foundEvent = service.GetEventDetails((int)id);
 
             ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
 
@@ -285,11 +287,74 @@ namespace Site.OnlineStore.Controllers
             return View("DisplayEvents", response);
         }
 
+        /// <summary>
+        /// Show list available events
+        /// </summary>
+        /// <returns></returns>
         public ActionResult DisplayEvents()
         {
             ViewBag.ListEventTopics = service.GetListEventTopics();
             ViewBag.ListEventTypes = service.GetListEventTypes();
             return View("DisplayEvents");
+        }
+
+        /// <summary>
+        /// Navigate to order ticket page
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult OrderTicket(GetOrderTicketFormRequest orderTicketRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                if (orderTicketRequest.EventId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                else
+                {
+                    EventDetailsResponse foundEvent = service.GetEventDetails(orderTicketRequest.EventId);
+                    if (foundEvent == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    else
+                    {
+                        foreach (OrderTicketRequest ticket in orderTicketRequest.Tickets)
+                        {
+                            OrderEventTicketModel tk = foundEvent.Tickets.Where(t => t.Id == ticket.TicketId).FirstOrDefault();
+                            if (tk != null)
+                            {
+                                tk.Quantity = ticket.TicketQuantity;
+                            }
+                        }
+                        ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
+                        return View("EventDetails", foundEvent);
+                    }
+                }
+
+            }
+
+            // Check quantity of order tikcets is valid or not
+
+            EventDetailsResponse eventObject = service.GetEventDetails(orderTicketRequest.EventId);
+            foreach (OrderTicketRequest ticket in orderTicketRequest.Tickets)
+            {
+                OrderEventTicketModel tk = eventObject.Tickets.Where(t => t.Id == ticket.TicketId).FirstOrDefault();
+                if (tk != null)
+                {
+                    tk.Quantity = ticket.TicketQuantity;
+                }
+            }
+
+            TempData["orderItems"] = eventObject;
+            return RedirectToAction("OrderTicketPage");
+        }
+
+        public ActionResult OrderTicketPage()
+        {
+            var model = TempData["orderItems"] as EventDetailsResponse;
+            return View(model);
         }
 
         #endregion

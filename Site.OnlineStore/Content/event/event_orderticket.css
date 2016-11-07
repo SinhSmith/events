@@ -1,0 +1,471 @@
+﻿      <style>
+          #contentpub .main,
+#customheader .main,
+#customfooter .main,
+#headpub .main,
+#footpub .main{
+    min-width:700px;
+    vertical-align:top;
+    text-align:left;
+}
+
+.panel_628,
+.panel_280 {
+    width:100%;
+    margin-bottom: 26px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.panel_628{
+    min-width:400px;
+}
+.panel_280{
+    min-width:300px;
+}
+
+p{
+    line-height:normal;
+}
+#subhead{
+    margin-bottom:0;
+}
+#subfooter{
+    margin-top:0;
+}
+#regprocess{
+    margin:0;
+}
+#regprocess ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+#regprocess ul li{
+    width:189px;
+    height:20px;
+    padding:5px 9px 3px;
+    font-size:14px;
+    line-height:18px;
+    font-weight:bold;
+    display:inline-block;
+    float:left;
+    border-top:1px solid;
+    border-bottom:0 solid;
+    border-right:1px solid;
+    font-weight:normal;
+}
+#regprocess ul li.first{
+    width:191px;
+    border-left:1px solid;
+}
+#regprocess ul li span{
+    font-size:13px;
+    margin-left:5px;
+}
+#regprocess ul li.active{
+    color:#FFF;
+    background-color:#E60;
+}
+#processing{
+    text-align:center;
+}
+#processing ul{
+    width:100px;
+    margin:0 auto;
+    padding:0;
+    list-style:none;
+}
+#processing ul li{
+    width:20px;
+    height:20px;
+    margin-right:10px;
+    display:inline-block;
+    float:left;
+    border:1px solid;
+}
+.login_button {
+    width:58px;
+    height:24px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/login.png);
+    background-color:transparent;
+    vertical-align:middle;
+    border:none;
+}
+.reviewyourorder_button a{
+    width:180px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/reviewyourorder.png);
+    display:block;
+    vertical-align:middle;
+}
+.paybycheque_button a{
+    width:153px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paybycheque.png);
+    display:block;
+    vertical-align:middle;
+}
+.paybycheck_button a{
+    width:143px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paybycheck.png);
+    display:block;
+    vertical-align:middle;
+}
+.payatthedoor_button a{
+    width:160px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/payatthedoor.png);
+    display:block;
+    vertical-align:middle;
+}
+.sendinvoice_button a{
+    width:135px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/sendinvoice.png);
+    display:block;
+    vertical-align:middle;
+}
+.completeregistration_button a{
+    width:209px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/completeregistration.png);
+    display:block;
+    vertical-align:middle;
+}
+.register_button a{
+    width:99px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/register.png);
+    display:block;
+    vertical-align:middle;
+}
+.ordernow_button a{
+    width:116px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/ordernow.png);
+    display:block;
+    vertical-align:middle;
+}
+.payoffline_button a{
+    width:120px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/payoffline.png);
+    display:block;
+    vertical-align:middle;
+}
+.paynow_button a{
+    width:101px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/paynow.png);
+    display:block;
+    vertical-align:middle;
+}
+.save_button a{
+    width:71px;
+    height:26px;
+    background-image:url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/save.png);
+    display:block;
+    vertical-align:middle;
+}
+.addmetowaitlist_button a{
+    width:204px;
+    height:26px;
+    background-image: url(https://cdn.evbstatic.com/s3-s3/static/images/button_event/addmetowaitlist.png);
+    display:block;
+    vertical-align:middle;
+}
+a.on,button:hover,
+.login_button a:hover,
+.reviewyourorder_button a:hover,
+.paybycheque_button a:hover,
+.paybycheck_button a:hover,
+.payatthedoor_button a:hover,
+.sendinvoice_button a:hover,
+.completeregistration_button a:hover,
+.register_button a:hover,
+.ordernow_button a:hover,
+.payoffline_button a:hover,
+.paynow_button a:hover,
+.save_button a:hover{
+    background-position:bottom;
+}
+a.active{
+    background-position:0 -26px;
+}
+
+
+
+body {
+	color: #404040;
+	background-color: #f7f7f7;
+}
+body a,
+a:link,
+a:visited{
+	color: #0f90ba;
+}
+
+#contentpub .eb_button.large.default,
+#contentpub span.button_css > a {
+    color: #555;
+}
+
+#contentpub span.go_button > a,
+#contentpub .eb_button.small.fb_connect {
+    color: #fff;
+}
+
+h2 {
+	color: #404040;
+}
+h1 {
+	font-size: 26px;
+    line-height: 28px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.main {
+	color: #404040;
+}
+#subheader {
+    border-bottom: 1px dotted  #dedede;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+}
+#subheader_table {
+    width: 960px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#subheader_info_cell {
+    vertical-align: bottom;
+}
+
+#subheader_logo_cell {
+    width: 300px;
+    text-align: center;
+}
+
+.panel_head2, .panel_footer {
+	background-color: #fafafa;
+	border-color: #dedede;
+	color:  #404040;
+}
+.panel_body,
+.ticket_row,
+.passwd_info,
+.panel_628_share,
+.panel_footer,
+.panel_section,
+.unit_row {
+	background-color: #ffffff;
+	border-color:  #dedede;
+	color: #666666;
+}
+.panel_body a {
+	color: #0f90ba;
+}
+.panel_border {
+    border-color: #dedede;
+}
+.ticket_container {
+	border-color: #dedede;
+	border: 1px solid #dedede;
+}
+.ticket_table_head,
+.ticket_table_head td {
+	color: #666666;
+	background-color: #ffffff;
+}
+.ticket_table td {
+    border:none;
+    border-top: 1px solid #dedede;
+}
+.ticket_table .offer_row td {
+    border-top: none;
+}
+.unit_row td {
+	padding-top:0px;
+	padding-bottom:12px;
+	padding-right:5px;
+	padding-left:20px;
+	border-top: none;
+}
+.unit_row_v2 td {
+	padding-top:0px;
+	padding-bottom:0px;
+	padding-right:5px;
+	padding-left:5px;
+	border-top: none;
+}
+.passwd_info {
+	background-color: #ffffff;
+	border: 1px solid #dedede;
+}
+
+#processing ul li {
+	border-color: #0f90ba;
+}
+
+#processing ul li.active {
+	background-color: #0f90ba;
+}
+
+#regprocess {
+	border-color: #dedede;
+}
+
+#regprocess ul li,
+#regprocess ul li.first {
+	color: #666666;
+	background-color: #ffffff;
+	border-color: #dedede;
+}
+
+#regprocess ul li.active {
+	color: #404040;
+	background-color: #0f90ba;
+}
+
+.panel_edit {
+	width: 400px;
+	color:  #404040;
+	background-color: #ffffff;
+	border-color: #dedede;
+	border-style: solid;
+	border-width: 1px;
+	padding:8px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#event_header h1 {
+    margin-top: 8px;
+}
+
+#event_header h2 {
+	font-size: 17px;
+	text-align : left;
+    line-height: 21px;
+	color: #404040;
+	margin: 0;
+	padding: 0;
+	font-weight: 300;
+	}
+
+#event_header h2 > a {
+	color: #404040;
+}
+
+#event_network h2  {
+	margin  : 0;
+	padding :0 ;
+    line-height: 21px;
+}
+
+.panel_head2 h3 {
+	font-size:16px;
+	line-height:22px;
+	font-weight: 500;
+	color: #404040;
+	padding: 0;
+}
+
+.panel_body h2 {
+	font-size:16px;
+	line-height:1.2em;
+	font-weight:bold;
+	color: #666666;
+	margin : 2px 0 0;
+	padding: 0;
+}
+
+#panel_address h2 {
+	font-size:1.0em;
+	line-height:normal;
+	font-weight:normal;
+	color: #666666;
+	margin : 0;
+	padding: 0 0 8px;
+	text-align : left;
+}
+
+#panel_when h2 {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size:1.0em;
+	line-height:normal;
+	font-weight:normal;
+	color: #666666;
+	margin : 0;
+	padding: 0;
+	text-align : left;
+}
+
+#RSVPBody {
+	background-color: #ffffff;
+	border: 1px solid #dedede;
+	color:  #666666;
+}
+.RSVPMessage {
+    display: block;
+    margin: 24px 0 10px;
+}
+.rsvp_responded_thanks {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.rsvp_responded_msg {
+    margin-top: 13px;
+}
+
+/* social sharing module on /orderconfirmation */
+.panel_628_share {
+    border: 1px solid #dedede;
+}
+#optouts_div {
+    border-left: 1px dotted #dedede;
+}
+/* end social sharing module on /orderconfirmation */
+.registrationTable h3 {
+    border-bottom: 1px solid #dedede;
+}
+
+/* event tracking button */
+#track_event_container {
+    border-color: #dedede;
+    background-color: #ffffff;
+}
+
+
+.js-advanced-team-landing .pod,
+.advanced-team-navigation .js-advanced-team-landing .pod:hover {
+    background-color: #ffffff;
+    border: 1px solid #dedede;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+a:hover .advanced-team-landing__primary-text {
+    opacity: 0.66;
+}
+.advanced-team-landing__primary-text {
+    color:  #666666;
+}
+
+#preview_links {
+	background: #f7f7f7;
+	color: #99376e;
+	padding: 20px;
+	font-size: 14px;
+	font-family: Arial;
+	text-align: center;
+}
+
+      </style>
+

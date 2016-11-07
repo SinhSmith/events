@@ -109,4 +109,50 @@ namespace Portal.Model.ViewModel
         public string ZipCode { get; set; }
         public string Country { get; set; }
     }
+
+    public class EventDetailsResponse
+    {
+        public EventDetailsResponse()
+        {
+            Tickets = new List<OrderEventTicketModel>();
+        }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Description { get; set; }
+        public string OrganizationName { get; set; }
+        public string OrganizationDescription { get; set; }
+        public share_Images CoverImage { get; set; }
+        public int EventType { get; set; }
+        public int EventTopic { get; set; }
+        public bool IsShowRemainingNumberTicket { get; set; }
+        public string Location_StreetName { get; set; }
+        public string Location_Address { get; set; }
+        public string Location_Address2 { get; set; }
+        public string Location_City { get; set; }
+        public string Location_State { get; set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+        public int Status { get; set; }
+        public Nullable<int> SortOrder { get; set; }
+        public IList<OrderEventTicketModel> Tickets { get; set; }
+    }
+
+    public class OrderEventTicketModel
+    {
+        public Nullable<int> Id { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = true)]
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = true)]
+        public string Description { get; set; }
+        public int MinimunTicketOrder { get; set; }
+        public int MaximunTicketOrder { get; set; }
+        public string StartSaleDateTime { get; set; }
+        public string EndSaleDateTime { get; set; }
+        public int Type { get; set; }
+        public decimal Price { get; set; }
+
+    }
 }

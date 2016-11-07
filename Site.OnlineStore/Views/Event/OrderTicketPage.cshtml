@@ -1,0 +1,332 @@
+﻿@model Portal.Model.ViewModel.EventDetailsResponse
+@{
+    ViewBag.Title = "Order Event";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section LocalStyles{
+<link href="~/Content/event/event_orderticket.css" rel="stylesheet" />
+<link href="~/Content/event/event_pages_C.css" rel="stylesheet" />
+}
+
+<div id="contentpub">
+    <div class="main clrfix">
+        <!-- Error summary panel -->
+        <div id="ticket_error_message_container" class="deprecated-notification2 error_notification hidden">
+            <div class="error_notification_msg">
+                <span id="ticket_error_message" style="display:none;"></span>
+            </div>
+        </div>
+
+        <!-- Title, location of event -->
+        <div id="subheader">
+            <table id="subheader_table">
+                <tbody>
+                    <tr>
+                        <td id="subheader_info_cell" style="">
+                            <div id="event_header">
+                                <h1><span class="summary">@Model.Title</span></h1>
+                                <h2>
+                                    <a target="_blank">
+                                        @Model.OrganizationName
+                                    </a>
+                                </h2>
+                                <h2>From: @Model.StartDate To: @Model.EndDate</h2>
+                                <div id="event_network">
+                                    <h2>@Model.Location_StreetName @Model.Location_Address @Model.Location_City @Model.Location_State @Model.Country</h2>
+                                </div>
+                            </div>
+                        </td>
+                        <td id="subheader_logo_cell">
+                            <div class="event_title_image" style="margin:0;padding:0;">
+                                @if (Model.CoverImage != null)
+                                {
+                                    <img src="@Model.CoverImage.ImagePath" alt="@Model.CoverImage.ImageName" class="photo cropped js-d-retina">
+                                }
+                                else
+                                {
+                                    <img src="@Portal.Infractructure.Utility.EventConstants.ImageNotFoundPath" alt="Cannot find image" class="photo cropped js-d-retina">
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Right content panel -->
+        <div id="col_628">
+            <div class="panel_628">
+                <!-- error messages -->
+                <div id="order_summary_container">
+                    <div class="panel_head2">
+                        Order Summary
+                    </div>
+                    <div class="panel_body" id="order_summary_data">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="ticket_table" data-automation="ticket_table">
+                            <tbody>
+                                <tr class="ticket_table_head">
+                                    <td width="400">TYPE</td>
+                                    <td align="center">QUANTITY</td>
+                                    <td align="center"></td>
+                                </tr>
+
+                                @foreach (Portal.Model.ViewModel.OrderEventTicketModel ticket in Model.Tickets)
+                                {
+                                    <tr class="ticket_row">
+                                        <td>@ticket.Name</td>
+                                        <td align="center">@ticket.Quantity</td>
+                                        <td align="center"></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!--.panel_628-->
+            <div class="panel_628">
+                <div class="panel_head2">
+                    <div>
+                        <nobr><span>Registration Information</span></nobr>
+                    </div>
+                    <div class="clearfloat"></div>
+                </div>
+                <div class="panel_body" id="processingDiv" style="display: none;">
+                    <div style="text-align: center; margin: 100px;">
+                        <h1 id="processingTitle"> Processing Your Order </h1>
+                        <div id="processingMessage" style="display: none; font-weight: bold;">
+                            Your order is being processed.  Please do not refresh this page.<br>
+                            Once processing is complete, you will see your order confirmation.<br><br>
+                        </div>
+                        <div id="processing">
+                            <img src="./Eventbrite - Armour@ThePark_ Charged Run_files/progress-bar.gif" alt="loading animation">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel_body" id="registrationDiv" style="padding: 15px;" data-automation="registration_div">
+                    <a name="loginbox"></a>
+                    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="left">
+                        <tbody>
+                            <tr>
+                                <td>
+
+                                    <div class="countdown_timer_notification clrfix" style="font-weight: normal;">
+                                        <div id="time_left">6:56 </div>
+                                        <p>
+                                            Please complete registration within <span id="time_limit">8:00 </span> minutes.<br>
+                                            After <span id="time_limit2">8:00 </span> minutes, the reservation we're holding will be released to others.
+                                        </p>
+                                    </div>
+                                    <script type="text/javascript">
+                                        var orderTimeControl = {
+                                            limit: 480,
+                                            left: 478,
+                                            now: new Date(),
+                                            endTime: ''
+                                        },
+                                            gUpdateCountdownTimeoutId = null; //This global variable is a hack for #7215. Sorry
+
+                                        orderTimeControl.endTime = new Date(orderTimeControl.now.getTime() + orderTimeControl.left * 1000);
+
+                                        function displayTime(field, numSeconds) {
+                                            var timeMinutes = parseInt(numSeconds / 60, 10),
+                                                timeSeconds = parseInt(numSeconds - timeMinutes * 60, 10);
+
+                                            if (timeSeconds < 10) {
+                                                timeLabel = timeMinutes + ":0" + timeSeconds + " ";
+                                            } else {
+                                                timeLabel = timeMinutes + ":" + timeSeconds + " ";
+                                            }
+
+                                            document.getElementById(field).innerHTML = timeLabel;
+                                        }
+
+                                        displayTime("time_limit", orderTimeControl.limit);
+                                        displayTime("time_limit2", orderTimeControl.limit);
+                                        displayTime("time_left", orderTimeControl.left);
+
+
+                                        function updateCountdown() {
+                                            var now = new Date();
+
+                                            if (now < orderTimeControl.endTime) {
+                                                displayTime("time_left", (orderTimeControl.endTime - now) / 1000);
+                                                gUpdateCountdownTimeoutId = window.setTimeout("updateCountdown();", 1000);
+                                            } else {
+                                                display_error_msg("alert", "exceeded", "register");
+                                                if (regurl.indexOf('?') == -1)
+                                                    regurl += '?';
+                                                else
+                                                    regurl += '&';
+                                                document.location.href = regurl + "err=29";
+                                            }
+                                        }
+
+                                        gUpdateCountdownTimeoutId = window.setTimeout("updateCountdown();", 1000);
+                                    </script>
+                                    <b style="float: left; width: 450px;"></b><br><br>
+                                    <div class="clear"></div>
+                                    <br>
+                                    <div class="error" style="float: right;">* Required Field</div>
+                                    <!-- DISPLAY THE SURVEY QUESTIONS -->
+                                    <table class="registrationTable" cellpadding="2" cellspacing="0" border="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td><h3>Your Information</h3></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div id="loggedInAs" style="">
+                                                        <font style="font-size: 14px">Hi, <span id="loggedInEmail" style="font-style: italic;">trungkien3289@gmail.com.</span>&nbsp;&nbsp;&nbsp;</font>
+                                                        <font style="font-size: 12px; font-weight: normal;">Not you? <a href="">Sign Out</a></font>
+                                                    </div>
+                                                    <div id="loginCollapsed" style="display:none;">
+                                                        <font style="font-size: 12px;">Have you used Eventbrite before? <a href="">Sign In To Your Account</a></font>
+                                                    </div>
+                                                    <div id="loginExpanded" style=" display:none; ">
+                                                        <form id="loginForm" name="loginForm" method="post" action="https://www.eventbrite.com/regloginajax">
+                                                            <div id="loginError" style="display: none; margin: 0px 0px 6px 175px; color: red;"></div>
+                                                            <input type="hidden" name="orderid" value="8280b008a18811e6a86a12e0ae242de9">
+                                                            <input type="hidden" name="eid" value="28717566013">
+                                                            <table cellpadding="4">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 159px;" align="right"><div style="margin-bottom: -7px;">Email Address:</div></td>
+                                                                        <td>
+                                                                            <input type="text" name="email" id="email" value="trungkien3289@gmail.com" style="width: 150px; color: black;" onfocus="clearEmail();" onblur="setEmail();">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 159px;" align="right"><div style="margin-bottom: -7px;">Password:</div></td>
+                                                                        <td><input type="password" name="passwd" id="passwd" style="width: 150px; color: black;"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 159px;"></td>
+                                                                        <td id="login_button_cell"><span class="button_css go_button" style="display:inline-block;"><input type="submit" value="Login"></span><small>Logging in is optional.</small></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <form id="registrationForm" name="registrationForm" method="post" target="_top" class="">
+                                        <input type="hidden" name="submitted" value="1">
+                                        <input type="hidden" name="ismanual" value="">
+                                        <input type="hidden" name="payment_type" value="free">
+                                        <table class="registrationTable" cellpadding="2" cellspacing="0" border="0" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="right"><label for="first_name">First Name:</label></td>
+                                                    <td><span class="error">*</span></td>
+                                                    <td><input type="text" id="first_name" name="first_name" style="width: 270px;" onblur="setField(this);" class="required"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right"><label for="last_name">Last Name:</label></td>
+                                                    <td><span class="error">*</span></td>
+                                                    <td><input type="text" id="last_name" name="last_name" style="width: 270px;" onblur="setField(this);" class="required"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right"><nobr><label for="email_address">Email Address:</label></nobr></td>
+                                                    <td><span class="error">*</span></td>
+
+                                                    <td><input type="text" id="email_address" name="email_address" style="width: 270px;" onblur="setField(this);" class="required validated-field" maxlength="50" data-original-title="" title=""><i class="field-valid-status"></i><div class="field-error-message"></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <br>
+                                        <!-- DISPLAY THE PAYMENT OPTIONS -->
+
+                                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td align="right">
+                                                        <span id="primary_cta" class="button_css button_checkout"><a href="javascript: freeCheckout();" style="text-decoration:none; color:#FFFFFF;">Complete Registration</a></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clearfloat"></div>
+
+                </div>
+            </div><!--.panel_628-->
+        </div><!-- end col_628 -->
+
+        <!-- Left content panel -->
+        <div id="col_280">
+            <div class="panel_280">
+                <div class="panel_head2">
+                    <h3>
+                        When &amp; Where
+                    </h3>
+                </div>
+                <div class="panel_body" id="panel_when">
+                    <h2 class="location vcard" style="margin-top: 3px;">
+                        <br>
+                        <b><span class="fn org">@Model.Location_StreetName </span></b><br>
+                        <span class="adr">
+                            <span class="street-address">
+                                @Model.Location_Address<br>
+                                @Model.Location_Address2<br>
+                            </span>
+                            <span class="locality">@Model.Location_City</span>,
+                            <span class="region">@Model.Location_State</span> @Model.ZipCode<br>
+                            <span class="region">@Model.Country</span><br>
+                        </span>
+                        <br>
+                    </h2>
+                    <h2 style="padding-bottom: 0;">
+                        <span class="dtstart">
+                            @Model.StartDate
+                        </span>
+                        <span class="dtend">
+                            @Model.EndDate
+                        </span>
+                    </h2>
+                    <br>
+                </div><!-- end panel_body -->
+            </div><!-- end panel_280 -->
+            <div id="hostedByDiv" class="panel_280 vcard">
+                <div class="panel_head2"><h3>Organizer</h3></div>
+                <div id="new_organizer_module" class="panel_body">
+                    <div id="organizer_header" class="fn panel_border">
+                        <h2>@Model.OrganizationName</h2>
+                    </div>
+
+                    <div id="organizer_content">
+                        <div id="organizer_profile" class="organizer_link">
+                            <a id="profile_link" class="url js-organizer-tracking" href="" target="_blank" data-event-category="checkout" data-event-action="ViewOrgProfile" data-event-label="Under Armour SEA">
+                                View organizer profile
+                            </a>
+                        </div>
+
+                        <div id="organizer_facebook" class="organizer_link">
+                            <a class="url" href="" target="_blank" rel="nofollow">
+                                facebook.com
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- end panel_body -->
+            </div><!-- end panel_280 -->
+        </div><!-- end col_280 -->
+    </div>
+
+    <div class="clearfloat"></div>
+    <br><br>
+</div><!-- end main -->
+<!-- end contentpub -->
+
+
