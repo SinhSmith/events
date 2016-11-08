@@ -22,7 +22,8 @@ namespace Portal.Service.Implements
 
         private static PortalEntities context = new PortalEntities();
         private EventRepository db = new EventRepository(context);
-        private Repository<event_Order> orderRepository = new Repository<event_Order>(context); 
+        private EventOrderRepository orderRepository = new EventOrderRepository(context);
+        private TicketRepository ticketRepository = new TicketRepository(context);
 
         #endregion
 
@@ -32,7 +33,8 @@ namespace Portal.Service.Implements
         {
             context = new PortalEntities();
             db = new EventRepository(context);
-            orderRepository = new Repository<event_Order>(context);
+            orderRepository = new EventOrderRepository(context);
+            ticketRepository = new TicketRepository(context);
         }
 
         #endregion
@@ -177,6 +179,28 @@ namespace Portal.Service.Implements
         private IEnumerable<EventTypeModel> GetListEventTypes(List<int> eventTypeIds)
         {
             return GetListEventTypes().Where(t => eventTypeIds.Contains(t.Id)).ToList();
+        }
+
+        private bool CheckAvailableTicket(int eventId, int ticketId,int orderQuantity)
+        {
+            List<event_TicketOrder> orderedTickets = orderRepository.GetOrderedTicket(eventId, ticketId);
+
+            int numberOrderedTicket = 0;
+
+            foreach (var ticket in orderedTickets)
+            {
+                numberOrderedTicket += (int)ticket.Quantity;
+            }
+
+            int totalTickets = ticketRepository.GetTicketById(ticketId).AvailableTicketQuantity;
+
+            if (orderQuantity > (totalTickets - numberOrderedTicket))
+            {
+                return false;
+            }else{
+                return true;
+            }
+            
         }
 
         #endregion
@@ -360,21 +384,24 @@ namespace Portal.Service.Implements
             {
                 event_Order order = new event_Order()
                 {
-                    EventId = orderRequest.EventId
+                    EventId = orderRequest.EventId,
+                    Guid = Guid.NewGuid(),
+                    Status = (int)Portal.Infractructure.Utility.Define.Status.Deactive,
+                    OrderTime = DateTime.Now
                 };
-                db.Save();
 
                 foreach (var item in orderRequest.Tickets)
                 {
-                    order.event_TicketOrder.Add(new event_TicketOrder()
+                    order.OrderTickets.Add(new event_TicketOrder()
                     {
                         TicketId = item.TicketId,
                         Quantity = item.TicketQuantity,
-                        OrderId = order.Id
                     });
                 }
 
-                db.Save();
+                orderRepository.Insert(order);
+
+                orderRepository.Save();
 
                 return order.Guid;
             }
@@ -384,10 +411,60 @@ namespace Portal.Service.Implements
             }
         }
 
+        /// <summary>
+        /// Get Order by guid
+        /// </summary>
+        /// <param name="orderGuid"></param>
+        /// <returns></returns>
         public event_Order GetOrderByGuid(Guid orderGuid)
         {
-            orderRepository.get
+            return orderRepository.getEventByGuid(orderGuid);
         }
+
+        public bool ConfirmOrderTicket(ConfirmOrderTicketRequest orderInfor, ref string message)
+        {
+            event_Order order = orderRepository.getEventByGuid(orderInfor.OrderId);
+            if(order == null){
+                message = "Order was not found!";
+                return false;
+            }
+
+            if (orderInfor.SubmitTime.Subtract((DateTime)order.OrderTime).Minutes > 8)
+            {
+                message = "Order was time out!";
+                return false;
+            }
+
+            bool orderValid = true;
+
+            foreach (var item in order.OrderTickets)
+	        {
+                if (!CheckAvailableTicket(order.EventId, item.TicketId, (int)item.Quantity))
+                {
+                    orderValid = false;
+                }
+	        }
+
+            if (!orderValid) {
+                message = "Have not enough ticket available";
+                return false;
+            }
+
+            try
+            {
+                order.Status = (int)Portal.Infractructure.Utility.Define.Status.Active;
+                orderRepository.Save();
+
+                message = "Order tickets successful!";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return false;
+            }
+        }
+
         #endregion
 
         #region Release resources

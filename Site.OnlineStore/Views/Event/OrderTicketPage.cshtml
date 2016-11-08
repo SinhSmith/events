@@ -9,6 +9,16 @@
 <link href="~/Content/event/event_pages_C.css" rel="stylesheet" />
 }
 
+@section LocalScripts{
+
+<script src="~/Scripts/event/orderticket-management.js"></script>
+    <script>
+        $(document).ready(function () {
+            OrderTicketManagement.init();
+        })
+    </script>
+}
+
 <div id="contentpub">
     <div class="main clrfix">
         <!-- Error summary panel -->
@@ -41,7 +51,7 @@
                             <div class="event_title_image" style="margin:0;padding:0;">
                                 @if (Model.CoverImage != null)
                                 {
-                                    <img src="@Model.CoverImage.ImagePath" alt="@Model.CoverImage.ImageName" class="photo cropped js-d-retina">
+                                    <img src="@Model.CoverImage" class="photo cropped js-d-retina">
                                 }
                                 else
                                 {
@@ -120,53 +130,7 @@
                                             After <span id="time_limit2">8:00 </span> minutes, the reservation we're holding will be released to others.
                                         </p>
                                     </div>
-                                    <script type="text/javascript">
-                                        var orderTimeControl = {
-                                            limit: 480,
-                                            left: 478,
-                                            now: new Date(),
-                                            endTime: ''
-                                        },
-                                            gUpdateCountdownTimeoutId = null; //This global variable is a hack for #7215. Sorry
-
-                                        orderTimeControl.endTime = new Date(orderTimeControl.now.getTime() + orderTimeControl.left * 1000);
-
-                                        function displayTime(field, numSeconds) {
-                                            var timeMinutes = parseInt(numSeconds / 60, 10),
-                                                timeSeconds = parseInt(numSeconds - timeMinutes * 60, 10);
-
-                                            if (timeSeconds < 10) {
-                                                timeLabel = timeMinutes + ":0" + timeSeconds + " ";
-                                            } else {
-                                                timeLabel = timeMinutes + ":" + timeSeconds + " ";
-                                            }
-
-                                            document.getElementById(field).innerHTML = timeLabel;
-                                        }
-
-                                        displayTime("time_limit", orderTimeControl.limit);
-                                        displayTime("time_limit2", orderTimeControl.limit);
-                                        displayTime("time_left", orderTimeControl.left);
-
-
-                                        function updateCountdown() {
-                                            var now = new Date();
-
-                                            if (now < orderTimeControl.endTime) {
-                                                displayTime("time_left", (orderTimeControl.endTime - now) / 1000);
-                                                gUpdateCountdownTimeoutId = window.setTimeout("updateCountdown();", 1000);
-                                            } else {
-                                                display_error_msg("alert", "exceeded", "register");
-                                                if (regurl.indexOf('?') == -1)
-                                                    regurl += '?';
-                                                else
-                                                    regurl += '&';
-                                                document.location.href = regurl + "err=29";
-                                            }
-                                        }
-
-                                        gUpdateCountdownTimeoutId = window.setTimeout("updateCountdown();", 1000);
-                                    </script>
+                                    
                                     <b style="float: left; width: 450px;"></b><br><br>
                                     <div class="clear"></div>
                                     <br>
@@ -217,26 +181,25 @@
                                     </table>
 
                                     <form id="registrationForm" name="registrationForm" method="post" target="_top" class="">
-                                        <input type="hidden" name="submitted" value="1">
-                                        <input type="hidden" name="ismanual" value="">
+                                        <input type="hidden"  id="InputHidden_OrderId" name="submitted" value="@Model.OrderId">
                                         <input type="hidden" name="payment_type" value="free">
                                         <table class="registrationTable" cellpadding="2" cellspacing="0" border="0" width="100%">
                                             <tbody>
                                                 <tr>
                                                     <td align="right"><label for="first_name">First Name:</label></td>
                                                     <td><span class="error">*</span></td>
-                                                    <td><input type="text" id="first_name" name="first_name" style="width: 270px;" onblur="setField(this);" class="required"></td>
+                                                    <td><input type="text" id="Txt_FirstName" name="first_name" style="width: 270px;" class="required"></td>
                                                 </tr>
                                                 <tr>
                                                     <td align="right"><label for="last_name">Last Name:</label></td>
                                                     <td><span class="error">*</span></td>
-                                                    <td><input type="text" id="last_name" name="last_name" style="width: 270px;" onblur="setField(this);" class="required"></td>
+                                                    <td><input type="text" id="Txt_LastName" name="last_name" style="width: 270px;" class="required"></td>
                                                 </tr>
                                                 <tr>
                                                     <td align="right"><nobr><label for="email_address">Email Address:</label></nobr></td>
                                                     <td><span class="error">*</span></td>
 
-                                                    <td><input type="text" id="email_address" name="email_address" style="width: 270px;" onblur="setField(this);" class="required validated-field" maxlength="50" data-original-title="" title=""><i class="field-valid-status"></i><div class="field-error-message"></div></td>
+                                                    <td><input type="text" id="Txt_EmailAddress" name="email_address" style="width: 270px;" class="required validated-field" maxlength="50" data-original-title="" title=""><i class="field-valid-status"></i><div class="field-error-message"></div></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -249,7 +212,7 @@
                                                 <tr>
                                                     <td></td>
                                                     <td align="right">
-                                                        <span id="primary_cta" class="button_css button_checkout"><a href="javascript: freeCheckout();" style="text-decoration:none; color:#FFFFFF;">Complete Registration</a></span>
+                                                        <span id="Btn_CompleteRegistration" class="button_css button_checkout"><a href="javascript: freeCheckout();" style="text-decoration:none; color:#FFFFFF;">Complete Registration</a></span>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -328,5 +291,4 @@
     <br><br>
 </div><!-- end main -->
 <!-- end contentpub -->
-
 

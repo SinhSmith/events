@@ -113,9 +113,6 @@
     <Compile Include="Context\share_Images.cs">
       <DependentUpon>PortalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\sysdiagram.cs">
-      <DependentUpon>PortalModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\system_Banners.cs">
       <DependentUpon>PortalModel.tt</DependentUpon>
     </Compile>
@@ -133,15 +130,20 @@
     </Compile>
     <Compile Include="Mapper\CommonMapper.cs" />
     <Compile Include="Mapper\EventMapper.cs" />
+    <Compile Include="Mapper\OrderEventMapper.cs" />
     <Compile Include="Mapper\ProjectMapper.cs" />
+    <Compile Include="MessageModel\CommonMessage.cs" />
     <Compile Include="MessageModel\EventModel.cs" />
+    <Compile Include="MessageModel\OrderEventModel.cs" />
     <Compile Include="MessageModel\ProjectManagement.cs" />
     <Compile Include="MessageModel\SearchResultItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\EventOrderRepository.cs" />
     <Compile Include="Repository\EventRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ProjectRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\TicketRepository.cs" />
     <Compile Include="ViewModel\BannerViewModel.cs" />
     <Compile Include="ViewModel\cmsCategoryView.cs" />
     <Compile Include="ViewModel\ImageViewModel.cs" />

@@ -117,13 +117,14 @@ namespace Portal.Model.ViewModel
             Tickets = new List<OrderEventTicketModel>();
         }
         public int Id { get; set; }
+        public string OrderId { get; set; }
         public string Title { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string Description { get; set; }
         public string OrganizationName { get; set; }
         public string OrganizationDescription { get; set; }
-        public share_Images CoverImage { get; set; }
+        public string CoverImage { get; set; }
         public int EventType { get; set; }
         public int EventTopic { get; set; }
         public bool IsShowRemainingNumberTicket { get; set; }

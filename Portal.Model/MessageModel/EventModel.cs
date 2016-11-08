@@ -16,4 +16,5 @@ namespace Portal.Model.MessageModel
         public int TicketId { get; set; }
         public int TicketQuantity { get; set; }
     }
+
 }

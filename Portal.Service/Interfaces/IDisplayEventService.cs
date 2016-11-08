@@ -21,5 +21,8 @@ namespace Portal.Service.Interfaces
         IEnumerable<EventTypeModel> GetListEventTypes();
         IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId);
         Guid? AddOrder(GetOrderTicketFormRequest orderRequest);
+        event_Order GetOrderByGuid(Guid orderGuid);
+
+        bool ConfirmOrderTicket(ConfirmOrderTicketRequest orderInfor, ref string message);
     }
 }

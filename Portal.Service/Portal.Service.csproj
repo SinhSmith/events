@@ -83,6 +83,7 @@
     <Compile Include="Interfaces\ISystemConfigService.cs" />
     <Compile Include="MessageModel\EventDisplayModel.cs" />
     <Compile Include="MessageModel\EventManagement.cs" />
+    <Compile Include="MessageModel\OrderEventModel.cs" />
     <Compile Include="MessageModel\ProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -41,7 +41,5 @@ namespace Portal.Model.Context
         public string Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<int> Age { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
     }
 }

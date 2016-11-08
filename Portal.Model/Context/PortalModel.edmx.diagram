@@ -28,19 +28,19 @@
         <AssociationConnector Association="PortalModel.portal_Projects_Images" />
         <AssociationConnector Association="PortalModel.FK_portal_Projects_share_Images" />
         <EntityTypeShape EntityType="PortalModel.event_Event" Width="1.5" PointX="11.375" PointY="5" />
-        <EntityTypeShape EntityType="PortalModel.event_Order" Width="1.5" PointX="15.625" PointY="2.375" />
         <EntityTypeShape EntityType="PortalModel.event_Ticket" Width="1.5" PointX="16.25" PointY="6.625" />
         <AssociationConnector Association="PortalModel.FK_event_Event_AspNetUsers" />
-        <AssociationConnector Association="PortalModel.FK_event_Order_AspNetUsers" />
         <AssociationConnector Association="PortalModel.FK_event_Event_share_Images" />
-        <AssociationConnector Association="PortalModel.FK_event_Order_event_Event" />
         <AssociationConnector Association="PortalModel.FK_event_Ticket_event_Event" />
         <EntityTypeShape EntityType="PortalModel.event_TicketOrder" Width="1.5" PointX="19.5" PointY="5.75" />
-        <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Order" />
         <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Ticket" />
-        <EntityTypeShape EntityType="PortalModel.system_Organisers" Width="1.5" PointX="9.25" PointY="20.25" />
-        <AssociationConnector Association="PortalModel.FK_system_Organisers_share_Images1" />
-        <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="10.375" PointY="12.75" />
+        <EntityTypeShape EntityType="PortalModel.event_Order" Width="1.5" PointX="14.875" PointY="2.625" />
+        <AssociationConnector Association="PortalModel.FK_event_Order_AspNetUsers" />
+        <AssociationConnector Association="PortalModel.FK_event_Order_event_Event" />
+        <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Order" />
+        <EntityTypeShape EntityType="PortalModel.system_Organisers" Width="1.5" PointX="10.5" PointY="13.375" />
+        <AssociationConnector Association="PortalModel.FK_system_Organisers_share_Images" />
+        <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="13.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

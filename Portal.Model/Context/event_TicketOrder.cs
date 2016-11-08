@@ -18,7 +18,7 @@ namespace Portal.Model.Context
         public int OrderId { get; set; }
         public Nullable<int> Quantity { get; set; }
     
-        public virtual event_Order Order { get; set; }
         public virtual event_Ticket Ticket { get; set; }
+        public virtual event_Order event_Order { get; set; }
     }
 }

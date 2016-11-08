@@ -2036,6 +2036,7 @@
     <Content Include="Scripts\common\html5shiv.min.js" />
     <Content Include="Scripts\event\displayevents-management.js" />
     <Content Include="Scripts\event\eventdetails-management.js" />
+    <Content Include="Scripts\event\orderticket-management.js" />
     <Content Include="Scripts\home\chosen.jquery.min.js" />
     <Content Include="Scripts\home\custom-footer.js" />
     <Content Include="Scripts\home\footer-homepage.js" />
@@ -2157,6 +2158,7 @@
     <Content Include="Views\Event\_SummaryEventItem.cshtml" />
     <Content Include="Views\Event\OrderTicketPage.cshtml" />
     <Content Include="Views\Event\EventDetails.cshtml" />
+    <Content Include="Views\Event\OrderSuccessful.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,6 +17,7 @@ namespace Portal.Model.Context
         public event_Event()
         {
             this.Tickets = new HashSet<event_Ticket>();
+            this.event_Order = new HashSet<event_Order>();
         }
     
         public int Id { get; set; }
@@ -47,5 +48,6 @@ namespace Portal.Model.Context
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual share_Images CoverImage { get; set; }
         public virtual ICollection<event_Ticket> Tickets { get; set; }
+        public virtual ICollection<event_Order> event_Order { get; set; }
     }
 }

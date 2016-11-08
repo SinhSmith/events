@@ -118,7 +118,7 @@ namespace Portal.Model.Mapper
                 Description = eventObject.Description,
                 OrganizationName = eventObject.OrganizationName,
                 OrganizationDescription = eventObject.OrganizationDescription,
-                CoverImage = eventObject.CoverImage,
+                CoverImage = eventObject.CoverImage.ImagePath,
                 EventType = eventObject.EventType,
                 EventTopic = eventObject.EventTopic,
                 IsShowRemainingNumberTicket = eventObject.IsShowRemainingNumberTicket,

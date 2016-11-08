@@ -140,9 +140,11 @@
           <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EventId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="EmailAddress" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" />
+          <Property Name="EmailAddress" Type="nchar" MaxLength="200" />
+          <Property Name="Status" Type="int" />
+          <Property Name="OrderTime" Type="datetime" />
         </EntityType>
         <EntityType Name="event_Ticket">
           <Key>
@@ -824,7 +826,7 @@
           <NavigationProperty Name="system_Banners" Relationship="Self.FK_system_Banners_share_Images" FromRole="share_Images" ToRole="system_Banners" />
           <NavigationProperty Name="portal_Projects" Relationship="PortalModel.portal_Projects_Images" FromRole="share_Images" ToRole="portal_Projects" />
           <NavigationProperty Name="event_Event" Relationship="PortalModel.FK_event_Event_share_Images" FromRole="share_Images" ToRole="event_Event" />
-          <NavigationProperty Name="system_Organisers" Relationship="PortalModel.FK_system_Organisers_share_Images1" FromRole="share_Images" ToRole="system_Organisers1" />
+          <NavigationProperty Name="system_Organisers" Relationship="PortalModel.FK_system_Organisers_share_Images" FromRole="share_Images" ToRole="system_Organisers" />
         </EntityType>
         <EntityType Name="system_Banners">
           <Key>
@@ -989,41 +991,41 @@
             <End Role="portal_Projects" EntitySet="portal_Projects" />
           </AssociationSet>
           <EntitySet Name="event_Event" EntityType="PortalModel.event_Event" />
-          <EntitySet Name="event_Order" EntityType="PortalModel.event_Order" />
           <EntitySet Name="event_Ticket" EntityType="PortalModel.event_Ticket" />
           <AssociationSet Name="FK_event_Event_AspNetUsers" Association="PortalModel.FK_event_Event_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="event_Event" EntitySet="event_Event" />
           </AssociationSet>
-          <AssociationSet Name="FK_event_Order_AspNetUsers" Association="PortalModel.FK_event_Order_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="event_Order" EntitySet="event_Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_event_Event_share_Images" Association="PortalModel.FK_event_Event_share_Images">
             <End Role="share_Images" EntitySet="share_Images" />
             <End Role="event_Event" EntitySet="event_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK_event_Order_event_Event" Association="PortalModel.FK_event_Order_event_Event">
-            <End Role="event_Event" EntitySet="event_Event" />
-            <End Role="event_Order" EntitySet="event_Order" />
           </AssociationSet>
           <AssociationSet Name="FK_event_Ticket_event_Event" Association="PortalModel.FK_event_Ticket_event_Event">
             <End Role="event_Event" EntitySet="event_Event" />
             <End Role="event_Ticket" EntitySet="event_Ticket" />
           </AssociationSet>
           <EntitySet Name="event_TicketOrder" EntityType="PortalModel.event_TicketOrder" />
-          <AssociationSet Name="FK_event_TicketOrder_event_Order" Association="PortalModel.FK_event_TicketOrder_event_Order">
-            <End Role="event_Order" EntitySet="event_Order" />
-            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
-          </AssociationSet>
           <AssociationSet Name="FK_event_TicketOrder_event_Ticket" Association="PortalModel.FK_event_TicketOrder_event_Ticket">
             <End Role="event_Ticket" EntitySet="event_Ticket" />
             <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
           </AssociationSet>
+          <EntitySet Name="event_Order" EntityType="PortalModel.event_Order" />
+          <AssociationSet Name="FK_event_Order_AspNetUsers" Association="PortalModel.FK_event_Order_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="event_Order" EntitySet="event_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_Order_event_Event" Association="PortalModel.FK_event_Order_event_Event">
+            <End Role="event_Event" EntitySet="event_Event" />
+            <End Role="event_Order" EntitySet="event_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_TicketOrder_event_Order" Association="PortalModel.FK_event_TicketOrder_event_Order">
+            <End Role="event_Order" EntitySet="event_Order" />
+            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
+          </AssociationSet>
           <EntitySet Name="system_Organisers" EntityType="PortalModel.system_Organisers" />
-          <AssociationSet Name="FK_system_Organisers_share_Images1" Association="PortalModel.FK_system_Organisers_share_Images1">
+          <AssociationSet Name="FK_system_Organisers_share_Images" Association="PortalModel.FK_system_Organisers_share_Images">
             <End Role="share_Images" EntitySet="share_Images" />
-            <End Role="system_Organisers1" EntitySet="system_Organisers" />
+            <End Role="system_Organisers" EntitySet="system_Organisers" />
           </AssociationSet>
           <EntitySet Name="system_Profiles" EntityType="PortalModel.system_Profiles" />
           </EntityContainer>
@@ -1101,21 +1103,7 @@
           <NavigationProperty Name="AspNetUser" Relationship="PortalModel.FK_event_Event_AspNetUsers" FromRole="event_Event" ToRole="AspNetUser" />
           <NavigationProperty Name="CoverImage" Relationship="PortalModel.FK_event_Event_share_Images" FromRole="event_Event" ToRole="share_Images" />
           <NavigationProperty Name="Tickets" Relationship="PortalModel.FK_event_Ticket_event_Event" FromRole="event_Event" ToRole="event_Ticket" />
-        </EntityType>
-        <EntityType Name="event_Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Guid" Type="Guid" Nullable="false" />
-          <Property Name="EventId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="PortalModel.FK_event_Order_AspNetUsers" FromRole="event_Order" ToRole="AspNetUser" />
-          <NavigationProperty Name="Event" Relationship="PortalModel.FK_event_Order_event_Event" FromRole="event_Order" ToRole="event_Event" />
-          <NavigationProperty Name="event_TicketOrder" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_Order" ToRole="event_TicketOrder" />
+          <NavigationProperty Name="event_Order" Relationship="PortalModel.FK_event_Order_event_Event" FromRole="event_Event" ToRole="event_Order" />
         </EntityType>
         <EntityType Name="event_Ticket">
           <Key>
@@ -1156,18 +1144,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_event_Order_AspNetUsers">
-          <End Type="PortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
-          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="event_Order">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_event_Event_share_Images">
           <End Type="PortalModel.share_Images" Role="share_Images" Multiplicity="0..1" />
           <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="*" />
@@ -1177,18 +1153,6 @@
             </Principal>
             <Dependent Role="event_Event">
               <PropertyRef Name="CoverImageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_event_Order_event_Event">
-          <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="1" />
-          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="event_Event">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="event_Order">
-              <PropertyRef Name="EventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1212,21 +1176,9 @@
           <Property Name="TicketId" Type="Int32" Nullable="false" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_TicketOrder" ToRole="event_Order" />
           <NavigationProperty Name="Ticket" Relationship="PortalModel.FK_event_TicketOrder_event_Ticket" FromRole="event_TicketOrder" ToRole="event_Ticket" />
+          <NavigationProperty Name="event_Order" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_TicketOrder" ToRole="event_Order" />
         </EntityType>
-        <Association Name="FK_event_TicketOrder_event_Order">
-          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="1" />
-          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="event_Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="event_TicketOrder">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_event_TicketOrder_event_Ticket">
           <End Type="PortalModel.event_Ticket" Role="event_Ticket" Multiplicity="1" />
           <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
@@ -1236,6 +1188,59 @@
             </Principal>
             <Dependent Role="event_TicketOrder">
               <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="event_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="PortalModel.FK_event_Order_AspNetUsers" FromRole="event_Order" ToRole="AspNetUser" />
+          <NavigationProperty Name="Event" Relationship="PortalModel.FK_event_Order_event_Event" FromRole="event_Order" ToRole="event_Event" />
+          <NavigationProperty Name="OrderTickets" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_Order" ToRole="event_TicketOrder" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="OrderTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_event_Order_AspNetUsers">
+          <End Type="PortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Order">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_Order_event_Event">
+          <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="1" />
+          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_Order">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_TicketOrder_event_Order">
+          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="1" />
+          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_TicketOrder">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1256,16 +1261,16 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="share_Images" Relationship="PortalModel.FK_system_Organisers_share_Images1" FromRole="system_Organisers1" ToRole="share_Images" />
+          <NavigationProperty Name="share_Images" Relationship="PortalModel.FK_system_Organisers_share_Images" FromRole="system_Organisers" ToRole="share_Images" />
         </EntityType>
-        <Association Name="FK_system_Organisers_share_Images1">
+        <Association Name="FK_system_Organisers_share_Images">
           <End Type="PortalModel.share_Images" Role="share_Images" Multiplicity="0..1" />
-          <End Type="PortalModel.system_Organisers" Role="system_Organisers1" Multiplicity="*" />
+          <End Type="PortalModel.system_Organisers" Role="system_Organisers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="share_Images">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="system_Organisers1">
+            <Dependent Role="system_Organisers">
               <PropertyRef Name="AvatarId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1553,19 +1558,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="event_Order">
-            <EntityTypeMapping TypeName="PortalModel.event_Order">
-              <MappingFragment StoreEntitySet="event_Order">
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="EventId" ColumnName="EventId" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="event_Ticket">
             <EntityTypeMapping TypeName="PortalModel.event_Ticket">
               <MappingFragment StoreEntitySet="event_Ticket">
@@ -1598,6 +1590,21 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="event_Order">
+            <EntityTypeMapping TypeName="PortalModel.event_Order">
+              <MappingFragment StoreEntitySet="event_Order">
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Portal.Model.Mapper;
 
 namespace Site.OnlineStore.Controllers
 {
@@ -344,27 +345,40 @@ namespace Site.OnlineStore.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
-
-            //EventDetailsResponse eventObject = service.GetEventDetails(orderTicketRequest.EventId);
-            //foreach (OrderTicketRequest ticket in orderTicketRequest.Tickets)
-            //{
-            //    OrderEventTicketModel tk = eventObject.Tickets.Where(t => t.Id == ticket.TicketId).FirstOrDefault();
-            //    if (tk != null)
-            //    {
-            //        tk.Quantity = ticket.TicketQuantity;
-            //    }
-            //}
-
-
-
-            return RedirectToAction("OrderTicketPage", new { order = guid});
+            return RedirectToAction("OrderTicketPage", new { orderId = guid});
         }
 
         public ActionResult OrderTicketPage(Guid orderId)
         {
-            var model = TempData["orderItems"] as EventDetailsResponse;
+            event_Order order = service.GetOrderByGuid(orderId);
+
+            EventDetailsResponse model = order.ConvertToOrderEventTicketModel();
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmOrderTickets(ConfirmOrderTicketRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("OrderTicketPage", new { orderId = request.OrderId });
+            }
+
+            // Update submit time for request model
+            request.SubmitTime = DateTime.Now;
+
+            string message = String.Empty;
+            bool result = service.ConfirmOrderTicket(request,ref message);
+
+            return Json(new BaseResponseModel(){
+            Success = result,
+            Message = message
+            },JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult OrderSuccessful()
+        {
+            return View();
         }
 
         #endregion
