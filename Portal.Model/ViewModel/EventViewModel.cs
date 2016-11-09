@@ -136,6 +136,7 @@ namespace Portal.Model.ViewModel
         public string ZipCode { get; set; }
         public string Country { get; set; }
         public int Status { get; set; }
+        public int RemainOrderSessionTime { get; set; }
         public Nullable<int> SortOrder { get; set; }
         public IList<OrderEventTicketModel> Tickets { get; set; }
     }

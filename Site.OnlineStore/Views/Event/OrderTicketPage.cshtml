@@ -14,7 +14,7 @@
 <script src="~/Scripts/event/orderticket-management.js"></script>
     <script>
         $(document).ready(function () {
-            OrderTicketManagement.init();
+            OrderTicketManagement.init('@Model.OrderId','@Model.Id',@Model.RemainOrderSessionTime);
         })
     </script>
 }

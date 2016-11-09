@@ -22,7 +22,7 @@ namespace Portal.Service.Interfaces
         IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId);
         Guid? AddOrder(GetOrderTicketFormRequest orderRequest);
         event_Order GetOrderByGuid(Guid orderGuid);
-
         bool ConfirmOrderTicket(ConfirmOrderTicketRequest orderInfor, ref string message);
+        bool CheckOrderSessionTimeOut(Guid orderGuid, ref string message);
     }
 }

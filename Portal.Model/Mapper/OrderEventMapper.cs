@@ -32,7 +32,8 @@ namespace Portal.Model.Mapper
                 Location_City = order.Event.Location_City,
                 Location_State = order.Event.Location_State,
                 ZipCode = order.Event.ZipCode,
-                Country = order.Event.Country
+                Country = order.Event.Country,
+                RemainOrderSessionTime = (int)(480 - (DateTime.Now-(DateTime)order.OrderTime).TotalSeconds)
             };
 
             foreach (event_TicketOrder item in order.OrderTickets)

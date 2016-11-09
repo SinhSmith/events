@@ -1,6 +1,6 @@
 ﻿var OrderTicketManagement = OrderTicketManagement || {};
 OrderTicketManagement = {
-    init: function () {
+    init: function (orderId,eventId,remainOrderSessionTime) {
         // support ajax to upload images
         window.addEventListener("submit", function (e) {
             OrderTicketManagement.showSpin();
@@ -28,7 +28,6 @@ OrderTicketManagement = {
             }
         }, true);
 
-
         // Init spin
         this.controls.spin = new Spinner({
             lines: 13 // The number of lines to draw
@@ -53,10 +52,90 @@ OrderTicketManagement = {
             , position: 'fixed' // Element positioning
         }).spin();
 
+        if (orderId) {
+            this.model.OrderId = orderId;
+        }
+        if (eventId) {
+            this.regurl = "/Event/EventDetails?id=" + eventId;
+        } else {
+            this.regurl = "/Home";
+        }
+
+        if (remainOrderSessionTime) {
+            this.orderTimeControl.left = remainOrderSessionTime;
+        }
+
         this.bindEventForElement();
+        this.countDownTime();
     },
     controls: {
         spin: null
+    },
+    gUpdateCountdownTimeoutId: null,
+    orderTimeControl : {
+        limit:480,
+        left: 480,
+        now: new Date(),
+        endTime: ''
+    },
+    regurl: '',
+    checkingRequestTime:0,
+    countDownTime: function () {
+        this.orderTimeControl.endTime = new Date(this.orderTimeControl.now.getTime() + this.orderTimeControl.left * 1000);
+        this.displayTime("time_limit", this.orderTimeControl.limit);
+        this.displayTime("time_limit2", this.orderTimeControl.limit);
+        this.displayTime("time_left", this.orderTimeControl.left);
+
+        this.gUpdateCountdownTimeoutId = window.setTimeout("OrderTicketManagement.updateCountdown();", 1000);
+    },
+    updateCountdown: function () {
+        var now = new Date();
+
+        if (now < this.orderTimeControl.endTime) {
+            this.displayTime("time_left", (this.orderTimeControl.endTime - now) / 1000);
+            this.checkingRequestTime += 1;
+            if (this.checkingRequestTime >= 10) {
+                this.checkTimeOutSession();
+                this.checkingRequestTime = 0;
+            }
+            gUpdateCountdownTimeoutId = window.setTimeout("OrderTicketManagement.updateCountdown();", 1000);
+        } else {
+            alert("Exceeded time for register!");
+            var url = this.regurl;
+            if (url.indexOf('?') == -1)
+                url += '?';
+            else
+                url += '&';
+            window.location.replace(url + "err=29");
+        }
+    },
+    checkTimeOutSession:function(){
+        $.ajax({
+            url: '/Event/CheckOrderSessionTimeOut',
+            data: { orderId: this.model.OrderId },
+            type: "POST",
+            success: function (result) {
+                if (!result.Success) {
+                    alert("Error :" + result.Message);
+                    window.location.replace(OrderTicketManagement.regurl);
+                }
+            },
+            error: function (ex) {
+                console.log("Check session timeout error");
+            }
+        });
+    },
+    displayTime: function (field, numSeconds) {
+        var timeMinutes = parseInt(numSeconds / 60, 10),
+        timeSeconds = parseInt(numSeconds - timeMinutes * 60, 10);
+
+        if (timeSeconds < 10) {
+            timeLabel = timeMinutes + ":0" + timeSeconds + " ";
+        } else {
+            timeLabel = timeMinutes + ":" + timeSeconds + " ";
+        }
+
+        document.getElementById(field).innerHTML = timeLabel;
     },
     bindEventForElement: function () {
         // Bind events for controls
@@ -72,7 +151,8 @@ OrderTicketManagement = {
                         if (result.Success) {
                             window.location.replace("/Event/OrderSuccessful");
                         } else {
-                            alert(result.Message);
+                            alert("Error :" + result.Message);
+                            window.location.replace(OrderTicketManagement.regurl);
                         }
                     },
                     error: function () {
@@ -86,7 +166,7 @@ OrderTicketManagement = {
         // Validate form
 
         var valid = false;
-        
+
         var firstName = $("#Txt_FirstName").val();
         var lastName = $("#Txt_LastName").val();
         var emailAddress = $("#Txt_EmailAddress").val();
@@ -122,57 +202,13 @@ OrderTicketManagement = {
 
         OrderTicketManagement.controls.spin.stop();
     },
-    model:{
+    model: {
         OrderId: null,
-        FirstName:"",
-        LastName:"",
-        EmailAddress:""
+        FirstName: "",
+        LastName: "",
+        EmailAddress: ""
     }
 }
 
 
-var orderTimeControl = {
-    limit: 480,
-    left: 478,
-    now: new Date(),
-    endTime: ''
-},
-gUpdateCountdownTimeoutId = null; //This global variable is a hack for #7215. Sorry
 
-orderTimeControl.endTime = new Date(orderTimeControl.now.getTime() + orderTimeControl.left * 1000);
-
-function displayTime(field, numSeconds) {
-    var timeMinutes = parseInt(numSeconds / 60, 10),
-        timeSeconds = parseInt(numSeconds - timeMinutes * 60, 10);
-
-    if (timeSeconds < 10) {
-        timeLabel = timeMinutes + ":0" + timeSeconds + " ";
-    } else {
-        timeLabel = timeMinutes + ":" + timeSeconds + " ";
-    }
-
-    document.getElementById(field).innerHTML = timeLabel;
-}
-
-displayTime("time_limit", orderTimeControl.limit);
-displayTime("time_limit2", orderTimeControl.limit);
-displayTime("time_left", orderTimeControl.left);
-
-
-function updateCountdown() {
-    var now = new Date();
-
-    if (now < orderTimeControl.endTime) {
-        displayTime("time_left", (orderTimeControl.endTime - now) / 1000);
-        gUpdateCountdownTimeoutId = window.setTimeout("updateCountdown();", 1000);
-    } else {
-        display_error_msg("alert", "exceeded", "register");
-        if (regurl.indexOf('?') == -1)
-            regurl += '?';
-        else
-            regurl += '&';
-        document.location.href = regurl + "err=29";
-    }
-}
-
-gUpdateCountdownTimeoutId = window.setTimeout("updateCountdown();", 1000);

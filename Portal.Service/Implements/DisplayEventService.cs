@@ -465,6 +465,35 @@ namespace Portal.Service.Implements
             }
         }
 
+        /// <summary>
+        /// Check Order session is timeout or not
+        /// </summary>
+        /// <param name="orderGuid"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public bool CheckOrderSessionTimeOut(Guid orderGuid, ref string message)
+        {
+            event_Order order = orderRepository.getEventByGuid(orderGuid);
+            if (order == null)
+            {
+                message = "Order was not found!";
+                return false;
+            }
+
+            if ((DateTime.Now-(DateTime)order.OrderTime).TotalSeconds > 480)
+            {
+                // Delete order when order session time out
+                order.Status = (int)Portal.Infractructure.Utility.Define.Status.Delete;
+                orderRepository.Save();
+
+                message = "Order was time out!";
+                return false;
+            }
+
+            message = "Check Order session timeout successful!";
+            return true;
+        }
+
         #endregion
 
         #region Release resources
@@ -486,6 +515,8 @@ namespace Portal.Service.Implements
         public void Dispose()
         {
             db.Dispose();
+            orderRepository.Dispose();
+            ticketRepository.Dispose();
         }
 
         #endregion

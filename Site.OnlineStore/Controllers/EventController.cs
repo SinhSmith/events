@@ -348,14 +348,38 @@ namespace Site.OnlineStore.Controllers
             return RedirectToAction("OrderTicketPage", new { orderId = guid});
         }
 
+        /// <summary>
+        /// Redirect to Order ticket page with order details information and payment form
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public ActionResult OrderTicketPage(Guid orderId)
         {
             event_Order order = service.GetOrderByGuid(orderId);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            string message = String.Empty;
+            bool result = service.CheckOrderSessionTimeOut(orderId, ref message);
 
-            EventDetailsResponse model = order.ConvertToOrderEventTicketModel();
-            return View(model);
+            if (result)
+            {
+                EventDetailsResponse model = order.ConvertToOrderEventTicketModel();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("EventDetails", new { Id = order.EventId });
+            }
         }
 
+        /// <summary>
+        /// Confirm Order
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ConfirmOrderTickets(ConfirmOrderTicketRequest request)
         {
@@ -376,9 +400,31 @@ namespace Site.OnlineStore.Controllers
             },JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Return to Order tickets successful
+        /// </summary>
+        /// <returns></returns>
         public ActionResult OrderSuccessful()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Check status or order session and delete order if session time out
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CheckOrderSessionTimeOut(Guid orderId)
+        {
+            string message = String.Empty;
+            bool result = service.CheckOrderSessionTimeOut(orderId, ref message);
+
+            return Json(new BaseResponseModel()
+            {
+                Success = result,
+                Message = message
+            }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
