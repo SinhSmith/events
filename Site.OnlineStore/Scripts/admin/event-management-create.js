@@ -131,6 +131,16 @@ EventManagement = {
         $("#Btn_EnableDetailAddressPanel").unbind("click").bind("click", function () {
             EventManagement.updateModeLocationPanel(false);
         });
+
+        $('#event_form').submit(function (event) {
+            if (this.checkValidity()) {
+                EventManagement.createEvent();
+            } else {
+                EventManagement.showAllErrorMessages();
+            }
+            event.preventDefault();
+
+        });
     },
     initElement: function () {
         //////////////
@@ -431,6 +441,12 @@ EventManagement = {
             }
         });
     },
+    onCreateEventBtnClick:function(){
+        $('#event_form').submit();
+    },
+    onUpdateEventBtnClick:function(){
+        $('#event_form').submit();
+    },
     updateEvent:function(){
         // Update event
 
@@ -470,6 +486,25 @@ EventManagement = {
             error: function () {
                 alert("Update event fail!");
             }
+        });
+    },
+    showAllErrorMessages: function () {
+        // Validate event informations
+        var form = $("#event_form");
+        var errorList = $('ul.errorMessages', form);
+
+        errorList.empty();
+
+        //Find all invalid fields within the form.
+        form.find(':invalid').each(function (index, node) {
+
+            //Find the field's corresponding label
+            var fieldName = $(node).data("fieldname");
+            //Opera incorrectly does not fill the validationMessage property.
+            var message = node.validationMessage || 'Invalid value.';
+            errorList
+                .show()
+                .append('<li><span>' + fieldName + '</span> ' + message + '</li>');
         });
     },
     getDataOfEvent:function(){
@@ -601,6 +636,11 @@ EventManagement = {
         if (settingDetailsPanel) {
             $(settingDetailsPanel).toggleClass("hidden");
         }
+    },
+    onBackToIndexBtnClick:function(){
+        // Redirect to index page of event management area
+
+        window.location.replace("/Admin/Event/Index");
     },
     showSpin: function (target) {
         /// <summary>

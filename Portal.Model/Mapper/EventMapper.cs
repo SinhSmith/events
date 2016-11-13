@@ -3,6 +3,7 @@ using Portal.Model.Context;
 using Portal.Model.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +77,14 @@ namespace Portal.Model.Mapper
 
         public static DisplayEventSummaryView ConvertToEventSummaryView(this event_Event eventObject)
         {
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+            List<decimal> listPrice = eventObject.Tickets.OrderBy(t => t.Price).Select(t => t.Price).Distinct().ToList();
+            List<string> listPriceFormated = new List<string>();
+            
+            foreach (var item in listPrice)
+            {
+                listPriceFormated.Add(String.Format(cul, "{0:c}", item));
+            }
             DisplayEventSummaryView eventSummaryView = new DisplayEventSummaryView()
             {
                 Id = eventObject.Id,
@@ -85,8 +94,8 @@ namespace Portal.Model.Mapper
                 Description = eventObject.Description,
                 OrganizationName = eventObject.OrganizationName,
                 CoverImage = eventObject.CoverImage !=null? eventObject.CoverImage.ImagePath:"/Content/Images/no-image.png",
-                EventType = eventObject.EventType,
-                EventTopic = eventObject.EventTopic,
+                EventType = eventObject.EventTypeName,
+                EventTopic = eventObject.EventTopicName,
                 Location_StreetName = eventObject.Location_StreetName,
                 Location_Address = eventObject.Location_Address,
                 Location_Address2 = eventObject.Location_Address2,
@@ -94,6 +103,9 @@ namespace Portal.Model.Mapper
                 Location_State = eventObject.Location_State,
                 ZipCode = eventObject.ZipCode,
                 Country = eventObject.Country,
+                ListOrderPricePrice = listPriceFormated,
+                TicketPriceType = eventObject.Tickets.First().Type,
+
             };
 
             return eventSummaryView;

@@ -197,6 +197,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin\event-management.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\admin\bootstrap\css\bootstrap.css" />
@@ -618,6 +619,7 @@
     <Content Include="Content\Images\diamond_lotus_pc_1457670143.jpg" />
     <Content Include="Content\Images\email-icon.png" />
     <Content Include="Content\Images\firstteam.jpg" />
+    <Content Include="Content\Images\glass_light-trans.png" />
     <Content Include="Content\Images\green.jpg" />
     <Content Include="Content\Images\icon-hotline.jpg" />
     <Content Include="Content\Images\icon1.jpg" />
@@ -1823,7 +1825,8 @@
     <Content Include="Library\time-picker\jquery.timepicker.min.js" />
     <Content Include="New York, New York Events For You _ Eventbrite.html" />
     <Content Include="Scripts\admin\Common.js" />
-    <Content Include="Scripts\admin\event-management.js" />
+    <Content Include="Scripts\admin\event-management-update.js" />
+    <Content Include="Scripts\admin\event-management-create.js" />
     <Content Include="Scripts\admin\project-management.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

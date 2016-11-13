@@ -1,5 +1,4 @@
-﻿      <style>
-          #contentpub .main,
+﻿#contentpub .main,
 #customheader .main,
 #customfooter .main,
 #headpub .main,
@@ -466,6 +465,14 @@ a:hover .advanced-team-landing__primary-text {
 	font-family: Arial;
 	text-align: center;
 }
-
-      </style>
+ #Btn_CompleteRegistration a{
+    border: 1px solid #8BAE42;
+    -moz-box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset;
+    -webkit-box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset;
+    box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset;
+    text-shadow: 0 1px #63852B;
+    font-size: 20px;
+    padding: 9px 26px;
+    background: url(~/Content/Images/glass_light-trans.png) 0 50% repeat-x #90C833;
+ }
 

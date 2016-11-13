@@ -1675,10 +1675,10 @@ textarea {
     background: url(../../images/art_assets/box_header_tickets_icon-trans.png) 10px 10px no-repeat #fdf9cf
 }
 body {
-    font-family: "Benton Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    /*font-family: "Benton Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 15px;
     color: #45494E;
-    letter-spacing: .5px
+    letter-spacing: .5px*/
 }
 .text-heading-mega,
 .text-mega {
@@ -2868,12 +2868,12 @@ a:hover.icon-link {
     height: 42px;
     font-weight: 400
 }
-body {
+/*body {
     font-family: "Benton Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 15px;
     color: #45494E;
     letter-spacing: .5px
-}
+}*/
 .text-heading-mega,
 .text-mega {
     font-size: 65px;
@@ -3432,7 +3432,7 @@ div.form__group--help-text .form__group--help-text-container {
     color: #282C35!important;
     text-transform: uppercase;
 }
-@font-face {
+ @font-face {
     font-family: myFirstFont;
     src: url('../fonts/briteicons.woff2');
 }

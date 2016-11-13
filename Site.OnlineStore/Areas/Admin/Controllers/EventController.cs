@@ -178,6 +178,10 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            PopulateCountryDropDownList();
+            PopulateEventTypeDropDownList(null);
+            PopulateEventTopicDropDownList(null);
+            PopulateTicketTypeDropDownList();
             PopulateStatusDropDownList();
             return View();
         }

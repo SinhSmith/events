@@ -95,6 +95,8 @@ HomePageManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
+        HomePageManagement.showSpin();
+
         $.ajax({
             url: '/Home/GetEventsInCurrentLocation',
             type: 'POST',
@@ -106,6 +108,8 @@ HomePageManagement = {
             },
             error: function () {
                 console.log("Get events fail!");
+            }, complete: function () {
+                HomePageManagement.hideSpin();
             }
         });
     },
@@ -234,7 +238,7 @@ HomePageManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
-        $("#images").append(HomePageManagement.controls.spin.spin().el);
+        $(".js-events-list").append(HomePageManagement.controls.spin.spin().el);
     },
     hideSpin: function () {
         /// <summary>

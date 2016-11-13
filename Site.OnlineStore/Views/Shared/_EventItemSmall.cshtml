@@ -14,7 +14,10 @@
                         <img class="js-poster-image " src="@Portal.Infractructure.Utility.EventConstants.ImageNotFoundPath" alt="@Model.Title">
                     }
                 </div>
-                <span class="poster-card__label">Free</span>
+                @if (Model.TicketPriceType == (int)Portal.Infractructure.Utility.Define.TicketType.Free)
+                {
+                    <span class="poster-card__label">Free</span>
+                }
             </div>
             <div class="poster-card__body">
                 <time class="poster-card__date">

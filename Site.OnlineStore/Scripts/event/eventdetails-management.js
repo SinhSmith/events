@@ -69,6 +69,10 @@ EventDetailsManagement = {
                 $("#Form_OrderTicket").submit();
             }
         });
+
+        $("#Txt_EventSearchBox").unbind("change").bind("change", function () {
+            window.location.replace("/Event/SearchEvent/?SearchString="+$(this).val());
+        });
     },
     validateOrderTicketForm:function(){
         // Validate form

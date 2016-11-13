@@ -175,6 +175,7 @@ DisplayEventsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
+        DisplayEventsManagement.showSpin();
         $.ajax({
             url: '/Home/GetEventsInCurrentLocation',
             type: 'POST',
@@ -186,6 +187,9 @@ DisplayEventsManagement = {
             },
             error: function () {
                 console.log("Get events fail!");
+            },
+            complete: function () {
+                DisplayEventsManagement.hideSpin();
             }
         });
     },
@@ -267,6 +271,11 @@ DisplayEventsManagement = {
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function () {
+            var map = new google.maps.Map(document.getElementById('LocationMap'), {
+                //center: { lat: -33.8688, lng: 151.2195 },
+                zoom: 13,
+                mapTypeId: 'roadmap'
+            });
             var places = searchBox.getPlaces();
             if (places.length == 0) {
                 return;
@@ -332,6 +341,8 @@ DisplayEventsManagement = {
     searchEventWithFilters:function(){
         // Request to server to get list events match with filter rules
 
+        DisplayEventsManagement.showSpin();
+
         $.ajax({
             url: '/Event/SearchEvent',
             type: 'POST',
@@ -346,6 +357,9 @@ DisplayEventsManagement = {
             },
             error: function (e) {
                 console.log("Get events fail!");
+            },
+            complete: function () {
+                DisplayEventsManagement.hideSpin();
             }
         });
     },
@@ -360,7 +374,7 @@ DisplayEventsManagement = {
         itemTemplate += "            <div class=\"list-card__image\" style=\"background-color:#5b5355;\">";
         itemTemplate += "                    <img src=\""+event.CoverImage+"\" alt=\"Image not found\" title=\""+event.Title+"\" class=\"js-poster-image\" \/>";
         itemTemplate += "            <\/div>";
-        itemTemplate += "            <span class=\"list-card__label\">$0 - $20<\/span>";
+        itemTemplate += "            <span class=\"list-card__label\">" + event.ListOrderPricePrice.join(" - ")+ "<\/span>";
         itemTemplate += "        <\/div>";
         itemTemplate += "        <div class=\"list-card__body\">";
         itemTemplate += "            <time class=\"list-card__date\" style=\"box-sizing:content-box;\">";
@@ -397,6 +411,7 @@ DisplayEventsManagement = {
         return itemTemplate;
     },
     updateFiltersModel: function () {
+        debugger
         // Update search string
         this.model.filterRules.SearchString = $("#Txt_EventSearchBox").val().trim();
 
@@ -476,18 +491,28 @@ DisplayEventsManagement = {
     },
     updateDataAndLayoutInSearchMode:function(model){
         // Call when page in search mode
+
+        debugger
         // Update model
         this.model.filterRules.City = model.City;
         this.model.filterRules.State = model.State;
         this.model.filterRules.Country = model.Country;
         this.model.selectedLocation.City.short_name = model.City;
+        this.model.selectedLocation.State.short_name = model.State;
         this.model.selectedLocation.Country.short_name = model.Country;
         this.model.filterRules.DateFilterType = model.DateFilterType;
         this.model.filterRules.Topics = model.Topics;
         this.model.filterRules.EventTypes = model.EventTypes;
 
         // Update layout
-        $("#SearchLocation_AutoComplete").val(this.model.filterRules.State + ", " + this.model.filterRules.Country);
+        var address = "";
+        if (this.model.filterRules.State != null && this.model.filterRules.State != "") {
+            address = address + this.model.filterRules.State;
+        }
+        if (this.model.filterRules.Country != null && this.model.filterRules.Country != "") {
+            address = address + ", " + this.model.filterRules.Country;
+        }
+        $("#SearchLocation_AutoComplete").val(address);
         if(this.model.filterRules.Topics && this.model.filterRules.Topics.length>0){
             $.each(this.model.filterRules.Topics,function(index,item){
                 $("#ckb-event-topic-" + item).prop("checked", true);
@@ -511,6 +536,7 @@ DisplayEventsManagement = {
     },
     updateMapForNewLocation: function (address) {
 
+        debugger
         var map = new google.maps.Map(document.getElementById('LocationMap'), {
             //center: { lat: -33.8688, lng: 151.2195 },
             zoom: 13,
@@ -536,7 +562,7 @@ DisplayEventsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
-        $("#images").append(DisplayEventsManagement.controls.spin.spin().el);
+        $("#EventList").append(DisplayEventsManagement.controls.spin.spin().el);
     },
     hideSpin: function () {
         /// <summary>

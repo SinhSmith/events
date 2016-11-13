@@ -100,7 +100,13 @@
                                             <div style="font-size: 11px; line-height: 12px; margin: 5px 0 0 0;">@Model.Tickets[i].Description</div>
                                         </td>
                                         <td nowrap="nowrap" class="price_td">
-                                            @Model.Tickets[i].Price VND
+                                            @if(Model.Tickets[i].Type == (int)Portal.Infractructure.Utility.Define.TicketPriceType.Free){
+                                                <span>Free</span>
+                                            }else if(Model.Tickets[i].Type == (int)Portal.Infractructure.Utility.Define.TicketPriceType.Paid){
+                                                <span>@Model.Tickets[i].Price VND</span>  
+                                            }else{
+                                                <span>Donation</span> 
+                                            }
                                         </td>
                                         <td align="right" nowrap="nowrap">
                                             <label class="is-hidden-accessible">Ticket Quantity Select</label>

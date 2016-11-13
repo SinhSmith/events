@@ -9,14 +9,14 @@
                 <input type="hidden" name="TicketId" value="@Model.Id">
                 <label for="group-tickets-0-ticket_type" class="label-primary hide-medium-accessible hide-large-accessible">Ticket name</label>
                 <div>
-                    <input name="TicketName" maxlength="255" type="text" value="@Model.Name"
+                    <input data-fieldname="Ticket Name" required name="TicketName" maxlength="255" type="text" value="@Model.Name"
                            class="form__input form__input--full-width js-ticket-name" placeholder="Early Bird, RSVP...">
                 </div>
                 <div class="form__field-error is-hidden js-error-for-name"></div>
             </div>
             <div class="g-cell g-cell-1-2 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half">
                 <label for="group-tickets-0-quantity_total" class="label-primary hide-medium-accessible hide-large-accessible">Quantity</label>
-                <input name="TicketQuantity" maxlength="6" value=@Model.Quantity
+                <input data-fieldname="Quantity" required name="TicketQuantity" maxlength="6" value=@Model.Quantity
                        type="number" class="form__input--full-width js-quantity-input">
                 <div class="form__field-error is-hidden js-error-for-quantity"></div>
             </div>
@@ -30,8 +30,8 @@
                     else if (Model.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Paid)
                     {
                         <div class="responsive-form__input--currency">
-                            <div class="responsive-form__input--currency__symbol">$</div>
-                            <input type="number" name="TicketPrice" value="@Model.Price" class="js-price-input form__input--xxsmall" maxlength="11">
+                            <div class="responsive-form__input--currency__symbol">Đ</div>
+                            <input type="number" data-fieldname="Ticket Price" required name="TicketPrice" value="@Model.Price" class="js-price-input form__input--xxsmall" maxlength="11">
                         </div>
                         <span class="form__field-error is-hidden js-error-for-ticketPrice"></span>
                     }
@@ -82,7 +82,7 @@
                                 Value = item.Value.ToString(),
                                 Text = item.Text.ToString(),
                                 Selected = Model.SaleChanel == item.Value
-                            }), htmlAttributes: new { @class = "js-d-select-box js-ticket-sales-channel-option responsive-form__select" })
+                            }), htmlAttributes: new { @class = "js-d-select-box js-ticket-sales-channel-option responsive-form__select",@data_fieldname="Sale Chanel",@required = "true" })
                         </div>
                     </div>
                 </div>
@@ -92,14 +92,14 @@
                             <div class="js-ticket-sales-start-group g-cell g-cell-1-2 l-mar-top-3">
                                 <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">Ticket sales start</h4>
                                 <div class="js-ticket-sales-start">
-                                    <input type="text" value="@Model.StartSaleDateTime" name="TicketStartSaleDate" class="js-sales-start-time-picker">
+                                    <input type="text" data-fieldname="Start Sale Date" required value="@Model.StartSaleDateTime" name="TicketStartSaleDate" class="js-sales-start-time-picker">
                                     <div class="js-error-for-salesStartDate form__field-error"></div>
                                 </div>
                             </div>
                             <div class="s-ticket-sales-start-group g-cell g-cell-1-2 l-mar-top-3">
                                 <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">Ticket sales end</h4>
                                 <div class="jjs-ticket-sales-start">
-                                    <input type="text" value="@Model.EndSaleDateTime" name="TicketEndSaleDate" class="js-sales-start-time-picker">
+                                    <input type="text" data-fieldname="End Sale Date" required value="@Model.EndSaleDateTime" name="TicketEndSaleDate" class="js-sales-start-time-picker">
                                     <div class="js-error-for-salesEndDate form__field-error"></div>
                                 </div>
                             </div>

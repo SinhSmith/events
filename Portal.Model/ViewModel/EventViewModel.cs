@@ -92,6 +92,10 @@ namespace Portal.Model.ViewModel
 
     public class DisplayEventSummaryView
     {
+        public DisplayEventSummaryView()
+        {
+            ListOrderPricePrice = new List<string>();
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string StartDate { get; set; }
@@ -99,8 +103,8 @@ namespace Portal.Model.ViewModel
         public string Description { get; set; }
         public string OrganizationName { get; set; }
         public string CoverImage { get; set; }
-        public int EventType { get; set; }
-        public int EventTopic { get; set; }
+        public string EventType { get; set; }
+        public string EventTopic { get; set; }
         public string Location_StreetName { get; set; }
         public string Location_Address { get; set; }
         public string Location_Address2 { get; set; }
@@ -108,6 +112,8 @@ namespace Portal.Model.ViewModel
         public string Location_State { get; set; }
         public string ZipCode { get; set; }
         public string Country { get; set; }
+        public int TicketPriceType { get; set; }
+        public List<string> ListOrderPricePrice { get; set; }
     }
 
     public class EventDetailsResponse

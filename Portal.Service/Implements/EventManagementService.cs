@@ -154,11 +154,12 @@ namespace Portal.Service.Implements
                     SortOrder = 1,
                     IsVerified = false,
                     OwnerId = ownerId,
-                    Guid = new Guid()
+                    Guid = Guid.NewGuid()
                 };
 
                 foreach (var item in newEvent.Tickets)
                 {
+                    var ticketNumber = Guid.NewGuid();
                     event_Ticket ticket = new event_Ticket()
                     {
                         EventId = eventObject.Id,
@@ -173,13 +174,13 @@ namespace Portal.Service.Implements
                         StartSaleDateTime = DateTime.ParseExact(item.StartSaleDateTime, EventConstants.DefaultDateTimeFormat, provider),
                         EndSaleDateTime = DateTime.ParseExact(item.EndSaleDateTime, EventConstants.DefaultDateTimeFormat, provider),
                         Type = item.Type,
-                        Guid = new Guid(),
+                        Guid = ticketNumber,
                         AvailableTicketQuantity = item.Quantity,
                         Price = item.Price,
                         SaleEndOption = 0,
                         Status = 1,
                         SortOrder = 1,
-                        TicketCode = "abc"
+                        TicketCode = ticketNumber.ToString()
                     };
 
                     eventObject.Tickets.Add(ticket);

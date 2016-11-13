@@ -9,14 +9,14 @@
                     <input type="hidden" name="TicketId" value="">
                     <label for="group-tickets-0-ticket_type" class="label-primary hide-medium-accessible hide-large-accessible">Ticket name</label>
                     <div>
-                        <input name="TicketName" maxlength="255" type="text"
+                        <input name="TicketName" data-fieldname="Ticket Name" required maxlength="255" type="text"
                                class="form__input form__input--full-width js-ticket-name" placeholder="Early Bird, RSVP...">
                     </div>
                     <div class="form__field-error is-hidden js-error-for-name"></div>
                 </div>
                 <div class="g-cell g-cell-1-2 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half">
                     <label for="group-tickets-0-quantity_total" class="label-primary hide-medium-accessible hide-large-accessible">Quantity</label>
-                    <input name="TicketQuantity" maxlength="6"
+                    <input name="TicketQuantity" maxlength="6" required data-fieldname="Ticket Quantity"
                            type="number" class="form__input--full-width js-quantity-input">
                     <div class="form__field-error is-hidden js-error-for-quantity"></div>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
                             <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1 l-mar-top-3">Sales channel</h4>
                             <div class="g-cell g-cell-1-1 l-mar-top-1">
-                                <select class="js-d-select-box js-ticket-sales-channel-option responsive-form__select" name="SaleChanel">
+                                <select class="js-d-select-box js-ticket-sales-channel-option responsive-form__select" data-fieldname="Sale Chanel" required name="SaleChanel">
                                     <option value="0" selected="selected">Everywhere</option>
                                     <option value="1">Online only</option>
                                     <option value="2">At the door only</option>
@@ -71,14 +71,14 @@
                                 <div class="js-ticket-sales-start-group g-cell g-cell-1-2 l-mar-top-3">
                                     <h4 class="responsive-form__fieldset-legend">Ticket sales start</h4>
                                     <div class="js-ticket-sales-start">
-                                        <input type="text" name="TicketStartSaleDate" class="js-sales-start-time-picker">
+                                        <input type="text" name="TicketStartSaleDate" required data-fieldname="Sale Ticket Start Date" class="js-sales-start-time-picker">
                                         <div class="js-error-for-salesStartDate form__field-error"></div>
                                     </div>
                                 </div>
                                 <div class="s-ticket-sales-start-group g-cell g-cell-1-2 l-mar-top-3">
                                     <h4 class="responsive-form__fieldset-legend">Ticket sales end</h4>
                                     <div class="jjs-ticket-sales-start">
-                                        <input type="text" name="TicketEndSaleDate" class="js-sales-start-time-picker">
+                                        <input type="text" name="TicketEndSaleDate" required data-fieldname="Sale Ticket End Date" class="js-sales-start-time-picker">
                                         <div class="js-error-for-salesEndDate form__field-error"></div>
                                     </div>
                                 </div>

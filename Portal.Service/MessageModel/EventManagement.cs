@@ -80,8 +80,11 @@ namespace Portal.Service.MessageModel
         {
             Tickets = new List<CreateTicketRequest>();
         }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string StartDate { get; set; }
+        [Required]
         public string EndDate { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Description { get; set; }
@@ -108,8 +111,6 @@ namespace Portal.Service.MessageModel
         public string ZipCode { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Country { get; set; }
-        //public int Status { get; set; }
-        //public Nullable<int> SortOrder { get; set; }
         public bool IsVerified { get; set; }
         public List<CreateTicketRequest> Tickets { get; set; }
     }
@@ -117,7 +118,9 @@ namespace Portal.Service.MessageModel
     public class CreateTicketRequest
     {
         [DisplayFormat(ConvertEmptyStringToNull = true)]
+        [Required]
         public string Name { get; set; }
+        [Required]
         public int Quantity { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Description { get; set; }
@@ -126,7 +129,9 @@ namespace Portal.Service.MessageModel
         public bool IsHide { get; set; }
         public int MinimunTicketOrder { get; set; }
         public int MaximunTicketOrder { get; set; }
+        [Required]
         public string StartSaleDateTime { get; set; }
+        [Required]
         public string EndSaleDateTime { get; set; }
         public int Type { get; set; }
         public decimal Price { get; set; }

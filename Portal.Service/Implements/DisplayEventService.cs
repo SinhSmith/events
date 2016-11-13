@@ -148,7 +148,7 @@ namespace Portal.Service.Implements
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
-        private string GetEventTopicNameById(int id)
+        public string GetEventTopicNameById(int id)
         {
            EventTopicModel topic = GetListEventTopics().Where(t => t.Id == id).FirstOrDefault();
            if (topic != null)
@@ -169,6 +169,24 @@ namespace Portal.Service.Implements
         private IEnumerable<EventTopicModel> GetListEventTopics(List<int> topicIds)
         {
             return GetListEventTopics().Where(t => topicIds.Contains(t.Id)).ToList();
+        }
+
+        /// <summary>
+        /// Get event type name by id
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public string GetEventTypeNameById(int id)
+        {
+            EventTypeModel type = GetListEventTypes().Where(t => t.Id == id).FirstOrDefault();
+            if (type != null)
+            {
+                return type.Name;
+            }
+            else
+            {
+                return String.Empty;
+            }
         }
 
         /// <summary>
@@ -215,6 +233,13 @@ namespace Portal.Service.Implements
         public GetEventsByCategoryResponse GetEventsByCategory(GetEventsByCategoryRequest request)
         {
             IEnumerable<event_Event> foundEvents = GetAllEventsMatchingQueryAndSort(request);
+
+            // Set Event Type and Event Topic
+            foreach (var item in foundEvents)
+            {
+                item.EventTopicName = GetEventTopicNameById(item.EventTopic);
+                item.EventTypeName = GetEventTypeNameById(item.EventType);
+            }
 
             GetEventsByCategoryResponse reponse = new GetEventsByCategoryResponse()
             {
@@ -278,6 +303,7 @@ namespace Portal.Service.Implements
         public GetEventsByCategoryResponse SearchByEventName(GetEventsByCategoryRequest request)
         {
             IEnumerable<event_Event> foundEvents = GetAllEventsMatchingQueryAndSort(request);
+
             GetEventsByCategoryResponse response = new GetEventsByCategoryResponse()
             {
                 EventTypes = request.EventTypes,
@@ -301,6 +327,11 @@ namespace Portal.Service.Implements
             return response;
         }
 
+        /// <summary>
+        /// Get event by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public event_Event GetEventById(int id)
         {
             return db.GetEventById(id);
@@ -370,7 +401,11 @@ namespace Portal.Service.Implements
             return GetListEventTopics;
         }
 
-
+        /// <summary>
+        /// Get events by topic
+        /// </summary>
+        /// <param name="topicId"></param>
+        /// <returns></returns>
         public IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId)
         {
             IEnumerable<event_Event> events = db.GetAllEventsWithoutDelete().Where(e => e.EventTopic == topicId).ToList();
@@ -378,6 +413,11 @@ namespace Portal.Service.Implements
             return events.ConvertToEventSummaryViews().ToList();
         }
 
+        /// <summary>
+        /// Add new order
+        /// </summary>
+        /// <param name="orderRequest"></param>
+        /// <returns></returns>
         public Guid? AddOrder(GetOrderTicketFormRequest orderRequest)
         {
            try
@@ -421,6 +461,12 @@ namespace Portal.Service.Implements
             return orderRepository.getEventByGuid(orderGuid);
         }
 
+        /// <summary>
+        /// Confirm ticket order
+        /// </summary>
+        /// <param name="orderInfor"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool ConfirmOrderTicket(ConfirmOrderTicketRequest orderInfor, ref string message)
         {
             event_Order order = orderRepository.getEventByGuid(orderInfor.OrderId);

@@ -14,7 +14,7 @@
                     <img src="~/Content/Images/no-image.png" class="js-poster-image" alt="Image not found"/>
                 }
             </div>
-            <span class="list-card__label">$0 - $20</span>
+            <span class="list-card__label">@String.Join(" - ", Model.ListOrderPricePrice.ToArray())</span>
         </div>
         <div class="list-card__body">
             <time class="list-card__date" style="box-sizing:content-box;">

@@ -6,7 +6,7 @@
 }
 
 <script src="~/Library/ckeditor/ckeditor.js"></script>
-<script src="~/Scripts/admin/event-management.js"></script>
+<script src="~/Scripts/admin/event-management-update.js"></script>
 
 <link href="~/Content/event/base_styles.css" rel="stylesheet" />
 <link href="~/Content/event/create_event_tinymce.css" rel="stylesheet" />
@@ -17,6 +17,7 @@
 <link href="~/Content/event/bundle.css" rel="stylesheet" />
 <link href="~/Content/event/bundle(1).css" rel="stylesheet" />
 <link href="~/Content/event/window.css" rel="stylesheet" />
+<link href="~/Content/admin/event-management.css" rel="stylesheet" />
 
 <!-- Summary -->
 <div id="event_summary_bar" class="g-grid " style="display: block;">
@@ -39,7 +40,8 @@
 <!-- Creating ticket steps -->
 <div id="content" class="clrfix">
     <!-- Id event hidden control -->
-    <div id="event_form" class="responsive-form">
+    <form id="event_form" class="responsive-form">
+        <ul class="errorMessages"></ul>
         <!-- Event content form -->
         <div class="g-grid g-group">
             <div id="main_page" class="clrfix page visible inactive">
@@ -76,7 +78,7 @@
                                 </div>
                                 <div class="l-mar-top-1 g-cell g-cell-1-1">
                                     <div class="inputtext errors">
-                                        <input id="Title" name="Title" maxlength="255" value="@Model.Title" placeholder="Give it a short distinct name" type="text">
+                                        <input id="Title" name="Title" data-fieldname="Event Title" required maxlength="255" value="@Model.Title" placeholder="Give it a short distinct name" type="text">
                                         <div id="id_group-details-name_errors">
                                             <ul class="errorlist"></ul>
                                         </div>
@@ -101,7 +103,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="g-cell g-cell-1-1 g-cell-md-6-8">
-                                                        <input class="js-location-edit-venue l-mar-top-1" value="@Model.Location_StreetName" id="Location_StreetName" name="Location_StreetName" type="text" placeholder="Enter the venue&#39;s name">
+                                                        <input data-fieldname="Street Name" class="js-location-edit-venue l-mar-top-1" value="@Model.Location_StreetName" id="Location_StreetName" name="Location_StreetName" type="text" placeholder="Enter the venue&#39;s name">
                                                     </div>
 
                                                     <div class="g-cell g-cell-1-1  g-cell-md-2-8 l-mar-top-3">
@@ -110,7 +112,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="g-cell g-cell-1-1 g-cell-md-6-8">
-                                                        <input class="js-location-edit-address_1 l-mar-top-1 js-xd-cep-street" value="@Model.Location_Address" id="Location_Address" name="Location_Address" type="text" placeholder="Address" />
+                                                        <input data-fieldname="Address 1" class="js-location-edit-address_1 l-mar-top-1 js-xd-cep-street" value="@Model.Location_Address" id="Location_Address" name="Location_Address" type="text" placeholder="Address" />
                                                     </div>
 
                                                     <div class="g-cell g-cell-1-1  g-cell-md-2-8 l-mar-top-3">
@@ -119,7 +121,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="g-cell g-cell-1-1 g-cell-md-6-8">
-                                                        <input class="js-location-edit-address_2 l-mar-top-1 js-xd-cep-neighborhood" value="@Model.Location_Address2" id="Location_Address2" name="Location_Address2" type="text" placeholder="Address 2">
+                                                        <input data-fieldname="Address 2" class="js-location-edit-address_2 l-mar-top-1 js-xd-cep-neighborhood" value="@Model.Location_Address2" id="Location_Address2" name="Location_Address2" type="text" placeholder="Address 2">
                                                     </div>
 
                                                     <div class="g-cell g-cell-1-1  g-cell-md-2-8 l-mar-top-3">
@@ -128,7 +130,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="g-cell g-cell-1-1 g-cell-md-6-8">
-                                                        <input class="js-location-edit-city l-mar-top-1 js-xd-cep-city" value="@Model.Location_City" id="Location_City" name="Location_City" type="text" placeholder="City">
+                                                        <input data-fieldname="City" class="js-location-edit-city l-mar-top-1 js-xd-cep-city" value="@Model.Location_City" id="Location_City" name="Location_City" type="text" placeholder="City">
                                                     </div>
 
                                                     <div class="g-group">
@@ -143,22 +145,13 @@
                                                             </label>
                                                         </div>
                                                         <div class="g-cell g-cell-1-2">
-                                                            <input class="js-location-edit-state l-mar-top-1 js-xd-cep-state" value="@Model.Location_State" id="Location_State" name="Location_State" type="text" placeholder="State">
+                                                            <input data-fieldname="State" class="js-location-edit-state l-mar-top-1 js-xd-cep-state" value="@Model.Location_State" id="Location_State" name="Location_State" type="text" placeholder="State">
                                                         </div>
                                                         <div class="g-cell g-cell-1-2">
-                                                            <input class="js-location-edit-postal_code l-mar-top-1 js-xd-cep-input" value="@Model.ZipCode" id="Location_ZipCode" name="Location_ZipCode" type="text" placeholder="Zip/Postal">
+                                                            <input data-fieldname="Zipcode" class="js-location-edit-postal_code l-mar-top-1 js-xd-cep-input" value="@Model.ZipCode" id="Location_ZipCode" name="Location_ZipCode" type="text" placeholder="Zip/Postal">
                                                         </div>
                                                         <div class="g-cell g-cell-1-1 l-mar-top-1 js-country-select">
-                                                            @Html.DropDownList("Country", @ViewBag.Country as SelectList, "Please select a country", htmlAttributes: new { @class = "js-d-select-box js-location-edit-country responsive-form__select", @id = "Country" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="g-group g-cell-1-1">
-                                                        <div class="g-cell g-cell-1-2">
-                                                            <ul class="bullet-list-ico bullet-list-ico--compact text-body-small">
-                                                                <li>
-                                                                    <a href="#" class="location-reset"><i class="ico-refresh ico--small"></i>Reset location</a>
-                                                                </li>
-                                                            </ul>
+                                                            @Html.DropDownList("Country", @ViewBag.Country as SelectList, "Please select a country", htmlAttributes: new { @class = "js-d-select-box js-location-edit-country responsive-form__select", @id = "Country",@data_fieldname="Country" })
                                                         </div>
                                                     </div>
                                                 </div>
@@ -178,14 +171,14 @@
                                             <div class="js-dtp-startdatetimepicker datetime_input g-cell l-mar-top-1 ui-date-time-picker">
                                                 <label class="label-primary">Starts</label>
                                                 <div class="l-mar-top-1">
-                                                    <input type="text" style="width:200px" value="@Model.StartDate" id="Event_StartDate_Dpk">
+                                                    <input data-fieldname="Start Date" required type="text" style="width:200px" value="@Model.StartDate" id="Event_StartDate_Dpk">
                                                 </div>
                                             </div>
 
                                             <div class="js-dtp-enddatetimepicker datetime_input g-cell l-mar-top-1 ui-date-time-picker">
                                                 <label class="label-primary">Ends</label>
                                                 <div class="l-mar-top-1">
-                                                    <input type="text" style="width:200px" value="@Model.EndDate" id="Event_EndDate_Dpk">
+                                                    <input data-fieldname="End Date" required type="text" style="width:200px" value="@Model.EndDate" id="Event_EndDate_Dpk">
                                                 </div>
                                             </div>
                                         </div>
@@ -283,7 +276,7 @@
                         <div class="js-create-ticket-wrapper ticket-container--no-handles">
                             <section class="js-ticket-summary js-ticket-summary-container" style="opacity: 1;">
                                 <div class="g-cell g-cell-1-2 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-3-12 paid-ticket-container">
-                                    @Html.DropDownList("TicketType", @ViewBag.TicketType as SelectList, "Select the type of ticket", htmlAttributes: new { @class = "responsive-form__select create_select_time_field custom-select-container clrfix", @id = "TicketType" })
+                                    @Html.DropDownList("TicketType", @ViewBag.TicketType as SelectList, "Select the type of ticket", htmlAttributes: new { @class = "responsive-form__select create_select_time_field custom-select-container clrfix", @id = "TicketType",@data_fieldname="Ticket Type",@required="true" })
                                 </div>
                                 <div class="g-cell g-cell-2-2 l-mar-top-2 g-offset-lg-4-12 g-cell-lg-3-12 paid-ticket-container">
                                     <a class="js-create-ticket btn btn--ico btn--secondary pull-right" id="add-ticket-button">
@@ -452,14 +445,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Functional buttons -->
     <div class="js-publish-callout l-align-center l-mar-top-4 responsive-form">
         <div id="starburst" class="l-pad-hor-2 l-pad-vert-4 l-sm-pad-vert-3">
             <div id="next_step_buttons" class="g-cell g-cell-1-1 btn-group btn-group--responsive">
-                <a class="btn btn--secondary btn-center" onclick="EventManagement.updateEvent(); return false;" id="save-event-button-almost-done">Update</a>
-                <a id="make-event-live-button-almost-done" class="btn btn--epic submit_for_live  btn-center">Make Your Event Live</a>
+                <a class="btn btn--secondary btn-center" onclick="EventManagement.onUpdateEventBtnClick(); return false;" id="save-event-button-almost-done">Update</a>
+                <a id="make-event-live-button-almost-done" onclick="EventManagement.onBackToIndexBtnClick(); return false;" class="btn btn--epic submit_for_live  btn-center">Back</a>
             </div>
         </div>
     </div>

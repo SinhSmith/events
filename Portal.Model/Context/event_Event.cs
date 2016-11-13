@@ -44,7 +44,10 @@ namespace Portal.Model.Context
         public int Status { get; set; }
         public Nullable<int> SortOrder { get; set; }
         public bool IsVerified { get; set; }
-    
+
+
+        public virtual string EventTypeName { get; set; }
+        public virtual string EventTopicName { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual share_Images CoverImage { get; set; }
         public virtual ICollection<event_Ticket> Tickets { get; set; }
