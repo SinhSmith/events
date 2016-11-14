@@ -1,0 +1,530 @@
+﻿@charset "UTF-8";
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+/* ---------------------------------------------------------- */
+/*                                                            */
+/* A media query that captures:                               */
+/*                                                            */
+/* - Retina iOS devices                                       */
+/* - Retina Macs running Safari                               */
+/* - High DPI Windows PCs running IE 8 and above              */
+/* - Low DPI Windows PCs running IE, zoomed in                */
+/* - Low DPI Windows PCs and Macs running Firefox, zoomed in  */
+/* - Android hdpi devices and above                           */
+/* - Android tvdpi devices, including Google Nexus 7          */
+/* - Chrome running on high DPI Macs and PCs                  */
+/* - Opera running on high DPI Macs, PCs and mobile devices   */
+/*                                                            */
+/* Please note that that this code assumes you'll swap a      */
+/* 2× version of your images. If you'd like to supply         */
+/* finer increments, other thresholds might be appropriate.   */
+/*                                                            */
+/* A test for CSS pixel densites can be found here:           */
+/* http://bjango.com/articles/min-device-pixel-ratio/         */
+/*                                                            */
+/*                                  @marcedwards from @bjango */
+/*                                                            */
+/* ---------------------------------------------------------- */
+/* This is hacky and awesome. it should be part of mixins or something.
+   I found it once on stack overflow and couldn't find it later when I looked */
+/* XXX: test in browsers */
+/* ratio is the height divided by width in percentage form */
+/* This function is used to get the max height for multi-line ellipses
+ * We use px values for line-height in styleguide, and unitless values for line-height in core
+ * so we need to handle the possibility for both here
+ */
+
+html,
+body,
+#content {
+    height: 100%;
+    background-color: black;
+}
+.landing-hero {
+    margin-top: -60px;
+}
+.page-loader {
+    -webkit-transition: all 400ms ease-in;
+    -moz-transition: all 400ms ease-in;
+    transition: all 400ms ease-in;
+    position: absolute;
+    background: black;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+}
+.page-loader.is-hidden-animate {
+    z-index: -1;
+}
+.landing-hero {
+    position: relative;
+    padding-top: 62px;
+    height: 700px;
+    background: url("../Images/img/eventbrite-about-hero.jpg") center center no-repeat;
+    background-size: cover;
+}
+@media only screen and (max-width: 479px) {
+    .landing-hero {
+        height: 460px;
+        background-image: url("../../../../../images/pages/about/eventbrite-about-hero-mobile.jpg");
+    }
+}
+.landing-hero .hero-headline {
+    position: relative;
+    top: 250px;
+}
+@media only screen and (max-width: 479px) {
+    .landing-hero .hero-headline {
+        top: 155px;
+    }
+}
+.landing-hero.about-no-hero {
+    background: #0093D7;
+    height: auto;
+    min-height: 65px;
+}
+.landing-hero.about-no-hero .landing-nav {
+    position: relative;
+}
+.landing-hero.about-team {
+    background-image: url("../../../../../images/pages/about/eventbrite-team-hero.jpg");
+    background-position: top left;
+}
+@media only screen and (max-width: 479px) {
+    .landing-hero.about-team {
+        background-image: url("../../../../../images/pages/about/eventbrite-team-hero-mobile.jpg");
+    }
+}
+.ie8 .landing-hero.about-team {
+    background-position: top center;
+}
+@media only screen and (min-width: 800px) {
+    .landing-hero.about-team {
+        background-position: top center;
+    }
+}
+.landing-hero.about-careers {
+    background-image: url("../../../../../images/pages/about/eventbrite-careers-hero.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-hero.about-careers {
+        background-image: url("../../../../../images/pages/about/eventbrite-careers-hero-mobile.jpg");
+    }
+}
+.landing-hero.about-contact {
+    background: black;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+}
+.landing-hero.about-contact .landing-triangle {
+    top: -78px;
+}
+.landing-hero.about-press {
+    background-image: url("../../../../../images/pages/about/eventbrite-press-hero.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-hero.about-press {
+        background-image: url("../../../../../images/pages/about/eventbrite-press-hero-mobile.jpg");
+    }
+}
+.landing-locations {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transition: all 400ms ease-in;
+    -moz-transition: all 400ms ease-in;
+    transition: all 400ms ease-in;
+}
+.landing-locations.active {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+}
+.landing-locations.active .landing-hero {
+    z-index: 2;
+}
+.landing-locations .landing-hero {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+.landing-locations .location-san-francisco {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-sf.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-san-francisco {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-sf-mobile.jpg");
+    }
+}
+.landing-locations .location-mendoza,
+.landing-locations .location-nashville {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-default.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-mendoza,
+    .landing-locations .location-nashville {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-default-mobile.jpg");
+    }
+}
+.landing-locations .location-sao-paulo {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-sao-paulo.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-sao-paulo {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-sao-paulo-mobile.jpg");
+    }
+}
+.landing-locations .location-berlin {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-berlin.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-berlin {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-berlin-mobile.jpg");
+    }
+}
+.landing-locations .location-melbourne {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-melbourne.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-melbourne {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-melbourne-mobile.jpg");
+    }
+}
+.landing-locations .location-dublin {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-dublin.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-dublin {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-dublin-mobile.jpg");
+    }
+}
+.landing-locations .location-london {
+    background-image: url("../../../../../images/pages/about/eventbrite-location-uk.jpg");
+}
+@media only screen and (max-width: 479px) {
+    .landing-locations .location-london {
+        background-image: url("../../../../../images/pages/about/eventbrite-location-uk-mobile.jpg");
+    }
+}
+.landing-triangle-wrapper {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 3;
+    background: #0093D7;
+}
+.landing-triangle {
+    position: absolute;
+    z-index: 1;
+    top: -80px;
+    height: 80px;
+    width: 100%;
+    overflow: hidden;
+}
+.landing-triangle .landing-triangle-border {
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    border-bottom: 80px solid #0093D7;
+    z-index: 1;
+    width: 50%;
+}
+.landing-triangle .landing-triangle-left {
+    border-right: 0 solid transparent;
+    border-left: 0;
+    left: 0;
+}
+.landing-triangle .landing-triangle-right {
+    right: 0;
+    border-left: 0 solid transparent;
+    border-right: 0;
+}
+.landing-description {
+    background: #0093D7;
+}
+.landing-description a.text-heading--emphasized {
+    text-decoration: underline;
+}
+.landing-description a.text-heading--emphasized:hover {
+    color: white;
+}
+.landing-nav {
+    -webkit-transition: all 400ms ease-in;
+    -moz-transition: all 400ms ease-in;
+    transition: all 400ms ease-in;
+    position: absolute;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 3;
+}
+.landing-nav a {
+    -webkit-transition: all 400ms ease-in;
+    -moz-transition: all 400ms ease-in;
+    transition: all 400ms ease-in;
+    color: white;
+}
+.landing-nav a:hover {
+    color: #ffdb00;
+}
+@media only screen and (max-width: 479px) {
+    .landing-nav .inline-link-list {
+        padding-left: 15px;
+    }
+}
+.landing-nav .inline-link-list > li {
+    padding-left: 0;
+}
+.landing-nav .is-active a {
+    display: block;
+    color: #ffdb00;
+    border-bottom: 1px solid #ffdb00;
+    padding-bottom: 5px;
+}
+.landing-nav-sticky {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    background-color: white;
+}
+.landing-nav-sticky .link-list li:not(.is-active) a {
+    color: #282C35;
+}
+.landing-section {
+    padding: 80px 0;
+}
+@media only screen and (max-width: 479px) {
+    .landing-section {
+        padding: 60px 0;
+    }
+}
+.landing-features .landing-feature {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    padding: 0 70px;
+}
+@media only screen and (min-width: 480px) and (max-width: 799px) {
+    .landing-features .landing-feature {
+        padding: 0 20px;
+    }
+}
+@media only screen and (max-width: 479px) {
+    .landing-features .landing-feature {
+        padding: 0;
+        margin-top: 35px;
+    }
+}
+.landing-features .landing-feature-no-margin {
+    margin-top: 0;
+}
+.category-card .category-card__tint {
+    border-radius: 0;
+}
+.category-card .category-card__image {
+    height: 350px;
+}
+@media only screen and (min-width: 480px) and (max-width: 799px) {
+    .category-card .category-card__image {
+        height: 280px;
+    }
+}
+@media only screen and (max-width: 479px) {
+    .category-card .category-card__image {
+        height: 160px;
+    }
+}
+.category-card:hover .category-card__tint:after,
+.category-card:focus .category-card__tint:after,
+.category-card:active .category-card__tint:after {
+    border-radius: 0;
+}
+.cta-host {
+    background: url("../Images/img/cta-host.jpg");
+}
+.cta-discover {
+    background: url("../Images/img/cta-discover.jpg");
+}
+.cta-join {
+    background: url("../Images/img/cta-join.jpg");
+}
+.cta-team {
+    background: url("../Images/img/cta-team.jpg");
+}
+.cta-cities {
+    background: url("../Images/img/cta-cities.jpg");
+}
+.cta-barklings {
+    background: url("../Images/img/cta-barklings.jpg");
+}
+.investor-logo {
+    position: relative;
+    height: 50px;
+}
+.investor-logo img {
+    position: absolute;
+    bottom: 5px;
+}
+.press-nav-item {
+    display: inline-block;
+    margin-right: 30px;
+}
+.press-nav-item a {
+    color: #282C35;
+    text-transform: none;
+}
+.press-nav-item a:hover {
+    text-decoration: none;
+}
+.press-nav-item.is-active {
+    border-bottom: 2px solid #282C35;
+    padding-bottom: 5px;
+}
+.press-article {
+    position: relative;
+    border-left: 2px solid #0093D7;
+    padding-left: 10px;
+    min-height: 70px;
+    margin: 20px 0;
+}
+.press-site {
+    text-transform: uppercase;
+}
+.press-article-url {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.press-release-content p {
+    margin-bottom: 10px;
+}
+.careers-perk {
+    background: center top no-repeat;
+    background-size: cover;
+    padding: 200px 0;
+    height: 430px;
+}
+.careers-perk-1 {
+    background-image: url("../../../../../images/pages/about/careers-slider-1.jpg");
+}
+.careers-perk-2 {
+    background-image: url("../../../../../images/pages/about/careers-slider-2.jpg");
+}
+.careers-perk-3 {
+    background-image: url("../../../../../images/pages/about/careers-slider-3.jpg");
+}
+.leader-card {
+    background: #F8F8FA;
+}
+.leader-description {
+    padding: 45px 0;
+}
+.leader-photo-wrapper {
+    height: 350px;
+}
+@media only screen and (max-width: 479px) {
+    .leader-photo-wrapper {
+        height: 240px;
+    }
+}
+.leader-photo-bg {
+    position: relative;
+}
+.leader-photo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+@media only screen and (min-width: 480px) and (max-width: 799px) {
+    .leader-photo {
+        height: 100%;
+    }
+}
+.leader-photo img {
+    margin: auto;
+}
+.leader-title {
+    display: inline-block;
+    border-bottom: 3px solid #0093D7;
+    padding-bottom: 5px;
+}
+.leaders-nav .slick-track {
+    width: 100% !important;
+}
+.leader-nav-item:hover {
+    cursor: pointer;
+}
+.landing-photo-grid {
+    display: none;
+}
+.landing-photo-grid.active {
+    display: block;
+}
+.grid-description {
+    height: 100%;
+}
+.slick-prev,
+.slick-next {
+    top: 195px;
+}
+.landing-section--white {
+    background: white;
+}
+.landing-section--light-blue {
+    background-color: #0093D7;
+}
+.landing-section--green {
+    background-color: #00ab44;
+}
+.text-yellow {
+    color: #ffdb00;
+}
+.animate-first {
+    -webkit-transition: all 500ms ease-out 0s;
+    -moz-transition: all 500ms ease-out 0s;
+    transition: all 500ms ease-out 0s;
+}
+.animate-second {
+    -webkit-transition: all 500ms ease-out 500ms;
+    -moz-transition: all 500ms ease-out 500ms;
+    transition: all 500ms ease-out 500ms;
+}
+.animate-third {
+    -webkit-transition: all 500ms ease-out 1s;
+    -moz-transition: all 500ms ease-out 1s;
+    transition: all 500ms ease-out 1s;
+}
+
+#contentpub a {
+    text-decoration: none !important;
+}
+
+#contentpub {
+    padding-bottom: 0
+}

@@ -61,16 +61,16 @@ HomePageManagement = {
     controls: {
         spin: null
     },
-    bindEventForElement:function(){
+    bindEventForElement: function () {
         // Bind event for controls in page
 
         $("a.category-card").unbind("click").bind("click", function () {
             var filterType = $(this).data("type");
             var id = $(this).data("id");
-            HomePageManagement.searchEventByCategory(filterType,id);
+            HomePageManagement.searchEventByCategory(filterType, id);
         });
     },
-    searchEventByCategory:function(filterType,id){
+    searchEventByCategory: function (filterType, id) {
         // search events by category
 
         var url = "/Event/SearchEvent/?";
@@ -100,7 +100,7 @@ HomePageManagement = {
         $.ajax({
             url: '/Home/GetEventsInCurrentLocation',
             type: 'POST',
-            data: { country: country, state:state, city: city },
+            data: { country: country, state: state, city: city },
             success: function (result) {
                 console.log(result);
                 $("#content .js-popular-events .js-events-list").empty();
@@ -113,7 +113,7 @@ HomePageManagement = {
             }
         });
     },
-    googleApiCallBackFunction:function(){
+    googleApiCallBackFunction: function () {
         /// <summary>
         /// This function will be call when google api ready for use
         /// </summary>
@@ -167,7 +167,7 @@ HomePageManagement = {
         var resultAddress = {
             City: {
                 long_name: "",
-                short_name:""
+                short_name: ""
             },
             State: {
                 long_name: "",
@@ -202,7 +202,7 @@ HomePageManagement = {
 
         return resultAddress;
     },
-    initLocationAutoComplete:function(){
+    initLocationAutoComplete: function () {
         // Create the search box and link it to the UI element.
         var input = document.getElementById("EventLocation_AutoComplete");
         var searchBox = new google.maps.places.SearchBox(input);

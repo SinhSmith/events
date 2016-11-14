@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 ul.bulleted {
     margin-top: .3em;
     margin-bottom: .8em
@@ -39389,8 +39389,7 @@ label.label-secondary {
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     position: relative;
-    top: 50%;
-    width:100%;
+    top: 50%
 }
 @media only screen and (max-width: 479px) {
     .list-card-v2 .list-card__image {
@@ -39459,14 +39458,11 @@ label.label-secondary {
     font-size: 15px;
     line-height: 20px;
     max-height: 40px;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 0;
     padding: 0;
     height: 40px;
-    margin-bottom: 2px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 5px 0 0;
+    margin-bottom: 2px
 }
 .list-card-v2 .list-card__organizer,
 .list-card-v2 .list-card__venue {
@@ -39626,8 +39622,7 @@ label.label-secondary {
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     position: relative;
-    top: 50%;
-    width:100%;
+    top: 50%
 }
 .poster-card .poster-card__header .poster-card__friends {
     background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, .3));
@@ -39699,13 +39694,10 @@ label.label-secondary {
     font-size: 15px;
     line-height: 19px;
     max-height: 38px;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 0;
     padding: 0;
-    height: 38px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 5px 0 0;
+    height: 38px
 }
 .poster-card .poster-card__body .poster-card__venue {
     text-overflow: ellipsis;
