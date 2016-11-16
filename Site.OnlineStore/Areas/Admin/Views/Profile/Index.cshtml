@@ -40,16 +40,16 @@
                                 Email
                             </th>
                             <th>
-                                Mật khẩu
+                                Password
                             </th>
                             <th>
-                                Số điện thoại
+                                MobilePhone
                             </th>
                             <th>
-                                Địa chỉ
+                                Home Address
                             </th>
                             <th style="width: 100px;">
-                                Tình trạng
+                                Status
                             </th>
                             <th></th>
                         </tr>
@@ -64,10 +64,10 @@
                                     @Html.DisplayFor(modelItem => item.Password)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Phone)
+                                    @Html.DisplayFor(modelItem => item.MobilePhone)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Address)
+                                    @Html.DisplayFor(modelItem => item.Home_Address)
                                 </td>
                                 <td class="text-center">
                                     <span class="glyphicon @(item.Status == (int)Portal.Infractructure.Utility.Define.Status.Active ? "glyphicon-ok" : "glyphicon-remove")"></span>

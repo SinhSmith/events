@@ -2186,6 +2186,12 @@
     <Content Include="Views\Event\OrderTicketPage.cshtml" />
     <Content Include="Views\Event\EventDetails.cshtml" />
     <Content Include="Views\Event\OrderSuccessful.cshtml" />
+    <Content Include="Views\Account\ProfileSetting.cshtml" />
+    <Content Include="Views\Organiser\Create.cshtml" />
+    <Content Include="Views\Organiser\Delete.cshtml" />
+    <Content Include="Views\Organiser\Details.cshtml" />
+    <Content Include="Views\Organiser\Edit.cshtml" />
+    <Content Include="Views\Organiser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

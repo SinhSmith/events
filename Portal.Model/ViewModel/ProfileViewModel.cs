@@ -15,7 +15,7 @@ namespace Portal.Model.ViewModel
         public string Emaill { get; set; }
         public string Password { get; set; }
         public Nullable<int> Status { get; set; }
-        public string Prefix { get; set; }
+        public int? Prefix { get; set; }
         [MaxLength(20)]
         public string HomePhone { get; set; }
         [MaxLength(20)]
@@ -29,17 +29,17 @@ namespace Portal.Model.ViewModel
         public string Blog { get; set; }
         public string Home_Address { get; set; }
         public string Home_Address2 { get; set; }
-        public string Home_City { get; set; }
+        public int? Home_City { get; set; }
         public string Billing_Address { get; set; }
         public string Billing_Address2 { get; set; }
-        public string Billing_City { get; set; }
+        public int? Billing_City { get; set; }
         public string Shipping_Address { get; set; }
         public string Shipping_Address2 { get; set; }
-        public string Shipping_City { get; set; }
+        public int? Shipping_City { get; set; }
         public string Work_Address { get; set; }
         public string Work_Address2 { get; set; }
-        public string Work_City { get; set; }
-        public string Gender { get; set; }
+        public int? Work_City { get; set; }
+        public int? Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<int> Age { get; set; }
     }

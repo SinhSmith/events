@@ -20,7 +20,8 @@ namespace Portal.Service.Implements
 
             using (var db = new PortalEntities())
             {
-                var organiser = db.system_Organisers.FirstOrDefault(x => x.UserId == userId);
+                var organiser = db.system_Organisers.FirstOrDefault(x => x.UserId == userId.Value);
+
                 return new OrganiserViewModel
                 {
                     Id = organiser.Id,
@@ -31,7 +32,7 @@ namespace Portal.Service.Implements
                     Facebook = organiser.Facebook,
                     Twitter = organiser.Twitter,
                     AvatarId = organiser.AvatarId,
-                    AvatarPath = organiser.share_Images.ImagePath,
+                    AvatarPath = organiser.share_Images != null ? organiser.share_Images.ImagePath : string.Empty,
                     Status = organiser.Status
                 };
             }
