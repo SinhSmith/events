@@ -41,6 +41,7 @@
         <EntityTypeShape EntityType="PortalModel.system_Organisers" Width="1.5" PointX="10.5" PointY="13.375" />
         <AssociationConnector Association="PortalModel.FK_system_Organisers_share_Images" />
         <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="13.375" PointY="6.75" />
+        <AssociationConnector Association="PortalModel.event_EventBookMark" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

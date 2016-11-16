@@ -144,6 +144,7 @@
     <Compile Include="Repository\ProjectRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\TicketRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="ViewModel\BannerViewModel.cs" />
     <Compile Include="ViewModel\cmsCategoryView.cs" />
     <Compile Include="ViewModel\ImageViewModel.cs" />

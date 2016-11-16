@@ -68,6 +68,7 @@
     <Compile Include="Implements\ProfileService.cs" />
     <Compile Include="Implements\ProjectService.cs" />
     <Compile Include="Implements\SystemConfigService.cs" />
+    <Compile Include="Implements\UserResourcesService.cs" />
     <Compile Include="Interfaces\IBannerService.cs" />
     <Compile Include="Interfaces\ICMSCategoryService.cs" />
     <Compile Include="Interfaces\IOrganiserService.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\IProjectService.cs" />
     <Compile Include="Interfaces\ISystemConfigService.cs" />
+    <Compile Include="Interfaces\IUserResourcesService.cs" />
     <Compile Include="MessageModel\EventDisplayModel.cs" />
     <Compile Include="MessageModel\EventManagement.cs" />
     <Compile Include="MessageModel\OrderEventModel.cs" />

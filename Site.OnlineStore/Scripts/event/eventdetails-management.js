@@ -73,6 +73,10 @@ EventDetailsManagement = {
         $("#Txt_EventSearchBox").unbind("change").bind("change", function () {
             window.location.replace("/Event/SearchEvent/?SearchString="+$(this).val());
         });
+
+        $("#track_event").unbind("click").bind("click", function () {
+            EventDetailsManagement.bookMarkEvent();
+        });
     },
     validateOrderTicketForm:function(){
         // Validate form
@@ -118,6 +122,37 @@ EventDetailsManagement = {
             }
         });
     },
+    bookMarkEvent:function(){
+        // Bookmark a event
+
+        var eventId = $("[name = 'EventId']").val();
+        var userName = $("[name = 'UserName']").val();
+
+        if (userName == null || userName == "") {
+            console.log("You have to sign before bookmark this event");
+        } else {
+            EventDetailsManagement.showSpin("#track_event_container");
+            $.ajax({
+                type: "post",
+                url: "/UserResources/AddEventBookMark",
+                data: { eventId: eventId, userName: userName },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.Success) {
+                        console.log("Bookmark this event successful!");
+                    } else {
+                        console.log("Error: bookmark this event fail!");
+                    }
+                },
+                error: function () {
+                    console.log("Error: bookmark this event fail!");
+                },
+                complete: function () {
+                    EventDetailsManagement.hideSpin();
+                }
+            });
+        }
+    },
     showSpin: function (target) {
         /// <summary>
         /// Create spin control
@@ -125,7 +160,7 @@ EventDetailsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
-        $("#images").append(EventDetailsManagement.controls.spin.spin().el);
+        $(target).append(EventDetailsManagement.controls.spin.spin().el);
     },
     hideSpin: function () {
         /// <summary>

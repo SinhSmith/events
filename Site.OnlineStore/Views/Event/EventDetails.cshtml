@@ -24,6 +24,11 @@
 <!-- Event details and Order content -->
 <div id="contentpub" class="js-hidden-when-expired ">
     <div class="main">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Hidden("UserName",User.Identity.Name);
+        }
+   
         <!-- Error panel -->
         <div id="ticket_error_message_container" class="deprecated-notification2 error_notification hidden">
             <div class="error_notification_msg">
@@ -171,7 +176,7 @@
         <!-- Right column content panel -->
         <div id="col_280">
             <div id="track_event_container" class="common_box panel_280">
-                <a href="" id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
+                <a id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
                 <div class="count_subview"></div>
                 <div class="summary_subview"></div>
             </div>

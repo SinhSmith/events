@@ -18,6 +18,7 @@ namespace Portal.Model.Context
         {
             this.Tickets = new HashSet<event_Ticket>();
             this.event_Order = new HashSet<event_Order>();
+            this.ObservedUsers = new HashSet<AspNetUser>();
         }
     
         public int Id { get; set; }
@@ -44,13 +45,13 @@ namespace Portal.Model.Context
         public int Status { get; set; }
         public Nullable<int> SortOrder { get; set; }
         public bool IsVerified { get; set; }
-
-
-        public virtual string EventTypeName { get; set; }
-        public virtual string EventTopicName { get; set; }
+    
+        public string EventTypeName{get;set;}
+        public string EventTopicName { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual share_Images CoverImage { get; set; }
         public virtual ICollection<event_Ticket> Tickets { get; set; }
         public virtual ICollection<event_Order> event_Order { get; set; }
+        public virtual ICollection<AspNetUser> ObservedUsers { get; set; }
     }
 }

@@ -132,6 +132,14 @@
           <Property Name="SortOrder" Type="int" />
           <Property Name="IsVerified" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="event_EventBookMark">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="event_Order">
           <Key>
             <PropertyRef Name="Id" />
@@ -441,6 +449,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_event_EventBookMark_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="event_EventBookMark" Type="Self.event_EventBookMark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_EventBookMark">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_EventBookMark_event_Event">
+          <End Role="event_Event" Type="Self.event_Event" Multiplicity="1" />
+          <End Role="event_EventBookMark" Type="Self.event_EventBookMark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_EventBookMark">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_event_Order_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="event_Order" Type="Self.event_Order" Multiplicity="*" />
@@ -595,6 +627,7 @@
           <EntitySet Name="cms_Categories" EntityType="Self.cms_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cms_News" EntityType="Self.cms_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="event_Event" EntityType="Self.event_Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_EventBookMark" EntityType="Self.event_EventBookMark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="event_Order" EntityType="Self.event_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="event_Ticket" EntityType="Self.event_Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="event_TicketOrder" EntityType="Self.event_TicketOrder" Schema="dbo" store:Type="Tables" />
@@ -639,6 +672,14 @@
           <AssociationSet Name="FK_event_Event_share_Images" Association="Self.FK_event_Event_share_Images">
             <End Role="share_Images" EntitySet="share_Images" />
             <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_EventBookMark_AspNetUsers" Association="Self.FK_event_EventBookMark_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="event_EventBookMark" EntitySet="event_EventBookMark" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_EventBookMark_event_Event" Association="Self.FK_event_EventBookMark_event_Event">
+            <End Role="event_Event" EntitySet="event_Event" />
+            <End Role="event_EventBookMark" EntitySet="event_EventBookMark" />
           </AssociationSet>
           <AssociationSet Name="FK_event_Order_AspNetUsers" Association="Self.FK_event_Order_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -752,7 +793,8 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="event_Event" Relationship="PortalModel.FK_event_Event_AspNetUsers" FromRole="AspNetUser" ToRole="event_Event" />
-          <NavigationProperty Name="event_Order" Relationship="PortalModel.FK_event_Order_AspNetUsers" FromRole="AspNetUser" ToRole="event_Order" />
+          <NavigationProperty Name="Orders" Relationship="PortalModel.FK_event_Order_AspNetUsers" FromRole="AspNetUser" ToRole="event_Order" />
+          <NavigationProperty Name="BookMarkEvents" Relationship="PortalModel.event_EventBookMark" FromRole="AspNetUser" ToRole="event_Event" />
         </EntityType>
         <EntityType Name="cms_Categories">
           <Key>
@@ -1028,6 +1070,10 @@
             <End Role="system_Organisers" EntitySet="system_Organisers" />
           </AssociationSet>
           <EntitySet Name="system_Profiles" EntityType="PortalModel.system_Profiles" />
+          <AssociationSet Name="event_EventBookMark" Association="PortalModel.event_EventBookMark">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="portal_Projects">
           <Key>
@@ -1104,6 +1150,7 @@
           <NavigationProperty Name="CoverImage" Relationship="PortalModel.FK_event_Event_share_Images" FromRole="event_Event" ToRole="share_Images" />
           <NavigationProperty Name="Tickets" Relationship="PortalModel.FK_event_Ticket_event_Event" FromRole="event_Event" ToRole="event_Ticket" />
           <NavigationProperty Name="event_Order" Relationship="PortalModel.FK_event_Order_event_Event" FromRole="event_Event" ToRole="event_Order" />
+          <NavigationProperty Name="ObservedUsers" Relationship="PortalModel.event_EventBookMark" FromRole="event_Event" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="event_Ticket">
           <Key>
@@ -1307,6 +1354,10 @@
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
           <Property Name="Age" Type="Int32" />
         </EntityType>
+        <Association Name="event_EventBookMark">
+          <End Type="PortalModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1660,6 +1711,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="event_EventBookMark" TypeName="PortalModel.event_EventBookMark" StoreEntitySet="event_EventBookMark">
+            <EndProperty Name="event_Event">
+              <ScalarProperty Name="Id" ColumnName="EventId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
