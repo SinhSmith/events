@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implements\ShareCategoryService.cs" />
     <Compile Include="Implements\BannerService.cs" />
     <Compile Include="Implements\CMSCategoryExtensions.cs" />
     <Compile Include="Implements\CMSCategoryService.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Implements\ProjectService.cs" />
     <Compile Include="Implements\SystemConfigService.cs" />
     <Compile Include="Implements\UserResourcesService.cs" />
+    <Compile Include="Interfaces\IShareCategoryService.cs" />
     <Compile Include="Interfaces\IBannerService.cs" />
     <Compile Include="Interfaces\ICMSCategoryService.cs" />
     <Compile Include="Interfaces\IOrganiserService.cs" />

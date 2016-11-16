@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /* ============== Browser Support ============== */
 /* ================== Colors ================== */
 /* ================ Typography ================= */
@@ -113,11 +113,11 @@
     -moz-flex-grow: 10;
     -ms-flex-grow: 10;
     flex-grow: 10;
-    /*border-bottom: 1px solid #D2D6DF;*/
+    border-bottom: 1px solid #D2D6DF;
     height: 60px;
 }
 .header-browse {
-    /*border-bottom: 1px solid #D2D6DF;*/
+    border-bottom: 1px solid #D2D6DF;
     height: 60px;
 }
 .sill {
@@ -145,9 +145,6 @@
     border-color: transparent;
     border-radius: 0px;
 }
-.global-header .search-autocomplete input[type="search"][placeholder]:focus{
-    outline: none;
-} 
 .global-header .search-autocomplete input[type="search"]:-moz-placeholder {
     text-overflow: ellipsis;
     border-color: transparent;
@@ -244,7 +241,6 @@
     background-color: white;
     border-bottom: 1px solid #D2D6DF;
     z-index: 40000;
-    box-sizing:content-box!important;
 }
 .global-header .btn.btn--link {
     height: auto;
@@ -291,7 +287,7 @@
     float: left;
     background-color: white;
     z-index: 39000;
-    /*border-bottom: 1px solid #D2D6DF;*/
+    border-bottom: 1px solid #D2D6DF;
     height: 60px;
 }
 .global-header .major .header-link {
@@ -434,14 +430,14 @@
     height: 60px;
 }
 .gh-help-box {
-    /*border-bottom: 1px solid #D2D6DF;*/
+    border-bottom: 1px solid #D2D6DF;
     height: 60px;
 }
 .gh-help-box .gh-dd-menu {
     width: 330px;
 }
 .gh-profile-box {
-    /*border-bottom: 1px solid #D2D6DF;*/
+    border-bottom: 1px solid #D2D6DF;
     height: 60px;
 }
 .gh-profile-box .gh-dd-menu {
@@ -711,7 +707,6 @@ body .global-header a.header-link {
     letter-spacing: 0.5px;
     border-radius: 0px;
     color: #45494E;
-    height:100%;
 }
 body .global-header .list {
     font-size: 15px;

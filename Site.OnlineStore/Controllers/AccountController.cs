@@ -12,6 +12,8 @@ using Site.OnlineStore.Models;
 using Portal.Service.Implements;
 using Portal.Infractructure.Utility;
 using Portal.Model.ViewModel;
+using System.Collections.Generic;
+using Portal.Infractructure.Helper;
 
 namespace Site.OnlineStore.Controllers
 {
@@ -229,6 +231,9 @@ namespace Site.OnlineStore.Controllers
                 return HttpNotFound();
             }
 
+            PopulateDropdownListPrefix(profile.Prefix == null ? Define.Prefix.Mr : (Define.Prefix)profile.Prefix);
+            PopulateDropdownListCity(profile.Home_City);
+            PopulateDropdownListGender(profile.Gender == null ? Define.Gender.Male : (Define.Gender)profile.Gender);
             return View(profile);
         }
 
@@ -243,6 +248,9 @@ namespace Site.OnlineStore.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            PopulateDropdownListPrefix(model.Prefix == null ? Define.Prefix.Mr : (Define.Prefix)model.Prefix);
+            PopulateDropdownListCity(model.Home_City);
+            PopulateDropdownListGender(model.Gender == null ? Define.Gender.Male : (Define.Gender)model.Gender);
             return View(model);
         }
 
@@ -496,6 +504,46 @@ namespace Site.OnlineStore.Controllers
 
             base.Dispose(disposing);
         }
+
+        #region private functions
+
+        private void PopulateDropdownListPrefix(Define.Prefix prefix = Define.Prefix.Mr)
+        {
+            IEnumerable<Define.Prefix> values = Enum.GetValues(typeof(Define.Prefix)).Cast<Define.Prefix>();
+            IEnumerable<SelectListItem> items = from value in values
+                                                select new SelectListItem
+                                                {
+                                                    Text = EnumHelper.GetDescriptionFromEnum((Define.Prefix)value),
+                                                    Value = ((int)value).ToString(),
+                                                    Selected = value == prefix,
+                                                };
+
+            ViewData["Prefix"] = items;
+        }
+
+        private void PopulateDropdownListCity(int? selectedCity = null)
+        {
+            var shareCategoryService = new ShareCategoryService();
+            var shareCategories = shareCategoryService.GetShareCategoriesByType(Define.ShareCategoryType.City);
+            ViewData["City"] = new SelectList(shareCategories, "ID", "Name", selectedCity);
+        }
+
+        private void PopulateDropdownListGender(Define.Gender gender = Define.Gender.Male)
+        {
+            IEnumerable<Define.Gender> values = Enum.GetValues(typeof(Define.Gender)).Cast<Define.Gender>();
+            IEnumerable<SelectListItem> items = from value in values
+                                                select new SelectListItem
+                                                {
+                                                    Text = value.ToString(),
+                                                    Value = ((int)value).ToString(),
+                                                    Selected = value == gender,
+                                                };
+
+            ViewData["Gender"] = items;
+        }
+
+        #endregion
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins

@@ -322,7 +322,7 @@
           <Property Name="Emaill" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Status" Type="int" />
-          <Property Name="Prefix" Type="char" MaxLength="1" />
+          <Property Name="Prefix" Type="int" />
           <Property Name="HomePhone" Type="nvarchar" MaxLength="50" />
           <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
           <Property Name="JobTitle" Type="nvarchar" MaxLength="250" />
@@ -331,17 +331,17 @@
           <Property Name="Blog" Type="nvarchar" MaxLength="255" />
           <Property Name="Home_Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Home_Address2" Type="nvarchar" MaxLength="250" />
-          <Property Name="Home_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Home_City" Type="int" />
           <Property Name="Billing_Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Billing_Address2" Type="nvarchar" MaxLength="250" />
-          <Property Name="Billing_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_City" Type="int" />
           <Property Name="Shipping_Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Shipping_Address2" Type="nvarchar" MaxLength="250" />
-          <Property Name="Shipping_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_City" Type="int" />
           <Property Name="Work_Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Work_Address2" Type="nvarchar" MaxLength="250" />
-          <Property Name="Work_City" Type="nvarchar" MaxLength="250" />
-          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Work_City" Type="int" />
+          <Property Name="Gender" Type="int" />
           <Property Name="BirthDate" Type="datetime" />
           <Property Name="Age" Type="int" />
         </EntityType>
@@ -1331,7 +1331,7 @@
           <Property Name="Emaill" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
-          <Property Name="Prefix" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Prefix" Type="Int32" />
           <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="JobTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -1340,17 +1340,17 @@
           <Property Name="Blog" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Home_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Home_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Home_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Home_City" Type="Int32" />
           <Property Name="Billing_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Billing_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Billing_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_City" Type="Int32" />
           <Property Name="Shipping_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Shipping_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Shipping_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_City" Type="Int32" />
           <Property Name="Work_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Work_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Work_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Work_City" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
           <Property Name="BirthDate" Type="DateTime" Precision="3" />
           <Property Name="Age" Type="Int32" />
         </EntityType>

@@ -1,4 +1,14 @@
 ﻿$(document).ready(function () {
+    $("#registerLink").click(function () {
+        $("#modalLogin").modal("hide");
+        $("#modalRegister").modal("show");
+    });
+
+    $("#loginLink").click(function () {
+        $("#modalLogin").modal("show");
+        $("#modalRegister").modal("hide");
+    });
+
     $("#switch-to-signup").click(function () {
         $("#modalLogin").modal("hide");
         $("#modalRegister").modal("show");

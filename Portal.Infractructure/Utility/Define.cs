@@ -113,9 +113,9 @@ namespace Portal.Infractructure.Utility
         }
         public enum TicketPriceType
         {
-            AllPrices=2,
-            Paid=1,
-            Free=0
+            AllPrices = 2,
+            Paid = 1,
+            Free = 0
         }
 
         public enum DateFilterType
@@ -135,7 +135,7 @@ namespace Portal.Infractructure.Utility
             [Description("Next Month")]
             NextMonth = 6,
             [Description("Custom Date")]
-            CustomDate =7
+            CustomDate = 7
         }
 
         public enum EventSortBy
@@ -144,6 +144,39 @@ namespace Portal.Infractructure.Utility
             Name = 1,
             [Description("Sort by Date")]
             Date = 2
+        }
+
+        public enum Prefix
+        {
+            [Description("Mr.")]
+            Mr = 1,
+            [Description("Mrs.")]
+            Mrs = 2,
+            [Description("Ms.")]
+            Ms = 3,
+            [Description("Miss")]
+            Miss = 4,
+            [Description("Mx.")]
+            Mx = 5,
+            [Description("Dr.")]
+            Dr = 6,
+            [Description("Prof.")]
+            Prof = 7,
+            [Description("Rev.")]
+            Rev = 8
+        }
+
+        public enum ShareCategoryType
+        {
+            City = 1,
+            District = 2
+        }
+
+        public enum Gender
+        {
+            Male = 1,
+            Female = 2,
+            Other = 3
         }
     }
 }

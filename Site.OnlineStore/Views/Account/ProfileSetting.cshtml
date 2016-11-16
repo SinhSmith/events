@@ -28,12 +28,12 @@
                                 </h3>
                                 <ul class="js-xd-accordion-content side-nav__subheader">
                                     <li class="is-selected">
-                                        <a href="/account">
+                                        <a href="@Url.Action("ProfileSetting", "Account")">
                                             Contact Info
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="/password">
+                                        <a href="@Url.Action("ChangePassword", "Manage")">
                                             Change Password
                                         </a>
                                     </li>
@@ -65,13 +65,6 @@
 
             <div class="g-vertical-group g-cell-12-12 g-cell-lg-9-12 l-mar-top-4">
 
-                <div class="g-cell g-cell-1-1">
-                    <h2 class="text-heading-primary">Account Information</h2>
-                </div>
-                <div class="g-cell g-cell-1-1 l-pad-vert-2">
-                    <hr>
-                </div>
-
                 <div>
                     @using (Html.BeginForm("ProfileSetting", "Account", null, FormMethod.Post, new { id = "profile_form", @class = "responsive-form fieldsform js-d-submitControl" }))
                     {
@@ -80,29 +73,16 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <div class="g-group">
-                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                 <div><label for="contactinfo_prefix" class="label-primary">Prefix</label></div>
                                 <div>
-                                    <div class="responsive-form__select custom-select-container clrfix">
-                                        <span class="custom-select-value">--</span>
-                                        <div class="custom-select-arrow"></div>
-                                        <select class="js-d-select-box" id="prefix" name="prefix" dorsal-guid="2b4c602d-ac2b-7c3a-4dc6-5f7585272a45" data-xd-wired="select-box">
-                                            <option value="" selected="selected">--</option>
-                                            <option value="Mr.">Mr.</option>
-                                            <option value="Mrs.">Mrs.</option>
-                                            <option value="Ms.">Ms.</option>
-                                            <option value="Miss">Miss</option>
-                                            <option value="Mx.">Mx.</option>
-                                            <option value="Dr.">Dr.</option>
-                                            <option value="Prof.">Prof.</option>
-                                            <option value="Rev.">Rev.</option>
-                                        </select>
-                                    </div>
+                                    @Html.DropDownList("Prefix", ViewData["Prefix"] as SelectList, new { @class = "responsive-form__select custom-select-container clrfix form-control" })
+                                    @Html.ValidationMessageFor(model => model.Prefix, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="g-group">
                                 <div class="g-group">
-                                    <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                    <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                         <div><label for="UserName" class="label-primary">Full Name</label></div>
                                         <div>
                                             @Html.TextBoxFor(m => m.UserName)
@@ -112,31 +92,31 @@
                                 <div class="g-group">
                                     <div class="g-group">
                                         <div class="g-group">
-                                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                                 <div><label for="HomePhone" class="label-primary">Home Phone</label></div>
                                                 <div>@Html.TextBoxFor(m => m.HomePhone)</div>
                                             </div>
-                                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                                 <div><label for="MobilePhone" class="label-primary">Mobile Phone</label></div>
                                                 <div>@Html.TextBoxFor(m => m.MobilePhone)</div>
                                             </div>
                                         </div>
                                         <div class="g-group">
-                                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                                 <div><label for="JobTitle" class="label-primary">Job Title</label></div>
                                                 <div>@Html.TextBoxFor(m => m.JobTitle)</div>
                                             </div>
-                                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                                 <div><label for="Company" class="label-primary">Company / Organisation</label></div>
                                                 <div>@Html.TextBoxFor(m => m.Company)</div>
                                             </div>
                                         </div>
                                         <div class="g-group">
-                                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                                 <div><label for="Website" class="label-primary">Website</label></div>
                                                 <div>@Html.TextBoxFor(m => m.Website)</div>
                                             </div>
-                                            <div class="g-cell g-cell-1-1 g-cell-md-3-9 l-mar-top-2">
+                                            <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
                                                 <div><label for="Blog" class="label-primary">Blog</label></div>
                                                 <div>@Html.TextBoxFor(m => m.Blog)</div>
                                             </div>
@@ -161,7 +141,10 @@
 
                                             <div class="g-group">
                                                 <div class="g-cell g-cell-1-1 l-mar-top-2"><label for="Home_City" class="label-primary">Town/city</label></div>
-                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">@Html.TextBoxFor(m => m.Home_City, new { @class = "js-xd-cep-city" })</div>
+                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">
+                                                    @Html.DropDownList("Home_City", ViewData["City"] as SelectList, new { @class = "js-xd-cep-city form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Home_City, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
                                         </div>
 
@@ -184,7 +167,10 @@
 
                                             <div class="g-group">
                                                 <div class="g-cell g-cell-1-1 l-mar-top-2"><label for="Billing_City" class="label-primary">Town/city</label></div>
-                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">@Html.TextBoxFor(m => m.Billing_City, new { @class = "js-xd-cep-city" })</div>
+                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">
+                                                    @Html.DropDownList("Billing_City", ViewData["City"] as SelectList, new { @class = "js-xd-cep-city form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Billing_City, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
                                         </div>
 
@@ -207,7 +193,10 @@
 
                                             <div class="g-group">
                                                 <div class="g-cell g-cell-1-1 l-mar-top-2"><label for="Shipping_City" class="label-primary">Town/city</label></div>
-                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">@Html.TextBoxFor(m => m.Shipping_City, new { @class = "js-xd-cep-city" })</div>
+                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">
+                                                    @Html.DropDownList("Shipping_City", ViewData["City"] as SelectList, new { @class = "js-xd-cep-city form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Shipping_City, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
                                         </div>
 
@@ -229,7 +218,10 @@
 
                                             <div class="g-group">
                                                 <div class="g-cell g-cell-1-1 l-mar-top-2"><label for="Work_City" class="label-primary">Town/city</label></div>
-                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">@Html.TextBoxFor(m => m.Work_City, new { @class = "js-xd-cep-city" })</div>
+                                                <div class="g-cell g-cell-1-1 g-cell-md-6-9">
+                                                    @Html.DropDownList("Work_City", ViewData["City"] as SelectList, new { @class = "js-xd-cep-city form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Work_City, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
                                         </div>
 
@@ -241,16 +233,8 @@
                                         <div class="g-group l-mar-top-2">
                                             <div class="g-cell g-cell-1-1"><label for="sex" class="label-primary">Gender</label></div>
                                             <div class="g-cell g-cell-1-1 g-cell-md-6-9">
-                                                <div class="responsive-form__select custom-select-container clrfix">
-                                                    <span class="custom-select-value">--</span>
-                                                    <div class="custom-select-arrow"></div>
-                                                    <select class="js-d-select-box" id="sex" name="sex" dorsal-guid="def2379e-7b92-ae5d-6f2a-0577384a8e04" data-xd-wired="select-box">
-                                                        <option value="" selected="selected">--</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                    </select>
-                                                </div>
+                                                @Html.DropDownList("Gender", ViewData["Gender"] as SelectList, new { @class = "responsive-form__select custom-select-container clrfix form-control" })
+                                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <div class="g-group l-mar-top-2">
@@ -266,7 +250,7 @@
 
                                         <div class="g-group l-mar-top-4">
                                             <div class="g-cell g-cell-1-1">
-                                                <a href="#" class="btn">Save</a>
+                                                <input type="submit" value="Save" class="btn" />
                                             </div>
                                         </div>
                                     </div>
