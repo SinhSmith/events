@@ -231,9 +231,9 @@ namespace Site.OnlineStore.Controllers
                 return HttpNotFound();
             }
 
-            PopulateDropdownListPrefix(profile.Prefix == null ? Define.Prefix.Mr : (Define.Prefix)profile.Prefix);
+            PopulateDropdownListPrefix(profile.Prefix == null ? Define.Prefix.Mr : EnumHelper.GetEnumFromDescription<Define.Prefix>(profile.Prefix));
             PopulateDropdownListCity(profile.Home_City);
-            PopulateDropdownListGender(profile.Gender == null ? Define.Gender.Male : (Define.Gender)profile.Gender);
+            PopulateDropdownListGender(profile.Gender == null ? Define.Gender.Male : EnumHelper.GetEnumFromDescription<Define.Gender>(profile.Gender));
             return View(profile);
         }
 
@@ -248,9 +248,9 @@ namespace Site.OnlineStore.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            PopulateDropdownListPrefix(model.Prefix == null ? Define.Prefix.Mr : (Define.Prefix)model.Prefix);
+            PopulateDropdownListPrefix(model.Prefix == null ? Define.Prefix.Mr : EnumHelper.GetEnumFromDescription<Define.Prefix>(model.Prefix));
             PopulateDropdownListCity(model.Home_City);
-            PopulateDropdownListGender(model.Gender == null ? Define.Gender.Male : (Define.Gender)model.Gender);
+            PopulateDropdownListGender(model.Gender == null ? Define.Gender.Male : EnumHelper.GetEnumFromDescription<Define.Gender>(model.Gender));
             return View(model);
         }
 
@@ -521,7 +521,7 @@ namespace Site.OnlineStore.Controllers
             ViewData["Prefix"] = items;
         }
 
-        private void PopulateDropdownListCity(int? selectedCity = null)
+        private void PopulateDropdownListCity(string selectedCity = null)
         {
             var shareCategoryService = new ShareCategoryService();
             var shareCategories = shareCategoryService.GetShareCategoriesByType(Define.ShareCategoryType.City);

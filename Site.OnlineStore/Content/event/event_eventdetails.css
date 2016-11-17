@@ -477,3 +477,7 @@ a:hover .advanced-team-landing__primary-text {
         */
     -webkit-filter: grayscale(100%);
 }
+
+.event-description-detailpage img{
+    max-width:100%;
+}
