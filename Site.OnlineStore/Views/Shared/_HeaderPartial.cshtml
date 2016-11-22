@@ -9,10 +9,9 @@
     <div class="global-header js-global-header">
         <div class="major">
             <a class="eb-logo js-d-track-link" href="/Home" data-event-action="LogoHome" data-event-category="header" data-event-label="home" dorsal-guid="48c49fdc-c971-6562-32b5-27816f61a5f9" data-xd-wired="track-link">
-                <i class="ico-eventbrite-wordmark ico--color-brand-orange ico--large"></i>
+                <div class="logo" style="background-image: url('../Content/img/event/logo.PNG'); width:130px; height: 40px;"></div>
                 <span class="is-hidden-accessible">Eventbrite</span>
             </a>
-
             <div class="gh-dd header-search">
                 <div class="search-autocomplete js-header-search-autocomplete is-init">
                     <a href="#" class="hide-large js-header-search-icon mobile-action-b" title="Search">
@@ -46,7 +45,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="gh-dd gh-profile-box js-gh-dd">
-                        <a class="header-link user-avatar js-gh-action user-avatar-no-img" onclick="if (!window['_EB_GLOBAL_HEADER_INITED']) { document.getElementById('js-global-nav-account-menu').className += ' js-gh-dd-menu--show'; return false; }">
+                        <a class="header-link user-avatar js-gh-action user-avatar-no-img" onclick="if ($('#js-global-nav-account-menu').css('visibility') === 'hidden') { document.getElementById('js-global-nav-account-menu').className += ' js-gh-dd-menu--show'; return false; } else $('#js-global-nav-account-menu').removeClass('js-gh-dd-menu--show') ">
                             <i class="user-avatar-icon ico-avatar"><span class="is-hidden-accessible">Profile</span></i>
                             <span class="user-name">@Html.Raw(User.Identity.GetUserName())</span>
                             <i class="user-name ico-arrow-tail-down"><span class="is-hidden-accessible">Down Arrow</span></i>
@@ -54,13 +53,13 @@
                         <div class="gh-dd-menu on-right js-gh-dd-menu" id="js-global-nav-account-menu">
                             <ul class="list">
                                 <li>
-                                    <a href="#" class="js-d-track-link g-group">
+                                    <a href="#" class="js-d-track-link g-group" style="font-size:0">
                                         <span class="g-cell g-cell-2-3 g-cell--no-gutters">
                                             Tickets
                                         </span>
                                         <span class="g-cell g-cell-1-3 l-align-right">1</span>
                                     </a>
-                                    <a href="#" class="g-group js-d-track-link">
+                                    <a href="#" class="g-group js-d-track-link"  style="font-size:0">
                                         <span class="g-cell g-cell-2-3 g-cell--no-gutters">
                                             Saved
                                         </span>
