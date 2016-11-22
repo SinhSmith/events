@@ -104,7 +104,15 @@
                     </a>
                 </div>
                 <a class="js-modal-auth js-d-track-link header-link" data-toggle="modal" href="#" id="registerLink">Sign up</a>
+               if (ViewBag.IsLoginPage != null && ViewBag.IsLoginPage == true)
+               {
+                <a class="header-link primary-link js-d-track-link js-modal-auth show-large" data-toggle="modal" href="/Account/Login" id="loginLink">Login</a>
+
+               }
+               else
+               {
                 <a class="header-link primary-link js-d-track-link js-modal-auth show-large" data-toggle="modal" href="#" id="loginLink">Login</a>
+               }
             }
             <div class="hide-small hide-medium gh-dd">
             </div>
@@ -112,23 +120,26 @@
     </div>
 </div>
 
-<div id="modalLogin" class="modal fade in" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Login</h4>
-            </div>
-            <div class="modal-body">
-                <p class="l-mar-top-1 text-center">
-                    <a id="switch-to-signup" class="js-switch-to-signup mfp-prevent-close js-d-track-event" href="#" data-toggle="modal">Or, sign up.</a>
-                </p>
+@if (ViewBag.IsLoginPage == null || ViewBag.IsLoginPage == false)
+{
+    <div id="modalLogin" class="modal fade in" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="l-mar-top-1 text-center">
+                        <a id="switch-to-signup" class="js-switch-to-signup mfp-prevent-close js-d-track-event" href="#" data-toggle="modal">Or, sign up.</a>
+                    </p>
 
-                @Html.Action("Login", "Account")
+                    @Html.Action("LoginForm", "Account")
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 
 <div id="modalRegister" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">

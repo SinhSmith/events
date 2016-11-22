@@ -1,0 +1,31 @@
+﻿@using Site.OnlineStore.Models
+@{
+    Layout = null;
+}
+@model LoginViewModel
+
+<div id="columns">
+    @using (Html.BeginForm("LoginForm", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "form-login", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <span id="errorMessage" class="text-danger"></span>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.Email, new { @class = "is_required validate account_input form-control", placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.PasswordFor(m => m.Password, new { @class = "is_required validate account_input form-control", placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Login" class="btn btn-primary btn-sm col-md-12" />
+            </div>
+        </div>
+
+    }
+</div>

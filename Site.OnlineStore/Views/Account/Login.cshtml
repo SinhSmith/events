@@ -1,38 +1,58 @@
 ﻿@using Site.OnlineStore.Models
-@{ 
-    Layout = null;
+@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section LocalStyles{
+    
+    <link rel="stylesheet" type="text/css" href="~/Content/css/ebauth.css">
 }
 @model LoginViewModel
 
-<div id="columns">
-    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "form-login", @class = "form-horizontal", role = "form" }))
+<div id="authentication-container" class="text-default is-centered-block">
+    @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "form-login", @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        <span id="errorMessage" class="text-danger"></span>
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.TextBoxFor(m => m.Email, new { @class = "is_required validate account_input form-control", placeholder = "Email" })
-                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-            </div>
+    <div class="l-pad-vert-4 l-sm-pad-vert-3 l-pad-hor-2 pod">
+        <div class="text--centered">
+            <h1 class="text-large">Log in</h1>
+            <p class="l-mar-top-1">
+                <a class="js-switch-to-signup mfp-prevent-close js-d-track-event" href="https://www.eventbrite.com/signup/">Or, sign up.</a>
+            </p>
         </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.PasswordFor(m => m.Password, new { @class = "is_required validate account_input form-control", placeholder = "Password" })
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <input type="submit" value="Login" class="btn btn-primary btn-sm col-md-12" />
-            </div>
-        </div>
-        @*<div class="l-mar-top-3 form__row form-group">            
-            <a class="js-authentication-reset-password authentication__forgot-password layout-stackable__aside text-body-small js-d-track-link pull-right" href="/resetpassword">Forgot password?</a>
-        </div>*@
-        @*<div class="form-group">
-                <div class="col-md-12">
-                    @Html.ActionLink("Or Sign up", "/Register")
+        <form class="responsive-form l-mar-top-3" id="form-login">
+            <div class="js-notification l-mar-top-3"></div>
+            <div class="js-current-component">
+                <div>
+                    <div class="l-mar-top-3">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "is_required validate account_input form-control", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @*<label class="is-hidden-accessible" for="login-email">Email address</label>
+                        <input name="email" type="email" value="" placeholder="Email" id="login-email">
+                        <div class="js-error-for-email form__field-error is-hidden"></div>*@
+                    </div>
+                    <div class="l-mar-top-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "is_required validate account_input form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        @*<label class="is-hidden-accessible" for="login-password">Password</label>
+                        <input name="password" type="password" placeholder="Password" id="login-password">
+                        <div class="js-error-for-passwd form__field-error is-hidden"></div>*@
+                    </div>
+                    <div class="js-captcha-form-row l-mar-top-3 is-hidden">
+                        <div class="js-captcha-field"></div>
+                        <div class="js-error-for-captcha form__field-error is-hidden"></div>
+                    </div>
+                    <div class="l-mar-top-3">
+                        <input type="submit" class="btn btn--epic btn--block" value="Log in">
+                    </div>
+                    <div class="l-mar-top-3 form__row">
+                        <input id="remember_me" name="remember_me" type="checkbox" checked="true">
+                        <label for="remember_me" class="text-body-small">Remember me</label>
+                        <a class="js-authentication-reset-password authentication__forgot-password layout-stackable__aside text-body-small js-d-track-link" data-event-action="ForgotPwd" data-event-category="login" data-source="login_footer" href="https://www.eventbrite.com/resetpassword">Forgot password?</a>
+                    </div>
                 </div>
-            </div>*@
+            </div>
+        </form>
+    </div>
     }
 </div>

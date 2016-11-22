@@ -586,6 +586,7 @@
     <Content Include="Content\css\bundle.css" />
     <Content Include="Content\css\css.css" />
     <Content Include="Content\css\custom.css" />
+    <Content Include="Content\css\ebauth.css" />
     <Content Include="Content\css\event_pages_C.css" />
     <Content Include="Content\css\event_page_advanced.css" />
     <Content Include="Content\css\global_header.css" />
@@ -1524,6 +1525,7 @@
     <Content Include="Content\project\jquery.desoslide.css" />
     <Content Include="Content\project\prettyPhoto.css" />
     <Content Include="Content\project\slideshow.css" />
+    <Content Include="Eventbrite - Log in to your Eventbrite account.html" />
     <Content Include="EventbriteArmourTheParkChargedRun.html" />
     <Content Include="Eventbrite - Create a new event.html" />
     <Content Include="favicon.ico" />
@@ -2193,6 +2195,7 @@
     <Content Include="Views\Organiser\Details.cshtml" />
     <Content Include="Views\Organiser\Edit.cshtml" />
     <Content Include="Views\Organiser\Index.cshtml" />
+    <Content Include="Views\Account\LoginForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

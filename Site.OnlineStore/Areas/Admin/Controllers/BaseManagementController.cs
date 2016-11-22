@@ -304,23 +304,23 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
                 new SelectListItem() {Value="19", Text="Appearance or Signing"},
                 new SelectListItem() {Value="17", Text="Attraction"},
                 new SelectListItem() {Value="18", Text="Camp, Trip, or Retreat"},
-                new SelectListItem() {Value="9", Text="lass, Training, or Workshop"},
-                new SelectListItem() {Value="6", Text="oncert or Performance"},
-                new SelectListItem() {Value="1", Text="onference"},
-                new SelectListItem() {Value="4", Text="onvention"},
-                new SelectListItem() {Value="8", Text="inner or Gala"},
-                new SelectListItem() {Value="5", Text="estival or Fair"},
+                new SelectListItem() {Value="9", Text="Class, Training, or Workshop"},
+                new SelectListItem() {Value="6", Text="Concert or Performance"},
+                new SelectListItem() {Value="1", Text="Conference"},
+                new SelectListItem() {Value="4", Text="Convention"},
+                new SelectListItem() {Value="8", Text="Dinner or Gala"},
+                new SelectListItem() {Value="5", Text="Festival or Fair"},
                 new SelectListItem() {Value="14", Text="Game or Competition"},
                 new SelectListItem() {Value="10", Text="Meeting or Networking Event"},
                 new SelectListItem() {Value="100", Text="Other"},
                 new SelectListItem() {Value="11", Text="Party or Social Gathering"},
                 new SelectListItem() {Value="15", Text="Race or Endurance Event"},
                 new SelectListItem() {Value="12", Text="Rally"},
-                new SelectListItem() {Value="7", Text="creening"},
-                new SelectListItem() {Value="2", Text="eminar or Talk"},
+                new SelectListItem() {Value="7", Text="Screening"},
+                new SelectListItem() {Value="2", Text="Seminar or Talk"},
                 new SelectListItem() {Value="16", Text="Tour"},
                 new SelectListItem() {Value="13", Text="Tournament"},
-                new SelectListItem() {Value="3", Text="radeshow, Consumer Show, or Expo"}
+                new SelectListItem() {Value="3", Text="Tradeshow, Consumer Show, or Expo"}
             };
 
             if (selectedType != null)
@@ -341,26 +341,26 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         {
             IEnumerable<SelectListItem> topics = new List<SelectListItem>
             {
-                new SelectListItem() {Value="118",Text="Auto, Boat &amp; Air"},
-                new SelectListItem() {Value="101",Text="Business &amp; Professional"},
-                new SelectListItem() {Value="111",Text="Charity &amp; Causes"},
-                new SelectListItem() {Value="113",Text="Community &amp; Culture"},
-                new SelectListItem() {Value="115",Text="Family &amp; Education"},
-                new SelectListItem() {Value="106",Text="Fashion &amp; Beauty"},
-                new SelectListItem() {Value="104",Text="Film, Media &amp; Entertainment"},
-                new SelectListItem() {Value="110",Text="Food &amp; Drink"},
-                new SelectListItem() {Value="112",Text="Government &amp; Politics"},
-                new SelectListItem() {Value="107",Text="Health &amp; Wellness"},
-                new SelectListItem() {Value="119",Text="Hobbies &amp; Special Interest"},
-                new SelectListItem() {Value="117",Text="Home &amp; Lifestyle"},
+                new SelectListItem() {Value="118",Text="Auto, Boat & Air"},
+                new SelectListItem() {Value="101",Text="Business & Professional"},
+                new SelectListItem() {Value="111",Text="Charity & Causes"},
+                new SelectListItem() {Value="113",Text="Community & Culture"},
+                new SelectListItem() {Value="115",Text="Family & Education"},
+                new SelectListItem() {Value="106",Text="Fashion & Beauty"},
+                new SelectListItem() {Value="104",Text="Film, Media & Entertainment"},
+                new SelectListItem() {Value="110",Text="Food & Drink"},
+                new SelectListItem() {Value="112",Text="Government & Politics"},
+                new SelectListItem() {Value="107",Text="Health & Wellness"},
+                new SelectListItem() {Value="119",Text="Hobbies & Special Interest"},
+                new SelectListItem() {Value="117",Text="Home & Lifestyle"},
                 new SelectListItem() {Value="103",Text="Music"},
                 new SelectListItem() {Value="199",Text="Other"},
-                new SelectListItem() {Value="105",Text="Performing &amp; Visual Arts"},
-                new SelectListItem() {Value="114",Text="Religion &amp; Spirituality"},
-                new SelectListItem() {Value="102",Text="Science &amp; Technology"},
-                new SelectListItem() {Value="116",Text="Seasonal &amp; Holiday"},
-                new SelectListItem() {Value="108",Text="Sports &amp; Fitness"},
-                new SelectListItem() {Value="109",Text="Travel &amp; Outdoor"}
+                new SelectListItem() {Value="105",Text="Performing & Visual Arts"},
+                new SelectListItem() {Value="114",Text="Religion & Spirituality"},
+                new SelectListItem() {Value="102",Text="Science & Technology"},
+                new SelectListItem() {Value="116",Text="Seasonal & Holiday"},
+                new SelectListItem() {Value="108",Text="Sports & Fitness"},
+                new SelectListItem() {Value="109",Text="Travel & Outdoor"}
             };
 
             if (selectedTopic != null)
