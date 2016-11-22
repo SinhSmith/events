@@ -683,6 +683,7 @@
     <Content Include="Content\Images\Unicons_Logo_27062016.jpg" />
     <Content Include="Content\Images\yt.jpg" />
     <Content Include="Content\img\event\bookmark-default.png" />
+    <Content Include="Content\img\event\logo.PNG" />
     <Content Include="Content\img\home\img_category_arts.jpg" />
     <Content Include="Content\img\home\img_category_arts_small.jpg" />
     <Content Include="Content\img\home\img_category_classes.jpg" />
