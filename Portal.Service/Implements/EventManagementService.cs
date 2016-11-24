@@ -21,7 +21,7 @@ namespace Portal.Service.Implements
         private static PortalEntities context = new PortalEntities();
         private EventRepository db = new EventRepository(context);
         private Repository<share_Images> imageRepository = new Repository<share_Images>(context);
-        private Repository<AspNetUser> userRepository = new Repository<AspNetUser>(context);
+        private UserRepository userRepository = new UserRepository(context);
 
         #endregion
 
@@ -31,6 +31,8 @@ namespace Portal.Service.Implements
         {
             context = new PortalEntities();
             db = new EventRepository(context);
+            imageRepository = new Repository<share_Images>(context);
+            userRepository = new UserRepository(context);
             imageRepository = new Repository<share_Images>(context);
         }
 
@@ -127,7 +129,8 @@ namespace Portal.Service.Implements
         public bool AddEvent(CreateEventRequest newEvent)
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
-            string ownerId = userRepository.GetByID("109b6373-4e29-4fec-bb53-e2cbee2416e9").Id;
+            AspNetUser owner = userRepository.GetUserByName(newEvent.OwnerId);
+            string ownerId = owner.Id;
             try
             {
                 event_Event eventObject = new event_Event()

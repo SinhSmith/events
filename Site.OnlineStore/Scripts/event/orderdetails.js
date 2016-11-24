@@ -1,0 +1,5 @@
+﻿var OrderDetails = {
+    init: function () {
+
+    }
+}

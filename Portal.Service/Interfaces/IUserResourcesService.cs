@@ -11,7 +11,10 @@ namespace Portal.Service.Interfaces
     public interface IUserResourcesService
     {
         bool AddEventBookMark(int eventId,string userName, ref string message);
+        bool RemoveEventBookMark(int eventId, string userName, ref string message);
+        bool CheckEventIsSavedOrNot(string userName, int eventId);
+        AspNetUser GetUserProfileByName(string userName);
         IEnumerable<DisplayEventSummaryView> GetListBookMarkEvent(string userName);
-        IEnumerable<event_Order> GetListOrder(string userName);
+        IEnumerable<event_Order> GetListOrders(string userName);
     }
 }

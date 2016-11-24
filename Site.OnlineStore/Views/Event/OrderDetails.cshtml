@@ -1,0 +1,101 @@
+﻿@using Portal.Model.Context;
+@model event_Order
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section LocalStyles{
+    <link href="~/Content/event/mytickets_responsive.css" rel="stylesheet" />
+}
+
+@section LocalScripts{
+    <script src="~/Scripts/event/orderdetails.js"></script>
+    <script>
+        $(document).ready(function () {
+            OrderDetails.init();
+        });
+    </script>
+}
+
+<div id="content" class="clrfix">
+    <div class="g-grid">
+        <div class="g-group">
+            <nav class="g-cell g-cell-12-12 l-mar-top-3">
+                <div class="text-body-medium">
+                    <a class="back_nav" href="/UserResources/DisplaySavedEventsAndTicket">
+                        <i class="ico-omnes-arrow-left"></i> Back to Current Orders
+                    </a>
+                </div>
+            </nav>
+            <header class="g-cell g-cell-12-12 l-mar-top-3">
+                <h2 class="text-heading-primary">
+                    Order for <a href="/Event/EventDetails?id=@Model.EventId" target="_blank">
+                        @Model.Event.Title
+                    </a>
+                </h2>
+            </header>
+            <section class="g-cell g-cell-12-12 l-mar-top-1">
+                <div class="text-body-large text-body--understated">
+                    <p> order #@Model.Id on @Model.OrderTime</p>
+                    <p>@Model.Event.StartDate</p>
+                    <p>@Model.Event.Location_Address, @Model.Event.Location_StreetName <br>
+                    @Model.Event.Location_City<br>
+                    @Model.Event.Country<br></p>
+
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="g-grid">
+        <div class="g-group">
+            <div class="g-vertical-group g-cell-12-12 g-cell-lg-12-12">
+                <div class="g-group l-gutter-right-1">
+                    <div data-order_id="571262876" data-attendee_id="718013214" class="attendee_edit_section myorder-container l-mar-top-2" data-automation="attendee-container">
+                        @foreach (event_TicketOrder item in Model.OrderTickets)
+                        {
+                            <div class="g-cell g-cell-9-9 g-cell-md-4-9 g-cell-lg-5-9">
+                                <div class="l-pad-hor-3 l-sm-pad-hor-2 l-pad-vert-3">
+                                    <h3 class="text-heading-secondary">
+                                        (@item.Quantity x)
+                                        @item.Ticket.Name
+
+                                        - Price : @item.Ticket.Price Đ
+                                    </h3>
+                                </div>
+                            </div>
+                        }
+                        
+                        <section class="l-section l-pad-bot-3">
+                            <div class="g-cell">
+                                <div class="attendee_edit_container">
+                                        <div class="l-mar-top-3 g-group">
+
+                                            <div class="g-cell g-cell-9-9">
+                                                <span class="text-body-large text-body--significant">Contact Information</span>
+                                            </div>
+
+                                            <label for="first_name" class="text-body--understated l-mar-top-2 g-cell g-cell-9-9 ">First Name <span class="error">*</span></label>
+                                            <div class="g-cell g-cell-9-9 g-cell-md-1-2">
+                                                <span id="value_first_name" class="text-body--faint">@Model.FirstName</span>
+                                            </div>
+
+                                            <label for="last_name" class="text-body--understated l-mar-top-2 g-cell g-cell-9-9 ">Last Name <span class="error">*</span></label>
+                                            <div class="g-cell g-cell-9-9 g-cell-md-1-2">
+                                                <span id="value_last_name" class="text-body--faint">@Model.LastName</span>
+                                            </div>
+
+                                            <label for="email_address" class="text-body--understated l-mar-top-2 g-cell g-cell-9-9 ">Email <span class="error">*</span></label>
+                                            <div class="g-cell g-cell-9-9 g-cell-md-1-2">
+                                                <span id="value_email_address" class="text-body--faint">@Model.EmailAddress</span>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div><!-- vertical -->
+        </div><!-- g-group -->
+    </div>
+    <div id="fb-root"></div>
+</div>

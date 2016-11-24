@@ -1,0 +1,382 @@
+﻿@model Portal.Model.Context.event_Event
+@{
+    ViewBag.Title = "CreateEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Library/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/admin/event-management-create.js"></script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=EventManagement.googleApiCallBackFunction">
+</script>
+
+<link href="~/Content/event/base_styles.css" rel="stylesheet" />
+<link href="~/Content/event/create_event_tinymce.css" rel="stylesheet" />
+<link href="~/Content/event/create2.css" rel="stylesheet" />
+<link href="~/Content/event/ticket_grouping.css" rel="stylesheet" />
+<link href="~/Content/event/ui.css" rel="stylesheet" />
+<link href="~/Content/event/global_header.css" rel="stylesheet" />
+<link href="~/Content/event/bundle.css" rel="stylesheet" />
+<link href="~/Content/event/bundle(1).css" rel="stylesheet" />
+<link href="~/Content/event/window.css" rel="stylesheet" />
+<link href="~/Content/admin/event-management.css" rel="stylesheet" />
+
+<!-- Summary -->
+<div id="event_summary_bar" class="g-grid " style="display: block;">
+    <div class="g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12">
+
+        <div class="l-mar-top-3 notification-bar notification-bar--success is-hidden js-one-funnel-message">
+            <p class="js-one-funnel-message-area"></p>
+            <a class="notification-bar__close js-notification-bar-close"><i class="ico-cross"></i></a>
+        </div>
+        <div id="js_form_errors"></div>
+        <div class="js-error-not-saved l-mar-top-3 notification notification--error is-hidden">
+            Your event was not saved. Please review the highlighted fields below.
+        </div>
+    </div>
+</div>
+
+<!-- Creating ticket steps -->
+<div id="content" class="clrfix">
+    <!-- Id event hidden control -->
+    <form id="createevent_form" class="responsive-form">
+        <ul class="errorMessages"></ul>
+        <!-- Event content form -->
+        <div class="g-grid g-group">
+            <div id="main_page" class="clrfix page visible inactive">
+                <div id="main_wrapper">
+                    <!-- First step: Event details -->
+                    <div id="event_details_wrapper">
+                        <div id="event_details_header" class="g-group">
+                            <div class="l-mar-top-4">
+                                <div class="g-cell g-cell-1-1 g-cell-lg-7-12 g-cell-md-8-12 g-offset-lg-1-12">
+                                    <div class="l-media-v-center">
+                                        <div class="l-media-v-center__row">
+                                            <span class="ico-box ico--small ico--color-teal ico--color-brand-white">1</span>
+                                            <span class="text-large l-pad-hor-1">
+                                                Event Details
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="g-cell g-cell-1-1 g-cell-lg-10-12 g-offset-lg-1-12">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="event_details_content" class="g-vertical-group g-cell-md-1-1 g-cell-lg-8-12 g-offset-lg-1-12 module_content l-mar-top-2">
+                            <!-- Event Title -->
+                            <div id="event_details_title">
+                                <div class="g-cell g-cell-1-1">
+                                    <label class="label-primary" for="id_group-details-name">
+                                        Event title
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="l-mar-top-1 g-cell g-cell-1-1">
+                                    <div class="inputtext">
+                                        <input id="Title" name="Title" required maxlength="255" data-fieldname="Event title" placeholder="Give it a short distinct name" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Event Location -->
+                            <div class="g-cell g-cell-1-1 l-mar-top-3">
+                                <label class="label-primary" for="location-name-input">
+                                    Location
+                                </label>
+                            </div>
+                            <div id="event_details_super_location" class="l-mar-top-1">
+                                <div>
+                                    <div id="create_location_content">
+                                        <div>
+                                            <div class="autocomplate-location-panel inputtext g-cell g-cell-1-1">
+                                                <input id="Location_AutoComplete" class="js-location-input-new" type="text" placeholder="Input location">
+                                                <ul class="bullet-list-ico bullet-list-ico--compact text-body-small">
+                                                    <li>
+                                                        <a id="Btn_EnableDetailAddressPanel" class="js-location-cant-find">
+                                                            <i class="ico-location ico--small"></i>
+                                                            Enter Address
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="detail-location-panel g-group hidden">
+                                                <div id="location_edit_form" class="g-vertical-group g-cell-1-1 g-cell-md-5-8">
+                                                    <div class="g-cell g-cell-1-1">
+                                                        <input class="js-location-edit-venue l-mar-top-1" id="Location_StreetName" data-fieldname="Street Name" required name="Location_StreetName" type="text" placeholder="Enter the venue&#39;s name">
+                                                        <p class="form__field-error is-hidden js-error-for-venue"></p>
+                                                        <input class="js-location-edit-address_1 l-mar-top-1 js-xd-cep-street" data-fieldname="Address 1" id="Location_Address" name="Location_Address" type="text" placeholder="Address" />
+                                                        <p class="form__field-error is-hidden js-error-for-address_1"></p>
+                                                        <input class="js-location-edit-address_2 l-mar-top-1 js-xd-cep-neighborhood" data-fieldname="Address 2" id="Location_Address2" name="Location_Address2" type="text" placeholder="Address 2">
+                                                        <p class="form__field-error is-hidden js-error-for-address_2"></p>
+                                                        <input class="js-location-edit-city l-mar-top-1 js-xd-cep-city" id="Location_City" data-fieldname="City" name="Location_City" type="text" placeholder="City">
+                                                        <p class="form__field-error is-hidden js-error-for-city"></p>
+                                                    </div>
+                                                    <div class="g-group">
+                                                        <div class="g-cell g-cell-1-2">
+                                                            <input class="js-location-edit-state l-mar-top-1 js-xd-cep-state" data-fieldname="State" id="Location_State" name="Location_State" type="text" placeholder="State">
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-2">
+                                                            <input class="js-location-edit-postal_code l-mar-top-1 js-xd-cep-input" data-fieldname="ZipCode" id="Location_ZipCode" name="Location_ZipCode" type="text" placeholder="Zip/Postal">
+                                                        </div>
+                                                        <div class="g-cell g-cell-1-1 l-mar-top-1 js-country-select">
+                                                            @Html.DropDownList("Country", @ViewBag.Country as SelectList, "Please select a country", htmlAttributes: new { @class = "js-d-select-box js-location-edit-country responsive-form__select", @id = "Country", data_fieldname = "Country" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="g-group g-cell-1-1">
+                                                        <div class="g-cell g-cell-1-2">
+                                                            <ul class="bullet-list-ico bullet-list-ico--compact text-body-small">
+                                                                <li>
+                                                                    <a id="Btn_ResetAddressPanel" class="location-reset"><i class="ico-refresh ico--small"></i>Reset location</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="g-vertical-group g-cell-3-8 hide-small">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Time and Schedules -->
+                            <div id="event_details_date" class="l-mar-top-3">
+                                <div>
+                                    <div class="js-dtp-eventdatetimepair">
+                                        <div class="js-dtp-datetimepairpicker ui-date-time-pair-picker">
+                                            <div class="js-dtp-startdatetimepicker datetime_input g-cell l-mar-top-1 ui-date-time-picker">
+                                                <label class="label-primary">Starts</label>
+                                                <div class="l-mar-top-1">
+                                                    <input type="text" required data-fieldname="Start Date" style="width:200px" id="Event_StartDate_Dpk">
+                                                </div>
+                                            </div>
+
+                                            <div class="js-dtp-enddatetimepicker datetime_input g-cell l-mar-top-1 ui-date-time-picker">
+                                                <label class="label-primary">Ends</label>
+                                                <div class="l-mar-top-1">
+                                                    <input type="text" required data-fieldname="End Date" style="width:200px" id="Event_EndDate_Dpk">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="g-cell g-cell-1-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Event Cover Image -->
+                            <div id="event_details_logo" class="l-mar-top-3">
+                                <div class="g-cell g-cell-1-1">
+                                    <label class="label-primary">
+                                        Event Image
+                                    </label>
+                                </div>
+
+                                <div class="js-logo-croploader-wrap g-cell g-cell-1-1 g-cell-md-3-4 g-cell-lg-5-8">
+                                    <input type="file" required data-fieldname="Event Image File" id="CoverImage" name="CoverImage" />
+                                </div>
+                            </div>
+
+                            <!-- Event Description -->
+                            <div id="event_details_details" class="l-mar-top-3">
+                                <div class="g-cell g-cell-1-2">
+                                    <label class="label-primary">
+                                        Event description
+                                    </label>
+                                </div>
+                                <div class="l-mar-top-1">
+                                    <div class="g-cell g-cell-1-1">
+                                        <textarea id="Description" name="Description" placeholder="Tell people what&#39;s special about this event" rows="10" aria-hidden="true" style="display: none;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Organization -->
+                            <div id="event_details_organizer" class="l-mar-top-3">
+                                <div class="g-cell g-cell-1-1">
+                                    <label class="label-primary">Organizer name</label>
+                                </div>
+                                <div class="g-cell g-cell-1-1">
+                                    <div id="organizer-selector" class="l-mar-top-2">
+                                        <input type="text" id="OrganizationName" name="OrganizationName">
+                                    </div>
+
+                                    <div id="edit-organizer-desc-0" class="edit-organizer-desc l-mar-top-2 visible">
+                                        <label class="label-primary">
+                                            Organizer description
+                                        </label>
+                                        <div class="l-mar-top-1">
+                                            <textarea cols="20" id="OrganizationDescription" name="OrganizationDescription" placeholder="Share details about the organizer" rows="10" aria-hidden="true" style="display: none;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second step: Event tickets -->
+                    <div id="create_tickets_wrapper">
+                        <div id="create_tickets_header" class="g-group">
+                            <div class="l-mar-top-6">
+                                <div class="g-cell g-cell-1-1 g-cell-lg-7-12 g-cell-md-8-12 g-offset-lg-1-12">
+                                    <div class="l-media-v-center">
+                                        <div class="l-media-v-center__row">
+                                            <span class="ico-box ico--small ico--color-teal ico--color-brand-white">2</span>
+                                            <span class="text-large l-pad-hor-1">
+                                                Create Tickets
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="js-create-ticket-wrapper ticket-container--no-handles">
+                            <section class="js-ticket-summary js-ticket-summary-container" style="opacity: 1;">
+                                <div class="g-cell g-cell-1-2 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-3-12 paid-ticket-container">
+                                    @Html.DropDownList("TicketType", @ViewBag.TicketType as SelectList, "Select the type of ticket", htmlAttributes: new { @class = "responsive-form__select create_select_time_field custom-select-container clrfix", @id = "TicketType", @data_fieldname = "Event Type", @required = "true" })
+                                </div>
+                                <div class="g-cell g-cell-2-2 l-mar-top-2 g-offset-lg-4-12 g-cell-lg-3-12 paid-ticket-container">
+                                    <a class="js-create-ticket btn btn--ico btn--secondary pull-right" id="add-ticket-button">
+                                        <i class="ico-circle-plus"></i>Add ticket
+                                    </a>
+                                </div>
+                                <div class="g-cell g-cell-1-1 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-10-12 paid-ticket-container">
+                                    <!-- Ticket table header -->
+                                    <div class="g-group create-tickets--header hide-small">
+                                        <div class="g-cell g-cell-5-12 g-cell--no-gutters l-block-h-2 l-pad-vert-2">
+                                            Ticket name<span class="required">*</span>
+                                        </div>
+                                        <div class="g-cell g-cell-2-12 g-cell--no-gutters l-padded-h-half l-pad-vert-2">
+                                            Quantity available<span class="required">*</span>
+                                        </div>
+                                        <div class="g-cell g-cell-3-12 g-cell--no-gutters l-padded-h-half l-pad-vert-2">Price</div>
+                                        <div class="g-cell g-cell-2-12 g-cell--no-gutters l-padded-h-half l-pad-vert-2">Actions</div>
+                                    </div>
+                                    <!-- Ticket table body -->
+                                    <div id="List_Tickets" class="js-ticket-container create-tickets--container">
+                                        <!-- Ticket rows -->
+                                    </div>
+                                    <!-- Ticket table footer -->
+                                    <div class="g-group js-ticket-summary-footer create-tickets--footer l-pad-vert-2">
+                                        <div class="g-cell g-cell-1-1 g-cell-lg-4-12 g-offset-lg-8-12 l-sm-align-center l-md-align-center l-lg-align-right js-event-capacity l-mar-top-2">
+                                            <div class="js-event-capacity-display" data-original-title="" title="">
+                                                @*<span>Total capacity:</span><span id="TotalTicketCapacity"></span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- Payment information -->
+                        <div class="js-change-payout">
+                            <section class="js-change-payout-container g-group" style="opacity: 1;">
+                                <div class="g-cell g-cell-1-1 l-mar-top-2 g-offset-lg-1-12 g-cell-lg-10-12 change-payout-container">
+                                    <div class="create-payout--fields g-group" data-editable="true">
+                                        <div class="js-payout-paypal-email g-cell g-cell-1-1 g-cell-md-11-12 g-cell--no-gutters">
+                                            <div data-automation="paypal-form-container" class="js-payout-paypal-email l-mar-top-5" style="margin-bottom: -5px;">
+                                                <span class="g-cell g-cell-1-1">
+                                                    <label for="id_group-payment_options-paypal_email">Enter your existing PayPal account email address.</label>
+                                                    <span class="required requires-paypal processor-is-paypal">*</span>
+                                                </span>
+                                                <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2">
+                                                    <input class="js-xd-janus-checkpoint-event" data-fieldname="PaymentEmail" id="PaymentEmail" required name="PaymentEmail" placeholder="PayPal Email" type="text">
+                                                    <span class="form__field-error is-hidden js-error-for-paypalEmail"></span>
+                                                </div>
+                                                <span class="g-cell g-cell-1-1 l-mar-top-2 l-pad-vert-1">
+                                                    Don't have a PayPal account?
+                                                    <a href="https://www.paypal.com/us/webapps/mpp/referral/paypal-express-checkout?partner_id=W9QW5TKUA246E" target="_EB_PayPal_Sign_Up">Create a free PayPal merchant account.</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+
+                    <!-- Third step: Additional settings -->
+                    <div id="privacy_and_promotion_wrapper" class="g-group">
+                        <!-- Header -->
+                        <div id="privacy_header" class="">
+                            <div class="l-mar-top-6">
+                                <div class="g-cell g-cell-1-1 g-cell-lg-7-12 g-cell-md-8-12 g-offset-lg-1-12">
+                                    <div class="l-media-v-center">
+                                        <div class="l-media-v-center__row">
+                                            <span class="ico-box ico--small ico--color-teal ico--color-brand-white">3</span>
+                                            <span class="text-large l-pad-hor-1">
+                                                Additional Settings
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="g-cell g-cell-12-12 g-cell-lg-10-12 g-offset-lg-1-12">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div id="privacy_and_promotion_content">
+                            <!-- Event type and Event toppic -->
+                            <div id="privacy_and_promotion_categories" class="promotion g-group">
+                                <!-- Event type -->
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-2 select">
+                                    <label for="id_group-privacy_and_promotion-primary_category" class="label-primary">Event Type<span class="required is-hidden">*</span></label>
+                                </div>
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-1">
+                                    @Html.DropDownList("EventType", @ViewBag.EventType as SelectList, "Select the type of event", htmlAttributes: new { @class = "responsive-form__select create_select_time_field custom-select-container clrfix", @id = "EventType", @data_fieldname = "Event Type", @required = "true" })
+                                    <div class="form__field-error is-hidden">
+                                        None
+                                    </div>
+                                    <p class="js-create-format-error is-hidden l-padded-2 form__field-error">Please select an event type.</p>
+                                </div>
+                                <!-- Event topic -->
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-2 select l-mar-top-2">
+                                    <label for="id_group-privacy_and_promotion-primary_category" class="label-primary">Event Topic<span class="required is-hidden">*</span></label>
+                                </div>
+                                <div class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-1">
+                                    @Html.DropDownList("EventTopic", @ViewBag.EventTopic as SelectList, "Select a topic", htmlAttributes: new { @class = "responsive-form__select create_select_time_field custom-select-container clrfix", @id = "EventTopic", @data_fieldname = "Event Topic", @required = "true" })
+                                    <p class="js-create-category-error is-hidden l-padded-2 form__field-error">Please select an event topic.</p>
+                                    <div class="form__field-error hidden">
+                                        None
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Remainning tickets -->
+                            <div id="remaining_ticket_display" class="g-cell g-cell-12-12 g-cell-md-10-12 g-cell-lg-8-12 g-offset-lg-1-12 l-mar-top-3 nonrepeating_only ">
+                                <label class="label-primary">
+                                    Remaining tickets
+                                </label>
+                                <div id="remaining_ticket_display_options" class="l-mar-top-1 privacy_and_promotion_label">
+                                    <div class="l-media">
+                                        <div><input id="IsShowRemainingNumberTicket" name="IsShowRemainingNumberTicket" type="checkbox"></div>
+                                        <div>
+                                            <label class="" for="IsShowRemainingNumberTicket">Show the number of tickets remaining on the registration page</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Functional buttons -->
+    <div class="js-publish-callout l-align-center l-mar-top-4 responsive-form">
+        <div id="starburst" class="l-pad-hor-2 l-pad-vert-4 l-sm-pad-vert-3">
+            <div id="next_step_buttons" class="g-cell g-cell-1-1 btn-group btn-group--responsive">
+                <a class="btn btn--secondary btn-center" onclick="EventManagement.onCreateEventBtnOnClientSideClick(); return false;" id="save-event-button-almost-done">Save</a>
+                <a id="make-event-live-button-almost-done" onclick="EventManagement.onBackToIndexClientSideBtnClick(); return false;" class="btn btn--epic submit_for_live  btn-center">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+@RenderPage("_TicketTemplate.cshtml")
+

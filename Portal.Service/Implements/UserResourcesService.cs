@@ -50,7 +50,14 @@ namespace Portal.Service.Implements
                 return false;
             }
             AspNetUser user = userRepository.GetUserByName(userName);
-            user.BookMarkEvents.Add(selectedEvent);
+            if (!userRepository.CheckEventIsSavedOrNot(userName, eventId))
+            {
+                user.BookMarkEvents.Add(selectedEvent);
+            }
+            else
+            {
+                return false;
+            }
             try
             {
                 userRepository.Update(user);
@@ -63,6 +70,62 @@ namespace Portal.Service.Implements
                 message = ex.Message;
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Remove bookmarked event for selected user
+        /// </summary>
+        /// <param name="eventId">event id</param>
+        /// <param name="userId">user id</param>
+        /// <param name="message">resul message of function</param>
+        /// <returns>true if add action success and false if it fail</returns>
+        public bool RemoveEventBookMark(int eventId, string userName, ref string message)
+        {
+            event_Event selectedEvent = eventRepository.GetEventById(eventId);
+            if (selectedEvent == null)
+            {
+                message = "Remove Bookmark fail, Cannot found selected event";
+                return false;
+            }
+            AspNetUser user = userRepository.GetUserByName(userName);
+            if (!userRepository.CheckEventIsSavedOrNot(userName, eventId))
+            {
+                return false;
+            }
+            user.BookMarkEvents.Remove(selectedEvent);
+            try
+            {
+                userRepository.Update(user);
+                userRepository.Save();
+                message = "Remove bookmark successful";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check event is saved by current user or not
+        /// </summary>
+        /// <param name="userName">User Name</param>
+        /// <param name="eventId">Event Id</param>
+        /// <returns></returns>
+        public bool CheckEventIsSavedOrNot(string userName, int eventId)
+        {
+            return userRepository.CheckEventIsSavedOrNot(userName, eventId);
+        }
+
+        /// <summary>
+        /// Get information of user
+        /// </summary>
+        /// <param name="userName">User name</param>
+        /// <returns></returns>
+        public AspNetUser GetUserProfileByName(string userName)
+        {
+            return userRepository.GetUserByName(userName);
         }
 
         /// <summary>
@@ -88,11 +151,5 @@ namespace Portal.Service.Implements
         }
 
         #endregion
-
-
-        public IEnumerable<event_Order> GetListOrder(string userName)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

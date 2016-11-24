@@ -55,9 +55,27 @@ namespace Portal.Model.Repository
             }
         }
 
+        /// <summary>
+        /// Get User information by user name
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <returns></returns>
         public AspNetUser GetUserByName(string userName)
         {
             return dbSet.Where(u => u.UserName == userName).FirstOrDefault();
+        }
+
+        public bool CheckEventIsSavedOrNot(string userName, int eventId)
+        {
+            AspNetUser user = this.Get(u => u.UserName == userName, null, "BookMarkEvents").SingleOrDefault();
+            if (user != null)
+            {
+                return user.BookMarkEvents.Any(e => e.Id == eventId);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

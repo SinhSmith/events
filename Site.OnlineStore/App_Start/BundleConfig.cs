@@ -56,6 +56,11 @@ namespace Site.OnlineStore
                       "~/Content/admin/plugins/daterangepicker/daterangepicker-bs3.css",
                       "~/Library/datetime-picker/jquery.datetimepicker.css"
                       ));
+            bundles.Add(new StyleBundle("~/Content/pluginsCss").Include(
+                      "~/Content/admin/chosen-library/chosen.min.css",
+                      "~/Content/admin/plugins/daterangepicker/daterangepicker-bs3.css",
+                      "~/Library/datetime-picker/jquery.datetimepicker.css"
+                      ));
         }
     }
 }

@@ -1,0 +1,126 @@
+﻿@using Portal.Model.Context;
+@{
+    ViewBag.Title = "DisplaySavedEventsAndTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section LocalStyles{
+    <link href="~/Content/event/responsive_mytickets.css" rel="stylesheet" />
+    <link href="~/Content/event/user_profile.css" rel="stylesheet" />
+    <link href="~/Content/event/savedeventandticket.css" rel="stylesheet" />
+}
+
+@section LocalScripts{
+    <script src="~/Scripts/event/savedeventandticket.js"></script>
+    <script>
+        $(document).ready(function () {
+            SavedEventsAndTicketsDisplay.init();
+        });
+    </script>
+}
+<h1 class="is-hidden-accessible">User Profile</h1>
+<div class="l-pad-vert-3 js-user-profile user-profile__header">
+    <section>
+        <div class="js-user-profile-display l-align-center">
+            <h2 class="text-heading-primary l-mar-top-2">
+                @ViewBag.UserProfile.UserName
+            </h2>
+        </div>
+    </section>
+</div>
+<div class="l-pad-bot-3">
+    <div class="js-order-list-container js-d-tabs">
+        <div class="js-xd-header tabs-header tabs-header__grid tabs-header__grid-3 user-profile__header">
+            <div class="g-grid">
+                <ul id="TabStripEvents" class="nav nav-tabs tabs-header-list" role="tablist">
+                    <li class="active">
+                        <a href="#orderevents" role="tab" data-toggle="tab">
+                            <div class="hide-small">Upcoming Events</div>
+                            <div class="hide-large hide-medium">Upcoming</div>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#savedevents" role="tab" data-toggle="tab">
+                            <div class="hide-small">Saved Events</div>
+                            <div class="hide-large hide-medium">Saved</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="js-xd-content tab-content g-grid">
+            <div id="orderevents" class="tab-pane active g-cell g-cell-12-12 g-cell-lg-8-12 g-offset-lg-2-12 js-current-orders-container  tab-content l-pad-bot-5 l-sm-pad-bot-3">
+                @foreach (event_Order order in ViewBag.ListUpComingEvents)
+                {
+                    <div class="js-order-card  l-mar-top-2 g-group">
+                        <a href="/Event/OrderDetails?orderId=@order.Guid" class="list-card">
+                            <div class="list-card__header">
+                                <div class="list-card__image">
+                                    <img src="@order.Event.CoverImage.ImagePath" alt="teachnical soup">
+                                </div>
+                            </div>
+                            <div class="list-card__body">
+                                <time class="list-card__date">
+                                    @order.Event.StartDate
+                                </time>
+                                <h3 class="list-card__title">
+                                    @order.Event.Title
+                                </h3>
+
+                                <p class="show-small l-mar-top-2 text-body-small text-body--faint">
+                                    @order.Event.Location_StreetName @order.Event.Location_Address @order.Event.Location_City @order.Event.Location_State @order.Event.Country
+                                </p>
+
+                            </div>
+                        </a>
+                    </div>
+                }
+                
+            </div>
+            <div id="savedevents" class="tab-pane tab-content g-group">
+                @foreach (Portal.Model.ViewModel.DisplayEventSummaryView item in ViewBag.ListSavedEvents)
+                {
+                    <div class="g-cell g-cell--has-overflow g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 ">
+                        <div class="poster-card js-d-poster">
+                            <a href="/Event/EventDetails?id=@item.Id" class="poster-card__main js-event-link">
+                                <div class="poster-card__header">
+                                    <div class="poster-card__image" style="background-color:#ffffff;">
+                                        <img class="js-poster-image " src="@item.CoverImage" alt="@item.Title">
+                                    </div>
+                                </div>
+                                <div class="poster-card__body">
+                                    <time class="poster-card__date">
+                                        @item.StartDate
+                                    </time>
+                                    <div class="poster-card__title">
+                                        @item.Title
+                                    </div>
+                                    <div class="poster-card__venue">
+                                        @item.Location_StreetName @item.Location_Address @item.Location_City @item.Location_State @item.Country
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="poster-card__footer">
+                                <div class="poster-card__tags">
+                                    <a class="event-category">#@item.EventTopic</a>
+                                    <a class="event-format" >#@item.EventType</a>
+                                </div>
+                                <div class="poster-card__actions">
+                                    <a class="js-share-event-card share-action" title="Share">
+                                        <i class="ico-share ico--medium"></i>
+                                        <span class="is-hidden-accessible">Share this event</span>
+                                    </a>
+                                    <a class="js-d-bookmark bookmarked saved" data-eventId="@item.Id">
+                                        <i class="ico-bookmarked ico--medium"></i>
+                                        <span class="is-hidden-accessible">Bookmark this event</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

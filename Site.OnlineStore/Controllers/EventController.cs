@@ -14,14 +14,20 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Portal.Model.Mapper;
+using Site.OnlineStore.Models.ImageModels;
+using System.IO;
+using Site.OnlineStore.Areas.Admin.Controllers;
 
 namespace Site.OnlineStore.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseManagementController
     {
         #region Properties
 
         public IDisplayEventService service = new DisplayEventService();
+        public IEventManagementService eventManagementService = new EventManagementService();
+        public IUserResourcesService userService = new UserResourcesService();
+
         private static int productPerPage = 10;
 
         #endregion
@@ -31,6 +37,8 @@ namespace Site.OnlineStore.Controllers
         public EventController()
         {
             service = new DisplayEventService();
+            eventManagementService = new EventManagementService();
+            userService = new UserResourcesService();
         }
 
         #endregion
@@ -178,9 +186,124 @@ namespace Site.OnlineStore.Controllers
             return items.ToList();
         }
 
+        /// <summary>
+        /// Delete image from server
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        [NonAction]
+        private bool DeleteImageInFolder(string path)
+        {
+
+            string filePath = Server.MapPath("~/" + path);
+            if (System.IO.File.Exists(filePath))
+            {
+                try
+                {
+                    System.IO.File.Delete(filePath);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Upload project image
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
+        public bool UploadProjectImages(HttpPostedFileBase file, out string uploadedFileName, Int32 counter = 0)
+        {
+            try
+            {
+                ImageUpload projectImage = new ImageUpload { SavePath = DisplayProjectConstants.ProjectImageFolderPath };
+                var fileName = Path.GetFileName(file.FileName);
+                string finalFileName = "ProjectImage_" + ((counter).ToString()) + "_" + fileName;
+                if (System.IO.File.Exists(HttpContext.Request.MapPath("~" + DisplayProjectConstants.ProjectImageFolderPath + finalFileName)))
+                {
+                    return UploadProjectImages(file, out uploadedFileName, ++counter);
+                }
+                ImageResult uploadedProjectImage = projectImage.UploadProductImage(file, finalFileName, 1000);
+                uploadedFileName = uploadedProjectImage.ImageName;
+                return true;
+            }
+            catch (Exception)
+            {
+                uploadedFileName = null;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Get list options for country dropdownlist and assign to Variable in ViewBag of view
+        /// </summary>
+        /// <param name="status"></param>
+        private void PopulateCountryDropDownList(string country = null)
+        {
+            IEnumerable<SelectListItem> items = GetCountriesList(country);
+
+            ViewBag.Country = items;
+        }
+
+        /// <summary>
+        /// Get list options for event type dropdownlist and assign to Variable in ViewBag of view
+        /// </summary>
+        /// <param name="status"></param>
+        private void PopulateEventTypeDropDownList(int? type)
+        {
+            IEnumerable<SelectListItem> items = GetEventTypeList(type);
+
+            ViewBag.EventType = items;
+        }
+
+        /// <summary>
+        /// Get list options for event topic dropdownlist and assign to Variable in ViewBag of view
+        /// </summary>
+        /// <param name="status"></param>
+        private void PopulateEventTopicDropDownList(int? topic)
+        {
+            IEnumerable<SelectListItem> items = GetEventTopicList(topic);
+
+            ViewBag.EventTopic = items;
+        }
+
+        /// <summary>
+        /// Get list options for sale chanels dropdownlist and assign to Variable in ViewBag of view
+        /// </summary>
+        /// <param name="status"></param>
+        private IList<SaleChanelOption> PopulateSaleChanelDropDownList()
+        {
+            IList<SaleChanelOption> saleChanels = new List<SaleChanelOption>
+            {
+                new SaleChanelOption() {Value=0,Text="Everywhere"},
+                new SaleChanelOption() {Value=1,Text="Online only"},
+                new SaleChanelOption() {Value=2,Text="At the door only"}
+            };
+
+            return saleChanels;
+        }
+
+        /// <summary>
+        /// Get list options for ticket type dropdownlist and assign to Variable in ViewBag of view
+        /// </summary>
+        /// <param name="status"></param>
+        private void PopulateTicketTypeDropDownList(string type = null)
+        {
+            IEnumerable<SelectListItem> items = GetTicketTypeList(type);
+
+            ViewBag.TicketType = items;
+        }
+
         #endregion
 
         #region controller actions
+
+        #region Display Events
 
         /// <summary>
         /// Display event index
@@ -233,6 +356,12 @@ namespace Site.OnlineStore.Controllers
             }
 
             EventDetailsResponse foundEvent = service.GetEventDetails((int)id);
+
+            string userName = HttpContext.User.Identity.Name;
+
+            bool isSavedEvent = userService.CheckEventIsSavedOrNot(userName, (int)id);
+
+            ViewBag.SavedEvent = isSavedEvent;
 
             ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
 
@@ -299,6 +428,10 @@ namespace Site.OnlineStore.Controllers
             return View("DisplayEvents");
         }
 
+        #endregion
+
+        #region Order Tickets
+
         /// <summary>
         /// Navigate to order ticket page
         /// </summary>
@@ -338,6 +471,11 @@ namespace Site.OnlineStore.Controllers
 
             // Check quantity of order tikcets is valid or not
 
+            orderTicketRequest.Owner = HttpContext.User.Identity.Name;
+            if (HttpContext.User.Identity.Name == null || HttpContext.User.Identity.Name == string.Empty)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Guid? guid = service.AddOrder(orderTicketRequest);
 
             if (guid ==null)
@@ -426,6 +564,80 @@ namespace Site.OnlineStore.Controllers
                 Message = message
             }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult OrderDetails(Guid orderId)
+        {
+            event_Order order = service.GetOrderByGuid(orderId);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(order);
+        }
+
+        #endregion // End Order Tickets Region
+
+        #region Events Management
+
+        /// <summary>
+        /// Return Create view to let user input information of new event
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateEvent()
+        {
+            PopulateCountryDropDownList();
+            PopulateEventTypeDropDownList(null);
+            PopulateEventTopicDropDownList(null);
+            PopulateTicketTypeDropDownList();
+            PopulateStatusDropDownList();
+            return View();
+        }
+
+        /// <summary>
+        /// Create a project
+        /// </summary>
+        /// <param name="productRequest">information of new project</param>
+        /// <returns></returns>
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CreateEvent(CreateEventRequest requestModel, HttpPostedFileBase coverImage)
+        {
+            if (ModelState.IsValid)
+            {
+                var file = Request.Files["coverImage"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        ImageUpload imageUpload = new ImageUpload { Width = 600 };
+                        ImageResult imageResult = imageUpload.RenameUploadFile(file);
+                        if (imageResult.Success)
+                        {
+                            var photo = new share_Images
+                            {
+                                ImageName = imageResult.ImageName,
+                                ImagePath = Path.Combine(ImageUpload.LoadPath, imageResult.ImageName)
+                            };
+                            var imageId = eventManagementService.AddImage(photo);
+                            // Add product
+                            requestModel.CoverImageId = imageId;
+                            requestModel.OwnerId = HttpContext.User.Identity.Name;
+                            eventManagementService.AddEvent(requestModel);
+                            return RedirectToAction("Index","Home");
+                        }
+                        else
+                        {
+                            ViewBag.Error = imageResult.ErrorMessage;
+                        }
+                    }
+                }
+
+            }
+            PopulateStatusDropDownList();
+            return View(requestModel);
+        }
+
+        #endregion
 
         #endregion
     }

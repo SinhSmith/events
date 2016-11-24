@@ -175,12 +175,26 @@
 
         <!-- Right column content panel -->
         <div id="col_280">
-            <div id="track_event_container" class="common_box panel_280">
-                <a id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
-                <div class="count_subview"></div>
-                <div class="summary_subview"></div>
-            </div>
+            @if (Request.IsAuthenticated)
+            {
+                if (ViewBag.SavedEvent)
+                {
+                    <div id="track_event_container" class="common_box panel_280">
+                        <a id="track_event" class="eb_button default large saved" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
+                        <div class="count_subview"></div>
+                        <div class="summary_subview"></div>
+                    </div>
+                }
+                else
+                {
+                    <div id="track_event_container" class="common_box panel_280">
+                        <a id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
+                        <div class="count_subview"></div>
+                        <div class="summary_subview"></div>
+                    </div>
+                }
 
+            }
             <!-- Where -->
             <div class="panel_280">
                 <div class="panel_head2">
@@ -221,7 +235,7 @@
                         <h2>Contact</h2>
 
                         <div id="organizer_profile" class="organizer_link">
-                            <a id="profile_link" class="url js-event-track" data-tracking-action="ViewOrgProfile" href="http://www.eventbrite.com/o/scope-art-show-7205653955" target="_blank">
+                            <a id="profile_link" class="url js-event-track">
                                 View organizer profile
                             </a>
                         </div>

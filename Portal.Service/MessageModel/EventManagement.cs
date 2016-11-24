@@ -113,6 +113,7 @@ namespace Portal.Service.MessageModel
         public string Country { get; set; }
         public bool IsVerified { get; set; }
         public List<CreateTicketRequest> Tickets { get; set; }
+        public string OwnerId { get; set; }
     }
 
     public class CreateTicketRequest

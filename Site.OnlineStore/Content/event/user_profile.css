@@ -1,0 +1,31 @@
+/* ============== Browser Support ============== */
+/* ================== Colors ================== */
+/* ================ Typography ================= */
+/* ============ Heights and Widths ============= */
+/* ========== Responsive breakpoints =========== */
+/* ================= Elevations ================ */
+/* ================= Animations ================ */
+/* =================== Icons =================== */
+/* ============== Module specific ============== */
+/* ============== Accordion ============== */
+/* ============== Avatar ============== */
+/* ============== Badge ============== */
+/* ============== Button ============== */
+/* ============== Card ============== */
+/* ============== Event Cards ============== */
+/* ============== Form ============== */
+/* ============== Overlay ============== */
+/* ============== Reports ============== */
+/* ============== Responsive Form ============== */
+/* ============== Segmented Control ============== */
+/* ============== Ticket Types ============== */
+/* ============== Toggle / Switch ============== */
+.user-profile__header {
+  background-color: white; }
+
+.user-profile-croploader .croploader__crop-preview-container {
+  width: 180px; }
+
+.croploader__preview-wrap {
+  width: 250px;
+  margin: 0 auto; }

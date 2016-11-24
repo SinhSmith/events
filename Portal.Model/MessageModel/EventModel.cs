@@ -10,6 +10,7 @@ namespace Portal.Model.MessageModel
     {
         public int EventId { get; set; }
         public IEnumerable<OrderTicketRequest> Tickets {get;set;}
+        public string Owner { get; set; }
     }
 
     public class OrderTicketRequest{

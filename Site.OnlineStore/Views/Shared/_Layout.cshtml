@@ -19,17 +19,16 @@
     <link href="~/Content/css/home.css" rel="stylesheet" />
     <link href="~/Content/css/home_consumer.css" rel="stylesheet" />
 
+    @Styles.Render("~/Content/pluginsCss")
+
     <script src="~/Scripts/js/8095t6t28384.js"></script>
     <script src="~/Scripts/js/analytics.js"></script>
     <script src="~/Scripts/js/api.js"></script>
     <script src="~/Scripts/js/conversion.js"></script>
     <script src="~/Scripts/js/bat.js"></script>
-    @*<script src="~/Scripts/js/fbevents.js"></script>*@
     <script src="~/Scripts/js/ga.js"></script>
     <script src="~/Scripts/js/gtm.js"></script>
-    @*<script src="~/Scripts/js/pd.js"></script>*@
     <script src="~/Scripts/js/recaptcha__en.js"></script>
-    @*<script src="~/Scripts/js/roundtrip.js"></script>*@
 
     <!--[if lt IE 10]>
     <link rel='stylesheet' id='cotec-ie-css'  href='~/Content/common/ie.css' type='text/css' media='all' />
@@ -44,14 +43,11 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/home/jquery-migrate.min.js"></script>
     <script src="~/Scripts/home/front.js"></script>
-    <script src="~/Scripts/home/chosen.jquery.min.js"></script>
+ 
     <!--[if lt IE 9]>
     <script type='text/javascript' src='~/Scripts/common/html5.js'></script>
     <![endif]-->
 
-    <base href=".">
-    <link rel="shortcut icon" href="http://www.coteccons.vn/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="http://www.coteccons.vn/favicon.ico" type="image/x-icon">
     <link href="~/Content/home/main-layout.css" rel="stylesheet" />
     <link href="~/Content/common/custom.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
@@ -79,7 +75,7 @@
 
     <script src="~/Scripts/user/accountController.js"></script>
     <script src="~/Content/admin/plugins/spin/spin.min.js"></script>
-
+    @Scripts.Render("~/bundles/adminScript")
     @RenderSection("LocalScripts", required: false)
 
 </head>

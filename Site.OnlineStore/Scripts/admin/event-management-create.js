@@ -134,12 +134,20 @@ EventManagement = {
 
         $('#event_form').submit(function (event) {
             if (this.checkValidity()) {
-                EventManagement.createEvent();
+                EventManagement.createEvent("/Admin/Event/Create", "/Admin/Event/Index");
             } else {
-                EventManagement.showAllErrorMessages();
+                EventManagement.showAllErrorMessages($('#event_form'));
             }
             event.preventDefault();
+        });
 
+        $("#createevent_form").submit(function (event) {
+            if (this.checkValidity()) {
+                EventManagement.createEvent("/Event/CreateEvent","/Home");
+            } else {
+                EventManagement.showAllErrorMessages($("#createevent_form"));
+            }
+            event.preventDefault();
         });
     },
     initElement: function () {
@@ -398,7 +406,7 @@ EventManagement = {
             });
         });
     },
-    createEvent: function () {
+    createEvent: function (serviceUrl, returnUrl) {
         // Create new event
 
         var requestData = new FormData();
@@ -428,13 +436,13 @@ EventManagement = {
 
         // Request to server to create new event
         $.ajax({
-            url: '/Admin/Event/Create',
+            url:serviceUrl,
             data: requestData,
             type: 'POST',
             contentType: false,
             processData: false,
             success: function () {
-                window.location.replace("/Admin/Event/Index");
+                window.location.replace(returnUrl);
             },
             error: function () {
                 alert("Create event fail!");
@@ -443,6 +451,9 @@ EventManagement = {
     },
     onCreateEventBtnClick:function(){
         $('#event_form').submit();
+    },
+    onCreateEventBtnOnClientSideClick: function () {
+        $('#createevent_form').submit();
     },
     onUpdateEventBtnClick:function(){
         $('#event_form').submit();
@@ -488,15 +499,14 @@ EventManagement = {
             }
         });
     },
-    showAllErrorMessages: function () {
+    showAllErrorMessages: function (formControl) {
         // Validate event informations
-        var form = $("#event_form");
-        var errorList = $('ul.errorMessages', form);
+        var errorList = $('ul.errorMessages', formControl);
 
         errorList.empty();
 
         //Find all invalid fields within the form.
-        form.find(':invalid').each(function (index, node) {
+        formControl.find(':invalid').each(function (index, node) {
 
             //Find the field's corresponding label
             var fieldName = $(node).data("fieldname");
@@ -641,6 +651,11 @@ EventManagement = {
         // Redirect to index page of event management area
 
         window.location.replace("/Admin/Event/Index");
+    },
+    onBackToIndexClientSideBtnClick: function () {
+        // Redirect to index page of event management area
+
+        window.location.replace("/Home/Index");
     },
     showSpin: function (target) {
         /// <summary>

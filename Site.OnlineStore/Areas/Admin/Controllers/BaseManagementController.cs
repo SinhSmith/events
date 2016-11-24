@@ -373,29 +373,6 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Create list sale chanels items using for SaleChanel Dropdownlist
-        /// </summary>
-        /// <param name="selectedTopic"></param>
-        /// <returns></returns>
-        //protected IEnumerable<SelectListItem> GetSaleChanelList(int? selectedChanel = null)
-        //{
-        //    IEnumerable<SelectListItem> saleChanels = new List<SelectListItem>
-        //    {
-        //        new SelectListItem() {Value="0",Text="Everywhere"},
-        //        new SelectListItem() {Value="1",Text="Online only"},
-        //        new SelectListItem() {Value="2",Text="At the door only"}
-        //    };
-
-        //    if (selectedChanel != null)
-        //    {
-        //        var selected = saleChanels.Where(x => x.Value == selectedChanel.ToString()).First();
-        //        selected.Selected = true;
-        //    }
-
-        //    return saleChanels;
-        //}
-
-        /// <summary>
         /// Create list ticket types using for TicketType Dropdownlist
         /// </summary>
         /// <param name="selectedTopic"></param>

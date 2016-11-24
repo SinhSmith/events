@@ -24,6 +24,7 @@ namespace Portal.Service.Implements
         private EventRepository db = new EventRepository(context);
         private EventOrderRepository orderRepository = new EventOrderRepository(context);
         private TicketRepository ticketRepository = new TicketRepository(context);
+        private UserRepository userRepository = new UserRepository(context);
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace Portal.Service.Implements
             db = new EventRepository(context);
             orderRepository = new EventOrderRepository(context);
             ticketRepository = new TicketRepository(context);
+            userRepository = new UserRepository(context);
         }
 
         #endregion
@@ -422,12 +424,19 @@ namespace Portal.Service.Implements
         {
            try
             {
+               string userId = null;
+               if(orderRequest.Owner!=null && orderRequest.Owner != string.Empty){
+                   AspNetUser user = userRepository.GetUserByName(orderRequest.Owner);
+                   userId = user.Id;
+               }
+               
                 event_Order order = new event_Order()
                 {
                     EventId = orderRequest.EventId,
                     Guid = Guid.NewGuid(),
                     Status = (int)Portal.Infractructure.Utility.Define.Status.Deactive,
-                    OrderTime = DateTime.Now
+                    OrderTime = DateTime.Now,
+                    UserId = userId
                 };
 
                 foreach (var item in orderRequest.Tickets)

@@ -1,9 +1,8 @@
-﻿var EventDetailsManagement = EventDetailsManagement || {};
-EventDetailsManagement = {
+﻿var SavedEventsAndTicketsDisplay = {
     init: function () {
         // support ajax to upload images
         window.addEventListener("submit", function (e) {
-            EventDetailsManagement.showSpin();
+            SavedEventsAndTicketsDisplay.showSpin();
             var form = e.target;
             if (form.getAttribute("enctype") === "multipart/form-data") {
                 if (form.dataset.ajax) {
@@ -18,7 +17,7 @@ EventDetailsManagement = {
                                 if (updateTarget) {
                                     updateTarget.innerHTML = xhr.responseText;
 
-                                    EventDetailsManagement.hideSpin();
+                                    SavedEventsAndTicketsDisplay.hideSpin();
                                 }
                             }
                         }
@@ -61,78 +60,35 @@ EventDetailsManagement = {
     controls: {
         spin: null
     },
-    bindEventForElement:function(){
+    bindEventForElement: function () {
         // Bind events for controls
 
-        $("#Btn_OrderTicket").unbind("click").bind("click", function () {
-            if (EventDetailsManagement.validateOrderTicketForm()) {
-                $("#Form_OrderTicket").submit();
-            }
-        });
+        $('#TabStripEvents a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
 
-        $("#Txt_EventSearchBox").unbind("change").bind("change", function () {
-            window.location.replace("/Event/SearchEvent/?SearchString="+$(this).val());
-        });
-
-        $("#track_event").unbind("click").bind("click", function (e) {
-            var isSaved = $(e.target).hasClass("saved");
+        $("#savedevents a.js-d-bookmark").unbind("click").bind("click", function (e) {
+            var that = this;
+            var isSaved = $(that).hasClass("saved");
+            var eventId = $(that).data("eventid");
             if (isSaved) {
-                EventDetailsManagement.removeBookMarkEvent();
+                SavedEventsAndTicketsDisplay.removeBookMarkEvent(eventId,function () {
+                    $(that).removeClass("saved");
+                    $(that).removeClass("bookmarked");
+                });
             } else {
-                EventDetailsManagement.bookMarkEvent();
-            }
-        });
-    },
-    validateOrderTicketForm:function(){
-        // Validate form
-
-        var valid = false;
-        $("#Form_OrderTicket .ticket_table_select").each(function (index, element) {
-            var value = parseInt($(element).val());
-            if (value != NaN && value > 0) {
-                valid = true;
-                return
-            }
-        });
-
-        return valid;
-    },
-    googleApiCallBackFunction: function () {
-        /// <summary>
-        /// This function will be call when google api ready for use
-        /// </summary>
-        /// <param>N/A</param>
-        /// <returns>N/A</returns>
-
-        this.init();
-        this.updateMapForNewLocation();
-    },
-    updateMapForNewLocation: function () {
-
-        var map = new google.maps.Map(document.getElementById('map_canvas'), {
-            //center: { lat: -33.8688, lng: 151.2195 },
-            zoom: 13,
-            mapTypeId: 'roadmap'
-        });
-        geocoder = new google.maps.Geocoder();
-        var address = this.model.Address; //input box value
-        geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                console.log(results[0].geometry.location);
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
+                SavedEventsAndTicketsDisplay.bookMarkEvent(eventId,function () {
+                    $(that).removeClass("saved").addClass("saved");
+                    $(that).removeClass("bookmarked").addClass("bookmarked");
                 });
             }
         });
     },
-    bookMarkEvent:function(){
+    bookMarkEvent: function (eventId, callback) {
         // Bookmark a event
 
-        var eventId = $("[name = 'EventId']").val();
-
-        EventDetailsManagement.showSpin("#track_event_container");
+        SavedEventsAndTicketsDisplay.showSpin("#savedevents");
         $.ajax({
             type: "post",
             url: "/UserResources/AddEventBookMark",
@@ -140,7 +96,9 @@ EventDetailsManagement = {
             dataType: 'json',
             success: function (result) {
                 if (result.Success) {
-                    $("#track_event").removeClass("saved").addClass("saved");
+                    if (callback && typeof (callback) == 'function') {
+                        callback();
+                    }
                     console.log("Bookmark this event successful!");
                 } else {
                     console.log("Error: bookmark this event fail!");
@@ -150,16 +108,14 @@ EventDetailsManagement = {
                 console.log("Error: bookmark this event fail!");
             },
             complete: function () {
-                EventDetailsManagement.hideSpin();
+                SavedEventsAndTicketsDisplay.hideSpin();
             }
         });
     },
-    removeBookMarkEvent: function () {
+    removeBookMarkEvent: function (eventId, callback) {
         // Bookmark a event
 
-        var eventId = $("[name = 'EventId']").val();
-
-        EventDetailsManagement.showSpin("#track_event_container");
+        SavedEventsAndTicketsDisplay.showSpin("#savedevents");
         $.ajax({
             type: "post",
             url: "/UserResources/RemoveEventBookMark",
@@ -167,7 +123,9 @@ EventDetailsManagement = {
             dataType: 'json',
             success: function (result) {
                 if (result.Success) {
-                    $("#track_event").removeClass("saved");
+                    if (callback && typeof (callback) == 'function') {
+                        callback();
+                    }
                     console.log("Remove Bookmark of this event successful!");
                 } else {
                     console.log("Error: Remove bookmark this event fail!");
@@ -177,7 +135,7 @@ EventDetailsManagement = {
                 console.log("Error: Remove bookmark this event fail!");
             },
             complete: function () {
-                EventDetailsManagement.hideSpin();
+                SavedEventsAndTicketsDisplay.hideSpin();
             }
         });
     },
@@ -188,7 +146,7 @@ EventDetailsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>s
 
-        $(target).append(EventDetailsManagement.controls.spin.spin().el);
+        $(target).append(SavedEventsAndTicketsDisplay.controls.spin.spin().el);
     },
     hideSpin: function () {
         /// <summary>
@@ -197,9 +155,6 @@ EventDetailsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>
 
-        EventDetailsManagement.controls.spin.stop();
+        SavedEventsAndTicketsDisplay.controls.spin.stop();
     },
-    model:{
-        Address:""
-    }
-}
+};

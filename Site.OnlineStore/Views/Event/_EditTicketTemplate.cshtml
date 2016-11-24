@@ -1,0 +1,142 @@
+﻿@model Portal.Model.ViewModel.EventTicketResponse
+
+<div class="create-tickets--ticket free-ticket" style="display: block; opacity: 1;">
+    <!-- Ticket row -->
+    <div class="g-group create-tickets--row">
+        <div class="js-ticket-row ticket-row" style="position: relative;">
+            <div class="g-cell g-cell-1-1 g-cell-md-5-12 g-cell--no-gutters sorting-gripper-container l-padded-h-half l-mar-top-2">
+                <div class="js-sorting-gripper sorting-gripper hide-small "><i class="ico-gripper ico--xxlarge ico--color-understated"></i></div>
+                <input type="hidden" name="TicketId" value="@Model.Id">
+                <label for="group-tickets-0-ticket_type" class="label-primary hide-medium-accessible hide-large-accessible">Ticket name</label>
+                <div>
+                    <input data-fieldname="Ticket Name" required name="TicketName" maxlength="255" type="text" value="@Model.Name"
+                           class="form__input form__input--full-width js-ticket-name" placeholder="Early Bird, RSVP...">
+                </div>
+                <div class="form__field-error is-hidden js-error-for-name"></div>
+            </div>
+            <div class="g-cell g-cell-1-2 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half">
+                <label for="group-tickets-0-quantity_total" class="label-primary hide-medium-accessible hide-large-accessible">Quantity</label>
+                <input data-fieldname="Quantity" required name="TicketQuantity" maxlength="6" value=@Model.Quantity
+                       type="number" class="form__input--full-width js-quantity-input">
+                <div class="form__field-error is-hidden js-error-for-quantity"></div>
+            </div>
+            <div class="g-cell g-cell-1-2 g-cell-md-3-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half paid-ticket-container">
+                <label for="group-tickets-0-cost" class="label-primary hide-medium-accessible hide-large-accessible">Price</label>
+                <div class="js-payment-type">
+                    @if (Model.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Free)
+                    {
+                        <div class="l-mar-top-2">Free</div>
+                    }
+                    else if (Model.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Paid)
+                    {
+                        <div class="responsive-form__input--currency">
+                            <div class="responsive-form__input--currency__symbol">Đ</div>
+                            <input type="number" data-fieldname="Ticket Price" required name="TicketPrice" value="@Model.Price" class="js-price-input form__input--xxsmall" maxlength="11">
+                        </div>
+                        <span class="form__field-error is-hidden js-error-for-ticketPrice"></span>
+                    }
+                    else
+                    {
+                        <div class="l-mar-top-2">Donation</div>
+                    }
+
+                </div>
+            </div>
+            <div class="g-cell g-cell-1-1 g-cell-md-2-12 g-cell--no-gutters l-mar-top-2 l-padded-h-half report__row__tab-group">
+                <a class="js-ticket-settings-link report__row__tab narrow-tooltip icon-link" onclick="EventManagement.expandTicketSettingForm(this); return false;">
+                    <i class="ico-settings ico--medium" alt="Settings"></i>
+                </a>
+                <a id="id_group-tickets-0-delete_ticket" class="js-delete-ticket report__row__tab narrow-tooltip icon-link" onclick="EventManagement.onRemoveTicketBtnClick(this); return false;" style="display: inline;">
+                    <i class="ico-trash ico--medium" alt="Delete"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="ticket-settings settings hidden">
+        <div class="ticket-settings-container js-ticket-settings">
+            <div class="l-mar-top-2 g-cell g-cell-1-1">
+                <div class="js-ticket-name l-mar-top-1 text-body-large">Setting details</div>
+                <hr class="l-mar-top-2">
+            </div>
+            <div class="responsive-form text-body-medium l-pad-vert-3">
+                <div class="js-help-target g-group">
+                    <label class="responsive-form__fieldset-legend g-cell g-cell-1-1">Ticket description</label>
+                    <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
+                        <textarea name="TicketDescription" class="js-ticket-description" placeholder="Tell your attendees more about this ticket type.">
+                            @Model.Description
+                        </textarea>
+                        <div class="l-pad-vert-1">
+                            <input id="IsShowTicketDescription" @( Model.IsShowDescription ? Html.Raw("chekced") : Html.Raw(""))
+                                   name="IsShowTicketDescription" type="checkbox" class="js-show-ticket-description">
+
+                            <label for="IsShowTicketDescription">Show ticket description on event page</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="js-help-target js-ticket-sales-channel g-group" style="display: block;">
+                    <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4 ">
+                        <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1 l-mar-top-3">Sales channel</h4>
+                        <div class="g-cell g-cell-1-1 l-mar-top-1">
+                            @Html.DropDownList("SaleChanel", Model.SaleChanelOptions.Select(item => new SelectListItem
+                            {
+                                Value = item.Value.ToString(),
+                                Text = item.Text.ToString(),
+                                Selected = Model.SaleChanel == item.Value
+                            }), htmlAttributes: new { @class = "js-d-select-box js-ticket-sales-channel-option responsive-form__select",@data_fieldname="Sale Chanel",@required = "true" })
+                        </div>
+                    </div>
+                </div>
+                <div class="js-help-target js-ticket-sales">
+                    <div class="g-group">
+                        <div class="g-vertical-group g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                            <div class="js-ticket-sales-start-group g-cell g-cell-1-2 l-mar-top-3">
+                                <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">Ticket sales start</h4>
+                                <div class="js-ticket-sales-start">
+                                    <input type="text" data-fieldname="Start Sale Date" required value="@Model.StartSaleDateTime" name="TicketStartSaleDate" class="js-sales-start-time-picker">
+                                    <div class="js-error-for-salesStartDate form__field-error"></div>
+                                </div>
+                            </div>
+                            <div class="s-ticket-sales-start-group g-cell g-cell-1-2 l-mar-top-3">
+                                <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">Ticket sales end</h4>
+                                <div class="jjs-ticket-sales-start">
+                                    <input type="text" data-fieldname="End Sale Date" required value="@Model.EndSaleDateTime" name="TicketEndSaleDate" class="js-sales-start-time-picker">
+                                    <div class="js-error-for-salesEndDate form__field-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Type != (int)Portal.Infractructure.Utility.Define.TicketType.Donation)
+                {
+                    <div class="js-help-target js-min-max-tickets l-mar-top-3 g-group">
+                        <h4 class="responsive-form__fieldset-legend g-cell g-cell-1-1">Tickets allowed per order</h4>
+                        <div class="g-cell g-cell-1-1 g-cell-md-2-3 g-cell-lg-3-4">
+                            <div class="g-group">
+                                <div class="g-cell g-cell-1-2 g-cell-md-1-4 g-cell--no-gutters l-mar-top-3">
+                                    <input type="text" name="OrderTicketMinimun" value=@Model.MinimunTicketOrder class="js-order-minimum l-pad-hor-1">
+                                    <label for="id_group-tickets-2-order_minimum">minimum</label>
+                                    <div class="js-error-for-order_min form__field-error"></div>
+                                </div>
+                                <div class="g-cell g-cell-1-2 g-cell-md-1-4 g-cell--no-gutters l-block-h-1 l-mar-top-3">
+                                    <input type="text" name="OrderTicketMaximun" value=@Model.MaximunTicketOrder class="js-order-maximum l-pad-hor-1">
+                                    <label for="id_group-tickets-2-order_limit">maximum</label>
+                                    <div class="js-error-for-order_limit form__field-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="l-align-center g-cell g-cell-1-1">
+                <hr>
+                <div class="l-pad-vert-3">
+                    <a class="js-minimize-settings-link" onclick="EventManagement.expandTicketSettingForm(this); return false;">
+                        <i class="ico-circle ico-omnes-arrow-up ico--bullet"></i>Minimize settings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

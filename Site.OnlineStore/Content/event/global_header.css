@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ============== Browser Support ============== */
 /* ================== Colors ================== */
 /* ================ Typography ================= */
@@ -291,7 +291,8 @@
     width: 220px; }
   .global-header .user-avatar {
     position: relative;
-    height: 19px; }
+    height: 59px;
+  }
     .global-header .user-avatar.user-avatar-no-img {
       padding-left: 50px; }
     .global-header .user-avatar .name,
@@ -608,7 +609,9 @@ body .global-header {
     font-weight: 400;
     outline: 1px solid #D2D6DF;
     overflow: hidden;
-    background-color: white; }
+    background-color: white;
+    padding-left:0;
+  }
     body .global-header .list .list--with-divider-top,
     body .global-header .list .list--with-divider-bottom {
       outline: none;

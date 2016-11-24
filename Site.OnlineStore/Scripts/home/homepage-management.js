@@ -210,7 +210,6 @@ HomePageManagement = {
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function () {
-            debugger
             var places = searchBox.getPlaces();
 
             if (places.length > 0) {

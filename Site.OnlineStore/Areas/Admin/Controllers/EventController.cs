@@ -33,7 +33,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
 
         public EventController()
         {
-
+            IEventManagementService service = new EventManagementService();
         }
 
         #endregion
