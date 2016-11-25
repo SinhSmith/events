@@ -429,3 +429,10 @@ a.filter__header {
     height:300px;
     overflow-y:auto;
 }
+
+#EventList a.js-d-bookmark.saved .ico-bookmark {
+    color:#26bdff;
+}
+ #EventList a.js-d-bookmark .ico-bookmark {
+    color:#c0c0c0;
+}

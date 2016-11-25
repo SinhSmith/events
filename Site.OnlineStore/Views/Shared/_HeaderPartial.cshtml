@@ -41,6 +41,7 @@
 
             @if (Request.IsAuthenticated)
             {
+                @Html.Hidden("currentUserName", User.Identity.GetUserName())
                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", @style = "margin:0!important;" }))
                 {
                     @Html.AntiForgeryToken()
@@ -100,13 +101,14 @@
             }
             else
             {
+                @Html.Hidden("currentUserName", null)
                 <div class="gh-dd global-header__browse-events show-large text--truncated">
                     <a href="#" class="header-link gh-discover js-d-track-link js-xd-janus-checkpoint-link" data-checkpoint-name="discover_header_link_clicked" data-event-action="Discover" data-event-category="header" data-event-label="home" dorsal-guid="54e739b2-cd62-fecc-265b-c05f223d17b1" data-xd-wired="track-link">
                         Browse Events
                     </a>
                 </div>
                 <a class="js-modal-auth js-d-track-link header-link" data-toggle="modal" href="#" id="registerLink">Sign up</a>
-               if (ViewBag.IsLoginPage != null && ViewBag.IsLoginPage == true)
+                if (ViewBag.IsLoginPage != null && ViewBag.IsLoginPage == true)
                {
                 <a class="header-link primary-link js-d-track-link js-modal-auth show-large" data-toggle="modal" href="/Account/Login" id="loginLink">Login</a>
 

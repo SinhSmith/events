@@ -69,6 +69,30 @@ HomePageManagement = {
             var id = $(this).data("id");
             HomePageManagement.searchEventByCategory(filterType, id);
         });
+
+        $("a.js-d-bookmark").unbind("click").bind("click", function (e) {
+            debugger
+            var that = this;
+            var userName = $("#currentUserName").val();
+            if (userName == null || userName == "") {
+                HomePageManagement.showBookMarkLoginPopUp();
+            } else {
+            
+                var isSaved = $(that).hasClass("saved");
+                var eventId = $(that).data("eventid");
+                if (isSaved) {
+                    HomePageManagement.removeBookMarkEvent(eventId,function () {
+                        $(that).removeClass("saved");
+                        $(that).removeClass("bookmarked");
+                    });
+                } else {
+                    HomePageManagement.bookMarkEvent(eventId,function () {
+                        $(that).removeClass("saved").addClass("saved");
+                        $(that).removeClass("bookmarked").addClass("bookmarked");
+                    });
+                }
+            }
+        });
     },
     searchEventByCategory: function (filterType, id) {
         // search events by category
@@ -105,6 +129,7 @@ HomePageManagement = {
                 console.log(result);
                 $("#content .js-popular-events .js-events-list").empty();
                 $("#content .js-popular-events .js-events-list").append(result);
+                HomePageManagement.bindEventForElement();
             },
             error: function () {
                 console.log("Get events fail!");
@@ -247,6 +272,66 @@ HomePageManagement = {
         /// <returns>N/A</returns>
 
         HomePageManagement.controls.spin.stop();
+    },
+    showBookMarkLoginPopUp:function(){
+        // Show pop up to inform client login before bookmark a event
+
+        $("#BookMark_Login_Modal").modal("hide");
+        $("#BookMark_Login_Modal").modal("show");
+    },
+    bookMarkEvent: function (eventId, callback) {
+        // Bookmark a event
+
+        HomePageManagement.showSpin();
+        $.ajax({
+            type: "post",
+            url: "/UserResources/AddEventBookMark",
+            data: { eventId: eventId },
+            dataType: 'json',
+            success: function (result) {
+                if (result.Success) {
+                    if (callback && typeof (callback) == 'function') {
+                        callback();
+                    }
+                    console.log("Bookmark this event successful!");
+                } else {
+                    console.log("Error: bookmark this event fail!");
+                }
+            },
+            error: function () {
+                console.log("Error: bookmark this event fail!");
+            },
+            complete: function () {
+                HomePageManagement.hideSpin();
+            }
+        });
+    },
+    removeBookMarkEvent: function (eventId, callback) {
+        // Bookmark a event
+
+        HomePageManagement.showSpin();
+        $.ajax({
+            type: "post",
+            url: "/UserResources/RemoveEventBookMark",
+            data: { eventId: eventId },
+            dataType: 'json',
+            success: function (result) {
+                if (result.Success) {
+                    if (callback && typeof (callback) == 'function') {
+                        callback();
+                    }
+                    console.log("Remove Bookmark of this event successful!");
+                } else {
+                    console.log("Error: Remove bookmark this event fail!");
+                }
+            },
+            error: function () {
+                console.log("Error: Remove bookmark this event fail!");
+            },
+            complete: function () {
+                HomePageManagement.hideSpin();
+            }
+        });
     },
     model: {
         CurrentLocation: null

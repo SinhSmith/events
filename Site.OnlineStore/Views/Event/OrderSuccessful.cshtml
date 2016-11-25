@@ -1,8 +1,28 @@
 ﻿
 @{
-    ViewBag.Title = "OrderSuccessful";
+    ViewBag.Title = "Order Successful";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>OrderSuccessful</h2>
+<style>
+    .successful-image{
+        width:200px;
+        height:200px;
+    }
+    .order-successful-container{
+        text-align:center;
+    }
+    .message-level1{
+        font-size:40px;
+        font-weight:400;
+    }
+    .message-level2{
+        font-size:30px;
+        font-weight:400;
+    }
+</style>
+<div class="order-successful-container">
+    <img class="successful-image" src="~/Content/img/successful-icon.png">
+    <p class="message-level1">Thank you!</p>
+    <p class="message-level2">Your Order is successful, we will contact you soon.</p>
+</div>
 

@@ -95,6 +95,7 @@ namespace Portal.Model.ViewModel
         public DisplayEventSummaryView()
         {
             ListOrderPricePrice = new List<string>();
+            IsBookMarked = false;
         }
         public int Id { get; set; }
         public string Title { get; set; }
@@ -114,6 +115,7 @@ namespace Portal.Model.ViewModel
         public string Country { get; set; }
         public int TicketPriceType { get; set; }
         public List<string> ListOrderPricePrice { get; set; }
+        public bool IsBookMarked { get; set; }
     }
 
     public class EventDetailsResponse

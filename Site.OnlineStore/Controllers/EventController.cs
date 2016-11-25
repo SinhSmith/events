@@ -340,6 +340,14 @@ namespace Site.OnlineStore.Controllers
         {
             GetEventsByCategoryRequest getEventRequest = GenarateGetEventsWithFiltersRequest(request);
             GetEventsByCategoryResponse response = service.GetEventsByCategory(getEventRequest);
+            if (Request.IsAuthenticated)
+            {
+                string userName = HttpContext.User.Identity.Name;
+                foreach (var item in response.Events)
+                {
+                    item.IsBookMarked = userService.CheckEventIsSavedOrNot(userName, (int)item.Id);
+                }
+            }
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
@@ -380,6 +388,14 @@ namespace Site.OnlineStore.Controllers
 
             GetEventsByCategoryRequest request = CreateInitialSearchRequest(City,State, Country, SearchString, DateFilterType,Topic,EventType);
             GetEventsByCategoryResponse response = service.GetEventsByCategory(request);
+            if (Request.IsAuthenticated)
+            {
+                string userName = HttpContext.User.Identity.Name;
+                foreach (var item in response.Events)
+                {
+                    item.IsBookMarked = userService.CheckEventIsSavedOrNot(userName, (int)item.Id);
+                }
+            }
             ViewBag.ListEventTopics = service.GetListEventTopics();
             ViewBag.ListEventTypes = service.GetListEventTypes();
             ViewBag.ListEventDateFilterRules = GetListEventFilterDate(DateFilterType);
@@ -414,6 +430,14 @@ namespace Site.OnlineStore.Controllers
         {
             GetEventsByCategoryRequest getEventRequest = GenarateGetEventsWithFiltersRequest(request);
             GetEventsByCategoryResponse response = service.GetEventsByCategory(getEventRequest);
+            if (Request.IsAuthenticated)
+            {
+                string userName = HttpContext.User.Identity.Name;
+                foreach (var item in response.Events)
+                {
+                    item.IsBookMarked = userService.CheckEventIsSavedOrNot(userName, (int)item.Id);
+                }
+            }
             return View("DisplayEvents", response);
         }
 

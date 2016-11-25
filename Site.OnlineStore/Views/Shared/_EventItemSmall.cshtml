@@ -40,10 +40,21 @@
                     <i class="ico-share ico--medium"></i>
                     <span class="is-hidden-accessible">Share this event</span>
                 </a>
-                <a class="js-d-bookmark" data-eid="@Model.Id" data-bookmarked="false" title="Save" data-source-page="home:popular" href="#" dorsal-guid="a1e48384-de2f-1e54-ee5b-323416dad107" data-xd-wired="bookmark">
-                    <i class="ico-bookmark ico--medium"></i>
-                    <span class="is-hidden-accessible">Bookmark this event</span>
-                </a>
+                @if (Model.IsBookMarked)
+                {
+                    <a class="js-d-bookmark saved" data-eventid="@Model.Id" data-bookmarked="false" title="Save">
+                        <i class="ico-bookmark ico--medium"></i>
+                        <span class="is-hidden-accessible">Bookmark this event</span>
+                    </a>
+                }
+                else
+                {
+                    <a class="js-d-bookmark" data-eventid="@Model.Id" data-bookmarked="false" title="Save">
+                        <i class="ico-bookmark ico--medium"></i>
+                        <span class="is-hidden-accessible">Bookmark this event</span>
+                    </a>
+                }
+                
             </div>
         </div>
     </div>

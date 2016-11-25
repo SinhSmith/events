@@ -702,6 +702,7 @@
     <Content Include="Content\img\home\img_category_parties.jpg" />
     <Content Include="Content\img\home\img_category_parties_small.jpg" />
     <Content Include="Content\img\home\img_category_sports.jpg" />
+    <Content Include="Content\img\successful-icon.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\admin\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\admin\plugins\bootstrap-slider\slider.css" />

@@ -353,3 +353,10 @@
 .org-consumer-search-bar {
     margin-bottom: 15px;
 }
+
+ .js-events-list a.js-d-bookmark.saved .ico-bookmark {
+    color:#26bdff;
+}
+ .js-events-list a.js-d-bookmark .ico-bookmark {
+    color:#c0c0c0;
+}

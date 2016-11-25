@@ -20,6 +20,7 @@ namespace Site.OnlineStore.Controllers
         ICMSNewsService _cmsNewsService = new CMSNewsService();
         IDisplayProjectService _projectService = new DisplayProjectService();
         IDisplayEventService _eventService = new DisplayEventService();
+        public IUserResourcesService _userService = new UserResourcesService();
 
         #endregion
 
@@ -31,6 +32,7 @@ namespace Site.OnlineStore.Controllers
             _cmsNewsService = new CMSNewsService();
             _projectService = new DisplayProjectService();
             _eventService = new DisplayEventService();
+            _userService = new UserResourcesService();
         }
 
         #endregion
@@ -66,6 +68,7 @@ namespace Site.OnlineStore.Controllers
 
         public ActionResult Index()
         {
+            
             ViewBag.FeaturedProjects = _projectService.GetFeaturedProjects(6).ToList();
             return View();
         }
@@ -109,8 +112,18 @@ namespace Site.OnlineStore.Controllers
             GetEventsByCategoryRequest request = CreateGetEventInLocationRequest(country,state,city);
             GetEventsByCategoryResponse result = _eventService.GetEventsByCategory(request);
 
+            if (Request.IsAuthenticated)
+            {
+                string userName = HttpContext.User.Identity.Name;
+                foreach (var item in result.Events)
+                {
+                    item.IsBookMarked = _userService.CheckEventIsSavedOrNot(userName, (int)item.Id);
+                }
+            }
+
             return PartialView("_ListEventItemSmall", result.Events);
         }
+
         #endregion
 
         #region Release resources

@@ -167,6 +167,30 @@ DisplayEventsManagement = {
             DisplayEventsManagement.model.filterRules.SortBy = id;
             DisplayEventsManagement.searchEventWithFilters();
         });
+
+        // Bind event for bookmark buttons
+        $("#EventList a.js-d-bookmark").unbind("click").bind("click", function (e) {
+            var that = this;
+            var userName = $("#currentUserName").val();
+            if (userName == null || userName == "") {
+                DisplayEventsManagement.showBookMarkLoginPopUp();
+            } else {
+
+                var isSaved = $(that).hasClass("saved");
+                var eventId = $(that).data("eventid");
+                if (isSaved) {
+                    DisplayEventsManagement.removeBookMarkEvent(eventId, function () {
+                        $(that).removeClass("saved");
+                        $(that).removeClass("bookmarked");
+                    });
+                } else {
+                    DisplayEventsManagement.bookMarkEvent(eventId, function () {
+                        $(that).removeClass("saved").addClass("saved");
+                        $(that).removeClass("bookmarked").addClass("bookmarked");
+                    });
+                }
+            }
+        });
     },
     getEventsInLocation: function (country,state, city) {
         /// <summary>
@@ -398,12 +422,22 @@ DisplayEventsManagement = {
         itemTemplate += "                <i class=\"ico-share ico--medium\"><\/i>";
         itemTemplate += "                <span class=\"is-hidden-accessible\">Share this event<\/span>";
         itemTemplate += "            <\/a>";
-        itemTemplate += "            <a href=\"\" class=\"js-d-bookmark bookmarked saved\">";
-        itemTemplate += "                <i class=\"ico-bookmarked ico--medium\"><\/i>";
-        itemTemplate += "                <span class=\"is-hidden-accessible\">";
-        itemTemplate += "                    Event Bookmarked";
-        itemTemplate += "                <\/span>";
-        itemTemplate += "            <\/a>";
+        if (event.IsBookMarked) {
+            itemTemplate += "            <a class=\"js-d-bookmark bookmarked saved\" data-eventId='" + event.Id + "'>";
+            itemTemplate += "                <i class=\"ico-bookmark ico--medium\"><\/i>";
+            itemTemplate += "                <span class=\"is-hidden-accessible\">";
+            itemTemplate += "                    Event Bookmarked";
+            itemTemplate += "                <\/span>";
+            itemTemplate += "            <\/a>";
+        } else {
+            itemTemplate += "            <a class=\"js-d-bookmark\" data-eventId='" + event.Id + "'>";
+            itemTemplate += "                <i class=\"ico-bookmark ico--medium\"><\/i>";
+            itemTemplate += "                <span class=\"is-hidden-accessible\">";
+            itemTemplate += "                    Event Bookmarked";
+            itemTemplate += "                <\/span>";
+            itemTemplate += "            <\/a>";
+        }
+
         itemTemplate += "        <\/div>";
         itemTemplate += "    <\/div>";
         itemTemplate += "<\/div>";
@@ -484,6 +518,29 @@ DisplayEventsManagement = {
             $.each(events, function (index, event) {
                 $("#EventList").append(DisplayEventsManagement.generateEventItem(event));
             });
+
+            $("#EventList a.js-d-bookmark").unbind("click").bind("click", function (e) {
+                var that = this;
+                var userName = $("#currentUserName").val();
+                if (userName == null || userName == "") {
+                    DisplayEventsManagement.showBookMarkLoginPopUp();
+                } else {
+
+                    var isSaved = $(that).hasClass("saved");
+                    var eventId = $(that).data("eventid");
+                    if (isSaved) {
+                        DisplayEventsManagement.removeBookMarkEvent(eventId, function () {
+                            $(that).removeClass("saved");
+                            $(that).removeClass("bookmarked");
+                        });
+                    } else {
+                        DisplayEventsManagement.bookMarkEvent(eventId, function () {
+                            $(that).removeClass("saved").addClass("saved");
+                            $(that).removeClass("bookmarked").addClass("bookmarked");
+                        });
+                    }
+                }
+            });
         } else {
             $("#EventList").append("<h3>Sorry, no  events found. Try another search or adjust your filters.</h3>")
         }
@@ -552,6 +609,66 @@ DisplayEventsManagement = {
                     map: map,
                     position: results[0].geometry.location
                 });
+            }
+        });
+    },
+    showBookMarkLoginPopUp: function () {
+        // Show pop up to inform client login before bookmark a event
+
+        $("#BookMark_Login_Modal").modal("hide");
+        $("#BookMark_Login_Modal").modal("show");
+    },
+    bookMarkEvent: function (eventId, callback) {
+        // Bookmark a event
+
+        DisplayEventsManagement.showSpin();
+        $.ajax({
+            type: "post",
+            url: "/UserResources/AddEventBookMark",
+            data: { eventId: eventId },
+            dataType: 'json',
+            success: function (result) {
+                if (result.Success) {
+                    if (callback && typeof (callback) == 'function') {
+                        callback();
+                    }
+                    console.log("Bookmark this event successful!");
+                } else {
+                    console.log("Error: bookmark this event fail!");
+                }
+            },
+            error: function () {
+                console.log("Error: bookmark this event fail!");
+            },
+            complete: function () {
+                DisplayEventsManagement.hideSpin();
+            }
+        });
+    },
+    removeBookMarkEvent: function (eventId, callback) {
+        // Bookmark a event
+
+        DisplayEventsManagement.showSpin();
+        $.ajax({
+            type: "post",
+            url: "/UserResources/RemoveEventBookMark",
+            data: { eventId: eventId },
+            dataType: 'json',
+            success: function (result) {
+                if (result.Success) {
+                    if (callback && typeof (callback) == 'function') {
+                        callback();
+                    }
+                    console.log("Remove Bookmark of this event successful!");
+                } else {
+                    console.log("Error: Remove bookmark this event fail!");
+                }
+            },
+            error: function () {
+                console.log("Error: Remove bookmark this event fail!");
+            },
+            complete: function () {
+                DisplayEventsManagement.hideSpin();
             }
         });
     },
