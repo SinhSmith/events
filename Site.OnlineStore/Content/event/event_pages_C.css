@@ -8068,7 +8068,7 @@ a.segmented-control__segment:focus {
     font-style: initial;
     padding-left: 5px
 }
-.tabs-header .tabs-header-list li.is-active {
+.tabs-header .tabs-header-list li.active {
     padding-bottom: 0;
     border-bottom: 4px solid #0093D7
 }

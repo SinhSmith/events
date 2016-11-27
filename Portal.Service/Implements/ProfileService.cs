@@ -25,7 +25,7 @@ namespace Portal.Service.Implements
                     {
                         UserId = x.UserId,
                         UserName = x.UserName,
-                        Emaill = x.Emaill,
+                        Email = x.Email,
                         Password = x.Password,
                         Status = x.Status
                     }).ToList();
@@ -42,7 +42,7 @@ namespace Portal.Service.Implements
                     {
                         UserId = profileViewModel.UserId,
                         UserName = profileViewModel.UserName,
-                        Emaill = profileViewModel.Emaill,
+                        Email = profileViewModel.Email,
                         Password = profileViewModel.Password,
                     };
                     db.system_Profiles.Add(profile);
@@ -142,7 +142,7 @@ namespace Portal.Service.Implements
                 {
                     UserId= profile.UserId,
                     UserName = profile.UserName,
-                    Emaill = profile.Emaill,
+                    Email = profile.Email,
                     Prefix = profile.Prefix,
                     HomePhone = profile.HomePhone,
                     MobilePhone = profile.MobilePhone,

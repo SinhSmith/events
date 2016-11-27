@@ -137,7 +137,6 @@ namespace Portal.Service.MessageModel
         public int Type { get; set; }
         public decimal Price { get; set; }
     }
-
 }
 
 

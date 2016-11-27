@@ -1,5 +1,5 @@
-﻿@using Portal.Model.Context;
-@model event_Order
+﻿@using Portal.Model.ViewModel;
+@model OrderDetails
 @{
     ViewBag.Title = "Order Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,7 +37,7 @@
             <section class="g-cell g-cell-12-12 l-mar-top-1">
                 <div class="text-body-large text-body--understated">
                     <p> order #@Model.Id on @Model.OrderTime</p>
-                    <p>@Model.Event.StartDate</p>
+                    <p>Start Date : @Model.Event.StartDate</p>
                     <p>@Model.Event.Location_Address, @Model.Event.Location_StreetName <br>
                     @Model.Event.Location_City<br>
                     @Model.Event.Country<br></p>
@@ -51,15 +51,14 @@
             <div class="g-vertical-group g-cell-12-12 g-cell-lg-12-12">
                 <div class="g-group l-gutter-right-1">
                     <div data-order_id="571262876" data-attendee_id="718013214" class="attendee_edit_section myorder-container l-mar-top-2" data-automation="attendee-container">
-                        @foreach (event_TicketOrder item in Model.OrderTickets)
+                        @foreach (OrderEventTicketModel item in Model.OrderTickets)
                         {
                             <div class="g-cell g-cell-9-9 g-cell-md-4-9 g-cell-lg-5-9">
                                 <div class="l-pad-hor-3 l-sm-pad-hor-2 l-pad-vert-3">
                                     <h3 class="text-heading-secondary">
-                                        (@item.Quantity x)
-                                        @item.Ticket.Name
+                                        @item.Name x @item.Quantity
 
-                                        - Price : @item.Ticket.Price Đ
+                                        - Price : @item.Price Đ
                                     </h3>
                                 </div>
                             </div>
@@ -69,7 +68,6 @@
                             <div class="g-cell">
                                 <div class="attendee_edit_container">
                                         <div class="l-mar-top-3 g-group">
-
                                             <div class="g-cell g-cell-9-9">
                                                 <span class="text-body-large text-body--significant">Contact Information</span>
                                             </div>

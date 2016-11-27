@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e94e520f8fda4cb1b72195dde21c911d" Name="Diagram1" ZoomLevel="83">
+      <Diagram DiagramId="e94e520f8fda4cb1b72195dde21c911d" Name="Diagram1" ZoomLevel="89">
         <EntityTypeShape EntityType="PortalModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.AspNetRole" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.AspNetUserClaim" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
@@ -32,16 +32,16 @@
         <AssociationConnector Association="PortalModel.FK_event_Event_AspNetUsers" />
         <AssociationConnector Association="PortalModel.FK_event_Event_share_Images" />
         <AssociationConnector Association="PortalModel.FK_event_Ticket_event_Event" />
-        <EntityTypeShape EntityType="PortalModel.event_TicketOrder" Width="1.5" PointX="14.25" PointY="12.25" />
-        <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Ticket" />
         <EntityTypeShape EntityType="PortalModel.event_Order" Width="1.5" PointX="12" PointY="8.625" />
         <AssociationConnector Association="PortalModel.FK_event_Order_AspNetUsers" />
         <AssociationConnector Association="PortalModel.FK_event_Order_event_Event" />
-        <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Order" />
         <EntityTypeShape EntityType="PortalModel.system_Organisers" Width="1.5" PointX="9.75" PointY="15.625" />
         <AssociationConnector Association="PortalModel.FK_system_Organisers_share_Images" />
         <AssociationConnector Association="PortalModel.event_EventBookMark" />
-        <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="5.75" PointY="15.25" />
+        <EntityTypeShape EntityType="PortalModel.event_TicketOrder" Width="1.5" PointX="14.25" PointY="12.375" />
+        <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Order" />
+        <AssociationConnector Association="PortalModel.FK_event_TicketOrder_event_Ticket" />
+        <EntityTypeShape EntityType="PortalModel.system_Profiles" Width="1.5" PointX="14.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

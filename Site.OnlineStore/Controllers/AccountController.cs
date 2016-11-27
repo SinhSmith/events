@@ -232,7 +232,7 @@ namespace Site.OnlineStore.Controllers
                         {
                             UserId = Guid.Parse(user.Id),
                             UserName = model.Email,
-                            Emaill = model.Email,
+                            Email = model.Email,
                             Password = model.Password,
                         });
 

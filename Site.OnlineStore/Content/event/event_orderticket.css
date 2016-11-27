@@ -465,14 +465,50 @@ a:hover .advanced-team-landing__primary-text {
 	font-family: Arial;
 	text-align: center;
 }
- #Btn_CompleteRegistration a{
-    border: 1px solid #8BAE42;
+ .button_css.button_checkout>#Btn_CompleteRegistration{
     -moz-box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset;
     -webkit-box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset;
-    box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset;
-    text-shadow: 0 1px #63852B;
-    font-size: 20px;
-    padding: 9px 26px;
-    background: url(~/Content/Images/glass_light-trans.png) 0 50% repeat-x #90C833;
+    box-shadow: 0 1px 0 #B7DB81 inset,0 -1px 0 #B7DB81 inset!important;
+    text-shadow: 0 1px #63852B!important;
+    font-size: 20px!important;
+    padding: 9px 26px!important;
+    background: url(~/Content/Images/glass_light-trans.png) 0 50% repeat-x #90C833!important;
+    border: 1px solid #8BAE42!important;
  }
 
+.validateform  input:invalid {
+  border: 1px solid red!important;
+}
+
+.validateform input:valid {
+  border: 1px solid green!important;
+}
+
+input:invalid {
+  border: 1px solid rgb(169, 169, 169);
+}
+
+input:valid {
+  border: 1px solid rgb(169, 169, 169);
+}
+
+.errorMessages {
+    display: none;
+    list-style-type: disc;
+    margin: 0 10px 15px 10px;
+    padding: 8px 35px 8px 30px;
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border: 2px solid #EED3D7;
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.errorMessages span {
+    font-weight: bold;
+}
+
+.registrationTable select {
+    height:25px;
+    width:270px;
+    max-width:none!important;
+}

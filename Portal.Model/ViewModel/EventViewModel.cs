@@ -155,6 +155,7 @@ namespace Portal.Model.ViewModel
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Name { get; set; }
         public int Quantity { get; set; }
+        public int AvailableQuantity { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string Description { get; set; }
         public int MinimunTicketOrder { get; set; }
@@ -164,5 +165,26 @@ namespace Portal.Model.ViewModel
         public int Type { get; set; }
         public decimal Price { get; set; }
 
+    }
+
+    public class OrderDetails
+    {
+        public OrderDetails()
+        {
+            this.OrderTickets = new HashSet<OrderEventTicketModel>();
+        }
+    
+        public int Id { get; set; }
+        public System.Guid Guid { get; set; }
+        public int EventId { get; set; }
+        public string UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailAddress { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> OrderTime { get; set; }
+    
+        public virtual event_Event Event { get; set; }
+        public virtual ICollection<OrderEventTicketModel> OrderTickets { get; set; }
     }
 }

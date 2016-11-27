@@ -1,5 +1,6 @@
 ﻿using Portal.Infractructure.Utility;
 using Portal.Model.Context;
+using Portal.Model.MessageModel;
 using Portal.Model.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -36,20 +37,46 @@ namespace Portal.Model.Mapper
                 RemainOrderSessionTime = (int)(480 - (DateTime.Now-(DateTime)order.OrderTime).TotalSeconds)
             };
 
-            foreach (event_TicketOrder item in order.OrderTickets)
+            IList<TicketOrderGroup> orderGroups = order.OrderTickets.GroupBy(t => t.TicketId).Select(g => new TicketOrderGroup()
             {
+                TicketId = g.Key,
+                Quantity = g.Count()
+            }).ToList();
+
+            foreach (var item in orderGroups)
+            {
+                var ticketDetails = order.OrderTickets.Where(t => t.TicketId == item.TicketId).First();
                 OrderEventTicketModel ticket = new OrderEventTicketModel()
                 {
-                    Id = item.OrderId,
-                    Name = item.Ticket.Name,
+                    Id = ticketDetails.OrderId,
+                    Name = ticketDetails.Ticket.Name,
                     Quantity = (int)item.Quantity,
-                    Price = item.Ticket.Price
+                    Price = ticketDetails.Ticket.Price
                 };
 
                 response.Tickets.Add(ticket);
             }
 
             return response;
+        }
+
+        public static OrderDetails ConvertToOrderDetailsModel(this event_Order order)
+        {
+            OrderDetails orderDetails = new OrderDetails()
+            {
+                Id = order.Id,
+                Guid = order.Guid,
+                EventId = order.EventId,
+                UserId = order.UserId,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                EmailAddress = order.EmailAddress,
+                Status = order.Status,
+                OrderTime = order.OrderTime,
+                Event = order.Event
+            };
+
+            return orderDetails;
         }
     }
 }

@@ -22,7 +22,7 @@
     <section>
         <div class="js-user-profile-display l-align-center">
             <h2 class="text-heading-primary l-mar-top-2">
-                @ViewBag.UserProfile.UserName
+                @ViewBag.UserInfor.UserName
             </h2>
         </div>
     </section>
@@ -32,13 +32,13 @@
         <div class="js-xd-header tabs-header tabs-header__grid tabs-header__grid-3 user-profile__header">
             <div class="g-grid">
                 <ul id="TabStripEvents" class="nav nav-tabs tabs-header-list" role="tablist">
-                    <li class="active">
+                    <li class="@(ViewBag.IsOrderView ? Html.Raw("active") : Html.Raw(""))">
                         <a href="#orderevents" role="tab" data-toggle="tab">
                             <div class="hide-small">Upcoming Events</div>
                             <div class="hide-large hide-medium">Upcoming</div>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="@(!ViewBag.IsOrderView ? Html.Raw("active") : Html.Raw(""))">
                         <a href="#savedevents" role="tab" data-toggle="tab">
                             <div class="hide-small">Saved Events</div>
                             <div class="hide-large hide-medium">Saved</div>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="js-xd-content tab-content g-grid">
-            <div id="orderevents" class="tab-pane active g-cell g-cell-12-12 g-cell-lg-8-12 g-offset-lg-2-12 js-current-orders-container  tab-content l-pad-bot-5 l-sm-pad-bot-3">
+            <div id="orderevents" class="tab-pane @(ViewBag.IsOrderView ? Html.Raw("active") : Html.Raw("")) g-cell g-cell-12-12 g-cell-lg-8-12 g-offset-lg-2-12 js-current-orders-container  tab-content l-pad-bot-5 l-sm-pad-bot-3">
                 @foreach (event_Order order in ViewBag.ListUpComingEvents)
                 {
                     <div class="js-order-card  l-mar-top-2 g-group">
@@ -74,9 +74,9 @@
                         </a>
                     </div>
                 }
-                
+
             </div>
-            <div id="savedevents" class="tab-pane tab-content g-group">
+            <div id="savedevents" class="@(!ViewBag.IsOrderView ? Html.Raw("active") : Html.Raw("")) tab-pane tab-content g-group">
                 @foreach (Portal.Model.ViewModel.DisplayEventSummaryView item in ViewBag.ListSavedEvents)
                 {
                     <div class="g-cell g-cell--has-overflow g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-pad-vert-3 ">
@@ -102,14 +102,14 @@
                             <div class="poster-card__footer">
                                 <div class="poster-card__tags">
                                     <a class="event-category">#@item.EventTopic</a>
-                                    <a class="event-format" >#@item.EventType</a>
+                                    <a class="event-format">#@item.EventType</a>
                                 </div>
                                 <div class="poster-card__actions">
                                     <a class="js-share-event-card share-action" title="Share">
                                         <i class="ico-share ico--medium"></i>
                                         <span class="is-hidden-accessible">Share this event</span>
                                     </a>
-                                    <a class="js-d-bookmark bookmarked saved" data-eventId="@item.Id">
+                                    <a class="js-d-bookmark bookmarked saved" data-eventid="@item.Id">
                                         <i class="ico-bookmarked ico--medium"></i>
                                         <span class="is-hidden-accessible">Bookmark this event</span>
                                     </a>

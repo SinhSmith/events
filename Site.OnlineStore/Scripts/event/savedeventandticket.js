@@ -76,11 +76,13 @@
                 SavedEventsAndTicketsDisplay.removeBookMarkEvent(eventId,function () {
                     $(that).removeClass("saved");
                     $(that).removeClass("bookmarked");
+                    $(that).find("i").removeClass("ico-bookmarked").addClass("ico-bookmark");
                 });
             } else {
                 SavedEventsAndTicketsDisplay.bookMarkEvent(eventId,function () {
                     $(that).removeClass("saved").addClass("saved");
                     $(that).removeClass("bookmarked").addClass("bookmarked");
+                    $(that).find("i").removeClass("ico-bookmark").addClass("ico-bookmarked");
                 });
             }
         });

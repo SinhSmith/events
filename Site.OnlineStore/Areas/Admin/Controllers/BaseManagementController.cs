@@ -2,6 +2,7 @@
 using Portal.Infractructure.Utility;
 using Portal.Service.Implements;
 using Portal.Service.Interfaces;
+using Site.OnlineStore.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ using System.Web.Mvc;
 
 namespace Site.OnlineStore.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Administrator")]
-    public class BaseManagementController : Controller
+    //[Authorize(Roles = "Administrator")]
+    public class BaseManagementController : BaseController
     {
         #region Properties
 

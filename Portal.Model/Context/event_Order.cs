@@ -28,6 +28,15 @@ namespace Portal.Model.Context
         public string EmailAddress { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> OrderTime { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Billing_Address { get; set; }
+        public string Billing_Address2 { get; set; }
+        public string Billing_City { get; set; }
+        public string Shipping_Address { get; set; }
+        public string Shipping_Address2 { get; set; }
+        public string Shipping_City { get; set; }
+        public string Billing_Country { get; set; }
+        public string Shipping_Country { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual event_Event Event { get; set; }

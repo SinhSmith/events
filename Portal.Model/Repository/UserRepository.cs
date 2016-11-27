@@ -1,4 +1,5 @@
-﻿using Portal.Model.Context;
+﻿using Portal.Infractructure.Utility;
+using Portal.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace Portal.Model.Repository
             AspNetUser user = this.Get(u => u.UserName == userName, null, "Orders").SingleOrDefault();
             if (user != null)
             {
-                return user.Orders.ToList();
+                return user.Orders.Where(o => o.Status == (int)Define.Status.Active).ToList();
             }
             else
             {

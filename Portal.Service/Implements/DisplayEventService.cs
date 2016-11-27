@@ -203,14 +203,14 @@ namespace Portal.Service.Implements
 
         private bool CheckAvailableTicket(int eventId, int ticketId,int orderQuantity)
         {
-            List<event_TicketOrder> orderedTickets = orderRepository.GetOrderedTicket(eventId, ticketId);
+            //List<event_TicketOrder> orderedTickets = orderRepository.GetOrderedTicket(eventId, ticketId);
 
-            int numberOrderedTicket = 0;
+            int numberOrderedTicket = orderRepository.GetNumberOrderedTicket(eventId, ticketId);
 
-            foreach (var ticket in orderedTickets)
-            {
-                numberOrderedTicket += (int)ticket.Quantity;
-            }
+            //foreach (var ticket in orderedTickets)
+            //{
+            //    numberOrderedTicket += (int)ticket.Quantity;
+            //}
 
             int totalTickets = ticketRepository.GetTicketById(ticketId).AvailableTicketQuantity;
 
@@ -282,7 +282,13 @@ namespace Portal.Service.Implements
             }
             else
             {
-                return eventObject.ConvertToEventDetailsModel();
+                EventDetailsResponse result = eventObject.ConvertToEventDetailsModel();
+                foreach (var ticket in result.Tickets)
+                {
+                    ticket.AvailableQuantity = ticket.Quantity - orderRepository.GetNumberOrderedTicket(eventObject.Id, (int)ticket.Id);
+                }
+
+                return result;
             }
         }
 
@@ -419,8 +425,8 @@ namespace Portal.Service.Implements
         /// Add new order
         /// </summary>
         /// <param name="orderRequest"></param>
-        /// <returns></returns>
-        public Guid? AddOrder(GetOrderTicketFormRequest orderRequest)
+        /// <returns>Return Guid of new order if Create Order successful, return null if Create Order fail</returns>
+        public Guid? AddOrder(GetOrderTicketFormRequest orderRequest,ref string message)
         {
            try
             {
@@ -429,7 +435,25 @@ namespace Portal.Service.Implements
                    AspNetUser user = userRepository.GetUserByName(orderRequest.Owner);
                    userId = user.Id;
                }
+
+               // Check have enough available tickets or not
+               bool orderValid = true;
+
+               foreach (var item in orderRequest.Tickets)
+               {
+                   if (!CheckAvailableTicket(orderRequest.EventId, item.TicketId, item.TicketQuantity))
+                   {
+                       orderValid = false;
+                   }
+               }
+
+               if (!orderValid)
+               {
+                   message = "Have not enough ticket available";
+                   return null;
+               }
                
+               // Create Order
                 event_Order order = new event_Order()
                 {
                     EventId = orderRequest.EventId,
@@ -439,13 +463,17 @@ namespace Portal.Service.Implements
                     UserId = userId
                 };
 
+               // Create Order Ticket
                 foreach (var item in orderRequest.Tickets)
                 {
-                    order.OrderTickets.Add(new event_TicketOrder()
+                    for (int i = 0; i < item.TicketQuantity; i++)
                     {
-                        TicketId = item.TicketId,
-                        Quantity = item.TicketQuantity,
-                    });
+                        order.OrderTickets.Add(new event_TicketOrder()
+                        {
+                            TicketId = item.TicketId,
+                            TicketCode = Guid.NewGuid(),
+                        });
+                    }
                 }
 
                 orderRepository.Insert(order);
@@ -456,6 +484,7 @@ namespace Portal.Service.Implements
             }
             catch(Exception ex)
             {
+                message = ex.Message;
                 return null;
             }
         }
@@ -492,13 +521,19 @@ namespace Portal.Service.Implements
 
             bool orderValid = true;
 
-            foreach (var item in order.OrderTickets)
-	        {
-                if (!CheckAvailableTicket(order.EventId, item.TicketId, (int)item.Quantity))
+            IList<TicketOrderGroup> orderGroups = order.OrderTickets.GroupBy(t => t.TicketId).Select(g => new TicketOrderGroup()
+            {
+                TicketId = g.Key,
+                Quantity = g.Count()
+            }).ToList();
+
+            foreach (var item in orderGroups)
+            {
+                if (!CheckAvailableTicket(order.EventId, item.TicketId,item.Quantity))
                 {
                     orderValid = false;
                 }
-	        }
+            }
 
             if (!orderValid) {
                 message = "Have not enough ticket available";
@@ -507,6 +542,18 @@ namespace Portal.Service.Implements
 
             try
             {
+                order.FirstName = orderInfor.FirstName;
+                order.LastName = orderInfor.LastName;
+                order.EmailAddress = orderInfor.EmailAddress;
+                order.PhoneNumber = orderInfor.PhoneNumber;
+                order.Billing_Address = orderInfor.Billing_Address;
+                order.Billing_Address2 = orderInfor.Billing_Address2;
+                order.Billing_City = orderInfor.Billing_City;
+                order.Billing_Country = orderInfor.Billing_Country;
+                order.Shipping_Address = orderInfor.Shipping_Address;
+                order.Shipping_Address2 = orderInfor.Shipping_Address2;
+                order.Shipping_City = orderInfor.Shipping_City;
+                order.Shipping_Country = orderInfor.Shipping_Country;
                 order.Status = (int)Portal.Infractructure.Utility.Define.Status.Active;
                 orderRepository.Save();
 

@@ -18,4 +18,10 @@ namespace Portal.Model.MessageModel
         public int TicketQuantity { get; set; }
     }
 
+    public class TicketOrderGroup
+    {
+        public int TicketId { get; set; }
+        public int Quantity { get; set; }
+    }
+
 }

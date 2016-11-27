@@ -66,8 +66,13 @@ EventDetailsManagement = {
 
         $("#Btn_OrderTicket").unbind("click").bind("click", function () {
             if (EventDetailsManagement.validateOrderTicketForm()) {
-                $("#Form_OrderTicket").submit();
+                $('#Form_OrderTicket').submit();
             }
+        });
+
+        $('#Form_OrderTicket').submit(function (event) {
+            EventDetailsManagement.onOrderTicketFormSubmit();
+            event.preventDefault();
         });
 
         $("#Txt_EventSearchBox").unbind("change").bind("change", function () {
@@ -181,6 +186,25 @@ EventDetailsManagement = {
             }
         });
     },
+    onOrderTicketFormSubmit:function(e){
+        // Request to Order ticket page
+
+        $.ajax({
+            type: "POST",
+            url: "/Event/OrderTicket",
+            data: $("#Form_OrderTicket").serialize(), // serializes the form's elements.
+            success: function (data) {
+                if (data.Success) {
+                    window.location.replace("/Event/OrderTicketPage?orderId=" + data.OrderGuid);
+                } else {
+                    alert(data.Message);
+                }
+            },
+            error: function () {
+                alert("Order event fail!");
+            }
+        });
+    },
     showSpin: function (target) {
         /// <summary>
         /// Create spin control
@@ -200,6 +224,11 @@ EventDetailsManagement = {
         EventDetailsManagement.controls.spin.stop();
     },
     model:{
-        Address:""
+        Address: "",
+        OrderRequest: {
+            EventId: null,
+            Tickets: [],
+            Owner:null
+        }
     }
 }

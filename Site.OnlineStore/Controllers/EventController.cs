@@ -24,9 +24,10 @@ namespace Site.OnlineStore.Controllers
     {
         #region Properties
 
-        public IDisplayEventService service = new DisplayEventService();
-        public IEventManagementService eventManagementService = new EventManagementService();
-        public IUserResourcesService userService = new UserResourcesService();
+        private IDisplayEventService service = new DisplayEventService();
+        private IEventManagementService eventManagementService = new EventManagementService();
+        private IUserResourcesService userService = new UserResourcesService();
+        private ProfileService profileService = new ProfileService();
 
         private static int productPerPage = 10;
 
@@ -39,6 +40,7 @@ namespace Site.OnlineStore.Controllers
             service = new DisplayEventService();
             eventManagementService = new EventManagementService();
             userService = new UserResourcesService();
+            profileService = new ProfileService();
         }
 
         #endregion
@@ -465,49 +467,54 @@ namespace Site.OnlineStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                if (orderTicketRequest.EventId == null)
+                EventDetailsResponse foundEvent = service.GetEventDetails(orderTicketRequest.EventId);
+                if (foundEvent == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return Json(new RequestOrderResponseModel()
+                    {
+                        Success = false,
+                        Message = "Cannot found event"
+                    }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    EventDetailsResponse foundEvent = service.GetEventDetails(orderTicketRequest.EventId);
-                    if (foundEvent == null)
+                    return Json(new RequestOrderResponseModel()
                     {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    else
-                    {
-                        foreach (OrderTicketRequest ticket in orderTicketRequest.Tickets)
-                        {
-                            OrderEventTicketModel tk = foundEvent.Tickets.Where(t => t.Id == ticket.TicketId).FirstOrDefault();
-                            if (tk != null)
-                            {
-                                tk.Quantity = ticket.TicketQuantity;
-                            }
-                        }
-                        ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
-                        return View("EventDetails", foundEvent);
-                    }
+                        Success = false,
+                        Message = "Submit information is not correct, please check it again"
+                    }, JsonRequestBehavior.AllowGet);
                 }
-
             }
 
-            // Check quantity of order tikcets is valid or not
-
+            // Authentication user
             orderTicketRequest.Owner = HttpContext.User.Identity.Name;
             if (HttpContext.User.Identity.Name == null || HttpContext.User.Identity.Name == string.Empty)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new RequestOrderResponseModel()
+                {
+                    Success = false,
+                    Message = "You have to login before order a ticket"
+                }, JsonRequestBehavior.AllowGet);
             }
-            Guid? guid = service.AddOrder(orderTicketRequest);
+
+            string message = "";
+            Guid? guid = service.AddOrder(orderTicketRequest, ref message);
 
             if (guid ==null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(new RequestOrderResponseModel()
+                {
+                    Success = false,
+                    Message = message
+                }, JsonRequestBehavior.AllowGet);
             }
 
-            return RedirectToAction("OrderTicketPage", new { orderId = guid});
+            return Json(new RequestOrderResponseModel()
+                {
+                    Success = true,
+                    Message = message,
+                    OrderGuid = guid.ToString()
+                }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -515,6 +522,7 @@ namespace Site.OnlineStore.Controllers
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
+        [Authorize]
         public ActionResult OrderTicketPage(Guid orderId)
         {
             event_Order order = service.GetOrderByGuid(orderId);
@@ -528,6 +536,7 @@ namespace Site.OnlineStore.Controllers
 
             if (result)
             {
+                ViewBag.UserInfor = profileService.GetProfileByUserId(GetUserId());
                 EventDetailsResponse model = order.ConvertToOrderEventTicketModel();
                 return View(model);
             }
@@ -543,6 +552,7 @@ namespace Site.OnlineStore.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult ConfirmOrderTickets(ConfirmOrderTicketRequest request)
         {
             if (!ModelState.IsValid)
@@ -589,6 +599,12 @@ namespace Site.OnlineStore.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Display Order Details
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        [Authorize]
         public ActionResult OrderDetails(Guid orderId)
         {
             event_Order order = service.GetOrderByGuid(orderId);
@@ -597,7 +613,29 @@ namespace Site.OnlineStore.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(order);
+            OrderDetails retValue = order.ConvertToOrderDetailsModel();
+
+            IList<TicketOrderGroup> orderGroups = order.OrderTickets.GroupBy(t => t.TicketId).Select(g => new TicketOrderGroup()
+            {
+                TicketId = g.Key,
+                Quantity = g.Count()
+            }).ToList();
+
+            foreach (var item in orderGroups)
+            {
+                var ticketDetails = order.OrderTickets.Where(t => t.TicketId == item.TicketId).First();
+                OrderEventTicketModel ticket = new OrderEventTicketModel()
+                {
+                    Id = ticketDetails.OrderId,
+                    Name = ticketDetails.Ticket.Name,
+                    Quantity = (int)item.Quantity,
+                    Price = ticketDetails.Ticket.Price
+                };
+
+                retValue.OrderTickets.Add(ticket);
+            }
+
+            return View(retValue);
         }
 
         #endregion // End Order Tickets Region
@@ -608,6 +646,7 @@ namespace Site.OnlineStore.Controllers
         /// Return Create view to let user input information of new event
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult CreateEvent()
         {
             PopulateCountryDropDownList();
@@ -623,6 +662,7 @@ namespace Site.OnlineStore.Controllers
         /// </summary>
         /// <param name="productRequest">information of new project</param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost, ValidateInput(false)]
         public ActionResult CreateEvent(CreateEventRequest requestModel, HttpPostedFileBase coverImage)
         {

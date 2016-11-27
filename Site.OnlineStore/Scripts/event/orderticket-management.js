@@ -141,25 +141,17 @@ OrderTicketManagement = {
         // Bind events for controls
 
         $("#Btn_CompleteRegistration").unbind("click").bind("click", function () {
-            if (OrderTicketManagement.validateInformationForm()) {
-                $.ajax({
-                    url: '/Event/ConfirmOrderTickets',
-                    type: 'POST',
-                    data: OrderTicketManagement.model,
-                    success: function (result) {
-                        console.log(result);
-                        if (result.Success) {
-                            window.location.replace("/Event/OrderSuccessful");
-                        } else {
-                            alert("Error :" + result.Message);
-                            window.location.replace(OrderTicketManagement.regurl);
-                        }
-                    },
-                    error: function () {
-                        console.log("Get events fail!");
-                    }
-                });
+            $("#registrationForm").submit();
+        });
+
+        $("#registrationForm").submit(function (event) {
+            $("#registrationForm").removeClass("validateform").addClass("validateform");
+            if (this.checkValidity()) {
+                OrderTicketManagement.orderTicket();
+            } else {
+                OrderTicketManagement.showAllErrorMessages($("#registrationForm"));
             }
+            event.preventDefault();
         });
     },
     validateInformationForm: function () {
@@ -170,7 +162,7 @@ OrderTicketManagement = {
         var firstName = $("#Txt_FirstName").val();
         var lastName = $("#Txt_LastName").val();
         var emailAddress = $("#Txt_EmailAddress").val();
-        var orderId = $("#InputHidden_OrderId").val();
+        var orderId = $("#OrderId").val();
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (firstName != "" && lastName != "" && emailAddress != "" && re.test(emailAddress)) {
             this.model.FirstName = firstName;
@@ -183,6 +175,45 @@ OrderTicketManagement = {
         }
 
         return valid;
+    },
+    showAllErrorMessages: function (formControl) {
+        // Validate event informations
+        var errorList = $('ul.errorMessages', formControl);
+
+        errorList.empty();
+
+        //Find all invalid fields within the form.
+        formControl.find(':invalid').each(function (index, node) {
+
+            //Find the field's corresponding label
+            var fieldName = $(node).data("fieldname");
+            //Opera incorrectly does not fill the validationMessage property.
+            var message = node.validationMessage || 'Invalid value.';
+            errorList
+                .show()
+                .append('<li><span>' + fieldName + '</span> ' + message + '</li>');
+        });
+    },
+    orderTicket: function () {
+        // Request to server to order ticket
+
+        $.ajax({
+            url: '/Event/ConfirmOrderTickets',
+            type: 'POST',
+            data: $("#registrationForm").serialize(),
+            success: function (result) {
+                console.log(result);
+                if (result.Success) {
+                    window.location.replace("/Event/OrderSuccessful");
+                } else {
+                    alert("Error :" + result.Message);
+                    window.location.replace(OrderTicketManagement.regurl);
+                }
+            },
+            error: function () {
+                console.log("Get events fail!");
+            }
+        });
     },
     showSpin: function (target) {
         /// <summary>

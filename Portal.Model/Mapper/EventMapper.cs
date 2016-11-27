@@ -153,7 +153,7 @@ namespace Portal.Model.Mapper
             {
                 Id = ticket.Id,
                 Name = ticket.Name,
-                Quantity = 0,
+                Quantity = ticket.Quantity,
                 Description = ticket.Description,
                 MinimunTicketOrder = ticket.MinimunTicketOrder,
                 MaximunTicketOrder = ticket.MaximunTicketOrder,

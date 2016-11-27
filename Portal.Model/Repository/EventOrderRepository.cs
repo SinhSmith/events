@@ -51,7 +51,13 @@ namespace Portal.Model.Repository
 
         public List<event_TicketOrder> GetOrderedTicket(int eventId, int ticketId)
         {
-            return dbSet.Where(o => o.EventId == eventId && o.Status == (int)Portal.Infractructure.Utility.Define.Status.Active).SelectMany(o => o.OrderTickets).Where(t => t.TicketId == ticketId).ToList();
+            IList<event_TicketOrder> orderList = dbSet.Where(o => o.EventId == eventId && o.Status != (int)Portal.Infractructure.Utility.Define.Status.Delete).SelectMany(o => o.OrderTickets).Where(t => t.TicketId == ticketId).ToList();
+            return orderList.Where(o => o.event_Order.Status == (int)Portal.Infractructure.Utility.Define.Status.Active || (o.event_Order.Status == (int)Portal.Infractructure.Utility.Define.Status.Deactive  && (DateTime.Now - (DateTime)o.event_Order.OrderTime).TotalSeconds < 480)).ToList();
+        }
+
+        public int GetNumberOrderedTicket(int eventId, int ticketId)
+        {
+            return GetOrderedTicket(eventId, ticketId).Count();
         }
 
         #endregion

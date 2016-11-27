@@ -182,11 +182,13 @@ DisplayEventsManagement = {
                     DisplayEventsManagement.removeBookMarkEvent(eventId, function () {
                         $(that).removeClass("saved");
                         $(that).removeClass("bookmarked");
+                        $(that).find("i").removeClass("ico-bookmarked").addClass("ico-bookmark");
                     });
                 } else {
                     DisplayEventsManagement.bookMarkEvent(eventId, function () {
                         $(that).removeClass("saved").addClass("saved");
                         $(that).removeClass("bookmarked").addClass("bookmarked");
+                        $(that).find("i").removeClass("ico-bookmark").addClass("ico-bookmarked");
                     });
                 }
             }
@@ -424,7 +426,7 @@ DisplayEventsManagement = {
         itemTemplate += "            <\/a>";
         if (event.IsBookMarked) {
             itemTemplate += "            <a class=\"js-d-bookmark bookmarked saved\" data-eventId='" + event.Id + "'>";
-            itemTemplate += "                <i class=\"ico-bookmark ico--medium\"><\/i>";
+            itemTemplate += "                <i class=\"ico-bookmarked ico--medium\"><\/i>";
             itemTemplate += "                <span class=\"is-hidden-accessible\">";
             itemTemplate += "                    Event Bookmarked";
             itemTemplate += "                <\/span>";
@@ -445,7 +447,6 @@ DisplayEventsManagement = {
         return itemTemplate;
     },
     updateFiltersModel: function () {
-        debugger
         // Update search string
         this.model.filterRules.SearchString = $("#Txt_EventSearchBox").val().trim();
 
@@ -532,11 +533,13 @@ DisplayEventsManagement = {
                         DisplayEventsManagement.removeBookMarkEvent(eventId, function () {
                             $(that).removeClass("saved");
                             $(that).removeClass("bookmarked");
+                            $(that).find("i").removeClass("ico-bookmarked").addClass("ico-bookmark");
                         });
                     } else {
                         DisplayEventsManagement.bookMarkEvent(eventId, function () {
                             $(that).removeClass("saved").addClass("saved");
                             $(that).removeClass("bookmarked").addClass("bookmarked");
+                            $(that).find("i").removeClass("ico-bookmark").addClass("ico-bookmarked");
                         });
                     }
                 }
@@ -549,7 +552,6 @@ DisplayEventsManagement = {
     updateDataAndLayoutInSearchMode:function(model){
         // Call when page in search mode
 
-        debugger
         // Update model
         this.model.filterRules.City = model.City;
         this.model.filterRules.State = model.State;
@@ -593,7 +595,6 @@ DisplayEventsManagement = {
     },
     updateMapForNewLocation: function (address) {
 
-        debugger
         var map = new google.maps.Map(document.getElementById('LocationMap'), {
             //center: { lat: -33.8688, lng: 151.2195 },
             zoom: 13,

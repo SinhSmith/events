@@ -28,6 +28,12 @@ namespace OnlineStoreMVC.Controllers
 
         #region Public functions
 
+        /// <summary>
+        /// Bookmark selected event
+        /// </summary>
+        /// <param name="eventId">event id</param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         public ActionResult AddEventBookMark(int eventId)
         {
@@ -41,6 +47,12 @@ namespace OnlineStoreMVC.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Remove bookmark of selected event
+        /// </summary>
+        /// <param name="eventId">event id</param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         public ActionResult RemoveEventBookMark(int eventId)
         {
@@ -54,12 +66,19 @@ namespace OnlineStoreMVC.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult DisplaySavedEventsAndTicket()
+        /// <summary>
+        /// Show List Saved Events and Order of current user 
+        /// </summary>
+        /// <param name="isOrder">active saved events tab or order tab</param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult DisplaySavedEventsAndTicket(bool isOrder = true)
         {
             string currentUserName = HttpContext.User.Identity.Name;
-            ViewBag.UserProfile = service.GetUserProfileByName(currentUserName);
+            ViewBag.UserInfor = service.GetUserProfileByName(currentUserName);
             ViewBag.ListUpComingEvents = service.GetListOrders(currentUserName);
             ViewBag.ListSavedEvents = service.GetListBookMarkEvent(currentUserName);
+            ViewBag.IsOrderView = isOrder;
             return View();
         }
 

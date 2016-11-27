@@ -71,7 +71,6 @@ HomePageManagement = {
         });
 
         $("a.js-d-bookmark").unbind("click").bind("click", function (e) {
-            debugger
             var that = this;
             var userName = $("#currentUserName").val();
             if (userName == null || userName == "") {
@@ -84,11 +83,13 @@ HomePageManagement = {
                     HomePageManagement.removeBookMarkEvent(eventId,function () {
                         $(that).removeClass("saved");
                         $(that).removeClass("bookmarked");
+                        $(that).find("i").removeClass("ico-bookmarked").addClass("ico-bookmark");
                     });
                 } else {
                     HomePageManagement.bookMarkEvent(eventId,function () {
                         $(that).removeClass("saved").addClass("saved");
                         $(that).removeClass("bookmarked").addClass("bookmarked");
+                        $(that).find("i").removeClass("ico-bookmark").addClass("ico-bookmarked");
                     });
                 }
             }

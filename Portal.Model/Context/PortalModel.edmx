@@ -153,6 +153,15 @@
           <Property Name="EmailAddress" Type="nchar" MaxLength="200" />
           <Property Name="Status" Type="int" />
           <Property Name="OrderTime" Type="datetime" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Billing_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_Address2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Billing_Country" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_Address2" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_City" Type="nvarchar" MaxLength="250" />
+          <Property Name="Shipping_Country" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="event_Ticket">
           <Key>
@@ -183,10 +192,11 @@
           <Key>
             <PropertyRef Name="TicketId" />
             <PropertyRef Name="OrderId" />
+            <PropertyRef Name="TicketCode" />
           </Key>
           <Property Name="TicketId" Type="int" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="int" />
+          <Property Name="TicketCode" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="portal_News_Projects">
           <Key>
@@ -319,7 +329,7 @@
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="200" />
-          <Property Name="Emaill" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Status" Type="int" />
           <Property Name="Prefix" Type="char" MaxLength="1" />
@@ -1046,11 +1056,6 @@
             <End Role="event_Event" EntitySet="event_Event" />
             <End Role="event_Ticket" EntitySet="event_Ticket" />
           </AssociationSet>
-          <EntitySet Name="event_TicketOrder" EntityType="PortalModel.event_TicketOrder" />
-          <AssociationSet Name="FK_event_TicketOrder_event_Ticket" Association="PortalModel.FK_event_TicketOrder_event_Ticket">
-            <End Role="event_Ticket" EntitySet="event_Ticket" />
-            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
-          </AssociationSet>
           <EntitySet Name="event_Order" EntityType="PortalModel.event_Order" />
           <AssociationSet Name="FK_event_Order_AspNetUsers" Association="PortalModel.FK_event_Order_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -1060,10 +1065,6 @@
             <End Role="event_Event" EntitySet="event_Event" />
             <End Role="event_Order" EntitySet="event_Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_event_TicketOrder_event_Order" Association="PortalModel.FK_event_TicketOrder_event_Order">
-            <End Role="event_Order" EntitySet="event_Order" />
-            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
-          </AssociationSet>
           <EntitySet Name="system_Organisers" EntityType="PortalModel.system_Organisers" />
           <AssociationSet Name="FK_system_Organisers_share_Images" Association="PortalModel.FK_system_Organisers_share_Images">
             <End Role="share_Images" EntitySet="share_Images" />
@@ -1072,6 +1073,15 @@
           <AssociationSet Name="event_EventBookMark" Association="PortalModel.event_EventBookMark">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="event_Event" EntitySet="event_Event" />
+          </AssociationSet>
+          <EntitySet Name="event_TicketOrder" EntityType="PortalModel.event_TicketOrder" />
+          <AssociationSet Name="FK_event_TicketOrder_event_Order" Association="PortalModel.FK_event_TicketOrder_event_Order">
+            <End Role="event_Order" EntitySet="event_Order" />
+            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_TicketOrder_event_Ticket" Association="PortalModel.FK_event_TicketOrder_event_Ticket">
+            <End Role="event_Ticket" EntitySet="event_Ticket" />
+            <End Role="event_TicketOrder" EntitySet="event_TicketOrder" />
           </AssociationSet>
           <EntitySet Name="system_Profiles" EntityType="PortalModel.system_Profiles" />
           </EntityContainer>
@@ -1215,29 +1225,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="event_TicketOrder">
-          <Key>
-            <PropertyRef Name="TicketId" />
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="TicketId" Type="Int32" Nullable="false" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Ticket" Relationship="PortalModel.FK_event_TicketOrder_event_Ticket" FromRole="event_TicketOrder" ToRole="event_Ticket" />
-          <NavigationProperty Name="event_Order" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_TicketOrder" ToRole="event_Order" />
-        </EntityType>
-        <Association Name="FK_event_TicketOrder_event_Ticket">
-          <End Type="PortalModel.event_Ticket" Role="event_Ticket" Multiplicity="1" />
-          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="event_Ticket">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="event_TicketOrder">
-              <PropertyRef Name="TicketId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="event_Order">
           <Key>
             <PropertyRef Name="Id" />
@@ -1251,9 +1238,18 @@
           <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="PortalModel.FK_event_Order_AspNetUsers" FromRole="event_Order" ToRole="AspNetUser" />
           <NavigationProperty Name="Event" Relationship="PortalModel.FK_event_Order_event_Event" FromRole="event_Order" ToRole="event_Event" />
-          <NavigationProperty Name="OrderTickets" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_Order" ToRole="event_TicketOrder" />
           <Property Name="Status" Type="Int32" />
           <Property Name="OrderTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderTickets" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_Order" ToRole="event_TicketOrder" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Billing_Country" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Shipping_Country" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_event_Order_AspNetUsers">
           <End Type="PortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
@@ -1276,18 +1272,6 @@
             </Principal>
             <Dependent Role="event_Order">
               <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_event_TicketOrder_event_Order">
-          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="1" />
-          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="event_Order">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="event_TicketOrder">
-              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1326,13 +1310,49 @@
           <End Type="PortalModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
           <End Type="PortalModel.event_Event" Role="event_Event" Multiplicity="*" />
         </Association>
+        <EntityType Name="event_TicketOrder">
+          <Key>
+            <PropertyRef Name="TicketId" />
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="TicketCode" />
+          </Key>
+          <Property Name="TicketId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="TicketCode" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="event_Order" Relationship="PortalModel.FK_event_TicketOrder_event_Order" FromRole="event_TicketOrder" ToRole="event_Order" />
+          <NavigationProperty Name="Ticket" Relationship="PortalModel.FK_event_TicketOrder_event_Ticket" FromRole="event_TicketOrder" ToRole="event_Ticket" />
+        </EntityType>
+        <Association Name="FK_event_TicketOrder_event_Order">
+          <End Type="PortalModel.event_Order" Role="event_Order" Multiplicity="1" />
+          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_TicketOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_TicketOrder_event_Ticket">
+          <End Type="PortalModel.event_Ticket" Role="event_Ticket" Multiplicity="1" />
+          <End Type="PortalModel.event_TicketOrder" Role="event_TicketOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_Ticket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="event_TicketOrder">
+              <PropertyRef Name="TicketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="system_Profiles">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Emaill" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Prefix" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -1635,18 +1655,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="event_TicketOrder">
-            <EntityTypeMapping TypeName="PortalModel.event_TicketOrder">
-              <MappingFragment StoreEntitySet="event_TicketOrder">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="event_Order">
             <EntityTypeMapping TypeName="PortalModel.event_Order">
               <MappingFragment StoreEntitySet="event_Order">
+                <ScalarProperty Name="Shipping_Country" ColumnName="Shipping_Country" />
+                <ScalarProperty Name="Billing_Country" ColumnName="Billing_Country" />
+                <ScalarProperty Name="Shipping_City" ColumnName="Shipping_City" />
+                <ScalarProperty Name="Shipping_Address2" ColumnName="Shipping_Address2" />
+                <ScalarProperty Name="Shipping_Address" ColumnName="Shipping_Address" />
+                <ScalarProperty Name="Billing_City" ColumnName="Billing_City" />
+                <ScalarProperty Name="Billing_Address2" ColumnName="Billing_Address2" />
+                <ScalarProperty Name="Billing_Address" ColumnName="Billing_Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
@@ -1686,6 +1706,15 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="event_TicketOrder">
+            <EntityTypeMapping TypeName="PortalModel.event_TicketOrder">
+              <MappingFragment StoreEntitySet="event_TicketOrder">
+                <ScalarProperty Name="TicketCode" ColumnName="TicketCode" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="system_Profiles">
             <EntityTypeMapping TypeName="PortalModel.system_Profiles">
               <MappingFragment StoreEntitySet="system_Profiles">
@@ -1713,7 +1742,7 @@
                 <ScalarProperty Name="Prefix" ColumnName="Prefix" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Emaill" ColumnName="Emaill" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>

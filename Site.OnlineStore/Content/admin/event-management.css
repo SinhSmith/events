@@ -1,13 +1,21 @@
 ﻿.js-location-input-new{
     color:#000000;
 }
-input:invalid {
+.validateform  input:invalid {
   border: 1px solid red!important;
 }
 
-/*input:valid {
+.validateform input:valid {
   border: 1px solid green!important;
-}*/
+}
+
+input:invalid {
+  border: 1px solid rgb(169, 169, 169);
+}
+
+input:valid {
+  border: 1px solid rgb(169, 169, 169);
+}
 
 .errorMessages {
     display: none;

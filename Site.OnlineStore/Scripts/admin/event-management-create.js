@@ -449,14 +449,17 @@ EventManagement = {
             }
         });
     },
-    onCreateEventBtnClick:function(){
+    onCreateEventBtnClick: function () {
         $('#event_form').submit();
+        $('#event_form').removeClass("validateform").addClass("validateform");
     },
     onCreateEventBtnOnClientSideClick: function () {
         $('#createevent_form').submit();
+        $('#createevent_form').removeClass("validateform").addClass("validateform");
     },
     onUpdateEventBtnClick:function(){
         $('#event_form').submit();
+        $('#event_form').removeClass("validateform").addClass("validateform");
     },
     updateEvent:function(){
         // Update event

@@ -20,7 +20,7 @@ namespace Portal.Service.Interfaces
         IEnumerable<EventTopicModel> GetListEventTopics();
         IEnumerable<EventTypeModel> GetListEventTypes();
         IEnumerable<DisplayEventSummaryView> GetEventByTopic(int topicId);
-        Guid? AddOrder(GetOrderTicketFormRequest orderRequest);
+        Guid? AddOrder(GetOrderTicketFormRequest orderRequest,ref string message);
         event_Order GetOrderByGuid(Guid orderGuid);
         bool ConfirmOrderTicket(ConfirmOrderTicketRequest orderInfor, ref string message);
         bool CheckOrderSessionTimeOut(Guid orderGuid, ref string message);
