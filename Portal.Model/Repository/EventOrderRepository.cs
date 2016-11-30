@@ -60,6 +60,16 @@ namespace Portal.Model.Repository
             return GetOrderedTicket(eventId, ticketId).Count();
         }
 
+        public int GetNumberOrderedTicketOfEvent(int eventId){
+            return dbSet.Where(o => o.EventId == eventId && o.Status == (int)Portal.Infractructure.Utility.Define.Status.Active).SelectMany(o => o.OrderTickets).Count();
+        }
+
+        public int GetNumberPendingOrderTicketOfEvent(int eventId)
+        {
+            IList<event_TicketOrder> orderList = dbSet.Where(o => o.EventId == eventId && o.Status == (int)Portal.Infractructure.Utility.Define.Status.Deactive).SelectMany(o => o.OrderTickets).ToList();
+            return orderList.Where(o => (DateTime.Now - (DateTime)o.event_Order.OrderTime).TotalSeconds < 480).Count();
+        }
+
         #endregion
         
     }

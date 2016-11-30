@@ -19,7 +19,7 @@ namespace Portal.Model.Context
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.event_Event = new HashSet<event_Event>();
+            this.Events = new HashSet<event_Event>();
             this.Orders = new HashSet<event_Order>();
             this.BookMarkEvents = new HashSet<event_Event>();
         }
@@ -40,7 +40,7 @@ namespace Portal.Model.Context
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        public virtual ICollection<event_Event> event_Event { get; set; }
+        public virtual ICollection<event_Event> Events { get; set; }
         public virtual ICollection<event_Order> Orders { get; set; }
         public virtual ICollection<event_Event> BookMarkEvents { get; set; }
     }

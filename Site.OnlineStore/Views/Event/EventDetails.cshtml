@@ -21,6 +21,16 @@
     </script>
 }
 
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=350998348610760";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
 <!-- Event details and Order content -->
 <div id="contentpub" class="js-hidden-when-expired ">
     <div class="main">
@@ -179,26 +189,26 @@
 
         <!-- Right column content panel -->
         <div id="col_280">
-            @if (Request.IsAuthenticated)
-            {
-                if (ViewBag.SavedEvent)
+            <div id="track_event_container" class="common_box panel_280">
+
+                @if (Request.IsAuthenticated)
                 {
-                    <div id="track_event_container" class="common_box panel_280">
+                    if (ViewBag.SavedEvent)
+                    {
                         <a id="track_event" class="eb_button default large saved" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
                         <div class="count_subview"></div>
                         <div class="summary_subview"></div>
-                    </div>
-                }
-                else
-                {
-                    <div id="track_event_container" class="common_box panel_280">
+                    }
+                    else
+                    {
                         <a id="track_event" class="eb_button default large" style="text-decoration:none;font-size:20px;box-sizing: content-box;">Save This Event</a>
                         <div class="count_subview"></div>
                         <div class="summary_subview"></div>
-                    </div>
+                    }
                 }
-
-            }
+                <div class="fb-share-button" data-width="100px" data-type="button_count" data-size="large" data-href="http://localhost:7979/Event/EventDetails?id=@Model.Id"></div>
+            </div>
+            
             <!-- Where -->
             <div class="panel_280">
                 <div class="panel_head2">

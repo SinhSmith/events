@@ -1,0 +1,262 @@
+﻿@using Portal.Model.ViewModel;
+@{
+    ViewBag.Title = "EventManagement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="g-grid global-sub-header l-pad-vert-4 l-sm-pad-vert-3">
+    <div class="g-group">
+        <div class="g-cell g-cell-12-12 g-cell-md-6-12 g-cell-lg-6-12">
+            <h1 class="text-heading-primary text-body--significant">Manage Events</h1>
+        </div>
+
+    </div>
+</div>
+<div class="g-grid clrfix l-pad-bot-5 l-sm-pad-bot-3">
+    <div class="g-group l-mar-top-1">
+        <div class="g-vertical-group g-cell-12-12 g-cell-lg-12-12">
+            <div class="g-cell g-cell-12-12 is-responsive">
+                <div class="seg-search g-cell g-cell-12-12 g-cell-md-12-12 g-cell-lg-12-12 g-cell--no-gutters l-sm-align-center l-lg-align-left">
+                    <div class="search-md g-cell g-cell--no-gutters hide-small">
+                        <div class="js-organizer-search-input form">
+                            <div class="js-search-md search-input responsive-form__input--icon responsive-form__input--icon--right">
+                                <input type="search" role="textbox" class="search-input js-search-query-input" placeholder="Search for events and attendees">
+                                <div class="glyphicon glyphicon-search">
+                                    <input type="submit" data-role="none" class="js-search-submit js-search-md" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="g-cell g-cell-12-12 g-cell--no-gutters l-sm-align-center l-mar-top-2">
+                        <div class="js-xd-header tabs-header">
+                            <ul id="TabStripEvents" class="tabs-header-list" style="width: 261px;" role="tablist">
+                                <li class="active">
+                                    <a class="js-live-events-toggle" href="#liveevents" role="tab" data-toggle="tab">Live <em>2</em></a>
+                                </li>
+                                <li class="">
+                                    <a class="js-draft-events-toggle" href="#draftevents" role="tab" data-toggle="tab">Draft <em>6</em></a>
+                                </li>
+                                <li class="">
+                                    <a class="js-past-events-toggle" href="#passevents" role="tab" data-toggle="tab">Past <em>0</em></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="js-event-list-block  tab-content">
+                <div class="g-cell g-cell-12-12 js-event-list-container active tab-pane" id="liveevents">
+                    @foreach (EventManagementItem item in ViewBag.ListLiveEvents)
+                    {
+                        <div>
+                            <div class="l-mar-top-2">
+                                <div class="event-card-myevents-container">
+                                    <div class="card card--elevated-1 l-pad-bot-2">
+                                        <div class="event-card__description">
+                                            <div class="g-group">
+                                                <div class="g-cell g-cell-12-12 g-cell-md-9-12 l-mar-top-2 l-pad-hor-2">
+                                                    <h3 class="text-medium event-card__header">
+                                                        <a href="/Event/EventDetails?id=@item.Id" style="text-decoration: none;" class="hide-small">  teachnical soup</a>
+                                                        <span class="show-small">  @item.Title</span>
+                                                    </h3>
+                                                    <div>
+
+                                                        <span class="text-body--faint text--truncated">
+                                                            @item.StartDate
+                                                        </span>
+
+                                                    </div>
+                                                    <ul class="l-mar-top-2 show-large action-menu grouped-ico">
+                                                        <li>
+                                                            <a href="/Event/EventManagement?id=@item.Id">
+                                                                <i class="ico-settings ico--small ico--color-understated"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-text">
+                                                            <a href="/Event/EventManagement?id=@item.Id" class="text-body-medium text-body--faint">
+                                                                Manage
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="/Event/EventDetails?id=@item.Id">
+                                                                <i class="ico-view-event-page ico--small ico--color-understated"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li><a href="/Event/EventDetails?id=@item.Id" target="_blank" class="text-body-medium text-body--faint">View</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="sales-block g-cell g-cell-no-gutters g-cell-12-12 g-cell-md-3-12 l-pad-vert-2 l-pad-hor-2">
+                                                    <div class="tickets-graph-block">
+                                                        <div class="progress-bar hide-small">
+                                                            <div class="progress-bar__progress" style="width: 35%"></div>
+                                                            <div class="progress-bar__total"></div>
+                                                        </div>
+                                                        <div class="l-md-align-right l-lg-align-right">
+                                                            <span class="text-body-medium text-color--green">@item.SoldTicketNumber </span>
+                                                            <span class="text-body-medium text-body--faint">/ @item.TotalTicketNumber</span>
+                                                            <span class="show-small text-body-medium text-body--faint">
+                                                                sold
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="ticket-sales-block g-cell g-cell-12-12 g-cell-md-6-12 hide-small">
+                                                        <div class="js-event-sales-text text-body-large text-body--understated"></div>
+                                                        <div class="text-body--faint">Ticket Sales</div>
+                                                    </div>-->
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="g-cell g-cell-12-12 js-event-list-container tab-pane" id="draftevents">
+                    <div>
+                        <div class="l-mar-top-2">
+                            <div class="event-card-myevents-container">
+                                <div class="card card--elevated-1 l-pad-bot-2">
+                                    <div class="event-card__description">
+                                        <div class="g-group">
+                                            <div class="g-cell g-cell-12-12 g-cell-md-9-12 l-mar-top-2 l-pad-hor-2">
+                                                <h3 class="text-medium event-card__header">
+                                                    <a href="https://www.eventbrite.com/myevent?eid=29376203014" style="text-decoration: none;" class="hide-small">  teachnical soup</a>
+                                                    <span class="show-small">  teachnical soup</span>
+                                                </h3>
+                                                <div>
+
+                                                    <span class="text-body--faint text--truncated">
+                                                        Dec 24, 2016 7:00 PM
+                                                    </span>
+
+                                                </div>
+                                                <ul class="l-mar-top-2 show-large action-menu grouped-ico">
+                                                    <li>
+                                                        <a href="https://www.eventbrite.com/myevent?eid=29376203014">
+                                                            <i class="ico-settings ico--small ico--color-understated"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="item-text">
+                                                        <a href="https://www.eventbrite.com/myevent?eid=29376203014" class="text-body-medium text-body--faint">
+                                                            Manage
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="https://www.eventbrite.com/edit?eid=29376203014">
+                                                            <i class="ico-write ico--small ico--color-understated"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="item-text"><a href="https://www.eventbrite.com/edit?eid=29376203014" class="text-body-medium text-body--faint" data-automation="event-card-edit">Edit</a></li>
+
+                                                    <li>
+                                                        <a href="https://www.eventbrite.com/e/teachnical-soup-tickets-29376203014">
+                                                            <i class="ico-view-event-page ico--small ico--color-understated"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="https://www.eventbrite.com/e/teachnical-soup-tickets-29376203014" target="_blank" class="text-body-medium text-body--faint">View</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="sales-block g-cell g-cell-no-gutters g-cell-12-12 g-cell-md-3-12 l-pad-vert-2 l-pad-hor-2">
+
+
+
+                                                <div class="tickets-graph-block">
+                                                    <div class="progress-bar hide-small">
+                                                        <div class="progress-bar__progress" style="width: 35%"></div>
+                                                        <div class="progress-bar__total"></div>
+                                                    </div>
+                                                    <div class="l-md-align-right l-lg-align-right">
+                                                        <span class="text-body-medium text-color--green">7 </span>
+                                                        <span class="text-body-medium text-body--faint">/ 20</span>
+                                                        <span class="show-small text-body-medium text-body--faint">
+                                                            sold
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <!--<div class="ticket-sales-block g-cell g-cell-12-12 g-cell-md-6-12 hide-small">
+                                        <div class="js-event-sales-text text-body-large text-body--understated"></div>
+                                        <div class="text-body--faint">Ticket Sales</div>
+                                    </div>-->
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="js-overlay event-card-overlay is-hidden hide-large" style="display: block;">
+                                    <div class="overlay-action-menu-block">
+                                        <div class="overlay-action-item">
+                                            <a href="https://www.eventbrite.com/myevent?eid=29376203014" class="js-overlay-action-item">
+                                                <span><i class="js-overlay-action-item ico-settings ico--large"></i></span>
+                                            </a>
+                                            <a href="https://www.eventbrite.com/myevent?eid=29376203014" class="js-overlay-action-item action-item-link">
+                                                Manage
+                                            </a>
+                                        </div>
+
+                                        <div class="overlay-action-item">
+                                            <a href="https://www.eventbrite.com/edit?eid=29376203014" class="js-overlay-action-item">
+                                                <span><i class="js-overlay-action-item ico-write ico--large"></i></span>
+                                            </a>
+                                            <a href="https://www.eventbrite.com/edit?eid=29376203014" class="js-overlay-action-item action-item-link">
+                                                Edit
+                                            </a>
+                                        </div>
+
+                                        <div class="overlay-action-item">
+                                            <a href="https://www.eventbrite.com/e/teachnical-soup-tickets-29376203014" target="_blank" class="js-overlay-action-item">
+                                                <span><i class="overlay-action-item ico-view-event-page ico--large"></i></span>
+                                            </a>
+                                            <a href="https://www.eventbrite.com/e/teachnical-soup-tickets-29376203014" target="_blank" class="js-overlay-action-item action-item-link">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="js-event-card-hover-overlay event-card-overlay is-hidden hide-small hide-medium">
+                                    <div class="overlay-action-menu-block">
+                                        <div class="overlay-action-item">
+                                            <a href="https://www.eventbrite.com/myevent?eid=29376203014" class="js-overlay-action-item">
+                                                <span><i class="js-overlay-action-item ico-settings ico--large"></i></span>
+                                            </a>
+                                            <a href="https://www.eventbrite.com/myevent?eid=29376203014" class="js-overlay-action-item action-item-link">
+                                                Manage
+                                            </a>
+                                        </div>
+
+                                        <div class="overlay-action-item">
+                                            <a href="https://www.eventbrite.com/edit?eid=29376203014" class="js-overlay-action-item">
+                                                <span><i class="js-overlay-action-item ico-write ico--large"></i></span>
+                                            </a>
+                                            <a href="https://www.eventbrite.com/edit?eid=29376203014" class="js-overlay-action-item action-item-link">
+                                                Edit
+                                            </a>
+                                        </div>
+
+                                        <div class="overlay-action-item">
+                                            <a href="https://www.eventbrite.com/e/teachnical-soup-tickets-29376203014" target="_blank" class="js-overlay-action-item">
+                                                <span><i class="overlay-action-item ico-view-event-page ico--large"></i></span>
+                                            </a>
+                                            <a href="https://www.eventbrite.com/e/teachnical-soup-tickets-29376203014" target="_blank" class="js-overlay-action-item action-item-link">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="g-cell g-cell-12-12 js-event-list-container tab-pane" id="passevents">
+                    <div>
+                        kaka
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1533,6 +1533,7 @@
     <Content Include="Content\project\prettyPhoto.css" />
     <Content Include="Content\project\slideshow.css" />
     <Content Include="Eventbrite - Log in to your Eventbrite account.html" />
+    <Content Include="Eventbrite - Manage Events.html" />
     <Content Include="Eventbrite - My Tickets.html" />
     <Content Include="Eventbrite - sf.html" />
     <Content Include="EventbriteArmourTheParkChargedRun.html" />
@@ -2074,6 +2075,7 @@
     <Content Include="Scripts\common\html5.js" />
     <Content Include="Scripts\common\html5shiv.min.js" />
     <Content Include="Scripts\event\displayevents-management.js" />
+    <Content Include="Scripts\event\event-management.js" />
     <Content Include="Scripts\event\eventdetails-management.js" />
     <Content Include="Scripts\event\orderdetails.js" />
     <Content Include="Scripts\event\orderticket-management.js" />
@@ -2212,6 +2214,7 @@
     <Content Include="Views\Event\_TicketTemplate.cshtml" />
     <Content Include="Views\UserResources\DisplaySavedEventsAndTicket.cshtml" />
     <Content Include="Views\Event\OrderDetails.cshtml" />
+    <Content Include="Views\UserResources\EventManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

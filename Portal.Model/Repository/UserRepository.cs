@@ -66,6 +66,12 @@ namespace Portal.Model.Repository
             return dbSet.Where(u => u.UserName == userName).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Check a event is bookmarked of a specific user or not
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <param name="eventId">event id</param>
+        /// <returns></returns>
         public bool CheckEventIsSavedOrNot(string userName, int eventId)
         {
             AspNetUser user = this.Get(u => u.UserName == userName, null, "BookMarkEvents").SingleOrDefault();
@@ -76,6 +82,60 @@ namespace Portal.Model.Repository
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Get list live event of a specific user
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <returns>list live events</returns>
+        public IEnumerable<event_Event> GetListLiveEventsOfUser(string userName)
+        {
+            AspNetUser user = this.Get(u => u.UserName == userName, null, "Tickets").SingleOrDefault();
+            if (user != null)
+            {
+                return user.Events.Where(e => e.IsVerified && e.StartDate>=DateTime.Now).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get list event not be verified by admin
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <returns></returns>
+        public IEnumerable<event_Event> GetListDraftEventsOfUser(string userName)
+        {
+            AspNetUser user = this.Get(u => u.UserName == userName, null, "Tickets").SingleOrDefault();
+            if (user != null)
+            {
+                return user.Events.Where(e => e.IsVerified == false).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get list events were passed
+        /// </summary>
+        /// <param name="userName">user name</param>
+        /// <returns></returns>
+        public IEnumerable<event_Event> GetListPassEventsOfUser(string userName)
+        {
+            AspNetUser user = this.Get(u => u.UserName == userName, null, "Tickets").SingleOrDefault();
+            if (user != null)
+            {
+                return user.Events.Where(e => e.IsVerified && e.StartDate < DateTime.Now).ToList();
+            }
+            else
+            {
+                return null;
             }
         }
 

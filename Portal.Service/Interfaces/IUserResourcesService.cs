@@ -16,5 +16,8 @@ namespace Portal.Service.Interfaces
         AspNetUser GetUserProfileByName(string userName);
         IEnumerable<DisplayEventSummaryView> GetListBookMarkEvent(string userName);
         IEnumerable<event_Order> GetListOrders(string userName);
+        IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListLiveEvents(string userName);
+        IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListDraftEvents(string userName);
+        IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListPassEvents(string userName);
     }
 }

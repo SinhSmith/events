@@ -82,6 +82,15 @@ namespace OnlineStoreMVC.Controllers
             return View();
         }
 
+        public ActionResult EventManagement()
+        {
+            string userName = HttpContext.User.Identity.Name;
+            ViewBag.ListLiveEvents = service.GetListLiveEvents(userName);
+            ViewBag.ListDraftEvents = service.GetListDraftEvents(userName);
+            ViewBag.ListPassEvents = service.GetListPassEvents(userName);
+            return View();
+        }
+
         #endregion
     }
 }

@@ -38,6 +38,22 @@ namespace Portal.Model.Repository
             return dbSet.Include("Event").Where(o => o.Id == id).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Get total number ticket of a specific event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public int GetTotalNumberTicketOfEvent(int eventId){
+            IEnumerable<event_Ticket> tickets = dbSet.Where(t => t.EventId == eventId).ToList();
+            int totalNumberTicket = 0;
+            foreach (var ticket in tickets)
+	        {
+		        totalNumberTicket+=ticket.Quantity;
+	        }
+
+            return totalNumberTicket;
+        }
+
         #endregion
         
     }

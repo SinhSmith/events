@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Portal.Model.Mapper;
+using Portal.Model.ViewModel;
 
 namespace Portal.Service.Implements
 {
@@ -18,6 +19,7 @@ namespace Portal.Service.Implements
         private EventRepository eventRepository = new EventRepository(context);
         private EventOrderRepository orderRepository = new EventOrderRepository(context);
         private UserRepository userRepository = new UserRepository(context);
+        private TicketRepository ticketRepository = new TicketRepository(context);
 
         #endregion
 
@@ -29,6 +31,7 @@ namespace Portal.Service.Implements
             eventRepository = new EventRepository(context);
             orderRepository = new EventOrderRepository(context);
             userRepository = new UserRepository(context);
+            ticketRepository = new TicketRepository(context);
         }
 
         #endregion
@@ -148,6 +151,86 @@ namespace Portal.Service.Implements
         public IEnumerable<Model.Context.event_Order> GetListOrders(string userName)
         {
             return userRepository.GetEventTicketOrders(userName);
+        }
+
+        /// <summary>
+        /// Get list live events of current user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public IEnumerable<EventManagementItem> GetListLiveEvents(string userName)
+        {
+            List<EventManagementItem> listEventResult = new List<EventManagementItem>();
+            IEnumerable<event_Event> events = userRepository.GetListLiveEventsOfUser(userName);
+
+            foreach (var item in events)
+            {
+                int numberOrderedTicket = orderRepository.GetNumberOrderedTicketOfEvent(item.Id) + orderRepository.GetNumberPendingOrderTicketOfEvent(item.Id);
+                int totalNumberTicket = ticketRepository.GetTotalNumberTicketOfEvent(item.Id);
+                EventManagementItem eventItem = new EventManagementItem()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    StartDate = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)item.StartDate),
+                    SoldTicketNumber = numberOrderedTicket,
+                    TotalTicketNumber = totalNumberTicket
+                };
+                listEventResult.Add(eventItem);
+            }
+
+            return listEventResult;
+        }
+
+        /// <summary>
+        /// Get list draft events of current user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public IEnumerable<EventManagementItem> GetListDraftEvents(string userName)
+        {
+            List<EventManagementItem> listEventResult = new List<EventManagementItem>();
+            IEnumerable<event_Event> events = userRepository.GetListDraftEventsOfUser(userName);
+
+            foreach (var item in events)
+            {
+                EventManagementItem eventItem = new EventManagementItem()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    StartDate = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)item.StartDate)
+                };
+                listEventResult.Add(eventItem);
+            }
+
+            return listEventResult;
+        }
+
+        /// <summary>
+        /// Get list draft events of current user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public IEnumerable<EventManagementItem> GetListPassEvents(string userName)
+        {
+            List<EventManagementItem> listEventResult = new List<EventManagementItem>();
+            IEnumerable<event_Event> events = userRepository.GetListPassEventsOfUser(userName);
+
+            foreach (var item in events)
+            {
+                int numberOrderedTicket = orderRepository.GetNumberOrderedTicketOfEvent(item.Id) + orderRepository.GetNumberPendingOrderTicketOfEvent(item.Id);
+                int totalNumberTicket = ticketRepository.GetTotalNumberTicketOfEvent(item.Id);
+                EventManagementItem eventItem = new EventManagementItem()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    StartDate = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)item.StartDate),
+                    SoldTicketNumber = numberOrderedTicket,
+                    TotalTicketNumber = totalNumberTicket
+                };
+                listEventResult.Add(eventItem);
+            }
+
+            return listEventResult;
         }
 
         #endregion

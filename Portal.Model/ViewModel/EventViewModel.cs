@@ -187,4 +187,13 @@ namespace Portal.Model.ViewModel
         public virtual event_Event Event { get; set; }
         public virtual ICollection<OrderEventTicketModel> OrderTickets { get; set; }
     }
+
+    public class EventManagementItem
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string StartDate { get; set; }
+        public int TotalTicketNumber { get; set; }
+        public int SoldTicketNumber { get; set; }
+    }
 }
