@@ -213,6 +213,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
                             var imageId = service.AddImage(photo);
                             // Add product
                             requestModel.CoverImageId = imageId;
+                            requestModel.OwnerId = HttpContext.User.Identity.Name;
                             service.AddEvent(requestModel);
                             return RedirectToAction("Index");
                         }

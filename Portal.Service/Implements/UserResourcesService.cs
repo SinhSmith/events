@@ -233,6 +233,47 @@ namespace Portal.Service.Implements
             return listEventResult;
         }
 
+        public IEnumerable<EventManagementItem> FilterEvents(string userName, string searchString, string type)
+        {
+            List<EventManagementItem> listEventResult = new List<EventManagementItem>();
+            IEnumerable<event_Event> events = new List<event_Event>(); ;
+            switch (type)
+            {
+                case "live":
+                {
+                    events = userRepository.GetListLiveEventsOfUser(userName,searchString);
+                    break;
+                }
+                case "draft":
+                {
+                    events = userRepository.GetListDraftEventsOfUser(userName, searchString);
+                    break;
+                }
+                case "pass":
+                {
+                    events = userRepository.GetListPassEventsOfUser(userName, searchString);
+                    break;
+                }
+            }
+
+            foreach (var item in events)
+            {
+                int numberOrderedTicket = orderRepository.GetNumberOrderedTicketOfEvent(item.Id) + orderRepository.GetNumberPendingOrderTicketOfEvent(item.Id);
+                int totalNumberTicket = ticketRepository.GetTotalNumberTicketOfEvent(item.Id);
+                EventManagementItem eventItem = new EventManagementItem()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    StartDate = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)item.StartDate),
+                    SoldTicketNumber = numberOrderedTicket,
+                    TotalTicketNumber = totalNumberTicket
+                };
+                listEventResult.Add(eventItem);
+            }
+
+            return listEventResult;
+        }
+
         #endregion
     }
 }

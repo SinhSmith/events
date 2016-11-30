@@ -19,5 +19,6 @@ namespace Portal.Service.Interfaces
         IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListLiveEvents(string userName);
         IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListDraftEvents(string userName);
         IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListPassEvents(string userName);
+        IEnumerable<EventManagementItem> FilterEvents(string userName, string searchString, string type);
     }
 }

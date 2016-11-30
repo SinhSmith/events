@@ -90,12 +90,19 @@ namespace Portal.Model.Repository
         /// </summary>
         /// <param name="userName">user name</param>
         /// <returns>list live events</returns>
-        public IEnumerable<event_Event> GetListLiveEventsOfUser(string userName)
+        public IEnumerable<event_Event> GetListLiveEventsOfUser(string userName,string searchString = "")
         {
             AspNetUser user = this.Get(u => u.UserName == userName, null, "Tickets").SingleOrDefault();
             if (user != null)
             {
-                return user.Events.Where(e => e.IsVerified && e.StartDate>=DateTime.Now).ToList();
+                if (searchString != null && searchString != string.Empty)
+                {
+                    return user.Events.Where(e => e.IsVerified && e.StartDate >= DateTime.Now && e.Title.Contains(searchString)).ToList();
+                }
+                else
+                {
+                    return user.Events.Where(e => e.IsVerified && e.StartDate >= DateTime.Now).ToList();
+                }
             }
             else
             {
@@ -108,12 +115,19 @@ namespace Portal.Model.Repository
         /// </summary>
         /// <param name="userName">user name</param>
         /// <returns></returns>
-        public IEnumerable<event_Event> GetListDraftEventsOfUser(string userName)
+        public IEnumerable<event_Event> GetListDraftEventsOfUser(string userName, string searchString = "")
         {
             AspNetUser user = this.Get(u => u.UserName == userName, null, "Tickets").SingleOrDefault();
             if (user != null)
             {
-                return user.Events.Where(e => e.IsVerified == false).ToList();
+                if (searchString != null && searchString != string.Empty)
+                {
+                    return user.Events.Where(e => e.IsVerified == false && e.Title.Contains(searchString)).ToList();
+                }
+                else
+                {
+                    return user.Events.Where(e => e.IsVerified == false).ToList();
+                }
             }
             else
             {
@@ -126,12 +140,19 @@ namespace Portal.Model.Repository
         /// </summary>
         /// <param name="userName">user name</param>
         /// <returns></returns>
-        public IEnumerable<event_Event> GetListPassEventsOfUser(string userName)
+        public IEnumerable<event_Event> GetListPassEventsOfUser(string userName, string searchString = "")
         {
             AspNetUser user = this.Get(u => u.UserName == userName, null, "Tickets").SingleOrDefault();
             if (user != null)
             {
-                return user.Events.Where(e => e.IsVerified && e.StartDate < DateTime.Now).ToList();
+                if (searchString != null && searchString != string.Empty)
+                {
+                    return user.Events.Where(e => e.IsVerified && e.StartDate < DateTime.Now && e.Title.Contains(searchString)).ToList();
+                }
+                else
+                {
+                    return user.Events.Where(e => e.IsVerified && e.StartDate < DateTime.Now).ToList();
+                }
             }
             else
             {

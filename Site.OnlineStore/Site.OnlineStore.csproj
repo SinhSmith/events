@@ -2125,6 +2125,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\user\accountController.js" />
+    <Content Include="Scripts\user\user-event-management.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
@@ -2215,6 +2216,7 @@
     <Content Include="Views\UserResources\DisplaySavedEventsAndTicket.cshtml" />
     <Content Include="Views\Event\OrderDetails.cshtml" />
     <Content Include="Views\UserResources\EventManagement.cshtml" />
+    <Content Include="Views\UserResources\ListEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

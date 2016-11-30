@@ -1,4 +1,5 @@
 ﻿using Portal.Model.MessageModel;
+using Portal.Model.ViewModel;
 using Portal.Service.Implements;
 using Portal.Service.Interfaces;
 using System;
@@ -89,6 +90,16 @@ namespace OnlineStoreMVC.Controllers
             ViewBag.ListDraftEvents = service.GetListDraftEvents(userName);
             ViewBag.ListPassEvents = service.GetListPassEvents(userName);
             return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult SearchEventOfUser(string searchString,string type = "live")
+        {
+            string userName = HttpContext.User.Identity.Name;
+            IEnumerable<EventManagementItem> events = service.FilterEvents(userName, searchString, type);
+
+            return PartialView("ListEvents", events);
         }
 
         #endregion

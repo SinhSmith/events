@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Portal.Model.ViewModel.EventManagementItem>
+
+@foreach (Portal.Model.ViewModel.EventManagementItem item in Model)
+{
+    <div>
+        <div class="l-mar-top-2">
+            <div class="event-card-myevents-container">
+                <div class="card card--elevated-1 l-pad-bot-2">
+                    <div class="event-card__description">
+                        <div class="g-group">
+                            <div class="g-cell g-cell-12-12 g-cell-md-9-12 l-mar-top-2 l-pad-hor-2">
+                                <h3 class="text-medium event-card__header">
+                                    <a href="/Event/EventDetails?id=@item.Id" style="text-decoration: none;" class="hide-small">  @item.Title</a>
+                                    <span class="show-small">  @item.Title</span>
+                                </h3>
+                                <div>
+
+                                    <span class="text-body--faint text--truncated">
+                                        @item.StartDate
+                                    </span>
+
+                                </div>
+                                <ul class="l-mar-top-2 show-large action-menu grouped-ico">
+                                    <li>
+                                        <a href="/Event/EventManagement?id=@item.Id">
+                                            <i class="ico-settings ico--small ico--color-understated"></i>
+                                        </a>
+                                    </li>
+                                    <li class="item-text">
+                                        <a href="/Event/EventManagement?id=@item.Id" class="text-body-medium text-body--faint">
+                                            Manage
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/Event/EventDetails?id=@item.Id">
+                                            <i class="ico-view-event-page ico--small ico--color-understated"></i>
+                                        </a>
+                                    </li>
+                                    <li><a href="/Event/EventDetails?id=@item.Id" target="_blank" class="text-body-medium text-body--faint">View</a></li>
+                                </ul>
+                            </div>
+                            <div class="sales-block g-cell g-cell-no-gutters g-cell-12-12 g-cell-md-3-12 l-pad-vert-2 l-pad-hor-2">
+                                <div class="tickets-graph-block">
+                                    <div class="l-md-align-right l-lg-align-right">
+                                        <span class="text-body-medium text-color--green">@item.SoldTicketNumber </span>
+                                        <span class="text-body-medium text-body--faint">/ @item.TotalTicketNumber</span>
+                                        <span class="show-small text-body-medium text-body--faint">
+                                            sold
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
