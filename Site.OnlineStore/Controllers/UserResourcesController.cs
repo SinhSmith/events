@@ -1,10 +1,12 @@
-﻿using Portal.Model.MessageModel;
+﻿using Portal.Model.Context;
+using Portal.Model.MessageModel;
 using Portal.Model.ViewModel;
 using Portal.Service.Implements;
 using Portal.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -83,12 +85,13 @@ namespace OnlineStoreMVC.Controllers
             return View();
         }
 
-        public ActionResult EventManagement()
+        public ActionResult EventManagement(string errorMessage = "")
         {
             string userName = HttpContext.User.Identity.Name;
             ViewBag.ListLiveEvents = service.GetListLiveEvents(userName);
             ViewBag.ListDraftEvents = service.GetListDraftEvents(userName);
             ViewBag.ListPassEvents = service.GetListPassEvents(userName);
+            ViewBag.ErrorMessage = errorMessage;
             return View();
         }
 
@@ -98,8 +101,39 @@ namespace OnlineStoreMVC.Controllers
         {
             string userName = HttpContext.User.Identity.Name;
             IEnumerable<EventManagementItem> events = service.FilterEvents(userName, searchString, type);
+            @ViewBag.Type = type;
 
             return PartialView("ListEvents", events);
+        }
+
+        [Authorize]
+        public ActionResult EventDashBoard(int eventId)
+        {
+            string userName = HttpContext.User.Identity.Name;
+            if (service.CheckEventOwner(eventId, userName))
+            {
+                EventManagementModel eventDetails = service.GetEventInformation(eventId);
+                return View(eventDetails);
+                //return View();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+        }
+
+        [Authorize]
+        public ActionResult OrderDetails(int orderId)
+        {
+            string userName = HttpContext.User.Identity.Name;
+            if(service.CheckOrderAccessAuthentication(userName,orderId))
+            {
+                OrderInformationModel order = service.OrderDetails(orderId);
+                return View(order);
+            }else{
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         #endregion

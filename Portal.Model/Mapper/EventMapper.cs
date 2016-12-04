@@ -141,6 +141,8 @@ namespace Portal.Model.Mapper
                 Location_State = eventObject.Location_State,
                 ZipCode = eventObject.ZipCode,
                 Country = eventObject.Country,
+                IsVerified = eventObject.IsVerified,
+                Status = eventObject.Status,
                 Tickets = eventObject.Tickets.ConvertToOrderEventTicketModels()
             };
 

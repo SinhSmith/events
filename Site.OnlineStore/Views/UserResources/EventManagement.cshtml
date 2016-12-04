@@ -10,8 +10,21 @@
             width: 300px;
         }
 
-        #Btn_SearchEvent i{
-            text-decoration:none;
+        #Btn_SearchEvent i {
+            text-decoration: none;
+        }
+        .errorMessages {
+            list-style-type: disc;
+            padding: 8px 35px 8px 30px;
+            color: #B94A48;
+            background-color: #F2DEDE;
+            border: 2px solid #EED3D7;
+            border-radius: 4px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+        .errorMessages span {
+            font-weight: bold;
+            font-size:14px;
         }
     </style>
 }
@@ -32,12 +45,21 @@
 
     </div>
 </div>
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <div class="g-grid global-sub-header l-pad-vert-4 l-sm-pad-vert-3">
+        <ul class="errorMessages">
+            <li><span>@ViewBag.ErrorMessage</span></li>
+        </ul>
+    </div>
+}
+
 <div class="g-grid clrfix l-pad-bot-5 l-sm-pad-bot-3">
     <div class="g-group l-mar-top-1">
         <div class="g-vertical-group g-cell-12-12 g-cell-lg-12-12">
             <div class="g-cell g-cell-12-12 is-responsive">
                 <div class="seg-search g-cell g-cell-12-12 g-cell-md-12-12 g-cell-lg-12-12 g-cell--no-gutters l-sm-align-center l-lg-align-left">
-                    <div class="search-md g-cell g-cell--no-gutters hide-small">
+                    <div class="search-md g-cell g-cell--no-gutters hide-small pull-right">
                         <div class="js-organizer-search-input form">
                             <div class="js-search-md search-input responsive-form__input--icon responsive-form__input--icon--right">
                                 <input id="Txt_Search" type="search" role="textbox" class="search-input js-search-query-input" placeholder="Search for events">
@@ -88,14 +110,22 @@
                                                     </div>
                                                     <ul class="l-mar-top-2 show-large action-menu grouped-ico">
                                                         <li>
-                                                            <a href="/Event/EventManagement?id=@item.Id">
+                                                            <a href="/UserResources/EventDashBoard?eventId=@item.Id">
                                                                 <i class="ico-settings ico--small ico--color-understated"></i>
                                                             </a>
                                                         </li>
                                                         <li class="item-text">
-                                                            <a href="/Event/EventManagement?id=@item.Id" class="text-body-medium text-body--faint">
+                                                            <a href="/UserResources/EventDashBoard?eventId=@item.Id" class="text-body-medium text-body--faint">
                                                                 Manage
                                                             </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/Event/EditEvent?id=@item.Id">
+                                                                <i class="ico-write ico--small"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-text">
+                                                            <a href="/Event/EditEvent?id=@item.Id" class="text-body-medium text-color--blue-under">Edit</a>
                                                         </li>
 
                                                         <li>
@@ -149,16 +179,13 @@
                                                     </div>
                                                     <ul class="l-mar-top-2 show-large action-menu grouped-ico">
                                                         <li>
-                                                            <a href="/Event/EventManagement?id=@item.Id">
-                                                                <i class="ico-settings ico--small ico--color-understated"></i>
+                                                            <a href="/Event/EditEvent?id=@item.Id">
+                                                                <i class="ico-write ico--small"></i>
                                                             </a>
                                                         </li>
                                                         <li class="item-text">
-                                                            <a href="/Event/EventManagement?id=@item.Id" class="text-body-medium text-body--faint">
-                                                                Manage
-                                                            </a>
+                                                            <a href="/Event/EditEvent?id=@item.Id" class="text-body-medium text-color--blue-under">Edit</a>
                                                         </li>
-
                                                         <li>
                                                             <a href="/Event/EventDetails?id=@item.Id">
                                                                 <i class="ico-view-event-page ico--small ico--color-understated"></i>
@@ -167,12 +194,12 @@
                                                         <li><a href="/Event/EventDetails?id=@item.Id" target="_blank" class="text-body-medium text-body--faint">View</a></li>
                                                     </ul>
                                                 </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     }
                 </div>
                 <div class="g-cell g-cell-12-12 js-event-list-container tab-pane" id="passevents">
@@ -198,14 +225,22 @@
                                                     </div>
                                                     <ul class="l-mar-top-2 show-large action-menu grouped-ico">
                                                         <li>
-                                                            <a href="/Event/EventManagement?id=@item.Id">
+                                                            <a href="/UserResources/EventDashBoard?eventId=@item.Id">
                                                                 <i class="ico-settings ico--small ico--color-understated"></i>
                                                             </a>
                                                         </li>
                                                         <li class="item-text">
-                                                            <a href="/Event/EventManagement?id=@item.Id" class="text-body-medium text-body--faint">
+                                                            <a href="/UserResources/EventDashBoard?eventId=@item.Id" class="text-body-medium text-body--faint">
                                                                 Manage
                                                             </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/Event/EditEvent?id=@item.Id">
+                                                                <i class="ico-write ico--small"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-text">
+                                                            <a href="/Event/EditEvent?id=@item.Id" class="text-body-medium text-color--blue-under">Edit</a>
                                                         </li>
 
                                                         <li>

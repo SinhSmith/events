@@ -40,6 +40,20 @@ namespace Portal.Model.Repository
             return dbSet.Include("CoverImage").Include("AspNetUser").Include("Tickets").Where(c => c.Id == id && c.Status != (int)Define.Status.Delete).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Get event owner
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public AspNetUser GetOwnerEvent(int eventId)
+        {
+            return dbSet.Where(e => e.Id == eventId).Select(e => e.AspNetUser).FirstOrDefault();
+        }
+
+        public event_Event GetEventForManagement(int id)
+        {
+            return dbSet.Include("Tickets").Where(c => c.Id == id && c.Status != (int)Define.Status.Delete).FirstOrDefault();
+        }
         #endregion
     }
 }

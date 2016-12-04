@@ -1536,6 +1536,7 @@
     <Content Include="Eventbrite - Manage Events.html" />
     <Content Include="Eventbrite - My Tickets.html" />
     <Content Include="Eventbrite - sf.html" />
+    <Content Include="Eventbrite - teachnical soup.html" />
     <Content Include="EventbriteArmourTheParkChargedRun.html" />
     <Content Include="Eventbrite - Create a new event.html" />
     <Content Include="favicon.ico" />
@@ -2217,6 +2218,9 @@
     <Content Include="Views\Event\OrderDetails.cshtml" />
     <Content Include="Views\UserResources\EventManagement.cshtml" />
     <Content Include="Views\UserResources\ListEvents.cshtml" />
+    <Content Include="Views\UserResources\EventDashBoard.cshtml" />
+    <Content Include="Views\UserResources\OrderDetails.cshtml" />
+    <Content Include="Views\Event\EditEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

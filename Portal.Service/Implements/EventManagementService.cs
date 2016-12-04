@@ -22,6 +22,7 @@ namespace Portal.Service.Implements
         private EventRepository db = new EventRepository(context);
         private Repository<share_Images> imageRepository = new Repository<share_Images>(context);
         private UserRepository userRepository = new UserRepository(context);
+        private EventOrderRepository orderRepository;
 
         #endregion
 
@@ -34,6 +35,7 @@ namespace Portal.Service.Implements
             imageRepository = new Repository<share_Images>(context);
             userRepository = new UserRepository(context);
             imageRepository = new Repository<share_Images>(context);
+            orderRepository = new EventOrderRepository(context);
         }
 
         #endregion
@@ -452,6 +454,79 @@ namespace Portal.Service.Implements
             {
                 deleteImagePath = null;
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Check event is ordered by user or not
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public bool CheckEventWasOrder(int eventId)
+        {
+            event_Event eventObject = db.GetEventById(eventId);
+
+            int numberCompletedOrder = orderRepository.GetNumberOrderedTicketOfEvent(eventId);
+            int numberPendingOrder = orderRepository.GetNumberPendingOrderTicketOfEvent(eventId);
+
+            if((numberCompletedOrder+numberPendingOrder)>0){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Public event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public bool PublicEvent(int eventId)
+        {
+            event_Event eventObject = db.GetEventById(eventId);
+            if (eventObject == null)
+            {
+                return false;
+            }
+            else
+            {
+                eventObject.Status = (int)Portal.Infractructure.Utility.Define.Status.Active;
+                try
+                {
+                    db.Save();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// UnPublic event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public bool UnPublicEvent(int eventId)
+        {
+            event_Event eventObject = db.GetEventById(eventId);
+            if (eventObject == null)
+            {
+                return false;
+            }
+            else
+            {
+                eventObject.Status = (int)Portal.Infractructure.Utility.Define.Status.Deactive;
+                try
+                {
+                    db.Save();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
         }
 

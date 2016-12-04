@@ -21,17 +21,31 @@
 
                                 </div>
                                 <ul class="l-mar-top-2 show-large action-menu grouped-ico">
-                                    <li>
-                                        <a href="/Event/EventManagement?id=@item.Id">
-                                            <i class="ico-settings ico--small ico--color-understated"></i>
-                                        </a>
-                                    </li>
-                                    <li class="item-text">
-                                        <a href="/Event/EventManagement?id=@item.Id" class="text-body-medium text-body--faint">
-                                            Manage
-                                        </a>
-                                    </li>
-
+                                    
+                                    @if (ViewBag.Type != "draft")
+                                    {
+                                        <li>
+                                            <a href="/UserResources/EventDashBoard?eventId=@item.Id">
+                                                <i class="ico-settings ico--small ico--color-understated"></i>
+                                            </a>
+                                        </li>
+                                        <li class="item-text">
+                                            <a href="/UserResources/EventDashBoard?eventId=@item.Id" class="text-body-medium text-body--faint">
+                                                Manage
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.Type != "past")
+                                    {
+                                        <li>
+                                            <a href="/Event/EditEvent?id=@item.Id">
+                                                <i class="ico-write ico--small"></i>
+                                            </a>
+                                        </li>
+                                        <li class="item-text">
+                                            <a href="/Event/EditEvent?id=@item.Id" class="text-body-medium text-color--blue-under">Edit</a>
+                                        </li>
+                                    }
                                     <li>
                                         <a href="/Event/EventDetails?id=@item.Id">
                                             <i class="ico-view-event-page ico--small ico--color-understated"></i>

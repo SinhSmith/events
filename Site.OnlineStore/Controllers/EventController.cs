@@ -367,15 +367,24 @@ namespace Site.OnlineStore.Controllers
 
             EventDetailsResponse foundEvent = service.GetEventDetails((int)id);
 
-            string userName = HttpContext.User.Identity.Name;
+            if (foundEvent != null)
+            {
+                string userName = HttpContext.User.Identity.Name;
 
-            bool isSavedEvent = userService.CheckEventIsSavedOrNot(userName, (int)id);
+                bool isSavedEvent = userService.CheckEventIsSavedOrNot(userName, (int)id);
 
-            ViewBag.SavedEvent = isSavedEvent;
+                ViewBag.SavedEvent = isSavedEvent;
 
-            ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
+                ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
 
-            return View("EventDetails", foundEvent);
+                ViewBag.IsShowOrderForm = (foundEvent.Status == (int)Portal.Infractructure.Utility.Define.Status.Active) && foundEvent.IsVerified;
+
+                return View("EventDetails", foundEvent);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         /// <summary>
@@ -699,6 +708,200 @@ namespace Site.OnlineStore.Controllers
             }
             PopulateStatusDropDownList();
             return View(requestModel);
+        }
+
+        /// <summary>
+        /// Get information of event and return Edit View for user update data for event
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+         [Authorize]
+        public ActionResult EditEvent(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Check whether current user have permission to edit this event or not
+            string userName = HttpContext.User.Identity.Name;
+            if (!userService.CheckEventOwner((int)id, userName))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Check whether selected event is ordered by user or not
+            // If it is ordered, Stop action update event
+            if (!eventManagementService.CheckEventWasOrder((int)id))
+            {
+                return RedirectToAction("EventManagement", "UserResources", new { errorMessage = "Cannot edit this event, because it was ordered" });
+            }
+
+            event_Event eventObject = service.GetEventById((int)id);
+
+            if (eventObject == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Populate status dropdownlist
+            PopulateCountryDropDownList(eventObject.Country);
+            PopulateEventTypeDropDownList(eventObject.EventType);
+            PopulateEventTopicDropDownList(eventObject.EventTopic);
+            PopulateStatusDropDownList((Define.Status)eventObject.Status);
+            EventFullView retValue = eventObject.ConvertToEventFullView();
+            string ticketType = null;
+            foreach (var ticket in retValue.Tickets)
+            {
+                ticketType = ticket.Type.ToString();
+                ticket.SaleChanelOptions = PopulateSaleChanelDropDownList();
+            }
+            PopulateTicketTypeDropDownList(ticketType);
+
+            return View(retValue);
+        }
+
+        /// <summary>
+        /// Update event
+        /// </summary>
+        /// <param name="product">information of event need to updated</param>
+        /// <returns></returns>
+         [Authorize]
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditEvent(CreateEventPostRequest eventRequest)
+        {
+            // Check whether current user have permission to edit this event or not
+            string userName = HttpContext.User.Identity.Name;
+            if (!userService.CheckEventOwner((int)eventRequest.Id, userName))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Check whether selected event is ordered by user or not
+            // If it is ordered, Stop action update event
+            if (!eventManagementService.CheckEventWasOrder((int)eventRequest.Id))
+            {
+                return RedirectToAction("EventManagement", "UserResources", new { errorMessage = "Cannot Edit this event, Because it is booked by user" });
+            }
+
+            if (ModelState.IsValid)
+            {
+                bool isSuccess = eventManagementService.UpdateEvent(eventRequest);
+                if (isSuccess)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(eventRequest);
+        }
+
+        /// <summary>
+        /// Upload image to server
+        /// </summary>
+        /// <param name="files"></param>
+        /// <param name="IdProject"></param>
+        /// <returns></returns>
+         [Authorize]
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UpdateCoverImage(IEnumerable<HttpPostedFileBase> files, int eventId)
+        {
+            // Check whether current user have permission to edit this event or not
+            string userName = HttpContext.User.Identity.Name;
+            if (!userService.CheckEventOwner(eventId, userName))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var file = Request.Files["coverImage"];
+            if (file != null && file.ContentLength > 0)
+            {
+                ImageUpload imageUpload = new ImageUpload { Width = 600 };
+                ImageResult imageResult = imageUpload.RenameUploadFile(file);
+                if (imageResult.Success)
+                {
+                    var photo = new share_Images
+                    {
+                        ImageName = imageResult.ImageName,
+                        ImagePath = Path.Combine(ImageUpload.LoadPath, imageResult.ImageName)
+                    };
+
+                    var imageId = eventManagementService.AddImage(photo);
+                    string oldImagePath = null;
+
+                    bool isSuccess = eventManagementService.UpdateCoverImage(eventId, (int)imageId, out oldImagePath);
+                    if (isSuccess)
+                    {
+                        DeleteImageInFolder(oldImagePath);
+                        return Json(new { success = true, newImagePath = photo.ImagePath }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { success = false, newImagePath = "" }, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+            }
+
+            return Json(new { success = false, newImagePath = "" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost, ValidateInput(false)]
+        public ActionResult PublicEvent(int eventId)
+        {
+            // Check whether current user have permission to edit this event or not
+            string userName = HttpContext.User.Identity.Name;
+            if (!userService.CheckEventOwner((int)eventId, userName))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            bool success = eventManagementService.PublicEvent(eventId);
+            string errorMessage = "";
+
+            if (!success)
+            {
+                errorMessage = "Error when public event";
+            }
+
+            return Json(new BaseResponseModel()
+            {
+                Success = success,
+                Message = errorMessage
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UnPublicEvent(int eventId)
+        {
+            // Check whether current user have permission to edit this event or not
+            string userName = HttpContext.User.Identity.Name;
+            if (!userService.CheckEventOwner((int)eventId, userName))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Check whether selected event is ordered by user or not
+            // If it is ordered, Stop action update event
+            if (!eventManagementService.CheckEventWasOrder(eventId))
+            {
+                return RedirectToAction("EventManagement", "UserResources", new { errorMessage = "Cannot UnPublic this event, Because it is booked by user" });
+            }
+
+            bool success = eventManagementService.UnPublicEvent(eventId);
+            string errorMessage = "";
+
+            if (!success)
+            {
+                errorMessage = "Error when unpublic event";
+            }
+
+            return Json(new BaseResponseModel()
+            {
+                Success = success,
+                Message = errorMessage
+            }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

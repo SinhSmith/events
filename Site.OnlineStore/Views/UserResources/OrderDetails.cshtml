@@ -1,0 +1,224 @@
+﻿@using Portal.Model.ViewModel;
+@model OrderInformationModel
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content" class="clrfix">
+    <div class="responsive-manage">
+        <div class="l-pad-bot-5 l-sm-pad-bot-3 g-grid manage-main">
+            <div class="g-vertical-group g-cell-12-12 g-cell-lg-12-12 l-mar-top-3 js-responsive-manage-body">
+                <header class="titled-container-header">
+                    <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2 l-sm-align-center">
+                        <span class="main-heading text-heading-primary text-body--significant" data-automation="event-name-display">
+                            Order : #@Model.Guid
+                        </span>
+                    </div>
+                </header>
+
+                <!-- Event Url -->
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Buyer</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.FirstName @Model.LastName</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Email Address</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.EmailAddress</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Status</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Status</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Order Time</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.OrderTime</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Phone Number</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.PhoneNumber</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Billing Address</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Billing_Address</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Billing Address 2</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Billing_Address2</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Billing City</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Billing_City</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Billing Country</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Billing_Country</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Shipping Address</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Shipping_Address</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Shipping Address 2</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Shipping_Address2</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Shipping City</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Shipping_City</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label class="label-primary">Shipping Country</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <span>@Model.Shipping_Country</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <!-- Ticket Order List -->
+                <section class="g-cell g-cell-1-1 l-mar-top-3">
+                    <a name="viewtickets"></a>
+                    <header class="has-corner-object">
+                        <h2 class="text-heading-secondary l-pad-vert-1">
+                            Order Ticket Information
+                        </h2>
+                    </header>
+                    <div id="ticketsSalesDiv">
+
+                        <div class="responsive-table--sticky__wrapper">
+                            <div class="responsive-table--sticky__scrollable">
+                                <table class="js-d-table-sticky responsive-table responsive-table--sticky">
+                                    <thead>
+                                        <tr>
+                                            <th>Ticket Type</th>
+                                            <th>Ticket Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (TicketOrderInformation ticket in @Model.OrderTickets)
+                                        {
+                                            <tr class="ticket_row">
+                                                <td>
+                                                    @ticket.TicketType
+                                                </td>
+                                                <td>
+                                                    @ticket.TicketCode
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p class="l-pad-hor-1">
+                        </p><p class="text-body-medium">
+                        </p>
+                        <p></p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+

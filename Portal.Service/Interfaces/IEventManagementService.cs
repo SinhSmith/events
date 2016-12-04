@@ -86,5 +86,25 @@ namespace Portal.Service.Interfaces
         /// <param name="oldCoverImagePath"></param>
         /// <returns></returns>
         bool UpdateCoverImage(int eventId, int imageId, out string oldCoverImagePath);
+
+        /// <summary>
+        /// Check selected event is orderd or not
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool CheckEventWasOrder(int eventId);
+
+        /// <summary>
+        /// Public event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool PublicEvent(int eventId);
+        /// <summary>
+        /// UnPublic event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool UnPublicEvent(int eventId);
     }
 }

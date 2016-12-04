@@ -146,6 +146,7 @@ namespace Portal.Model.ViewModel
         public int Status { get; set; }
         public int RemainOrderSessionTime { get; set; }
         public Nullable<int> SortOrder { get; set; }
+        public bool IsVerified { get; set; }
         public IList<OrderEventTicketModel> Tickets { get; set; }
     }
 
@@ -196,4 +197,69 @@ namespace Portal.Model.ViewModel
         public int TotalTicketNumber { get; set; }
         public int SoldTicketNumber { get; set; }
     }
+
+    public class TicketTypeDetails
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
+        public int NumberTicketSold { get; set; }
+        public string EndSaleTime { get; set; }
+    }
+
+    public class OrderInformation{
+        public int OrderId{get;set;}
+        public string OrderTime{get;set;}
+        public string OrderUserName{get;set;}
+        public int Quantity{get;set;}
+    }
+
+    public class EventManagementModel
+    {
+        public int EventId { get; set; }
+        public string Title { get; set; }
+        public string Location_StreetName { get; set; }
+        public string Location_Address { get; set; }
+        public string Location_Address2 { get; set; }
+        public string Location_City { get; set; }
+        public string Location_State { get; set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+        public int Status { get; set; }
+        public string StartDate { get; set; }
+
+        public int Quantity { get; set; }
+        public int NumberTicketSold { get; set; }
+        public List<TicketTypeDetails> TicketTypeDetails { get; set; }
+        public List<OrderInformation> Orders { get; set; }
+
+    }
+
+    public class TicketOrderInformation
+    {
+        public string TicketType { get; set; }
+        public System.Guid TicketCode { get; set; }
+    }
+
+    public class OrderInformationModel
+    {
+        public System.Guid Guid { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailAddress { get; set; }
+        public string Status { get; set; }
+        public string OrderTime { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Billing_Address { get; set; }
+        public string Billing_Address2 { get; set; }
+        public string Billing_City { get; set; }
+        public string Shipping_Address { get; set; }
+        public string Shipping_Address2 { get; set; }
+        public string Shipping_City { get; set; }
+        public string Billing_Country { get; set; }
+        public string Shipping_Country { get; set; }
+
+        public ICollection<TicketOrderInformation> OrderTickets { get; set; }
+    }
 }
+

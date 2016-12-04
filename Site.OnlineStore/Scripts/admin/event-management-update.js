@@ -96,6 +96,7 @@ EventManagement = {
         $("#add-ticket-button").unbind("click").bind("click", $.proxy(this.onCreateTicket, this));
         $("#TicketType").unbind("change").bind("change", $.proxy(this.removeAllTicket, this));
         $("#UpdateCoverImage").unbind("click").bind("click", function () {
+            event.preventDefault();
             var requestData = new FormData();
             // get cover image file
             var totalFiles = document.getElementById("CoverImage").files.length;
@@ -125,6 +126,39 @@ EventManagement = {
                 }
             });
         });
+        $("#UpdateCoverImageClientSide").unbind("click").bind("click", function () {
+            event.preventDefault();
+            var requestData = new FormData();
+            // get cover image file
+            var totalFiles = document.getElementById("CoverImage").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("CoverImage").files[i];
+
+                requestData.append("coverImage", file);
+            }
+            var eventId = $("#EventId").val();
+            requestData.append("eventId", eventId);
+            debugger
+
+            $.ajax({
+                url: '/Event/UpdateCoverImage',
+                data: requestData,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    debugger
+                    if (data.success) {
+                        $("#EventCoverImage").attr("src", data.newImagePath);
+                    } else {
+
+                    }
+                },
+                error: function () {
+                    alert("Update cover image fail!");
+                }
+            });
+        });
         $("#Btn_ResetAddressPanel").unbind("click").bind("click", function () {
             EventManagement.updateModeLocationPanel(true);
         });
@@ -134,9 +168,20 @@ EventManagement = {
 
         $('#event_form').submit(function (event) {
             if (this.checkValidity()) {
-                EventManagement.updateEvent();
+                EventManagement.updateEvent('/Admin/Event/Edit', "/Admin/Event/Index");
             } else {
-                EventManagement.showAllErrorMessages();
+                EventManagement.showAllErrorMessages($('#event_form'));
+            }
+            event.preventDefault();
+
+        });
+
+        $('#updateevent_form').submit(function (event) {
+            debugger
+            if (this.checkValidity()) {
+                EventManagement.updateEvent('/Event/EditEvent', "/UserResources/EventManagement");
+            } else {
+                EventManagement.showAllErrorMessages($('#updateevent_form'));
             }
             event.preventDefault();
 
@@ -447,7 +492,11 @@ EventManagement = {
     onUpdateEventBtnClick:function(){
         $('#event_form').submit();
     },
-    updateEvent:function(){
+    onUpdateEventBtnOnClientSideClick: function () {
+        $('#updateevent_form').submit();
+        $('#updateevent_form').removeClass("validateform").addClass("validateform");
+    },
+    updateEvent: function (serviceUrl, returnUrl) {
         // Update event
 
         var requestData = new FormData();
@@ -475,28 +524,27 @@ EventManagement = {
 
         // Request to server to create new event
         $.ajax({
-            url: '/Admin/Event/Edit',
+            url: serviceUrl,
             data: requestData,
             type: 'POST',
             contentType: false,
             processData: false,
             success: function () {
-                window.location.replace("/Admin/Event/Index");
+                window.location.replace(returnUrl);
             },
             error: function () {
                 alert("Update event fail!");
             }
         });
     },
-    showAllErrorMessages: function () {
+    showAllErrorMessages: function (formControl) {
         // Validate event informations
-        var form = $("#event_form");
-        var errorList = $('ul.errorMessages', form);
+        var errorList = $('ul.errorMessages', formControl);
 
         errorList.empty();
 
         //Find all invalid fields within the form.
-        form.find(':invalid').each(function (index, node) {
+        formControl.find(':invalid').each(function (index, node) {
 
             //Find the field's corresponding label
             var fieldName = $(node).data("fieldname");
@@ -641,6 +689,11 @@ EventManagement = {
         // Redirect to index page of event management area
 
         window.location.replace("/Admin/Event/Index");
+    },
+    onBackToIndexClientSideBtnClick: function () {
+        // Redirect to index page of event management area
+        debgger
+        window.location.replace("/Home/Index");
     },
     showSpin: function (target) {
         /// <summary>

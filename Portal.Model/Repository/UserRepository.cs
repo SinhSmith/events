@@ -122,11 +122,11 @@ namespace Portal.Model.Repository
             {
                 if (searchString != null && searchString != string.Empty)
                 {
-                    return user.Events.Where(e => e.IsVerified == false && e.Title.Contains(searchString)).ToList();
+                    return user.Events.Where(e => e.IsVerified == false && e.Status != (int)Define.Status.Delete && e.Title.Contains(searchString)).ToList();
                 }
                 else
                 {
-                    return user.Events.Where(e => e.IsVerified == false).ToList();
+                    return user.Events.Where(e => e.IsVerified == false && e.Status != (int)Define.Status.Delete).ToList();
                 }
             }
             else
@@ -147,11 +147,11 @@ namespace Portal.Model.Repository
             {
                 if (searchString != null && searchString != string.Empty)
                 {
-                    return user.Events.Where(e => e.IsVerified && e.StartDate < DateTime.Now && e.Title.Contains(searchString)).ToList();
+                    return user.Events.Where(e => e.IsVerified && e.Status != (int)Define.Status.Delete && e.StartDate < DateTime.Now && e.Title.Contains(searchString)).ToList();
                 }
                 else
                 {
-                    return user.Events.Where(e => e.IsVerified && e.StartDate < DateTime.Now).ToList();
+                    return user.Events.Where(e => e.IsVerified && e.Status != (int)Define.Status.Delete && e.StartDate < DateTime.Now).ToList();
                 }
             }
             else

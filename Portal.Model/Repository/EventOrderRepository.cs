@@ -70,6 +70,11 @@ namespace Portal.Model.Repository
             return orderList.Where(o => (DateTime.Now - (DateTime)o.event_Order.OrderTime).TotalSeconds < 480).Count();
         }
 
+        public int GetNumberTicketOfOrder(int orderId)
+        {
+            return dbSet.Where(o => o.Id == orderId).SelectMany(o => o.OrderTickets).Count();
+        }
+
         #endregion
         
     }

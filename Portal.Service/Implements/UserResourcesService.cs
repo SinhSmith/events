@@ -20,6 +20,7 @@ namespace Portal.Service.Implements
         private EventOrderRepository orderRepository = new EventOrderRepository(context);
         private UserRepository userRepository = new UserRepository(context);
         private TicketRepository ticketRepository = new TicketRepository(context);
+        private Repository<event_TicketOrder> ticketOrderRepository;
 
         #endregion
 
@@ -32,6 +33,7 @@ namespace Portal.Service.Implements
             orderRepository = new EventOrderRepository(context);
             userRepository = new UserRepository(context);
             ticketRepository = new TicketRepository(context);
+            ticketOrderRepository = new Repository<event_TicketOrder>(context);
         }
 
         #endregion
@@ -236,7 +238,7 @@ namespace Portal.Service.Implements
         public IEnumerable<EventManagementItem> FilterEvents(string userName, string searchString, string type)
         {
             List<EventManagementItem> listEventResult = new List<EventManagementItem>();
-            IEnumerable<event_Event> events = new List<event_Event>(); ;
+            IEnumerable<event_Event> events = new List<event_Event>();
             switch (type)
             {
                 case "live":
@@ -272,6 +274,149 @@ namespace Portal.Service.Implements
             }
 
             return listEventResult;
+        }
+
+        public event_Event EventManagement(string userName,int eventId)
+        {
+            event_Event foundEvent = eventRepository.GetEventById(eventId);
+            if (foundEvent.AspNetUser.UserName == userName)
+            {
+                return foundEvent;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Check whether current user is owner of event or not
+        /// </summary>
+        /// <param name="eventId">event id</param>
+        /// <param name="userName">user name</param>
+        /// <returns></returns>
+        public bool CheckEventOwner(int eventId,string userName){
+            AspNetUser user = eventRepository.GetOwnerEvent(eventId);
+
+            return user.UserName == userName;
+        }
+
+        /// <summary>
+        /// Get number sold ticket of a particular ticket 
+        /// </summary>
+        /// <param name="ticketId"></param>
+        /// <returns></returns>
+        private int GetNumberSoldTicket(int ticketId)
+        {
+            return ticketOrderRepository.Get(t => t.TicketId == ticketId && t.event_Order.Status == (int)Portal.Infractructure.Utility.Define.Status.Active).Count();
+        }
+
+
+        public EventManagementModel GetEventInformation(int eventId)
+        {
+            EventManagementModel retEvent = new EventManagementModel();
+            event_Event foundEvent = eventRepository.GetEventForManagement(eventId);
+            retEvent.EventId = foundEvent.Id;
+            retEvent.Title = foundEvent.Title;
+            retEvent.Location_StreetName = foundEvent.Location_StreetName;
+            retEvent.Location_Address = foundEvent.Location_Address;
+            retEvent.Location_Address2 = foundEvent.Location_Address2;
+            retEvent.Location_City = foundEvent.Location_City;
+            retEvent.Location_State = foundEvent.Location_State;
+            retEvent.ZipCode = foundEvent.ZipCode;
+            retEvent.Country = foundEvent.Country;
+            retEvent.Status = foundEvent.Status;
+            retEvent.StartDate = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)foundEvent.StartDate);
+            retEvent.Quantity = ticketRepository.GetTotalNumberTicketOfEvent(eventId);
+            retEvent.NumberTicketSold = orderRepository.GetNumberOrderedTicketOfEvent(eventId) + orderRepository.GetNumberPendingOrderTicketOfEvent(eventId);
+            retEvent.TicketTypeDetails = new List<TicketTypeDetails>();
+            foreach (var ticket in foundEvent.Tickets)
+            {
+                TicketTypeDetails ticketDetail = new TicketTypeDetails()
+                {
+                    Name = ticket.Name,
+                    Price = ticket.Price,
+                    Quantity = ticket.Quantity,
+                    NumberTicketSold = GetNumberSoldTicket(ticket.Id),
+                    EndSaleTime = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)ticket.EndSaleDateTime)
+                };
+                retEvent.TicketTypeDetails.Add(ticketDetail);
+            }
+            retEvent.Orders = new List<OrderInformation>();
+            foundEvent.event_Order = foundEvent.event_Order.Where(o => o.Status == (int)Portal.Infractructure.Utility.Define.Status.Active).ToList();
+            foreach (var order in foundEvent.event_Order)
+            {
+                OrderInformation orderInfor = new OrderInformation()
+                {
+                    OrderId = order.Id,
+                    OrderTime = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)order.OrderTime),
+                    OrderUserName = order.FirstName + order.LastName,
+                    Quantity = orderRepository.GetNumberTicketOfOrder(order.Id)
+                };
+                retEvent.Orders.Add(orderInfor);
+            }
+
+            return retEvent;
+
+        }
+
+        /// <summary>
+        /// Check whether user have permission to access order information or not
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public bool CheckOrderAccessAuthentication(string userName, int orderId)
+        {
+            event_Order order = orderRepository.GetOrderById(orderId);
+            if (order == null)
+            {
+                return false;
+            }
+            else
+            {
+                return CheckEventOwner(order.EventId, userName);
+            }
+        }
+
+        /// <summary>
+        /// Get order details
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public OrderInformationModel OrderDetails(int orderId)
+        {
+            event_Order order = orderRepository.GetOrderById(orderId);
+            OrderInformationModel retValue = new OrderInformationModel()
+            {
+                Guid = order.Guid,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                EmailAddress = order.EmailAddress,
+                Status = order.Status == (int)Portal.Infractructure.Utility.Define.Status.Active?"Completed":"Pending",
+                OrderTime = String.Format("{0:MMM dd, yyyy HH:mm}", (DateTime)order.OrderTime),
+                PhoneNumber = order.PhoneNumber,
+                Billing_Address = order.Billing_Address,
+                Billing_Address2 = order.Billing_Address2,
+                Billing_City = order.Billing_City,
+                Billing_Country = order.Billing_Country,
+                Shipping_Address = order.Shipping_Address,
+                Shipping_Address2 = order.Shipping_Address2,
+                Shipping_City = order.Shipping_City,
+                Shipping_Country = order.Shipping_Country
+            };
+            retValue.OrderTickets = new List<TicketOrderInformation>();
+            foreach (var ticket in order.OrderTickets)
+            {
+                TicketOrderInformation ticketInfor = new TicketOrderInformation()
+                {
+                    TicketCode = ticket.TicketCode,
+                    TicketType = ticket.Ticket.Name
+                };
+                retValue.OrderTickets.Add(ticketInfor);
+            }
+
+            return retValue;
         }
 
         #endregion

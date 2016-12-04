@@ -45,7 +45,6 @@ namespace Portal.Model.Context
         public int Status { get; set; }
         public Nullable<int> SortOrder { get; set; }
         public bool IsVerified { get; set; }
-
         public string EventTypeName { get; set; }
         public string EventTopicName { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

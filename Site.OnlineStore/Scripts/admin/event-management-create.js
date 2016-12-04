@@ -143,7 +143,7 @@ EventManagement = {
 
         $("#createevent_form").submit(function (event) {
             if (this.checkValidity()) {
-                EventManagement.createEvent("/Event/CreateEvent","/Home");
+                EventManagement.createEvent("/Event/CreateEvent", "/UserResources/EventManagement");
             } else {
                 EventManagement.showAllErrorMessages($("#createevent_form"));
             }

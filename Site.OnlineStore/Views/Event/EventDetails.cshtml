@@ -14,7 +14,7 @@
     <script src="~/Content/admin/plugins/slider-bar-library/sly.min.js"></script>
     <script src="~/Scripts/event/eventdetails-management.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=EventDetailsManagement.googleApiCallBackFunction">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUVF4qMvTKfQceh9fQP9XzM4f7ImTFOw&libraries=places&callback=EventDetailsManagement.googleApiCallBackFunction">
     </script>
     <script>
         EventDetailsManagement.model.Address = '@Model.Location_State, @Model.Country';
@@ -36,9 +36,9 @@
     <div class="main">
         @if (Request.IsAuthenticated)
         {
-            @Html.Hidden("UserName",User.Identity.Name);
+            @Html.Hidden("UserName", User.Identity.Name);
         }
-   
+
         <!-- Error panel -->
         <div id="ticket_error_message_container" class="deprecated-notification2 error_notification hidden">
             <div class="error_notification_msg">
@@ -83,96 +83,104 @@
         <!-- Left column content panel -->
         <div id="col_628">
             <!-- Book ticket form -->
-            <div id="ticket_information_wrapper" class="panel_628" style="position: relative;">
-                <form id="Form_OrderTicket" enctype="multipart/form-data" action="/Event/OrderTicket" method="post" style="margin: 0px;">
-                    <input type="hidden" name="EventId" value="@Model.Id">
-                    <!-- List tickets -->
-                    <div class="l-mar-stack">
-                        <div class="panel_head2 l-mar-top-3" id="ticketInfo">
-                            <h3>Ticket Information</h3>
+            @if (ViewBag.IsShowOrderForm)
+            {
+                <div id="ticket_information_wrapper" class="panel_628" style="position: relative;">
+                    <form id="Form_OrderTicket" enctype="multipart/form-data" action="/Event/OrderTicket" method="post" style="margin: 0px;">
+                        <input type="hidden" name="EventId" value="@Model.Id">
+                        <!-- List tickets -->
+                        <div class="l-mar-stack">
+                            <div class="panel_head2 l-mar-top-3" id="ticketInfo">
+                                <h3>Ticket Information</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div id="TicketReg" class="panel_body">
-                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="ticket_table" id="ticket_table" data-automation="ticket_table">
-                            <tbody>
-                                <tr class="ticket_table_head">
-                                    <td width="40%" nowrap="nowrap">
-                                        Ticket Type
-                                    </td>
-                                    <td>
-                                        Price
-                                    </td>
-                                    <td width="50" align="right">Available</td>
-                                    <td width="70" align="right">Quantity</td>
-                                </tr>
-                                @for (int i = 0; i < Model.Tickets.Count; i++)
-                                {
-                                    <tr class="ticket_row">
-                                        <input type="hidden" name="Tickets[@i].TicketId" value="@Model.Tickets[i].Id" />
-
-                                        <td class="ticket_type_name">
-                                            @Model.Tickets[i].Name
-
-                                            <div style="font-size: 11px; line-height: 12px; margin: 5px 0 0 0;">@Model.Tickets[i].Description</div>
-                                        </td>
-                                        <td nowrap="nowrap" class="price_td">
-                                            @if(Model.Tickets[i].Type == (int)Portal.Infractructure.Utility.Define.TicketPriceType.Free){
-                                                <span>Free</span>
-                                            }else if(Model.Tickets[i].Type == (int)Portal.Infractructure.Utility.Define.TicketPriceType.Paid){
-                                                <span>@Model.Tickets[i].Price VND</span>  
-                                            }else{
-                                                <span>Donation</span> 
-                                            }
+                        <div id="TicketReg" class="panel_body">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="ticket_table" id="ticket_table" data-automation="ticket_table">
+                                <tbody>
+                                    <tr class="ticket_table_head">
+                                        <td width="40%" nowrap="nowrap">
+                                            Ticket Type
                                         </td>
                                         <td>
-                                            <span>@Model.Tickets[i].AvailableQuantity</span>
+                                            Price
                                         </td>
-                                        <td align="right" nowrap="nowrap">
-                                            <label class="is-hidden-accessible">Ticket Quantity Select</label>
-                                            <select class="ticket_table_select" name="Tickets[@i].TicketQuantity">
-                                                @for (int j = 1; j < Model.Tickets[i].MaximunTicketOrder; j++)
-                                                {
-                                                    if (Model.Tickets[i].Quantity == j)
-                                                    {
-                                                        <option value="@j" selected="selected">@j</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@j">@j</option>
-                                                    }
-                                                }
-                                            </select>
+                                        <td width="50" align="right">Available</td>
+                                        <td width="70" align="right">Quantity</td>
+                                    </tr>
+                                    @for (int i = 0; i < Model.Tickets.Count; i++)
+                                    {
+                                        <tr class="ticket_row">
+                                            <input type="hidden" name="Tickets[@i].TicketId" value="@Model.Tickets[i].Id" />
 
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div><!-- end panel_body -->
-                    <div id="OrderReg" class="panel_footer" style="text-align: right; padding: 10px;height:initial;">
-                        <div id="paidButton" style="display: block;" data-automation="paidButton">
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td align="right">
-                                            <div class="cta_container">
-                                                <span id="primary_cta" class="button_css">
-                                                    <a id="Btn_OrderTicket" style="text-decoration:none;color:#fff;">
-                                                        Order Now
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            <td class="ticket_type_name">
+                                                @Model.Tickets[i].Name
+
+                                                <div style="font-size: 11px; line-height: 12px; margin: 5px 0 0 0;">@Model.Tickets[i].Description</div>
+                                            </td>
+                                            <td nowrap="nowrap" class="price_td">
+                                                @if (Model.Tickets[i].Type == (int)Portal.Infractructure.Utility.Define.TicketPriceType.Free)
+                                                {
+                                                    <span>Free</span>
+                                                }
+                                                else if (Model.Tickets[i].Type == (int)Portal.Infractructure.Utility.Define.TicketPriceType.Paid)
+                                                {
+                                                    <span>@Model.Tickets[i].Price VND</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Donation</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <span>@Model.Tickets[i].AvailableQuantity</span>
+                                            </td>
+                                            <td align="right" nowrap="nowrap">
+                                                <label class="is-hidden-accessible">Ticket Quantity Select</label>
+                                                <select class="ticket_table_select" name="Tickets[@i].TicketQuantity">
+                                                    @for (int j = 1; j < Model.Tickets[i].MaximunTicketOrder; j++)
+                                                    {
+                                                        if (Model.Tickets[i].Quantity == j)
+                                                        {
+                                                            <option value="@j" selected="selected">@j</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@j">@j</option>
+                                                        }
+                                                    }
+                                                </select>
+
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
-                        </div>		<!-- end paidButton -->
-                        <div class="clearfloat"></div>
-                    </div><!-- OrderReg end panel_footer -->
+                        </div><!-- end panel_body -->
+                        <div id="OrderReg" class="panel_footer" style="text-align: right; padding: 10px;height:initial;">
+                            <div id="paidButton" style="display: block;" data-automation="paidButton">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td align="right">
+                                                <div class="cta_container">
+                                                    <span id="primary_cta" class="button_css">
+                                                        <a id="Btn_OrderTicket" style="text-decoration:none;color:#fff;">
+                                                            Order Now
+                                                        </a>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>		<!-- end paidButton -->
+                            <div class="clearfloat"></div>
+                        </div><!-- OrderReg end panel_footer -->
 
-                </form>
-                <div class="clearfloat"></div>
-            </div>
+                    </form>
+                    <div class="clearfloat"></div>
+                </div>
+            }
 
             <!-- Event details -->
             <div class="panel_628  event-description-detailpage">
@@ -208,7 +216,7 @@
                 }
                 <div class="fb-share-button" data-width="100px" data-type="button_count" data-size="large" data-href="http://localhost:7979/Event/EventDetails?id=@Model.Id"></div>
             </div>
-            
+
             <!-- Where -->
             <div class="panel_280">
                 <div class="panel_head2">
@@ -299,7 +307,6 @@
                                             <img class="js-poster-image" src="@Portal.Infractructure.Utility.EventConstants.ImageNotFoundPath " alt=" cannot find image">
                                         }
                                     </div>
-                                    <span class="poster-card__label">$10 - $65</span>
                                 </div>
                                 <div class="poster-card__body">
                                     <time class="poster-card__date">
@@ -315,8 +322,8 @@
                             </a>
                             <div class="poster-card__footer">
                                 <div class="poster-card__tags">
-                                    <a class="event-category" href="">#Arts</a>
-                                    <a class="event-format" href="">#Festival</a>
+                                    <a class="event-category" href="">@item.EventType</a>
+                                    <a class="event-format" href="">@item.EventTopic</a>
                                 </div>
                                 <div class="poster-card__actions">
                                     <a class="js-share-event-card share-action" href="" title="Share">

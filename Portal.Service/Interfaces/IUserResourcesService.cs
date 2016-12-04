@@ -20,5 +20,9 @@ namespace Portal.Service.Interfaces
         IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListDraftEvents(string userName);
         IEnumerable<Portal.Model.ViewModel.EventManagementItem> GetListPassEvents(string userName);
         IEnumerable<EventManagementItem> FilterEvents(string userName, string searchString, string type);
+        bool CheckEventOwner(int eventId, string userName);
+        EventManagementModel GetEventInformation(int eventId);
+        OrderInformationModel OrderDetails(int orderId);
+        bool CheckOrderAccessAuthentication(string userName, int orderId);
     }
 }
