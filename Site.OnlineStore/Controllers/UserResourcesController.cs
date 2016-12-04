@@ -114,7 +114,6 @@ namespace OnlineStoreMVC.Controllers
             {
                 EventManagementModel eventDetails = service.GetEventInformation(eventId);
                 return View(eventDetails);
-                //return View();
             }
             else
             {

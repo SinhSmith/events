@@ -2071,6 +2071,8 @@
     <Content Include="Content\fonts\briteicons.woff2" />
     <Content Include="Areas\Admin\Views\Event\_TicketTemplate.cshtml" />
     <Content Include="Areas\Admin\Views\Event\_EditTicketTemplate.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\OrderDetails.cshtml" />
     <None Include="Properties\PublishProfiles\xaviadecor.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common\html5.js" />

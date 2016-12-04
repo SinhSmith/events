@@ -1,0 +1,138 @@
+﻿@using Portal.Model.ViewModel;
+@model EventManagementModel
+@{
+    ViewBag.Title = "Event Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/event_pages_C.css" rel="stylesheet" />
+
+<div id="content" class="clrfix">
+    <div class="responsive-manage">
+        <div class="l-pad-bot-5 l-sm-pad-bot-3 g-grid manage-main">
+            <div class="g-vertical-group g-cell-12-12 g-cell-lg-12-12 l-mar-top-3 js-responsive-manage-body">
+                <header class="titled-container-header">
+                    <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2 l-sm-align-center">
+                        <span class="main-heading text-heading-primary text-body--significant" data-automation="event-name-display">
+                            @Model.Title
+                        </span>
+                        <span id="event-status-badge" class="badge badge--success">live</span>
+                        <section class="text-body-medium l-mar-top-1 text-body--faint">
+                            @Model.Location_Address, @Model.Location_StreetName <br>
+                            @Model.Location_City<br>
+                            <span class="pipe">|</span>
+                            @Model.Country<br>
+                        </section>
+                        <div class="text-body-medium text-body--faint l-mar-top-1" data-automation="event-date-range">
+                            @Model.StartDate
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Number sold ticket/ total ticket -->
+                <section class="g-vertical-group g-cell-1-1 g-cell-md-1-2 g-cell-lg-1-3 l-mar-top-1">
+                    <section id="capacity_bar" class="g-cell g-cell-1-1 l-pad-vert-2">
+                        <h3>
+                            Tickets Sold: @Model.NumberTicketSold
+                            <span>/ @Model.Quantity</span>
+                        </h3>
+                    </section>
+                </section>
+                <!-- Event Url -->
+                <section id="custom_subdomain_editable" class="responsive-form l-mar-top-2">
+                    <section class="g-cell g-cell-1-1 l-mar-top-2">
+                        <label >Your Event URL</label>
+                    </section>
+                    <div id="show_subdomain">
+                        <section class="l-mar-top-1 g-cell g-cell-1-1">
+                            <div class="responsive-form__input--icon responsive-form__input--icon--right responsive-form__input--icon--action js-d-clipboard">
+                                <input type="text" id="event_url" class="js-xd-clipboard-source" value="/Event/EventDetails?id=@Model.EventId" readonly="readonly">
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <!-- Sales by Ticket Type -->
+                <section class="g-cell g-cell-1-1 l-mar-top-3">
+                    <a name="viewtickets"></a>
+                    <header class="has-corner-object">
+                        <h2 class="text-heading-secondary l-pad-vert-1">
+                            Sales by Ticket Type
+                        </h2>
+                    </header>
+                    <div id="ticketsSalesDiv">
+
+                        <div class="responsive-table--sticky__wrapper">
+                            <div class="responsive-table--sticky__scrollable">
+                                <table class="js-d-table-sticky responsive-table responsive-table--sticky">
+                                    <thead>
+                                        <tr>
+                                            <th>Ticket Type</th>
+                                            <th>Price</th>
+                                            <th>Sold</th>
+                                            <th class="is-not-number">End Sales</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (TicketTypeDetails ticket in @Model.TicketTypeDetails)
+                                        {
+                                            <tr class="ticket_row">
+                                                <td>
+                                                    @ticket.Name
+                                                </td>
+                                                <td>
+                                                    @ticket.Price VND
+                                                </td>
+                                                <td>
+                                                    @ticket.NumberTicketSold/@ticket.Quantity
+                                                </td>
+                                                <td class="is-not-number text-body-small">@ticket.EndSaleTime</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p class="l-pad-hor-1">
+                        </p><p class="text-body-medium">
+                        </p>
+                        <p></p>
+                    </div>
+                </section>
+
+                <!-- List Orders -->
+                <section class="g-cell g-cell-1-1 l-mar-top-3">
+                    <h2 class="text-heading-secondary l-pad-vert-1">
+                        Recent Orders
+                    </h2>
+                    <div class="responsive-table--sticky__wrapper">
+                        <div class="responsive-table--sticky__scrollable">
+                            <table class="js-d-table-sticky responsive-table responsive-table--sticky" dorsal-guid="906d5182-5d9e-0f6e-d29e-d94dafd38d3b" data-xd-wired="table-sticky">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th class="is-not-number">Ticket Buyer</th>
+                                        <th>Quantity</th>
+                                        <th class="is-not-number">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (OrderInformation order in @Model.Orders)
+                                    {
+                                        <tr class="ticket_row" data-automation="ticket_row_info574701841">
+                                            <td><a href="/Admin/Event/OrderDetails?orderId=@order.OrderId">@order.OrderId</a></td>
+                                            <td class="is-not-number">@order.OrderUserName</td>
+                                            <td>@order.Quantity</td>
+                                            <td class="is-not-number"><nobr>@order.OrderTime</nobr></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

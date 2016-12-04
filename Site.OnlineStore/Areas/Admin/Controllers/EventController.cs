@@ -20,12 +20,14 @@ using Portal.Model.Mapper;
 
 namespace Site.OnlineStore.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class EventController : BaseManagementController
     {
 
         #region Properties
 
         protected IEventManagementService service = new EventManagementService();
+        protected IUserResourcesService userResourceService = new UserResourcesService();
 
         #endregion
 
@@ -33,7 +35,8 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
 
         public EventController()
         {
-            IEventManagementService service = new EventManagementService();
+            service = new EventManagementService();
+            userResourceService = new UserResourcesService();
         }
 
         #endregion
@@ -340,6 +343,18 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
             }
 
             return Json(new { success = false, newImagePath = "" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Details(int eventId)
+        {
+            EventManagementModel eventDetails = userResourceService.GetEventInformation(eventId);
+            return View(eventDetails);
+        }
+
+        public ActionResult OrderDetails(int orderId)
+        {
+            OrderInformationModel order = userResourceService.OrderDetails(orderId);
+            return View(order);
         }
 
         #endregion

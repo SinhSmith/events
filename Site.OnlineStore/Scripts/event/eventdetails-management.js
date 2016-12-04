@@ -109,8 +109,10 @@ EventDetailsManagement = {
         /// <param>N/A</param>
         /// <returns>N/A</returns>
 
-        this.init();
-        this.updateMapForNewLocation();
+        $(document).ready(function () {
+            EventDetailsManagement.init();
+            EventDetailsManagement.updateMapForNewLocation();
+        });
     },
     updateMapForNewLocation: function () {
 

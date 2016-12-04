@@ -67,23 +67,24 @@ namespace Portal.Service.Implements
             {
                 searchQuery = searchQuery.And(e => e.StartDate >= request.StartDate);
             }
+            else
+            {
+                searchQuery = searchQuery.And(e => e.StartDate >= DateTime.Now);
+            }
 
             if (request.EndDate!=null)
             {
                 searchQuery = searchQuery.And(p => p.StartDate <= request.EndDate);
             }
 
-            if (request.Price != null)
+            switch (request.Price)
             {
-                switch (request.Price)
-                {
-                    case Portal.Infractructure.Utility.Define.TicketPriceType.Free:
-                        searchQuery = searchQuery.And(e => e.Tickets.Any(t => t.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Free));
-                        break;
-                    case Portal.Infractructure.Utility.Define.TicketPriceType.Paid:
-                        searchQuery = searchQuery.And(e => e.Tickets.Any(t => t.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Paid));
-                        break;
-                }
+                case Portal.Infractructure.Utility.Define.TicketPriceType.Free:
+                    searchQuery = searchQuery.And(e => e.Tickets.Any(t => t.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Free));
+                    break;
+                case Portal.Infractructure.Utility.Define.TicketPriceType.Paid:
+                    searchQuery = searchQuery.And(e => e.Tickets.Any(t => t.Type == (int)Portal.Infractructure.Utility.Define.TicketType.Paid));
+                    break;
             }
 
             if (request.Country != null)
@@ -105,6 +106,8 @@ namespace Portal.Service.Implements
             {
                 searchQuery = searchQuery.And(e => e.Title.Contains(request.SearchString));
             }
+
+            searchQuery = searchQuery.And(e => e.Status == (int)Portal.Infractructure.Utility.Define.Status.Active && e.IsVerified);
 
             IEnumerable<event_Event> eventsMatchingRefinement = db.Get(
                 filter: searchQuery, includeProperties: "CoverImage,AspNetUser,Tickets");

@@ -31,30 +31,30 @@
                     <h3 class="box-title">Event list</h3>
                 </div><!--Header-->
                 <div class="box-body">
-                    <table class="table table-hover table-condensed table-responsive table-bordered">
+                    <table class="table table-hover table-condensed table-responsive table-bordered center-text">
                         <tr>
-                            <th>
+                            <th class="center-text">
                                 TITLE
                             </th>
-                            <th>
+                            <th class="center-text">
                                 LOCATION
                             </th>
-                            <th>
+                            <th class="center-text">
                                 ORGANIZATION
                             </th>
-                            <th>
-                                COVER IMAGE
+                            <th class="center-text">
+                                COVER
                             </th>
-                            <th>
+                            <th class="center-text">
                                 ORDER
                             </th>
-                            <th>
+                            <th class="center-text">
                                 STATUS
                             </th>
-                            <th>
-                                IS VERIFIED
+                            <th class="center-text">
+                                VERIFIED
                             </th>
-                            <th style="width:95px;"></th>
+                            <th style="width:140px;"></th>
                         </tr>
 
                         @foreach (var item in Model)
@@ -85,6 +85,7 @@
                                     <input id="IsVerified" disabled @( item.IsVerified ? Html.Raw("checked") : Html.Raw("")) name="IsVerified" type="checkbox">
                                 </td>
                                 <td class="center-text">
+                                    @Html.ActionLink(" ", "Details", new { eventId = item.Id }, new { @class = "btn btn-primary glyphicon glyphicon-info-sign" })
                                     @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-primary glyphicon glyphicon-edit" })
                                     <a class="btn btn-danger glyphicon glyphicon-trash" onclick="EventManagement.deleteEvent(@item.Id, '@item.Title')"></a>
                                 </td>
