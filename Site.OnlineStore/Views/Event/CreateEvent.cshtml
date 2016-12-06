@@ -200,7 +200,14 @@
                                 </div>
                                 <div class="g-cell g-cell-1-1">
                                     <div id="organizer-selector" class="l-mar-top-2">
-                                        <input type="text" id="OrganizationName" name="OrganizationName">
+                                        @if (ViewBag.OrganizeProfile != null)
+                                        {
+                                            <input type="text" id="OrganizationName" name="OrganizationName" value="@ViewBag.OrganizeProfile.OrganiserName">
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="OrganizationName" name="OrganizationName" value="">
+                                        }
                                     </div>
 
                                     <div id="edit-organizer-desc-0" class="edit-organizer-desc l-mar-top-2 visible">
@@ -208,7 +215,14 @@
                                             Organizer description
                                         </label>
                                         <div class="l-mar-top-1">
-                                            <textarea cols="20" id="OrganizationDescription" name="OrganizationDescription" placeholder="Share details about the organizer" rows="10" aria-hidden="true" style="display: none;"></textarea>
+                                            @if (ViewBag.OrganizeProfile != null)
+                                            {
+                                                <textarea cols="20" id="OrganizationDescription" name="OrganizationDescription" placeholder="Share details about the organizer" rows="10" aria-hidden="true" style="display: none;">@ViewBag.OrganizeProfile.About</textarea>
+                                            }
+                                            else
+                                            {
+                                                <textarea cols="20" id="OrganizationDescription" name="OrganizationDescription" placeholder="Share details about the organizer" rows="10" aria-hidden="true" style="display: none;"></textarea>
+                                            }
                                         </div>
                                     </div>
                                 </div>

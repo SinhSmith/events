@@ -28,6 +28,7 @@ namespace Site.OnlineStore.Controllers
         private IEventManagementService eventManagementService = new EventManagementService();
         private IUserResourcesService userService = new UserResourcesService();
         private ProfileService profileService = new ProfileService();
+        private IOrganiserService organizeService;
 
         private static int productPerPage = 10;
 
@@ -41,6 +42,7 @@ namespace Site.OnlineStore.Controllers
             eventManagementService = new EventManagementService();
             userService = new UserResourcesService();
             profileService = new ProfileService();
+            organizeService = new OrganiserService();
         }
 
         #endregion
@@ -373,6 +375,13 @@ namespace Site.OnlineStore.Controllers
 
                 bool isSavedEvent = userService.CheckEventIsSavedOrNot(userName, (int)id);
 
+                AspNetUser user = userService.GetUserProfileByName(userName);
+                OrganiserViewModel organize = organizeService.GetOrganiserByUserId(new Guid(user.Id));
+                if (organize != null)
+                {
+                    ViewBag.OrganizeProfile = organize;
+                }
+
                 ViewBag.SavedEvent = isSavedEvent;
 
                 ViewBag.RelatedEvents = service.GetEventByTopic(foundEvent.EventTopic);
@@ -658,6 +667,15 @@ namespace Site.OnlineStore.Controllers
         [Authorize]
         public ActionResult CreateEvent()
         {
+            string userName = HttpContext.User.Identity.Name;
+            AspNetUser user = userService.GetUserProfileByName(userName);
+            OrganiserViewModel organize = organizeService.GetOrganiserByUserId(new Guid(user.Id));
+
+            if (organize != null)
+            {
+                ViewBag.OrganizeProfile = organize;
+            }
+
             PopulateCountryDropDownList();
             PopulateEventTypeDropDownList(null);
             PopulateEventTopicDropDownList(null);

@@ -28,6 +28,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
 
         protected IEventManagementService service = new EventManagementService();
         protected IUserResourcesService userResourceService = new UserResourcesService();
+        //protected IOrganiserService oganizeService;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace Site.OnlineStore.Areas.Admin.Controllers
         {
             service = new EventManagementService();
             userResourceService = new UserResourcesService();
+            //oganizeService = new OrganiserService();
         }
 
         #endregion

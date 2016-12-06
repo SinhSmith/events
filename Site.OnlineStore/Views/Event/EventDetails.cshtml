@@ -57,7 +57,10 @@
                                 <h1><span class="summary">@Model.Title</span></h1>
                                 <div id="event_network">
                                     <h2>
-                                        <a>@Model.Location_Address</a>
+                                        @Model.Location_StreetName<br>
+                                        @Model.Location_Address<br>
+                                        @Model.Location_City<br>
+                                        @Model.Country<br>
                                     </h2>
                                 </div>
                             </div>
@@ -232,7 +235,8 @@
                         <br>
                         <b>@Model.Title</b>
                         <br>
-                        @Model.Location_Address, @Model.Location_StreetName <br>
+                        @Model.Location_StreetName<br>
+                        @Model.Location_Address<br>
                         @Model.Location_City<br>
                         @Model.Country<br>
                         <br>
@@ -255,16 +259,19 @@
                     </div>
                     <div id="organizer_content">
                         <h2>Contact</h2>
-
-                        <div id="organizer_profile" class="organizer_link">
-                            <a id="profile_link" class="url js-event-track">
-                                View organizer profile
-                            </a>
-                        </div>
                         <div id="organizer_website" class="organizer_link">
-                            <a href="http://scope-art.com/" target="_blank" rel="nofollow" class="url js-event-track" data-tracking-action="ViewOrgWebsite">
-                                http://scope-art.com
-                            </a>
+                            @if (ViewBag.OrganizeProfile != null)
+                            {
+                                <a href="@ViewBag.OrganizeProfile.Website" target="_blank" class="url js-event-track">
+                                    @ViewBag.OrganizeProfile.Website
+                                </a>
+                                <a href="@ViewBag.OrganizeProfile.Facebook" target="_blank" class="url js-event-track">
+                                    @ViewBag.OrganizeProfile.Facebook
+                                </a>
+                                <a href="@ViewBag.OrganizeProfile.Twitter" target="_blank" class="url js-event-track">
+                                    @ViewBag.OrganizeProfile.Twitter
+                                </a>
+                            }
                         </div>
 
                     </div>  <!-- end organizer_context -->
